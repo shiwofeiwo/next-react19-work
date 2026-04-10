@@ -45,7 +45,11 @@ function copyDTS(to: string) {
         absolute: true,
     });
     for (const file of files) {
-        copySync(file, file.replace(DEST_TYPES, to));
+        const normalizedFile = file.replace(/\\/g, '/');
+        const normalizedDestTypes = DEST_TYPES.replace(/\\/g, '/');
+        const normalizedTo = to.replace(/\\/g, '/');
+        const dest = normalizedFile.replace(normalizedDestTypes, normalizedTo);
+        if (dest !== normalizedFile) copySync(file, dest);
     }
 }
 
@@ -55,14 +59,16 @@ function compile(dirs: string[], out: string, configPath: string, includeJs?: bo
     const include = [...COMMON_INCLUDE];
     const exclude: string[] = config.exclude || [];
     config.compilerOptions.outDir = out;
+    config.compilerOptions.rootDir = SRC_PATH;
     for (const dir of dirs) {
         const matches = ['**/*.ts', '**/*.tsx'];
         if (includeJs) {
             matches.push('**/*.js', '**/*.jsx');
         }
-        include.push(...matches.map(t => join(relative(__dirname, dir), t)));
+        const rel = relative(__dirname, dir).replace(/\\/g, '/');
+        include.push(...matches.map(t => join(rel, t)));
         exclude.push(
-            ...['**/__tests__/**/*', '**/__docs__/**/*'].map(t => join(relative(__dirname, dir), t))
+            ...['**/__tests__/**/*', '**/__docs__/**/*'].map(t => join(rel, t))
         );
     }
     config.include = include;
@@ -82,7 +88,10 @@ function compileTypes() {
         // copy legacy index.d.ts
         const dtsList = glob.sync('**/index.d.ts', { cwd: dir, absolute: true });
         for (const file of dtsList) {
-            copySync(file, file.replace(SRC_PATH, DEST_TYPES));
+            const normalizedFile = file.replace(/\\/g, '/');
+            const normalizedSrc = SRC_PATH.replace(/\\/g, '/');
+            const dest = normalizedFile.replace(normalizedSrc, DEST_TYPES);
+            if (dest !== normalizedFile) copySync(file, dest);
         }
     });
 
@@ -131,8 +140,12 @@ export function registryTransform(file = __filename) {
                         ignore: '**/@(__tests__|__docs__)/**/*',
                     });
                     for (const file of otherFiles) {
-                        copySync(file, file.replace(SRC_PATH, DEST_LIB));
-                        copySync(file, file.replace(SRC_PATH, DEST_ES));
+                        const normalizedFile = file.replace(/\\/g, '/');
+                        const normalizedSrc = SRC_PATH.replace(/\\/g, '/');
+                        const destLib = normalizedFile.replace(normalizedSrc, DEST_LIB);
+                        if (destLib !== normalizedFile) copySync(file, destLib);
+                        const destEs = normalizedFile.replace(normalizedSrc, DEST_ES);
+                        if (destEs !== normalizedFile) copySync(file, destEs);
                     }
                 });
             });

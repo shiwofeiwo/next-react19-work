@@ -7,5 +7,12 @@
         "declaration": true,
         "checkJs": false
     },
-    "exclude": ["../../../components/*/style.ts", "../../../components/demo-helper/**/*"]
+    "files": [],
+    "exclude": [
+        "../../../components/*/style.ts",
+        "../../../components/demo-helper/**/*",
+        "../../../components/**/__docs__/**/*",
+        "../../../components/**/__tests__/**/*",
+        "../../../tools/**/*"
+    ]
 }
