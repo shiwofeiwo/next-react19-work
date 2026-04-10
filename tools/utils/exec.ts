@@ -12,7 +12,7 @@ import { error, log } from './log';
  */
 export function execSync(bin: string, args: string[], options?: SpawnSyncOptions) {
     log('SHELL:', `${path.basename(bin)} ${args.join(' ')}`);
-    const child = spawnSync(bin, args, { stdio: 'inherit', cwd: CWD, ...options });
+    const child = spawnSync(bin, args, { stdio: 'inherit', cwd: CWD, shell: true, ...options });
     if (child.status !== 0) {
         if (child.status) {
             child.stderr && error(child.stderr.toString());
