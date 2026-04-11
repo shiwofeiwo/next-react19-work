@@ -198,7 +198,7 @@
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "css-loader": "^0.28.7",
     "css-split-webpack-plugin": "^0.2.5",
-    "cypress": "^13.6.1",
+    "cypress": "^14.0.0",
     "ejs": "^2.5.9",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "~1.10.0",
@@ -303,7 +303,8 @@
     "react-dom": ">=16.0.0"
   },
   "publishConfig": {
-    "registry": "http://192.168.1.65:8081/repository/npm-private-registry/"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "overrides": {
     "@alifd/field": "~2.0.3",
