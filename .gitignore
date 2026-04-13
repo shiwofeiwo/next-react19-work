@@ -91,3 +91,4 @@ patches/
 
 .claude/
 CLAUDE.md
+.npmrc
