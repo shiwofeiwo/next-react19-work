@@ -88,3 +88,6 @@ gemini-report/
 .DS_Store
 src/core-temp
 patches/
+
+.claude/
+CLAUDE.md
