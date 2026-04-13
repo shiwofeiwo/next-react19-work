@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, { type JSXElementConstructor } from 'react';
 import ReactDOM from 'react-dom';
 import ConfigProvider from '../config-provider';
@@ -57,8 +58,8 @@ export const show = (config: Config = {}) => {
         if (config.afterClose) {
             config.afterClose();
         }
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.unmountComponentAtNode(container);
+        const root = createRoot(container);
+        root.unmount();
         container.parentNode?.removeChild(container);
     };
 
@@ -77,8 +78,9 @@ export const show = (config: Config = {}) => {
         }
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(
+    const root = createRoot(container);
+
+    root.render(
         <ConfigProvider {...newContext}>
             <ConfigModal
                 {...config}
@@ -88,12 +90,9 @@ export const show = (config: Config = {}) => {
                     myRef = ref;
                 }}
             />
-        </ConfigProvider>,
-        container,
-        function () {
-            instance = myRef;
-        }
+        </ConfigProvider>
     );
+
     return {
         hide: handleClose,
     };

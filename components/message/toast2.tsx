@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import ConfigProvider from '../config-provider';
@@ -97,12 +98,12 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
         messageList.shift();
     }
 
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(
+    const root = createRoot(messageRootNode);
+
+    root.render(
         <ConfigProvider {...ConfigProvider.getContext()}>
             <ConfigedMessages dataSource={messageList} />
-        </ConfigProvider>,
-        messageRootNode
+        </ConfigProvider>
     );
 
     return {
@@ -116,12 +117,12 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
                 typeof item.onClose === 'function' && item.onClose();
                 messageList.splice(idx, 1);
 
-                // eslint-disable-next-line react/no-deprecated
-                ReactDOM.render(
+                const root = createRoot(messageRootNode);
+
+                root.render(
                     <ConfigProvider {...ConfigProvider.getContext()}>
                         <ConfigedMessages dataSource={messageList} />
-                    </ConfigProvider>,
-                    messageRootNode
+                    </ConfigProvider>
                 );
             }
         },
@@ -137,12 +138,12 @@ function close(key?: string) {
     }
 
     if (messageRootNode) {
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.render(
+        const root = createRoot(messageRootNode);
+
+        root.render(
             <ConfigProvider {...ConfigProvider.getContext()}>
                 <ConfigedMessages dataSource={messageList} />
-            </ConfigProvider>,
-            messageRootNode
+            </ConfigProvider>
         );
     }
 }
@@ -173,8 +174,8 @@ function open(type?: MessageQuickProps['type']) {
 function destory() {
     if (!messageRootNode) return;
     if (messageRootNode) {
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.unmountComponentAtNode(messageRootNode);
+        const root = createRoot(messageRootNode);
+        root.unmount();
         messageRootNode.parentNode!.removeChild(messageRootNode);
         messageRootNode = null;
     }

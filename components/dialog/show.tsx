@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, {
     Component,
     type JSXElementConstructor,
@@ -5,7 +6,6 @@ import React, {
     useImperativeHandle,
 } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ConfigProvider from '../config-provider';
 import Message, { type MessageProps } from '../message';
@@ -58,34 +58,26 @@ export const ModalInner = function ({
     );
 };
 
-class Modal extends Component<ModelProps, ModalState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        type: PropTypes.oneOf([
-            'alert',
-            'confirm',
-            'success',
-            'error',
-            'notice',
-            'warning',
-            'help',
-        ]),
-        title: PropTypes.node,
-        content: PropTypes.node,
-        messageProps: PropTypes.object,
-        footerActions: PropTypes.array,
-        onOk: PropTypes.func,
-        onCancel: PropTypes.func,
-        onClose: PropTypes.func,
-        okProps: PropTypes.object,
-        cancelProps: PropTypes.object,
-        locale: PropTypes.object,
-        needWrapper: PropTypes.bool,
-        className: PropTypes.string,
-    };
+interface ModalProps {
+    prefix?: string;
+    pure?: boolean;
+    rtl?: boolean;
+    type?: 'alert' | 'confirm' | 'success' | 'error' | 'notice' | 'warning' | 'help';
+    title?: React.ReactNode;
+    content?: React.ReactNode;
+    messageProps?: object;
+    footerActions?: unknown[];
+    onOk?(...args: unknown[]): unknown;
+    onCancel?(...args: unknown[]): unknown;
+    onClose?(...args: unknown[]): unknown;
+    okProps?: object;
+    cancelProps?: object;
+    locale?: object;
+    needWrapper?: boolean;
+    className?: string;
+}
 
+class Modal extends Component<ModalProps> {
     static defaultProps = {
         prefix: 'next-',
         pure: false,
@@ -250,8 +242,8 @@ export const show = (config: ShowConfig = {}) => {
         if (config.afterClose) {
             config.afterClose();
         }
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.unmountComponentAtNode(container);
+        const root = createRoot(container);
+        root.unmount();
         container.parentNode?.removeChild(container);
     };
 
@@ -262,8 +254,9 @@ export const show = (config: ShowConfig = {}) => {
     let instance: InstanceType<typeof ConfigModal> | null,
         myRef: InstanceType<typeof ConfigModal> | null;
 
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(
+    const root = createRoot(container);
+
+    root.render(
         <ConfigProvider {...newContext}>
             <ConfigModal
                 {...config}
@@ -272,12 +265,9 @@ export const show = (config: ShowConfig = {}) => {
                     myRef = ref;
                 }}
             />
-        </ConfigProvider>,
-        container,
-        function () {
-            instance = myRef;
-        }
+        </ConfigProvider>
     );
+
     return {
         hide: () => {
             const inc = instance && instance.getInstance();

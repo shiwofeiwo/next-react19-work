@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, { type JSXElementConstructor } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -16,26 +17,26 @@ const { config } = ConfigProvider;
 let instance: { destroy: () => void; component: ConfigMask | null } | null;
 const timeouts: Record<string, ReturnType<typeof setTimeout>> = {};
 
-class Mask extends React.Component<MessageQuickProps> {
+interface MaskProps {
+    prefix?: string;
+    type?: string;
+    title?: React.ReactNode;
+    content?: React.ReactNode;
+    align?: string;
+    offset?: unknown[];
+    hasMask?: boolean;
+    afterClose?(...args: unknown[]): unknown;
+    animation?: object | boolean;
+    overlayProps?: object;
+    onClose?(...args: unknown[]): unknown;
+    timeoutId?: string;
+    style?: object;
+    className?: string;
+}
+
+class Mask extends React.Component<MaskProps> {
     static contextTypes = {
         prefix: PropTypes.string,
-    };
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        type: PropTypes.string,
-        title: PropTypes.node,
-        content: PropTypes.node,
-        align: PropTypes.string,
-        offset: PropTypes.array,
-        hasMask: PropTypes.bool,
-        afterClose: PropTypes.func,
-        animation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        overlayProps: PropTypes.object,
-        onClose: PropTypes.func,
-        timeoutId: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
     };
 
     static defaultProps = {
@@ -129,8 +130,8 @@ const create = (props: MessageQuickProps) => {
     const div = document.createElement('div');
     document.body.appendChild(div);
     const closeChain = function () {
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
         afterClose && afterClose();
     };
@@ -146,8 +147,9 @@ const create = (props: MessageQuickProps) => {
         destroyed = true;
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(
+    const root = createRoot(div);
+
+    root.render(
         <ConfigProvider {...newContext}>
             <NewMask
                 afterClose={closeChain}
@@ -156,14 +158,7 @@ const create = (props: MessageQuickProps) => {
                     myRef = ref!;
                 }}
             />
-        </ConfigProvider>,
-        div,
-        function () {
-            mask = myRef;
-            if (mask && destroyed) {
-                destroy();
-            }
-        }
+        </ConfigProvider>
     );
 
     return {

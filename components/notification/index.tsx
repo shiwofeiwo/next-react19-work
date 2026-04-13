@@ -1,6 +1,6 @@
+import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import ConfigProvider from '../config-provider';
 import Animate from '../animate';
 import Message from '../message';
@@ -48,11 +48,11 @@ function close(key: string) {
     instance.close(key);
 }
 
-class Notification extends Component<NotificationProps, NotificationState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-    };
+interface NotificationProps {
+    prefix?: string;
+}
 
+class Notification extends Component<NotificationProps> {
     static defaultProps = {
         prefix: 'next-',
     };
@@ -222,22 +222,16 @@ function open(options: NotificationOptions = {}) {
                 document.body.appendChild(div);
             }
 
-            // 类型提示使用 createRoot，考虑到兼容性，暂时不处理
-            // eslint-disable-next-line react/no-deprecated
-            ReactDOM.render(
+            const root = createRoot(div);
+
+            root.render(
                 <ConfigProvider {...ConfigProvider.getContext()}>
                     <ConfigedNotification
                         ref={ref => {
                             instance = ref;
                         }}
                     />
-                </ConfigProvider>,
-                div,
-                () => {
-                    waitOpens.forEach(item => instance!.open(item));
-                    waitOpens = [];
-                    mounting = false;
-                }
+                </ConfigProvider>
             );
         }
 
@@ -256,8 +250,8 @@ function destroy() {
     if (!instance) return;
     const mountNode = ReactDOM.findDOMNode(instance)?.parentNode;
     if (mountNode) {
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.unmountComponentAtNode(mountNode as Element);
+        const root = createRoot(mountNode as Element);
+        root.unmount();
         mountNode.parentNode?.removeChild(mountNode);
     }
 }

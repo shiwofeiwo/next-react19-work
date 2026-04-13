@@ -1,7 +1,5 @@
+import { createRoot } from 'react-dom/client';
 import React, { Component, type ComponentRef } from 'react';
-// eslint-disable-next-line react/no-deprecated
-import { render, unmountComponentAtNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Overlay, { type OverlayProps } from '../../overlay';
 import { func, type ClassPropsWithDefault } from '../../util';
@@ -20,20 +18,20 @@ let menuInstance:
     | null
     | undefined;
 
-class ContextMenu extends Component<CreateMenuProps, { visible: boolean }> {
-    static propTypes = {
-        className: PropTypes.string,
-        popupClassName: PropTypes.string,
-        target: PropTypes.any,
-        align: PropTypes.string,
-        offset: PropTypes.array,
-        overlayProps: PropTypes.object,
-        afterClose: PropTypes.func,
-        mode: PropTypes.oneOf(['inline', 'popup']),
-        onOpen: PropTypes.func,
-        onItemClick: PropTypes.func,
-    };
+interface ContextMenuProps {
+    className?: string;
+    popupClassName?: string;
+    target?: any;
+    align?: string;
+    offset?: unknown[];
+    overlayProps?: object;
+    afterClose?(...args: unknown[]): unknown;
+    mode?: 'inline' | 'popup';
+    onOpen?(...args: unknown[]): unknown;
+    onItemClick?(...args: unknown[]): unknown;
+}
 
+class ContextMenu extends Component<ContextMenuProps> {
     static defaultProps = {
         prefix: 'next-',
         align: 'tl tl',
@@ -155,7 +153,8 @@ export default function create(props: CreateMenuProps) {
     document.body.appendChild(div);
 
     const closeChain = () => {
-        unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
 
         afterClose && afterClose();
@@ -164,7 +163,9 @@ export default function create(props: CreateMenuProps) {
     const newContext = ConfigProvider.getContext();
 
     let menu: ContextMenu | null;
-    render(
+    const root = createRoot(div);
+
+    root.render(
         <ConfigProvider {...newContext}>
             <ContextMenu
                 ref={ref => {
@@ -173,8 +174,7 @@ export default function create(props: CreateMenuProps) {
                 afterClose={closeChain}
                 {...others}
             />
-        </ConfigProvider>,
-        div
+        </ConfigProvider>
     );
 
     menuInstance = {
