@@ -146,9 +146,6 @@ function pauseEvent(e: React.SyntheticEvent) {
 
 class Range extends React.Component<RangeProps, RangeState> {
     static displayName = 'Range';
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
     static propTypes = {
         prefix: PropTypes.string,
         className: PropTypes.string,

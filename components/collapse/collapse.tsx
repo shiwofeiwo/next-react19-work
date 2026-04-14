@@ -35,10 +35,6 @@ class Collapse extends React.Component<
         onExpand: func.noop,
     };
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
-
     constructor(props: CollapseProps) {
         super(props);
 

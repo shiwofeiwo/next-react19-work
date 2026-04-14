@@ -38,10 +38,6 @@ class Step extends Component<StepProps, StepState> {
         stretch: false,
     };
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
-
     static getDerivedStateFromProps(newProps: StepProps) {
         if ('current' in newProps) {
             return {
@@ -142,7 +138,7 @@ class Step extends Component<StepProps, StepState> {
         } = this.props;
         const others = obj.pickOthers(Step.propTypes, this.props);
         let { prefix, direction } = this.props;
-        prefix = this.context.prefix || prefix;
+        // prefix is injected via ConfigProvider.config() HOC in index.tsx
         const { parentWidth, parentHeight } = this.state;
 
         // type 不同对应的 direction 不同

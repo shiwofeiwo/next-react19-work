@@ -25,9 +25,6 @@ let alignMap = normalMap;
 class Balloon extends React.Component<BalloonProps, BalloonState> {
     readonly props: BalloonV1Props & BalloonV2Props;
     static displayName = 'Balloon';
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
     static propTypes = {
         prefix: PropTypes.string,
         pure: PropTypes.bool,
@@ -273,7 +270,7 @@ class Balloon extends React.Component<BalloonProps, BalloonState> {
         const { align } = this.state;
 
         alignMap = alignEdge || v2 ? edgeMap : normalMap;
-        const _prefix = this.context.prefix || prefix;
+        const _prefix = prefix;
 
         let trOrigin: 'trOrigin' | 'rtlTrOrigin' = 'trOrigin';
         if (rtl) {

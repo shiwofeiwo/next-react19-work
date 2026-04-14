@@ -35,10 +35,6 @@ interface MaskProps {
 }
 
 class Mask extends React.Component<MaskProps> {
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         align: 'tc tc',

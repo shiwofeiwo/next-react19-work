@@ -40,9 +40,6 @@ export default class Progress extends Component<ProgressProps> {
 
     static displayName = 'Progress';
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
     readonly props: ProgressWithDefaultProps;
     render() {
         const { shape, hasBorder, ...others } = this.props;

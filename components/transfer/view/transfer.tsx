@@ -60,10 +60,6 @@ const filterCheckedValue = (
  * Transfer
  */
 class Transfer extends Component<TransferProps, TransferState> {
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
-
     static propTypes = {
         ...ConfigProvider.propTypes,
         prefix: PropTypes.string,

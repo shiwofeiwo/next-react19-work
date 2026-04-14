@@ -13,9 +13,6 @@ import type { BalloonInnerProps } from './types';
 const { noop } = func;
 
 class BalloonInner extends React.Component<BalloonInnerProps> {
-    static contextTypes = {
-        prefix: PropTypes.string,
-    };
     static propTypes = {
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
