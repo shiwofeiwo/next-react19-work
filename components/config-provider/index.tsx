@@ -16,6 +16,7 @@ import Consumer from './consumer';
 import ErrorBoundary from './error-boundary';
 import Cache from './cache';
 import datejs from '../util/date';
+import { obj } from '../util';
 import ConfigContext from './context';
 import type {
     ConfigProviderProps,
@@ -175,6 +176,8 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
         };
     }
 
+    private _lastMergedContext: ContextState | null = null;
+
     private _getMergedContext(): ContextState {
         const {
             prefix,
@@ -200,7 +203,7 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
             nextErrorBoundary,
         } = this.context;
 
-        return {
+        const newContext: ContextState = {
             nextPrefix: prefix || nextPrefix,
             nextDefaultPropsConfig: defaultPropsConfig || nextDefaultPropsConfig,
             nextLocale: locale || nextLocale,
@@ -211,6 +214,13 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
             nextPopupContainer: popupContainer || nextPopupContainer,
             nextErrorBoundary: errorBoundary || nextErrorBoundary,
         };
+
+        if (this._lastMergedContext && obj.shallowEqual(this._lastMergedContext, newContext)) {
+            return this._lastMergedContext;
+        }
+
+        this._lastMergedContext = newContext;
+        return newContext;
     }
 
     static getDerivedStateFromProps(
