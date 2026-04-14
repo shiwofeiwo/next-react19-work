@@ -12,6 +12,32 @@ const { makeChain } = func;
 const { pickOthers } = obj;
 const noop = () => {};
 
+const INNER_PROP_KEYS = [
+    'prefix',
+    'className',
+    'title',
+    'children',
+    'footer',
+    'footerAlign',
+    'footerActions',
+    'onOk',
+    'onCancel',
+    'okProps',
+    'cancelProps',
+    'closeable',
+    'onClose',
+    'locale',
+    'role',
+    'rtl',
+    'width',
+    'height',
+    'maxHeight',
+    'v2',
+    'closeIcon',
+    'pure',
+    'noPadding',
+];
+
 export default class Inner extends Component<InnerProps> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -205,7 +231,7 @@ export default class Inner extends Component<InnerProps> {
 
     render() {
         const { prefix, className, closeable, title, role, rtl } = this.props;
-        const others = pickOthers(Inner.propTypes, this.props);
+        const others = pickOthers(INNER_PROP_KEYS, this.props);
         const newClassName = cx({
             [`${prefix}dialog`]: true,
             [`${prefix}closeable`]: closeable,

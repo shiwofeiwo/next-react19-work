@@ -12,6 +12,25 @@ import type { OptionProps, ArrowProps } from '../types';
 
 const { noop } = func;
 
+const ARROW_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'type',
+    'centerMode',
+    'currentSlide',
+    'infinite',
+    'clickHandler',
+    'slideCount',
+    'slidesToShow',
+    'arrow',
+    'arrowSize',
+    'arrowPosition',
+    'arrowDirection',
+    'onMouseEnter',
+    'onMouseLeave',
+    'children',
+];
+
 export default class Arrow extends Component<ArrowProps> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -84,7 +103,7 @@ export default class Arrow extends Component<ArrowProps> {
             children,
         } = this.props;
 
-        const others = obj.pickOthers(Arrow.propTypes, this.props);
+        const others = obj.pickOthers(ARROW_PROP_KEYS, this.props);
         const iconType = Arrow.ARROW_ICON_TYPES[arrowDirection!][type!];
         const disabled = Arrow.isDisabled(this.props);
 
