@@ -21,6 +21,43 @@ import type { PaginationProps, PaginationState } from './types';
 const { Option } = Select;
 const noop = () => {};
 
+const PAGINATION_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Pagination-specific keys
+    'className',
+    'type',
+    'shape',
+    'size',
+    'current',
+    'defaultCurrent',
+    'onChange',
+    'total',
+    'totalRender',
+    'pageShowCount',
+    'pageSize',
+    'pageSizeSelector',
+    'pageSizeList',
+    'pageNumberRender',
+    'pageSizePosition',
+    'useFloatLayout',
+    'onPageSizeChange',
+    'hideOnlyOnePage',
+    'showJump',
+    'link',
+    'popupProps',
+    'selectProps',
+];
+
 function getTotalPage(total: number, currentPageSize: number) {
     const totalPage = Math.ceil(total / currentPageSize);
     return totalPage <= 0 ? 1 : totalPage;
@@ -536,7 +573,7 @@ class Pagination extends Component<PaginationProps, PaginationState> {
         }
 
         const buildComponent = (...coms: (ReactElement<any> | null)[]) => (
-            <div className={classes} {...obj.pickOthers(Object.keys(Pagination.propTypes), others)}>
+            <div className={classes} {...obj.pickOthers(PAGINATION_PROP_KEYS, others)}>
                 {isStart && sizeSelector}
                 {totalRender ? this.renderPageTotal() : null}
                 <div className={`${prefix}pagination-pages`}>

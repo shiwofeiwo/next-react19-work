@@ -12,6 +12,27 @@ import type * as toast2 from './toast2';
 
 type Toast2 = typeof toast2.default;
 
+const MESSAGE_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'className',
+    'style',
+    'type',
+    'shape',
+    'size',
+    'title',
+    'children',
+    'defaultVisible',
+    'visible',
+    'iconType',
+    'closeable',
+    'onClose',
+    'afterClose',
+    'animation',
+    'locale',
+    'rtl',
+];
+
 const noop = () => {};
 
 /**
@@ -103,7 +124,7 @@ class Message extends Component<MessageProps> {
             locale,
         } = this.props;
         const others = {
-            ...obj.pickOthers(Object.keys(Message.propTypes), this.props),
+            ...obj.pickOthers(MESSAGE_PROP_KEYS, this.props),
         };
         const { visible } = this.state;
         const messagePrefix = `${prefix}message`;

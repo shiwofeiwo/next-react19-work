@@ -14,6 +14,43 @@ const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 const MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -Math.pow(2, 53) + 1;
 
 const { isNil } = obj;
+
+const NUMBER_PICKER_PROP_KEYS = [
+    'prefix',
+    'type',
+    'size',
+    'value',
+    'defaultValue',
+    'disabled',
+    'step',
+    'precision',
+    'editable',
+    'autoFocus',
+    'onChange',
+    'onKeyDown',
+    'onFocus',
+    'onBlur',
+    'onCorrect',
+    'onDisabled',
+    'max',
+    'min',
+    'className',
+    'style',
+    'state',
+    'format',
+    'upBtnProps',
+    'downBtnProps',
+    'label',
+    'innerAfter',
+    'rtl',
+    'isPreview',
+    'renderPreview',
+    'device',
+    'hasTrigger',
+    'alwaysShowTrigger',
+    'stringMode',
+];
+
 /** NumberPicker */
 class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState> {
     static propTypes = {
@@ -588,7 +625,7 @@ class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState>
             );
         }
 
-        const others = obj.pickOthers(NumberPicker.propTypes, this.props);
+        const others = obj.pickOthers(NUMBER_PICKER_PROP_KEYS, this.props);
         const dataAttrs: object = obj.pickAttrsWith(this.props, 'data-');
 
         const previewCls = classNames(

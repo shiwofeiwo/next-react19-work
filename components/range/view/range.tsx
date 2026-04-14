@@ -21,6 +21,34 @@ const Tooltip = Balloon.Tooltip;
 const { noop, bindCtx } = func;
 const { pickOthers } = obj;
 
+const RANGE_PROP_KEYS = [
+    'prefix',
+    'className',
+    'style',
+    'slider',
+    'min',
+    'max',
+    'step',
+    'value',
+    'tempValue',
+    'defaultValue',
+    'marks',
+    'marksPosition',
+    'disabled',
+    'onChange',
+    'onProcess',
+    'hasTip',
+    'tipRender',
+    'id',
+    'reverse',
+    'pure',
+    'fixedWidth',
+    'tooltipVisible',
+    'rtl',
+    'isPreview',
+    'renderPreview',
+];
+
 function _isMultiple(slider: RangeProps['slider'], isFixedWidth?: boolean) {
     return isFixedWidth || slider === 'double';
 }
@@ -650,7 +678,7 @@ class Range extends React.Component<RangeProps, RangeState> {
             renderPreview,
         } = this.props;
 
-        const others = pickOthers(Object.keys(Range.propTypes), this.props);
+        const others = pickOthers(RANGE_PROP_KEYS, this.props);
 
         const classes = classNames({
             [`${prefix}range`]: true,

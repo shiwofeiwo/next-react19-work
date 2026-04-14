@@ -19,6 +19,34 @@ const { makeChain } = func;
 const { focusRef } = focus;
 const { pickOthers } = obj;
 
+const RADIO_GROUP_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // RadioGroup-specific keys
+    'className',
+    'name',
+    'value',
+    'defaultValue',
+    'component',
+    'onChange',
+    'disabled',
+    'shape',
+    'size',
+    'dataSource',
+    'direction',
+    'isPreview',
+    'renderPreview',
+];
+
 export interface GroupState {
     value: RadioValue | undefined;
 }
@@ -141,7 +169,7 @@ class RadioGroup extends Component<GroupProps, GroupState> {
             isPreview,
             renderPreview,
         } = this.props;
-        const others = pickOthers(RadioGroup.propTypes, this.props);
+        const others = pickOthers(RADIO_GROUP_PROP_KEYS, this.props);
 
         if (rtl) {
             others.dir = 'rtl';

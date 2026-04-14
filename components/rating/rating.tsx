@@ -12,6 +12,39 @@ const { noop, bindCtx } = func;
 const { ENTER, LEFT, UP, RIGHT, DOWN } = KEYCODE;
 const supportKeys = [ENTER, LEFT, UP, RIGHT, DOWN];
 
+const RATING_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Rating-specific keys
+    'defaultValue',
+    'value',
+    'count',
+    'showGrade',
+    'size',
+    'allowHalf',
+    'allowClear',
+    'onChange',
+    'onHoverChange',
+    'disabled',
+    'readAs',
+    'iconType',
+    'strokeMode',
+    'className',
+    'id',
+    'isPreview',
+    'renderPreview',
+    'readOnly',
+];
+
 // 评分组件的大小与 icon 的大小映射关系
 const ICON_SIZE_MAP = {
     small: 'xs',
@@ -342,7 +375,7 @@ class Rating extends Component<RatingProps, RatingState> {
         } = this.props;
 
         const { disabled } = this.state;
-        const others = obj.pickOthers(Rating.propTypes, this.props);
+        const others = obj.pickOthers(RATING_PROP_KEYS, this.props);
         const { hoverValue, clicked } = this.state;
         const underlay = [],
             overlay = [];

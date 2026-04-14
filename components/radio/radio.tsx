@@ -10,6 +10,35 @@ import type { RadioWithContextProps } from './types';
 
 const { makeChain, noop } = func;
 
+const RADIO_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Radio-specific keys
+    'className',
+    'id',
+    'style',
+    'checked',
+    'defaultChecked',
+    'label',
+    'onChange',
+    'onMouseEnter',
+    'onMouseLeave',
+    'disabled',
+    'value',
+    'name',
+    'isPreview',
+    'renderPreview',
+];
+
 interface RadioState extends UIStateState {
     checked?: boolean;
 }
@@ -149,7 +178,7 @@ class Radio extends UIState<RadioWithContextProps, RadioState> {
         const isButton = context.isButton;
         const prefix = this.props.prefix;
 
-        const others = obj.pickOthers(Radio.propTypes, otherProps);
+        const others = obj.pickOthers(RADIO_PROP_KEYS, otherProps);
         const othersData = obj.pickAttrsWith(others, 'data-') as Record<`data-${string}`, unknown>;
 
         if (isPreview) {
