@@ -6,7 +6,7 @@ import UIState, { type UIStateState } from '../mixin-ui-state';
 import ConfigProvider from '../config-provider';
 import withContext from './with-context';
 import { obj, func } from '../util';
-import type { RadioContext, RadioWithContextProps } from './types';
+import type { RadioWithContextProps } from './types';
 
 const { makeChain, noop } = func;
 
@@ -41,14 +41,6 @@ class Radio extends UIState<RadioWithContextProps, RadioState> {
         tabIndex: 0,
         prefix: 'next-',
         isPreview: false,
-    };
-
-    static contextTypes = {
-        onChange: PropTypes.func,
-        __group__: PropTypes.bool,
-        isButton: PropTypes.bool,
-        selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-        disabled: PropTypes.bool,
     };
 
     static getDerivedStateFromProps(nextProps: RadioWithContextProps) {
@@ -98,17 +90,9 @@ class Radio extends UIState<RadioWithContextProps, RadioState> {
         return disabled;
     }
 
-    shouldComponentUpdate(
-        nextProps: RadioWithContextProps,
-        nextState: RadioState,
-        nextContext: RadioContext
-    ) {
+    shouldComponentUpdate(nextProps: RadioWithContextProps, nextState: RadioState) {
         const { shallowEqual } = obj;
-        return (
-            !shallowEqual(this.props, nextProps) ||
-            !shallowEqual(this.state, nextState) ||
-            !shallowEqual(this.context, nextContext)
-        );
+        return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
     }
 
     componentDidUpdate() {

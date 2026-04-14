@@ -5,6 +5,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
 import { obj, func, focus } from '../util';
 import Radio from './radio';
+import RadioGroupContext from './context';
 import type {
     GroupChildProps,
     GroupProps,
@@ -56,14 +57,6 @@ class RadioGroup extends Component<GroupProps, GroupState> {
         isPreview: false,
     };
 
-    static childContextTypes = {
-        onChange: PropTypes.func,
-        __group__: PropTypes.bool,
-        isButton: PropTypes.bool,
-        selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-        disabled: PropTypes.bool,
-    };
-
     static displayName = 'RadioGroup';
 
     radioRefs: unknown[];
@@ -94,18 +87,6 @@ class RadioGroup extends Component<GroupProps, GroupState> {
         }
 
         return null;
-    }
-
-    getChildContext() {
-        const { disabled } = this.props;
-
-        return {
-            __group__: true,
-            isButton: this.props.shape === 'button',
-            onChange: this.onChange,
-            selectedValue: this.state.value,
-            disabled: disabled,
-        };
     }
 
     onChange(currentValue: RadioValue, e: ChangeEvent<HTMLInputElement>) {
@@ -231,21 +212,33 @@ class RadioGroup extends Component<GroupProps, GroupState> {
                 );
             });
         }
+        const groupValue = {
+            __group__: true as const,
+            isButton: shape === 'button',
+            onChange: this.onChange,
+            selectedValue: this.state.value,
+            disabled: !!disabled,
+        };
+
         if (isPreview) {
             const previewCls = classnames(className, `${prefix}form-preview`);
 
             if ('renderPreview' in this.props) {
                 return (
-                    <div {...others} className={previewCls}>
-                        {renderPreview!(previewed, this.props)}
-                    </div>
+                    <RadioGroupContext.Provider value={groupValue}>
+                        <div {...others} className={previewCls}>
+                            {renderPreview!(previewed, this.props)}
+                        </div>
+                    </RadioGroupContext.Provider>
                 );
             }
 
             return (
-                <p {...others} className={previewCls}>
-                    {previewed.label}
-                </p>
+                <RadioGroupContext.Provider value={groupValue}>
+                    <p {...others} className={previewCls}>
+                        {previewed.label}
+                    </p>
+                </RadioGroupContext.Provider>
             );
         }
 
@@ -261,27 +254,29 @@ class RadioGroup extends Component<GroupProps, GroupState> {
 
         const TagName = component!;
         return (
-            <TagName
-                {...others}
-                aria-disabled={disabled}
-                role="radiogroup"
-                className={cls}
-                style={style}
-                onFocus={makeChain(
-                    function () {
-                        this.hasFocus = true;
-                    }.bind(this),
-                    this.props.onFocus
-                )}
-                onBlur={makeChain(
-                    function () {
-                        this.hasFocus = false;
-                    }.bind(this),
-                    this.props.onBlur
-                )}
-            >
-                {children}
-            </TagName>
+            <RadioGroupContext.Provider value={groupValue}>
+                <TagName
+                    {...others}
+                    aria-disabled={disabled}
+                    role="radiogroup"
+                    className={cls}
+                    style={style}
+                    onFocus={makeChain(
+                        function () {
+                            this.hasFocus = true;
+                        }.bind(this),
+                        this.props.onFocus
+                    )}
+                    onBlur={makeChain(
+                        function () {
+                            this.hasFocus = false;
+                        }.bind(this),
+                        this.props.onBlur
+                    )}
+                >
+                    {children}
+                </TagName>
+            </RadioGroupContext.Provider>
         );
     }
 }
