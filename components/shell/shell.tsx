@@ -134,7 +134,7 @@ export default function ShellBase(props: { componentName?: string }) {
             }
         };
 
-        setChildCollapse = (child: ReactElement, mark: keyof CollapseMap) => {
+        setChildCollapse = (child: ReactElement<any>, mark: keyof CollapseMap) => {
             const { device, collapseMap, controll } = this.state;
             const { collapse } = child.props;
             const deviceMap = getCollapseMap(device);
@@ -473,7 +473,7 @@ export default function ShellBase(props: { componentName?: string }) {
                 }
             }
 
-            let headerDom: ReactElement | [] = [],
+            let headerDom: ReactElement<any> | [] = [],
                 contentArr = [],
                 taskHeaderDom = null;
             const innerArr = [];

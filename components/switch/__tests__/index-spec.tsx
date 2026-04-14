@@ -44,7 +44,7 @@ describe('Switch', () => {
         cy.get('.next-switch').click();
         cy.wrap(onClick).should('not.be.called');
         cy.get<MountReturn>('@switch').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { disabled: false }));
+            return rerender(cloneElement(component as ReactElement<any>, { disabled: false }));
         });
         cy.get('.next-switch').click();
         cy.wrap(onClick).should('be.calledOnce');

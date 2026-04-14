@@ -40,7 +40,7 @@ class Sup extends Component<BadgeSubProps, BadgeSubState> {
 
     // 单排可滚动的数字列表
     static renderDigit(prefix: string, digit: number, key: string | number) {
-        const children: Array<React.ReactElement> = [];
+        const children: Array<React.ReactElement<any>> = [];
         for (let i = 0; i < 30; i++) {
             children.push(<span key={i}>{i % 10}</span>);
         }
@@ -171,7 +171,7 @@ class Sup extends Component<BadgeSubProps, BadgeSubState> {
         return digit;
     }
 
-    saveRef: React.LegacyRef<HTMLElement> = ref => {
+    saveRef: React.Ref<HTMLElement> = ref => {
         this.supEl = ref;
     };
 

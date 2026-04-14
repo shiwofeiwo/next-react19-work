@@ -92,7 +92,7 @@ describe('Radio', () => {
             cy.get('.checked').should('exist');
             cy.get<MountReturn>('@radio').then(({ component, rerender }) => {
                 return rerender(
-                    cloneElement(component as ReactElement, {
+                    cloneElement(component as ReactElement<any>, {
                         checked: false,
                     })
                 );

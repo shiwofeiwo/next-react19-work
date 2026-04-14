@@ -214,7 +214,7 @@ export interface MessageQuickProps extends Omit<HTMLAttributesWeak, 'content'>, 
     contextConfig?: ConsumerState;
 }
 
-export type OpenProps = string | React.ReactElement | MessageQuickProps;
+export type OpenProps = string | React.ReactElement<any> | MessageQuickProps;
 
 export interface MessageWrapperItem extends MessageQuickProps {
     timer?: ReturnType<typeof setTimeout>;

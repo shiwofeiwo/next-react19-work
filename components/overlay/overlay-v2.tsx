@@ -101,7 +101,7 @@ const Overlay2 = (props: OverlayV2Props) => {
         typeof onPosition === 'function' && onPosition(result);
     };
 
-    const maskRender = (node: ReactElement) => (
+    const maskRender = (node: ReactElement<any>) => (
         <Animate.OverlayAnimate
             visible={visible}
             animation={animation ? { in: 'fadeIn', out: 'fadeOut' } : false}

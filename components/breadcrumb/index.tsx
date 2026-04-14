@@ -134,7 +134,7 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
     renderEllipsisNodeWithMenu(children: ReactNode, breakpointer: number) {
         // 拿到被隐藏的项
         const hiddenItems: ReactNode[] = [];
-        Children.forEach(children, (item: ReactElement, i) => {
+        Children.forEach(children, (item: ReactElement<any>, i) => {
             const { link, children: itemChildren, onClick } = item.props;
             if (i > 0 && i <= breakpointer) {
                 hiddenItems.push(
@@ -186,7 +186,7 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
             const breakpointer = length - maxNode + 1;
             items = [];
 
-            Children.forEach(children, (item: ReactElement, i) => {
+            Children.forEach(children, (item: ReactElement<any>, i) => {
                 const ariaProps: Record<string, string> = {};
 
                 // 增加空值判断
@@ -229,7 +229,7 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
                 }
             });
         } else {
-            items = Children.map(children, (item: ReactElement, i) => {
+            items = Children.map(children, (item: ReactElement<any>, i) => {
                 const ariaProps: Record<string, string> = {};
                 // 增加空值判断
                 if (!item) {
@@ -278,7 +278,7 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
                         ref={this.saveBreadcrumbRef}
                         className={`${prefix}breadcrumb`}
                     >
-                        {Children.map(children, (item: ReactElement, i) => {
+                        {Children.map(children, (item: ReactElement<any>, i) => {
                             return React.cloneElement(item, {
                                 separator,
                                 prefix,

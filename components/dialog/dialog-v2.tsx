@@ -86,7 +86,7 @@ const Dialog = (props: DialogV2Props) => {
     const [container, setContainer] = useState(getContainer());
     const dialogRef = useRef<Inner>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const lastFocus = useRef<HTMLElement>();
+    const lastFocus = useRef<HTMLElement>(undefined);
     const locker = useRef<string | null>(null);
     const [uuid] = useState(guid());
     const { setVisibleOverlayToParent, ...otherContext } = useContext(OverlayContext);

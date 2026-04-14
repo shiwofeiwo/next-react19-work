@@ -472,7 +472,9 @@ class Rating extends Component<RatingProps, RatingState> {
                 <div className={baseCls} {...finalProps}>
                     <div
                         className={`${prefix}rating-underlay`}
-                        ref={n => (this.underlayNode = n)}
+                        ref={n => {
+                            this.underlayNode = n;
+                        }}
                         aria-hidden
                     >
                         {underlay}

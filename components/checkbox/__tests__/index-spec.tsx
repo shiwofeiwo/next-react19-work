@@ -105,13 +105,15 @@ describe('Checkbox', () => {
             cy.get('input').should('be.checked');
             cy.get('.checked').should('have.length', 1);
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { checked: false }));
+                return rerender(
+                    React.cloneElement(component as ReactElement<any>, { checked: false })
+                );
             });
             cy.get('input').should('not.be.checked');
             cy.get('.checked').should('have.length', 0);
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as ReactElement, { indeterminate: true })
+                    React.cloneElement(component as ReactElement<any>, { indeterminate: true })
                 );
             });
             cy.get('.indeterminate').should('have.length', 1);

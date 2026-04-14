@@ -1,4 +1,4 @@
-import React, { type ComponentRef, type LegacyRef } from 'react';
+import React, { type ComponentRef, type Ref } from 'react';
 
 import { assignSubComponent } from '../util/component';
 import ConfigProvider from '../config-provider';
@@ -9,7 +9,7 @@ const ConfigTimePicker = ConfigProvider.config(TimePicker);
 
 const TimePickerWithSub = assignSubComponent(TimePicker, {
     RangePicker: React.forwardRef(
-        (props: TimePickerProps, ref: LegacyRef<ComponentRef<typeof ConfigTimePicker>>) => (
+        (props: TimePickerProps, ref: Ref<ComponentRef<typeof ConfigTimePicker>>) => (
             <ConfigTimePicker ref={ref} {...props} type="range" />
         )
     ),

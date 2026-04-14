@@ -1,7 +1,7 @@
 import React, { type ReactElement } from 'react';
 
 export function getDisabledCompatibleTrigger(
-    element: ReactElement & { type: { displayName: string } }
+    element: ReactElement<any> & { type: { displayName: string } }
 ) {
     if (element.type.displayName === 'Config(Button)' && element.props.disabled) {
         const displayStyle =

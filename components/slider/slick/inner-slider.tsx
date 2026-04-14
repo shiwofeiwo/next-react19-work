@@ -164,11 +164,12 @@ class InnerSlider extends Component<InnerSliderProps, InnerSliderState> {
     componentDidUpdate(this: ThisType, prevProps: InnerSliderProps, prevState: InnerSliderState) {
         if (prevProps.activeIndex !== this.props.activeIndex) {
             this.slickGoTo(this.props.activeIndex!);
-        } else if (prevState.currentSlide! >= (this.props.children as ReactElement[]).length) {
+        } else if (prevState.currentSlide! >= (this.props.children as ReactElement<any>[]).length) {
             this.update(this.props);
             this.changeSlide({
                 message: 'index',
-                index: (this.props.children as ReactElement[]).length - this.props.slidesToShow!,
+                index:
+                    (this.props.children as ReactElement<any>[]).length - this.props.slidesToShow!,
                 currentSlide: this.state.currentSlide,
             });
         } else {

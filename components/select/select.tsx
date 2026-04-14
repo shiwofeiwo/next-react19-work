@@ -888,7 +888,7 @@ class Select extends Base<SelectProps, SelectState> {
     renderExtraNode() {
         const { hasArrow, hasClear, prefix } = this.props;
 
-        const ret: ReactElement[] = [];
+        const ret: ReactElement<any>[] = [];
 
         if (hasArrow) {
             ret.push(
@@ -960,7 +960,7 @@ class Select extends Base<SelectProps, SelectState> {
         // compatible with selectPlaceHolder. TODO: removed in 2.0 version
         let _placeholder: string | undefined =
             placeholder || locale!.selectPlaceholder || locale!.selectPlaceHolder;
-        if (valueNodes && (valueNodes as ReactElement[]).length) {
+        if (valueNodes && (valueNodes as ReactElement<any>[]).length) {
             _placeholder = undefined;
         }
 
@@ -1041,7 +1041,7 @@ class Select extends Base<SelectProps, SelectState> {
     renderSearchInput(
         valueNodes: ReactNode,
         placeholder: string | undefined,
-        inputEl: ReactElement
+        inputEl: ReactElement<any>
     ) {
         const { prefix, mode, tagInline } = this.props;
         const isSingle = mode === 'single';

@@ -115,7 +115,7 @@ class Step extends Component<StepProps, StepState> {
     }
 
     _getValidChildren(children: ReactNode) {
-        const result: ReactElement[] = [];
+        const result: ReactElement<any>[] = [];
         React.Children.forEach(children, child => {
             if (React.isValidElement(child)) {
                 result.push(child);

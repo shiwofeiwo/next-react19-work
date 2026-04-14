@@ -535,7 +535,7 @@ class Pagination extends Component<PaginationProps, PaginationState> {
             others.dir = 'rtl';
         }
 
-        const buildComponent = (...coms: (ReactElement | null)[]) => (
+        const buildComponent = (...coms: (ReactElement<any> | null)[]) => (
             <div className={classes} {...obj.pickOthers(Object.keys(Pagination.propTypes), others)}>
                 {isStart && sizeSelector}
                 {totalRender ? this.renderPageTotal() : null}

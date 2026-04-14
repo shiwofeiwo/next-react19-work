@@ -1,8 +1,7 @@
 import React, {
     Component,
     type ReactNode,
-    type LegacyRef,
-    type ReactNodeArray,
+    type Ref,
     type ComponentElement,
     type ComponentRef,
 } from 'react';
@@ -30,7 +29,7 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
     scrollToSelectedItem() {
         const { prefix, useVirtual, children } = this.props;
         // FIXME 这里的判断很容易报错
-        if (!children || (children as ReactNodeArray).length === 0) {
+        if (!children || (children as ReadonlyArray<ReactNode>).length === 0) {
             return;
         }
         const selectedIndex = children.findIndex(
@@ -58,8 +57,8 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
     }
 
     renderMenu(
-        items: ReactNodeArray,
-        ref: LegacyRef<ComponentRef<typeof Menu>> | undefined,
+        items: ReadonlyArray<ReactNode>,
+        ref: Ref<ComponentRef<typeof Menu>> | undefined,
         props: MenuProps
     ) {
         function isItem(node: ReactNode): node is ComponentElement<ItemProps, CascaderMenuItem> {
@@ -116,7 +115,7 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
                         {children}
                     </VirtualList>
                 ) : (
-                    this.renderMenu(children as ReactNodeArray, undefined, menuProps)
+                    this.renderMenu(children as ReadonlyArray<ReactNode>, undefined, menuProps)
                 )}
             </div>
         );

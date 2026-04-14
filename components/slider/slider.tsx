@@ -168,9 +168,9 @@ export default class Slider extends Component<SliderProps> {
                     )}
                 >
                     <InnerSlider
-                        ref={(InnerSlider: InnerSliderType | null) =>
-                            (this.innerSlider = InnerSlider)
-                        }
+                        ref={(InnerSlider: InnerSliderType | null) => {
+                            this.innerSlider = InnerSlider;
+                        }}
                         {...sliderProps}
                     />
                 </div>

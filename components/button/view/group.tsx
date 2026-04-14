@@ -34,7 +34,7 @@ class ButtonGroup extends Component<GroupProps> {
         const cloneChildren = Children.map(children, child => {
             if (child) {
                 // fixme: child may not be cloned
-                return React.cloneElement(child as React.ReactElement, {
+                return React.cloneElement(child as React.ReactElement<any>, {
                     size: size,
                 });
             }

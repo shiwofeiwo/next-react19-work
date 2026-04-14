@@ -410,7 +410,7 @@ class Demo extends React.Component<DemoProps, DemoState> {
             demoShapeLevel = demoTitle.split(' -> ').join('_');
 
             const body = React.Children.map(this.props.children, (child, i) => {
-                return React.cloneElement(child as React.ReactElement, {
+                return React.cloneElement(child as React.ReactElement<any>, {
                     block: this.props.block,
                     demoIndex: `${index}-${i}`,
                     demoItems,
@@ -429,7 +429,7 @@ class Demo extends React.Component<DemoProps, DemoState> {
             );
         } else {
             children = React.Children.map(this.props.children, (child, i) => {
-                return React.cloneElement(child as React.ReactElement, {
+                return React.cloneElement(child as React.ReactElement<any>, {
                     parentDisplayName: 'Demo',
                     defaultBackground: background,
                     demoIndex: `${index}-${i}`,
@@ -647,7 +647,7 @@ class DemoGroup extends React.Component<DemoGroupProps> {
                 }
                 demoItems[demoIndex].existed = true;
 
-                const cloneChild = React.cloneElement(child as React.ReactElement, {
+                const cloneChild = React.cloneElement(child as React.ReactElement<any>, {
                     'data-cool': JSON.stringify(defaultCool),
                 });
 

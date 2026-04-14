@@ -72,7 +72,7 @@ export interface ArrowProps
     arrowSize?: SliderProps['arrowSize'];
     arrowPosition?: SliderProps['arrowPosition'];
     arrowDirection?: SliderProps['arrowDirection'];
-    children?: ReactElement;
+    children?: ReactElement<any>;
     clickHandler?: (options: OptionProps, e: MouseEvent<HTMLElement>) => void;
     onMouseEnter?: MouseEventHandler<HTMLDivElement | HTMLButtonElement>;
     onMouseLeave?: MouseEventHandler<HTMLDivElement | HTMLButtonElement>;
@@ -197,13 +197,13 @@ export interface SliderProps
      * 前向箭头节点
      * @en Prev arrow
      */
-    prevArrow?: ReactElement;
+    prevArrow?: ReactElement<any>;
 
     /**
      * 后向箭头节点
      * @en Next arrow
      */
-    nextArrow?: ReactElement;
+    nextArrow?: ReactElement<any>;
 
     /**
      * 是否启用居中模式

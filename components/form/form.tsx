@@ -30,7 +30,7 @@ const getNewChildren: (children: ReactNode, props: FormProps) => ReactNode = (
     const { size, device, labelAlign, labelTextAlign, labelCol, wrapperCol, responsive, colon } =
         props;
 
-    return Children.map(children, (child: ReactElement & ChildExtraProperties) => {
+    return Children.map(children, (child: ReactElement<any> & ChildExtraProperties) => {
         if (obj.isReactFragmentElement(child)) {
             return getNewChildren(child.props.children, props);
         }

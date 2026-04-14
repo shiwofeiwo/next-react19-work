@@ -292,7 +292,7 @@ class Search extends React.Component<SearchProps, SearchState> {
 
             hasIcon &&
                 (searchIcon = React.cloneElement(
-                    (iconsSearch as React.ReactElement) || <Icon type="search" />,
+                    (iconsSearch as React.ReactElement<any>) || <Icon type="search" />,
                     {
                         role: 'button',
                         'aria-disabled': disabled,

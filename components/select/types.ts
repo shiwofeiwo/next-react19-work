@@ -10,7 +10,7 @@ const { Popup } = Overlay;
 
 export type ReactElementWithTypeMark<P = unknown> = React.ReactElement<
     P,
-    React.ReactElement['type'] & { _typeMark?: string }
+    React.ReactElement<any>['type'] & { _typeMark?: string }
 >;
 
 interface HTMLAttributesWeak

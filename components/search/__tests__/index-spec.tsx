@@ -94,7 +94,9 @@ describe('Search', () => {
             cy.get('input').type('20');
             cy.wrap(onChange).should('be.calledTwice', '20');
             cy.get<MountReturn>('@Search').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { value: '30' }));
+                return rerender(
+                    React.cloneElement(component as ReactElement<any>, { value: '30' })
+                );
             });
             cy.wrap(onChange).should('be.calledTwice', '20');
         });
@@ -172,7 +174,7 @@ describe('Search', () => {
                 },
             ];
             cy.get<MountReturn>('@Search').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { filter }));
+                return rerender(React.cloneElement(component as ReactElement<any>, { filter }));
             });
             cy.get('.next-search-left-addon .next-select-single').click();
             cy.get('.next-menu-item').eq(FILTER_INDEX).click();
@@ -235,7 +237,7 @@ describe('Search', () => {
             cy.mount(<Search onSearch={onSearch} />).as('Search');
             cy.get<MountReturn>('@Search').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as ReactElement, {
+                    React.cloneElement(component as ReactElement<any>, {
                         value: VALUE,
                         filterValue: FILTER_VALUE,
                     })

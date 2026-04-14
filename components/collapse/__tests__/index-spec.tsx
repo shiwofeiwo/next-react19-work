@@ -376,7 +376,7 @@ describe('Collapse', () => {
             );
             cy.mount(collapse).then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as ReactElement, { expandedKeys: ['0'] })
+                    React.cloneElement(component as ReactElement<any>, { expandedKeys: ['0'] })
                 );
             });
 

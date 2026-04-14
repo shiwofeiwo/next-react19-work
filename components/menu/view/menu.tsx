@@ -4,8 +4,6 @@ import React, {
     cloneElement,
     type ReactElement,
     type CSSProperties,
-    type ReactChild,
-    type ReactFragment,
     type ReactPortal,
     type ReactNode,
     type FocusEvent,
@@ -37,7 +35,7 @@ const noop = () => {};
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
 
 const getIndicatorsItem = (
-    items: ReactElement[],
+    items: ReactElement<any>[],
     isPlaceholder: boolean,
     prefix = '',
     renderMore: MenuProps['renderMore']
@@ -85,13 +83,15 @@ const addIndicators = ({
     MenuPropsWithDefaults,
     'children' | 'prefix' | 'renderMore'
 >) => {
-    const arr: Array<ReactChild | ReactFragment | ReactPortal | true> = [];
+    const arr: Array<
+        ReactElement<any> | number | string | Iterable<ReactNode> | ReactPortal | true
+    > = [];
 
     React.Children.forEach(children, (child, index) => {
         if (!child) {
             return;
         }
-        let overflowedItems: ReactElement[] = [];
+        let overflowedItems: ReactElement<any>[] = [];
         // lastVisibleIndex 为 undefined 时，下面两个 if 条件始终为 false, 所以这里直接先行判断一下，避免类型错误
         if (typeof lastVisibleIndex !== 'undefined') {
             if (index > lastVisibleIndex) {
@@ -108,7 +108,7 @@ const addIndicators = ({
             }
 
             if (index === lastVisibleIndex + 1) {
-                overflowedItems = (children as ReactElement[])
+                overflowedItems = (children as ReactElement<any>[])
                     .slice(lastVisibleIndex + 1)
                     .map((c, i) => {
                         return React.cloneElement(c, {

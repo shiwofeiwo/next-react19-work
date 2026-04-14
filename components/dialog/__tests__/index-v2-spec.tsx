@@ -92,11 +92,11 @@ describe('v2', () => {
         cy.mount(<Dialog v2 visible />).as('Demo');
         cy.get('.next-dialog-footer').should('have.class', 'next-align-right');
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-            rerender(cloneElement(component as ReactElement, { footerAlign: 'center' }));
+            rerender(cloneElement(component as ReactElement<any>, { footerAlign: 'center' }));
         });
         cy.get('.next-dialog-footer').should('have.class', 'next-align-center');
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-            rerender(cloneElement(component as ReactElement, { footerAlign: 'left' }));
+            rerender(cloneElement(component as ReactElement<any>, { footerAlign: 'left' }));
         });
         cy.get('.next-dialog-footer').should('have.class', 'next-align-left');
     });
@@ -108,20 +108,22 @@ describe('v2', () => {
         shouldCancelBtn(cy.get('.next-dialog-btn').eq(1));
 
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-            rerender(cloneElement(component as ReactElement, { footerActions: ['cancel', 'ok'] }));
+            rerender(
+                cloneElement(component as ReactElement<any>, { footerActions: ['cancel', 'ok'] })
+            );
         });
         cy.get('.next-dialog-btn').should('have.length', 2);
         shouldCancelBtn(cy.get('.next-dialog-btn').eq(0));
         shouldOkBtn(cy.get('.next-dialog-btn').eq(1));
 
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-            rerender(cloneElement(component as ReactElement, { footerActions: ['ok'] }));
+            rerender(cloneElement(component as ReactElement<any>, { footerActions: ['ok'] }));
         });
         cy.get('.next-dialog-btn').should('have.length', 1);
         shouldOkBtn(cy.get('.next-dialog-btn').eq(0));
 
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-            rerender(cloneElement(component as ReactElement, { footerActions: ['cancel'] }));
+            rerender(cloneElement(component as ReactElement<any>, { footerActions: ['cancel'] }));
         });
         cy.get('.next-dialog-btn').should('have.length', 1);
         shouldCancelBtn(cy.get('.next-dialog-btn').eq(0));
@@ -133,7 +135,7 @@ describe('v2', () => {
 
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
             rerender(
-                cloneElement(component as ReactElement, {
+                cloneElement(component as ReactElement<any>, {
                     footer: <a className="custom">Link</a>,
                 })
             );
@@ -244,7 +246,7 @@ describe('v2', () => {
 
         cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
             rerender(
-                cloneElement(component as ReactElement, {
+                cloneElement(component as ReactElement<any>, {
                     height: '500px',
                 })
             );

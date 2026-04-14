@@ -60,7 +60,7 @@ const createChildren = (children: React.ReactNode, { spacing, direction, wrap }:
                 gridProps = createStyle({ display: 'grid', ...child.props });
             }
 
-            return React.cloneElement(child as React.ReactElement, {
+            return React.cloneElement(child as React.ReactElement<any>, {
                 style: {
                     ...spacingMargin,
                     // ...getBoxChildProps(child.props),

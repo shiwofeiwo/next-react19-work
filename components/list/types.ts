@@ -44,7 +44,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLElement>, CommonProp
      * @param index - 当前遍历的项的索引 - The index of the current item
      * @returns - 自定义渲染的 ReactElement - The ReactElement be customized
      */
-    renderItem?: (current: unknown, index: number) => ReactElement;
+    renderItem?: (current: unknown, index: number) => ReactElement<any>;
     /**
      * loading 状态控制
      * @en Loading state control
@@ -58,7 +58,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLElement>, CommonProp
      * @returns - 自定义的 Loading 组件 - Custom Loading component
      * @remarks 请务必透传 props, 使用方式：loadingComponent=\{props =\> \<Loading \{...props\}/\>\}
      */
-    loadingComponent?: (props: LoadingProps) => ReactElement;
+    loadingComponent?: (props: LoadingProps) => ReactElement<any>;
     /**
      * 当列表为空时显示的内容
      * @en The content displayed when the list is empty

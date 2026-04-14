@@ -370,7 +370,7 @@ export function isReactFragmentElement(component?: unknown): boolean {
         return false;
     }
 
-    const type = (component as ReactElement).type;
+    const type = (component as ReactElement<any>).type;
     return type === React.Fragment;
 }
 

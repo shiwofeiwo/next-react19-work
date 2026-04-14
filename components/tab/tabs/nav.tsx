@@ -25,7 +25,7 @@ const iconTypeMap = {
 const { Popup } = Overlay;
 interface NavState {
     showBtn: boolean;
-    dropdownTabs: ReactElement[];
+    dropdownTabs: ReactElement<any>[];
 }
 
 type AnimateInstanceType = InstanceType<typeof Animate>;
@@ -520,7 +520,7 @@ class Nav extends React.Component<NavProps, NavState> {
         return icon;
     }
 
-    renderDropdownTabs(tabs: ReactElement[] = []) {
+    renderDropdownTabs(tabs: ReactElement<any>[] = []) {
         if (!tabs.length) {
             return null;
         }

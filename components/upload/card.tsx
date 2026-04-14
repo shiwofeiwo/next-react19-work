@@ -190,7 +190,9 @@ class Card extends Base<CardProps, CardState> {
                     value={this.state.value}
                     onProgress={this.onProgress}
                     onChange={this.onChange}
-                    ref={ref => this.saveRef(ref)}
+                    ref={ref => {
+                        this.saveRef(ref);
+                    }}
                     className={uploadButtonCls}
                 >
                     {children}

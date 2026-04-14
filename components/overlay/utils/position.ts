@@ -33,7 +33,7 @@ function _getSize(element: SVGElement | HTMLElement) {
 /**
  * @internal get element rect
  */
-function _getElementRect(elem: HTMLElement, container?: HTMLElement | ReactElement) {
+function _getElementRect(elem: HTMLElement, container?: HTMLElement | ReactElement<any>) {
     let offsetTop = 0,
         offsetLeft = 0,
         scrollTop = 0,

@@ -107,7 +107,7 @@ class Nav extends Component<NavProps> {
         };
     }
 
-    getMenuRef: React.LegacyRef<MenuInstance> = ref => {
+    getMenuRef: React.Ref<MenuInstance> = ref => {
         this.menu = ref;
     };
 

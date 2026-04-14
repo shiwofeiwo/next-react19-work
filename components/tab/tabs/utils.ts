@@ -26,7 +26,7 @@ export function isTransformSupported(style: CSSStyleDeclaration) {
 }
 
 export function toArray(children: ReactNode) {
-    const ret: ReactElement[] = [];
+    const ret: ReactElement<any>[] = [];
     React.Children.forEach(children, (child, index) => {
         if (React.isValidElement(child)) {
             const props = {
@@ -48,7 +48,7 @@ export function toArray(children: ReactNode) {
  * arr.tabsArrayShallowEqual(['2','3','4'], ['2','5','4']); // false
  */
 
-export function tabsArrayShallowEqual(arrA: ReactElement[], arrB: ReactElement[]) {
+export function tabsArrayShallowEqual(arrA: ReactElement<any>[], arrB: ReactElement<any>[]) {
     // 相同地址的返回true，不需要更新数据（更新数据的基础是props数据与当前获取的值不同）
     if (arrA === arrB) {
         return true;

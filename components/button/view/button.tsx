@@ -123,7 +123,7 @@ export default class Button extends Component<ButtonProps> {
             }
 
             const loadingSize = iconSize || mapIconSize(size!);
-            loadingIcon = React.cloneElement(icons.loading as React.ReactElement, {
+            loadingIcon = React.cloneElement(icons.loading as React.ReactElement<any>, {
                 className: classNames({
                     [`${prefix}btn-custom-loading-icon`]: true,
                     show: loading,

@@ -200,7 +200,7 @@ describe('Radio.Group', () => {
             cy.mount(<RadioGroup defaultValue={0} dataSource={numberList} />).as('radio');
             cy.get('.next-radio-wrapper.checked .next-radio-label').should('have.text', '0');
             cy.get<MountReturn>('@radio').then(({ rerender, component }) => {
-                return rerender(cloneElement(component as ReactElement, { value: undefined }));
+                return rerender(cloneElement(component as ReactElement<any>, { value: undefined }));
             });
             cy.get('.next-radio-wrapper.checked').should('not.exist');
         });
@@ -211,7 +211,7 @@ describe('Radio.Group', () => {
             cy.get('.next-radio-wrapper.checked .next-radio-label').should('have.text', '梨');
 
             cy.get<MountReturn>('@radio').then(({ component, rerender }) => {
-                return rerender(cloneElement(component as ReactElement, { value: 'apple' }));
+                return rerender(cloneElement(component as ReactElement<any>, { value: 'apple' }));
             });
             cy.get('.next-radio-wrapper.checked .next-radio-label').should('have.text', '苹果');
         });
@@ -221,13 +221,16 @@ describe('Radio.Group', () => {
             cy.get('.next-radio-group.disabled').should('not.exist');
             cy.get('.next-radio.disabled').should('have.length', 1);
             cy.get<MountReturn>('@radio').then(({ component, rerender }) => {
-                return rerender(cloneElement(component as ReactElement, { disabled: true }));
+                return rerender(cloneElement(component as ReactElement<any>, { disabled: true }));
             });
             cy.get('.next-radio-group.disabled').should('exist');
 
             cy.get<MountReturn>('@radio').then(({ component, rerender }) => {
                 return rerender(
-                    cloneElement(component as ReactElement, { disabled: true, value: undefined })
+                    cloneElement(component as ReactElement<any>, {
+                        disabled: true,
+                        value: undefined,
+                    })
                 );
             });
             cy.get('.next-radio-group.disabled').should('exist');
@@ -284,7 +287,7 @@ describe('Radio.Group', () => {
             cy.get('.next-radio-wrapper.checked .next-radio-label').should('have.text', '0');
 
             cy.get<MountReturn>('@radio').then(({ component, rerender }) => {
-                return rerender(cloneElement(component as ReactElement, { value: 1 }));
+                return rerender(cloneElement(component as ReactElement<any>, { value: 1 }));
             });
 
             cy.get('.next-radio-wrapper.checked .next-radio-label').should('have.text', '1');

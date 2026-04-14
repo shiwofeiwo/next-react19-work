@@ -450,7 +450,11 @@ export interface GroupProps extends ItemProps {
      * 菜单项
      * @en menu items
      */
-    children: React.ReactChild | React.ReactChild[];
+    children:
+        | React.ReactElement<any>
+        | number
+        | string
+        | (React.ReactElement<any> | number | string)[];
 }
 
 /**
@@ -761,7 +765,7 @@ export interface MenuProps
      * @returns 渲染内容 - More render content
      */
     renderMore?: (
-        items?: React.ReactElement[]
+        items?: React.ReactElement<any>[]
     ) => React.ReactElement<{ className?: string; style?: React.CSSProperties }>;
 
     /**

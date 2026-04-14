@@ -701,7 +701,7 @@ class Cascader extends Component<CascaderProps, CascaderState> {
                                 </CascaderMenuItem>
                             );
                         })
-                        .filter(v => v) as ReactElement[]
+                        .filter(v => v) as ReactElement<any>[]
                 }
             </CascaderMenu>
         );

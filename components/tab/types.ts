@@ -264,7 +264,7 @@ export interface TabItemProps extends ItemProps, Pick<CommonProps, 'prefix'> {
 }
 
 export interface NavProps extends CommonProps, TabProps {
-    tabs: ReactElement[];
+    tabs: ReactElement<any>[];
     locale?: Locale['Tab'];
     onTriggerEvent: (triggerType: string, key: string) => void; // TypeFunc could be defined
 }

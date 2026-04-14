@@ -107,7 +107,7 @@ class Timeline extends Component<TimelineProps, TimelineState> {
                 }
             });
 
-            return React.cloneElement(child as ReactElement, {
+            return React.cloneElement(child as ReactElement<any>, {
                 prefix: prefix,
                 locale: locale,
                 total: childrenCount,

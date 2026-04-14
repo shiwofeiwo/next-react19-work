@@ -50,12 +50,12 @@ export interface PopupV1Props extends React.HTMLAttributes<HTMLElement>, CommonP
      * @en overlay element
      * @skip
      */
-    overlay?: React.ReactElement;
+    overlay?: React.ReactElement<any>;
     /**
      * 弹层内容
      * @en content of overlay
      */
-    children?: React.ReactElement;
+    children?: React.ReactElement<any>;
     /**
      * 弹层是否自适应内容
      * @en whether the overlay is automatically adapted to the content
@@ -268,7 +268,7 @@ export interface PopupV1Props extends React.HTMLAttributes<HTMLElement>, CommonP
      * 触发弹层显示或隐藏的元素
      * @en trigger the overlay to show or hide elements
      */
-    trigger?: React.ReactElement;
+    trigger?: React.ReactElement<any>;
 
     /**
      * 触发弹层显示或隐藏的操作类型，可以是 'click'，'hover'，'focus'，或者它们组成的数组，如 ['hover', 'focus']
@@ -385,12 +385,12 @@ export interface PopupV2Props extends React.HTMLAttributes<HTMLElement>, CommonP
      * @en overlay element
      * @skip
      */
-    overlay?: React.ReactElement;
+    overlay?: React.ReactElement<any>;
     /**
      * 弹层内容
      * @en content of overlay
      */
-    children?: React.ReactElement;
+    children?: React.ReactElement<any>;
     /**
      * 弹层是否自适应内容
      * @en whether the overlay is automatically adapted to the content
@@ -603,7 +603,7 @@ export interface PopupV2Props extends React.HTMLAttributes<HTMLElement>, CommonP
      * 触发弹层显示或隐藏的元素
      * @en trigger the overlay to show or hide elements
      */
-    trigger?: React.ReactElement;
+    trigger?: React.ReactElement<any>;
 
     /**
      * 触发弹层显示或隐藏的操作类型，可以是 'click'，'hover'，'focus'，或者它们组成的数组，如 ['hover', 'focus']
@@ -746,7 +746,7 @@ export interface OverlayV1Props extends React.HTMLAttributes<HTMLElement>, Commo
      * 弹层内容
      * @en content of overlay
      */
-    children?: React.ReactElement & { ref?: React.RefCallback<HTMLElement> };
+    children?: React.ReactElement<any> & { ref?: React.RefCallback<HTMLElement> };
 
     /**
      * 是否显示弹层
@@ -1003,7 +1003,7 @@ export interface OverlayV2Props extends React.HTMLAttributes<HTMLElement>, Commo
      * 弹层内容
      * @en content of overlay
      */
-    children?: React.ReactElement & { ref?: React.RefCallback<HTMLElement> };
+    children?: React.ReactElement<any> & { ref?: React.RefCallback<HTMLElement> };
 
     /**
      * 是否显示弹层
@@ -1234,7 +1234,7 @@ export interface PositionProps {
      * 弹层内容
      * @en content of overlay
      */
-    children?: React.ReactElement;
+    children?: React.ReactElement<any>;
     /**
      * 弹层定位的参照元素
      * @en reference element for overlay positioning
@@ -1356,7 +1356,7 @@ export interface GatewayProps {
      * 弹层内容
      * @en content of overlay
      */
-    children?: null | (React.ReactElement & { ref?: React.RefCallback<HTMLElement> | string });
+    children?: null | (React.ReactElement<any> & { ref?: React.RefCallback<HTMLElement> | string });
     /**
      * 渲染组件的容器，如果是函数需要返回 ref，如果是字符串则是该 DOM 的 id，也可以直接传入 DOM 节点
      * @en Container of the overlay, if it is a function, it should return ref, if it is a string, it is should be the id of the DOM element, it can also be passed the DOM element directly.
@@ -1371,5 +1371,5 @@ export interface GatewayProps {
 }
 
 export interface GatewayState {
-    containerNode: React.ReactElement | Element | Text | null;
+    containerNode: React.ReactElement<any> | Element | Text | null;
 }

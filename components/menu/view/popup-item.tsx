@@ -188,7 +188,7 @@ export default class PopupItem extends Component<PopupItemProps> {
     }
 
     renderPopup(
-        trigger: ReactElement,
+        trigger: ReactElement<any>,
         triggerType: PopupProps['triggerType'],
         positionProps: PopupProps,
         children: ReactNode

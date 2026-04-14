@@ -205,7 +205,7 @@ describe('VirtualList', () => {
                 >
                     <VirtualList
                         itemsRenderer={(items, ref) => {
-                            handleItemsRender((items[0] as ReactElement).key);
+                            handleItemsRender((items[0] as ReactElement<any>).key);
                             return <ul ref={ref}>{items}</ul>;
                         }}
                         jumpIndex={50}

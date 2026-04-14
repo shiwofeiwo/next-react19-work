@@ -112,7 +112,9 @@ describe('Nav', () => {
 
             ['normal', 'primary', 'secondary', 'line'].forEach(type => {
                 cy.get<MountReturn>('@el').then(({ component, rerender }) => {
-                    return rerender(React.cloneElement(component as React.ReactElement, { type }));
+                    return rerender(
+                        React.cloneElement(component as React.ReactElement<any>, { type })
+                    );
                 });
                 cy.get('ul.next-nav').should('have.class', `next-${type}`);
             });
@@ -129,7 +131,7 @@ describe('Nav', () => {
             ['hoz', 'ver'].forEach(direction => {
                 cy.get<MountReturn>('@el').then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, { direction })
+                        React.cloneElement(component as React.ReactElement<any>, { direction })
                     );
                 });
                 cy.get('ul.next-nav').should('have.class', `next-${direction}`);
@@ -146,7 +148,9 @@ describe('Nav', () => {
             ['left', 'right'].forEach(activeDirection => {
                 cy.get<MountReturn>('@el').then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, { activeDirection })
+                        React.cloneElement(component as React.ReactElement<any>, {
+                            activeDirection,
+                        })
                     );
                 });
                 cy.get('ul.next-nav')
@@ -156,7 +160,9 @@ describe('Nav', () => {
             ['top', 'bottom'].forEach(activeDirection => {
                 cy.get<MountReturn>('@el').then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, { activeDirection })
+                        React.cloneElement(component as React.ReactElement<any>, {
+                            activeDirection,
+                        })
                     );
                 });
                 cy.get('ul.next-nav').should('not.have.class', 'next-active');
@@ -165,7 +171,7 @@ describe('Nav', () => {
             ['top', 'bottom'].forEach(activeDirection => {
                 cy.get<MountReturn>('@el').then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             activeDirection,
                             direction: 'hoz',
                         })
@@ -178,7 +184,7 @@ describe('Nav', () => {
             ['left', 'right'].forEach(activeDirection => {
                 cy.get<MountReturn>('@el').then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             activeDirection,
                             direction: 'hoz',
                         })
@@ -206,7 +212,7 @@ describe('Nav', () => {
             cy.get<MountReturn>('@el')
                 .then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             children: (
                                 <SubNav label="Group label">
                                     <Item key="1">First</Item>
@@ -223,7 +229,7 @@ describe('Nav', () => {
             cy.get<MountReturn>('@el1')
                 .then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             mode: 'popup',
                         })
                     );
@@ -234,7 +240,7 @@ describe('Nav', () => {
             cy.get<MountReturn>('@el2')
                 .then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             selectedKeys: 'ddasdfa',
                         })
                     );
@@ -256,7 +262,7 @@ describe('Nav', () => {
             cy.get('li.next-nav-sub-nav-item').first().get('.next-nav-item.next-opened');
             cy.get<MountReturn>('@el').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as React.ReactElement, {
+                    React.cloneElement(component as React.ReactElement<any>, {
                         iconOnly: true,
                         mode: 'popup',
                     })
@@ -341,7 +347,7 @@ describe('Nav', () => {
             cy.get<MountReturn>('@el')
                 .then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             mode: 'popup',
                         })
                     );
@@ -360,7 +366,7 @@ describe('Nav', () => {
 
             cy.get<MountReturn>('@el1').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as React.ReactElement, {
+                    React.cloneElement(component as React.ReactElement<any>, {
                         hasArrow: false,
                         hasTooltip: true,
                     })
@@ -420,7 +426,7 @@ describe('Nav', () => {
             cy.get<MountReturn>('@el')
                 .then(({ component, rerender }) => {
                     return rerender(
-                        React.cloneElement(component as React.ReactElement, {
+                        React.cloneElement(component as React.ReactElement<any>, {
                             iconOnly: true,
                             mode: 'popup',
                         })
@@ -432,7 +438,7 @@ describe('Nav', () => {
 
             cy.get<MountReturn>('@el1').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as React.ReactElement, {
+                    React.cloneElement(component as React.ReactElement<any>, {
                         iconOnly: false,
                         mode: 'inline',
                     })

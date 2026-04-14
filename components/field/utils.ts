@@ -2,7 +2,7 @@ import { isValidElement, cloneElement, type ReactElement, type ReactInstance } f
 import ReactDOM from 'react-dom';
 import { type ScrollToFirstErrorOption } from './types';
 
-export function cloneAndAddKey(element: ReactElement) {
+export function cloneAndAddKey(element: ReactElement<any>) {
     if (element && isValidElement(element)) {
         const key = element.key || 'error';
         return cloneElement(element, { key });

@@ -256,7 +256,7 @@ export interface DatePickerProps
      * 自定义弹层内容
      * @en Custom pop-up content
      */
-    popupContent?: React.ReactElement;
+    popupContent?: React.ReactElement<any>;
 
     /**
      * 禁用日期选择器的日期模式切换
@@ -449,7 +449,7 @@ export interface MonthPickerProps
      * 自定义弹层内容
      * @en Custom pop-up content
      */
-    popupContent?: React.ReactElement;
+    popupContent?: React.ReactElement<any>;
 
     /**
      * 是否跟随滚动
@@ -749,7 +749,7 @@ export interface RangePickerProps
      * 自定义弹层内容
      * @en Custom pop-up content
      */
-    popupContent?: React.ReactElement;
+    popupContent?: React.ReactElement<any>;
     /**
      * 自定义月份渲染函数
      * @en Custom month rendering function
@@ -982,7 +982,7 @@ export interface YearPickerProps
      * 自定义弹层内容
      * @en Custom pop-up content
      */
-    popupContent?: React.ReactElement;
+    popupContent?: React.ReactElement<any>;
     /**
      * @skip
      */
@@ -1179,7 +1179,7 @@ export interface WeekPickerProps
      * 自定义弹层内容
      * @en Custom pop-up content
      */
-    popupContent?: React.ReactElement;
+    popupContent?: React.ReactElement<any>;
     /**
      * 是否跟随滚动
      * @en Whether Pop-up follows trigger when scrolling

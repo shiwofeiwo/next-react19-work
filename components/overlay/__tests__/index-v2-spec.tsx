@@ -87,12 +87,12 @@ describe('Overlay v2', async () => {
         cy.get('.next-overlay-wrapper.opened').should('exist');
         cy.get('.next-overlay-inner.content').should('exist');
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: false }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: false }));
         });
 
         cy.get('.next-overlay-wrapper').should('not.be.visible');
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: true }));
         });
 
         cy.get('.next-overlay-wrapper.opened').should('exist');
@@ -107,7 +107,7 @@ describe('Overlay v2', async () => {
         ).as('overlay');
         cy.get('.next-overlay-wrapper').should('not.exist');
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: true }));
         });
 
         cy.get('.next-overlay-wrapper').should('exist');
@@ -115,7 +115,7 @@ describe('Overlay v2', async () => {
         cy.get('.next-overlay-backdrop').should('not.exist');
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
             return rerender(
-                cloneElement(component as ReactElement, { visible: true, hasMask: true })
+                cloneElement(component as ReactElement<any>, { visible: true, hasMask: true })
             );
         });
 
@@ -134,7 +134,7 @@ describe('Overlay v2', async () => {
         cy.wrap(handleClose).should('not.be.calledOnce');
 
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { canCloseByEsc: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { canCloseByEsc: true }));
         });
 
         cy.get('html').trigger('keydown', { keyCode: KEYCODE.ESC });
@@ -153,7 +153,7 @@ describe('Overlay v2', async () => {
         cy.wrap(handleClose).should('not.be.calledOnce');
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
             return rerender(
-                cloneElement(component as ReactElement, { canCloseByOutSideClick: true })
+                cloneElement(component as ReactElement<any>, { canCloseByOutSideClick: true })
             );
         });
 

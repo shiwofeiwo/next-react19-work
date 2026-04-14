@@ -14,7 +14,7 @@ export interface VirtualListProps extends React.HTMLAttributes<HTMLElement>, Com
      * 渲染的子节点
      * @en children of the virtual list component
      */
-    children?: React.ReactElement | Array<React.ReactElement | undefined | null>;
+    children?: React.ReactElement<any> | Array<React.ReactElement<any> | undefined | null>;
 
     /**
      * 最小加载数量
@@ -36,7 +36,7 @@ export interface VirtualListProps extends React.HTMLAttributes<HTMLElement>, Com
      * @defaultValue `(items, ref) => <ul ref={ref}>{items}</ul>`
      */
     itemsRenderer?: (
-        items: React.ReactNodeArray,
+        items: ReadonlyArray<React.ReactNode>,
         ref: (instance: React.ReactInstance | null) => React.ReactInstance | null
     ) => React.ReactNode;
 

@@ -17,9 +17,9 @@ class TabContent extends PureComponent<TabContentProps> {
             this.props;
         const formatChildren: ReactNode[] = [];
         React.Children.forEach(children, child => {
-            const active = activeKey === (child as ReactElement).key;
+            const active = activeKey === (child as ReactElement<any>).key;
             formatChildren.push(
-                React.cloneElement(child as ReactElement, {
+                React.cloneElement(child as ReactElement<any>, {
                     prefix,
                     active,
                     lazyLoad,

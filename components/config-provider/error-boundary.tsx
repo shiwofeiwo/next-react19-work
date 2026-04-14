@@ -4,7 +4,7 @@ import { ErrorBoundaryConfig } from './types';
 
 function DefaultUI() {
     // fixme: string is not a valid react component return type
-    return '' as unknown as ReactElement;
+    return '' as unknown as ReactElement<any>;
 }
 
 DefaultUI.propTypes = {

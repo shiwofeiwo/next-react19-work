@@ -619,7 +619,7 @@ describe('Tree', () => {
                         nodes.filter(
                             node =>
                                 !node.props.children ||
-                                (node.props.children as React.ReactElement[]).length === 0
+                                (node.props.children as React.ReactElement<any>[]).length === 0
                         ).length !== nodes.length
                     ) {
                         return (
@@ -1567,7 +1567,7 @@ describe('Tree', () => {
         });
         cy.get<MountReturn>('@wrapper').then(({ component, rerender }) => {
             return rerender(
-                React.cloneElement(component as React.ReactElement, {
+                React.cloneElement(component as React.ReactElement<any>, {
                     expandedKeys,
                 })
             );
@@ -1584,7 +1584,7 @@ describe('Tree', () => {
         });
         cy.get<MountReturn>('@wrapper').then(({ component, rerender }) => {
             return rerender(
-                React.cloneElement(component as React.ReactElement, {
+                React.cloneElement(component as React.ReactElement<any>, {
                     expandedKeys,
                 })
             );

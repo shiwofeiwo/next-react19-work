@@ -42,7 +42,7 @@ class PopupItem extends Component<PopupItemProps> {
             }
         }
         const newLabel = [
-            iconEl ? cloneElement(iconEl as React.ReactElement, { key: 'icon' }) : null,
+            iconEl ? cloneElement(iconEl as React.ReactElement<any>, { key: 'icon' }) : null,
         ];
 
         const showLabel = !iconOnly || (iconOnly && !iconOnlyWidth);

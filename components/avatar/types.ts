@@ -27,7 +27,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLElement>, CommonPr
      * icon 类头像的图标类型，可设为 Icon 的 `type` 或 `ReactElement`
      * @en The icon type of the icon avatar, can be set to the `type` or `ReactElement` of Icon
      */
-    icon?: React.ReactElement | string;
+    icon?: React.ReactElement<any> | string;
     /**
      * 图片类头像的资源地址
      * @en The resource address of the image avatar

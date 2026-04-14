@@ -315,7 +315,7 @@ class Balloon extends React.Component<BalloonProps, BalloonState> {
         triggerProps.tabIndex = '0';
 
         const ariaTrigger = id
-            ? React.cloneElement(trigger as ReactElement, triggerProps)
+            ? React.cloneElement(trigger as ReactElement<any>, triggerProps)
             : trigger;
 
         const newTrigger = getDisabledCompatibleTrigger(

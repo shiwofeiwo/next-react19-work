@@ -94,7 +94,7 @@ export interface ItemState {
 
 export interface CascaderMenuProps extends CommonProps, MenuProps {
     useVirtual?: boolean;
-    children: Array<React.ReactElement>;
+    children: Array<React.ReactElement<any>>;
 }
 
 /**

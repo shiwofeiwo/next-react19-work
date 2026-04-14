@@ -137,23 +137,23 @@ export type CollapseMap = {
 
 export type LayoutProps = {
     header?: {
-        Action?: ReactElement;
-        Branding?: ReactElement;
-        Navigation?: ReactElement;
+        Action?: ReactElement<any>;
+        Branding?: ReactElement<any>;
+        Navigation?: ReactElement<any>;
     };
-    Navigation?: ReactElement;
-    LocalNavigation?: ReactElement;
-    MultiTask?: ReactElement;
-    Ancillary?: ReactElement;
-    ToolDock?: ReactElement;
-    taskHeader?: ReactElement;
-    content?: Array<ReactElement>;
-    page?: ReactElement | [];
+    Navigation?: ReactElement<any>;
+    LocalNavigation?: ReactElement<any>;
+    MultiTask?: ReactElement<any>;
+    Ancillary?: ReactElement<any>;
+    ToolDock?: ReactElement<any>;
+    taskHeader?: ReactElement<any>;
+    content?: Array<ReactElement<any>>;
+    page?: ReactElement<any> | [];
 };
 
 export interface ShellBaseProps extends ShellProps {
-    component?: ReactElement | unknown;
-    children?: Array<ReactElement | null>;
+    component?: ReactElement<any> | unknown;
+    children?: Array<ReactElement<any> | null>;
 }
 
 export interface BaseProps
@@ -165,7 +165,7 @@ export interface BaseProps
         ShellAncillaryProps {
     triggerProps?: object;
     miniable?: boolean;
-    component?: ReactElement | unknown;
+    component?: ReactElement<any> | unknown;
 }
 
 export interface ShellState {

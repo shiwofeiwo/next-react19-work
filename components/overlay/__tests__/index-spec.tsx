@@ -141,13 +141,13 @@ describe('Overlay', () => {
         cy.get('.next-overlay-inner.content').should('exist');
 
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: false }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: false }));
         });
 
         cy.get('.next-overlay-wrapper').should('have.length', 0);
 
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: true }));
         });
 
         cy.get('.next-overlay-wrapper.opened').should('exist');
@@ -162,14 +162,14 @@ describe('Overlay', () => {
         ).as('overlay');
         cy.get('.next-overlay-wrapper').should('have.length', 0);
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: true }));
         });
         cy.get('.next-overlay-wrapper.opened').should('exist');
         cy.get('.next-overlay-inner.content').should('exist');
         cy.get('.next-overlay-backdrop').should('have.length', 0);
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
             return rerender(
-                cloneElement(component as ReactElement, { visible: true, hasMask: true })
+                cloneElement(component as ReactElement<any>, { visible: true, hasMask: true })
             );
         });
         cy.get('.next-overlay-backdrop').should('exist');
@@ -183,14 +183,14 @@ describe('Overlay', () => {
         ).as('overlay');
         cy.get('.next-overlay-wrapper').should('have.length', 0);
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { visible: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { visible: true }));
         });
         cy.get('.next-overlay-wrapper').should('exist');
         cy.get('.next-overlay-inner').should('have.class', 'content');
         cy.get('.next-overlay-backdrop').should('have.length', 0);
         cy.get<MountReturn>('@overlay').then(({ component, rerender }) => {
             return rerender(
-                cloneElement(component as ReactElement, { visible: true, hasMask: true })
+                cloneElement(component as ReactElement<any>, { visible: true, hasMask: true })
             );
         });
         cy.get('.next-overlay-backdrop').should('exist');
@@ -278,7 +278,7 @@ describe('Overlay', () => {
 
         cy.get('.next-overlay-wrapper').should('have.length', 0);
         cy.get<MountReturn>('@OverlayControlDemo').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { animation: false }));
+            return rerender(cloneElement(component as ReactElement<any>, { animation: false }));
         });
         cy.get('button').click();
         cy.get('.next-overlay-wrapper').should('exist');

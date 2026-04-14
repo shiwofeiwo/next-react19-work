@@ -671,7 +671,7 @@ export interface ChildExtraProperties {
         _typeMark: 'form_item' | 'form_error';
         displayName?: string;
     };
-    ref?: RefObject<unknown>;
+    ref?: RefObject<unknown | null>;
 }
 
 export type RemoveUndefined<T extends Record<string, unknown>> = {

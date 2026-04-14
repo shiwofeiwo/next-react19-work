@@ -122,7 +122,7 @@ export default class Row extends Component<RowProps> {
                 marginRight: `-${halfGutterString}`,
                 ...newStyle,
             };
-            newChildren = Children.map(children, (child: ReactElement) => {
+            newChildren = Children.map(children, (child: ReactElement<any>) => {
                 if (
                     child &&
                     child.type &&

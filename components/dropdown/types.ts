@@ -17,7 +17,7 @@ export interface DropdownProps extends Omit<PopupProps, 'trigger' | 'autoFocus'>
      * 弹层内容
      * @en Content in Dropdown
      */
-    children: React.ReactElement;
+    children: React.ReactElement<any>;
 
     /**
      * 弹层当前是否显示
@@ -61,7 +61,7 @@ export interface DropdownProps extends Omit<PopupProps, 'trigger' | 'autoFocus'>
      * 触发弹层显示或者隐藏的元素
      * @en Trigger element
      */
-    trigger: React.ReactElement;
+    trigger: React.ReactElement<any>;
 
     /**
      * 触发弹层显示或隐藏的操作类型，可以是 'click'，'hover'，或者它们组成的数组，如 ['hover', 'click']

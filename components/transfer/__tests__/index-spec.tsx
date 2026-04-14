@@ -420,7 +420,7 @@ describe('Transfer', () => {
         });
         cy.get<MountReturn>('@wrapper').then(({ component, rerender }) => {
             return rerender(
-                React.cloneElement(component as React.ReactElement, {
+                React.cloneElement(component as React.ReactElement<any>, {
                     value,
                 })
             );
@@ -456,7 +456,7 @@ describe('Transfer', () => {
         });
         cy.get<MountReturn>('@wrapper').then(({ component, rerender }) => {
             return rerender(
-                React.cloneElement(component as React.ReactElement, {
+                React.cloneElement(component as React.ReactElement<any>, {
                     value,
                 })
             );
@@ -763,7 +763,7 @@ describe('Transfer', () => {
                                 checkedKeys={value}
                                 onCheck={(keys, extra: Record<string, unknown>) => {
                                     const newValues = (
-                                        extra.checkedNodes as React.ReactElement[]
+                                        extra.checkedNodes as React.ReactElement<any>[]
                                     ).map(item => item.props.value);
                                     onChange(position, newValues);
                                 }}

@@ -99,10 +99,10 @@ export default class Item extends Component<ItemProps> {
         const { name } = this.props;
         const childrenList = Children.toArray(children);
         const nameList = childrenList
-            .filter((c: ReactElement) => {
+            .filter((c: ReactElement<any>) => {
                 return c.props && ('name' in c.props || 'data-meta' in c.props);
             })
-            .map((c: ReactElement) => {
+            .map((c: ReactElement<any>) => {
                 return c.props.name || c.props.id;
             });
 
@@ -290,44 +290,47 @@ export default class Item extends Component<ItemProps> {
 
         const labelForErrorMessage = this.getLabelForErrorMessage();
 
-        const ele = Children.map(children, (child: ReactElement & ChildExtraProperties, idx) => {
-            if (
-                child &&
-                ['function', 'object'].indexOf(typeof child.type) > -1 &&
-                child.type._typeMark !== 'form_item' &&
-                child.type._typeMark !== 'form_error'
-            ) {
-                let extraProps = childrenProps;
-                // 自己直接使用 field.init 会在 props 上面留下 data-meta
-                // name 挪到 FormItem 上面，默认把第一个元素当做 Form 组件
+        const ele = Children.map(
+            children,
+            (child: ReactElement<any> & ChildExtraProperties, idx) => {
                 if (
-                    this.context._formField &&
-                    !('data-meta' in child.props) &&
-                    ('name' in child.props || (name && idx === 0)) //TODO：1.x 为了不 BR, 2.x 中把优先级调换下，优先取 FormItem 的 name
+                    child &&
+                    ['function', 'object'].indexOf(typeof child.type) > -1 &&
+                    child.type._typeMark !== 'form_item' &&
+                    child.type._typeMark !== 'form_error'
                 ) {
-                    const initName =
-                        'name' in child.props && child.props.name ? child.props.name : name;
-                    extraProps = this.context._formField.init(
-                        initName,
-                        {
-                            ...getFieldInitCfg(
-                                this.props,
-                                child.type.displayName!,
-                                labelForErrorMessage
-                            ),
-                            props: { ...child.props, ref: child.ref },
-                        },
-                        childrenProps
-                    );
-                } else {
-                    extraProps = Object.assign({}, child.props, extraProps);
+                    let extraProps = childrenProps;
+                    // 自己直接使用 field.init 会在 props 上面留下 data-meta
+                    // name 挪到 FormItem 上面，默认把第一个元素当做 Form 组件
+                    if (
+                        this.context._formField &&
+                        !('data-meta' in child.props) &&
+                        ('name' in child.props || (name && idx === 0)) //TODO：1.x 为了不 BR, 2.x 中把优先级调换下，优先取 FormItem 的 name
+                    ) {
+                        const initName =
+                            'name' in child.props && child.props.name ? child.props.name : name;
+                        extraProps = this.context._formField.init(
+                            initName,
+                            {
+                                ...getFieldInitCfg(
+                                    this.props,
+                                    child.type.displayName!,
+                                    labelForErrorMessage
+                                ),
+                                props: { ...child.props, ref: child.ref },
+                            },
+                            childrenProps
+                        );
+                    } else {
+                        extraProps = Object.assign({}, child.props, extraProps);
+                    }
+
+                    return cloneElement(child, extraProps);
                 }
 
-                return cloneElement(child, extraProps);
+                return child;
             }
-
-            return child;
-        });
+        );
 
         const help = this.getHelper(children);
 

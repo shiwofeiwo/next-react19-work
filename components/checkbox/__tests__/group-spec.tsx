@@ -111,20 +111,24 @@ describe('Checkbox.Group', () => {
 
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as ReactElement, { value: ['apple'] })
+                    React.cloneElement(component as ReactElement<any>, { value: ['apple'] })
                 );
             });
 
             cy.get('.next-checkbox-wrapper.checked').should('have.text', '苹果');
 
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { value: 'orange' }));
+                return rerender(
+                    React.cloneElement(component as ReactElement<any>, { value: 'orange' })
+                );
             });
 
             cy.get('.next-checkbox-wrapper.checked').should('have.text', '橙子');
 
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { value: null }));
+                return rerender(
+                    React.cloneElement(component as ReactElement<any>, { value: null })
+                );
             });
 
             cy.get('.next-checkbox-wrapper.checked').should('have.length', 0);
@@ -138,7 +142,9 @@ describe('Checkbox.Group', () => {
             cy.get('.next-checkbox-group').should('not.have.class', 'disabled');
 
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { disabled: true }));
+                return rerender(
+                    React.cloneElement(component as ReactElement<any>, { disabled: true })
+                );
             });
 
             cy.get('.next-checkbox-group').should('have.class', 'disabled');
@@ -149,7 +155,7 @@ describe('Checkbox.Group', () => {
             cy.mount(<CheckboxGroup value={['pear']} dataSource={list} />).as('Demo');
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as ReactElement, { value: undefined })
+                    React.cloneElement(component as ReactElement<any>, { value: undefined })
                 );
             });
             cy.get('.next-checkbox-wrapper.checked').should('have.length', 0);
@@ -170,7 +176,7 @@ describe('Checkbox.Group', () => {
             ).as('Demo');
             cy.get('.next-checkbox-wrapper.checked').should('have.text', 0);
             cy.get<MountReturn>('@Demo').then(({ component, rerender }) => {
-                return rerender(React.cloneElement(component as ReactElement, { value: 1 }));
+                return rerender(React.cloneElement(component as ReactElement<any>, { value: 1 }));
             });
             cy.get('.next-checkbox-wrapper.checked').should('have.text', 1);
         });

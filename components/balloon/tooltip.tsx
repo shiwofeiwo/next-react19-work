@@ -203,7 +203,7 @@ export default class Tooltip extends Component<TooltipProps, TooltipState> {
         }
 
         const ariaTrigger = id
-            ? React.cloneElement(trigger as ReactElement, triggerProps)
+            ? React.cloneElement(trigger as ReactElement<any>, triggerProps)
             : trigger;
 
         const newTrigger = getDisabledCompatibleTrigger(

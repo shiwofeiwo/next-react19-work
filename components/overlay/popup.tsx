@@ -384,7 +384,9 @@ class Popup extends Component<PopupProps, PopupState> {
             <Overlay
                 {...others}
                 key="overlay"
-                ref={overlay => (this.overlay = overlay)}
+                ref={overlay => {
+                    this.overlay = overlay;
+                }}
                 visible={this.state.visible}
                 target={target || findTriggerNode}
                 container={container}

@@ -74,20 +74,20 @@ const getSlideStyle = function (specProps: TrackProps) {
     return style;
 };
 
-const getKey = (child: ReactElement, fallbackKey: number) => {
+const getKey = (child: ReactElement<any>, fallbackKey: number) => {
     // key could be a zero
     return child.key === null || child.key === undefined ? fallbackKey : child.key;
 };
 
 const renderSlides = (specProps: TrackProps) => {
     let key;
-    const slides: ReactElement[] = [];
-    const preCloneSlides: ReactElement[] = [];
-    const postCloneSlides: ReactElement[] = [];
+    const slides: ReactElement<any>[] = [];
+    const preCloneSlides: ReactElement<any>[] = [];
+    const postCloneSlides: ReactElement<any>[] = [];
     const count = React.Children.count(specProps.children);
-    let child: ReactElement;
+    let child: ReactElement<any>;
 
-    React.Children.forEach(specProps.children, (elem: ReactElement, index) => {
+    React.Children.forEach(specProps.children, (elem: ReactElement<any>, index) => {
         const childOnClickOptions: OptionProps = {
             message: 'children',
             index,

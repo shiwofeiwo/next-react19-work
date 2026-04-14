@@ -245,7 +245,9 @@ class Tag extends Component<TagProps, { visible: boolean }> {
                 aria-disabled={disabled}
                 disabled={disabled}
                 dir={rtl ? 'rtl' : undefined}
-                ref={n => (this.tagNode = n)}
+                ref={n => {
+                    this.tagNode = n;
+                }}
                 style={this.getTagStyle()}
                 {...otherTagProps}
             >

@@ -23,7 +23,11 @@ export interface GroupProps extends MenuGroupProps {
      * 导航项和子导航
      * @en Navigation item and sub navigation
      */
-    children: React.ReactChild | React.ReactChild[];
+    children:
+        | React.ReactElement<any>
+        | number
+        | string
+        | (React.ReactElement<any> | number | string)[];
 }
 
 /**

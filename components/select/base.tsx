@@ -443,7 +443,9 @@ export default class Base<
                 .map(n => valueToSelectKey(n) as string);
         }
 
-        let children: ReactElement | (ReactElement | null)[] = this.renderMenuItem(dataSource!);
+        let children: ReactElement<any> | (ReactElement<any> | null)[] = this.renderMenuItem(
+            dataSource!
+        );
 
         const menuClassName = classNames({
             [`${prefix}select-menu`]: true,
@@ -475,7 +477,7 @@ export default class Base<
         };
         const menuStyle = this.shouldAutoWidth() ? { width: '100%' } : { minWidth: this.width };
 
-        return useVirtual && (children as ReactElement[]).length > 10 ? (
+        return useVirtual && (children as ReactElement<any>[]).length > 10 ? (
             <div
                 className={`${prefix}select-menu-wrapper`}
                 style={{ position: 'relative', ...menuStyle }}
@@ -508,7 +510,7 @@ export default class Base<
     /**
      * render menu item
      */
-    renderMenuItem(dataSource: NormalizedObjectItem[]): ReactElement[] {
+    renderMenuItem(dataSource: NormalizedObjectItem[]): ReactElement<any>[] {
         const { prefix, itemRender, showDataSourceChildren } = this.props;
         // If it has.
         let searchKey: string | undefined;
@@ -546,7 +548,7 @@ export default class Base<
                     </MenuItem>
                 );
             }
-        }) as ReactElement[];
+        }) as ReactElement<any>[];
     }
 
     saveSelectRef = (ref: HTMLElement | null) => {

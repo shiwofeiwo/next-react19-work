@@ -2,7 +2,7 @@ import React, {
     Component,
     type CSSProperties,
     type JSXElementConstructor,
-    type ReactNodeArray,
+    type ReactNode,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -22,7 +22,7 @@ const createChildren = (
     children: React.ReactNode,
     device: ResponsiveGridProps['device'],
     gap: ResponsiveGridProps['gap']
-): ReactNodeArray | null => {
+): ReadonlyArray<ReactNode> | null => {
     const array = React.Children.toArray(children);
     if (!children) {
         return null;
@@ -30,7 +30,7 @@ const createChildren = (
 
     return array.map(child => {
         if (isReactFragmentElement(child)) {
-            return createChildren((child as React.ReactElement).props.children, device, gap);
+            return createChildren((child as React.ReactElement<any>).props.children, device, gap);
         }
 
         if (

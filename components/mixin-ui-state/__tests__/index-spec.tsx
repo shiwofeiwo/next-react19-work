@@ -38,7 +38,7 @@ describe('mixin-ui-state', () => {
         cy.get('input').focus();
         cy.get('.focused').should('exist');
         cy.get<MountReturn>('@el').then(({ component, rerender }) => {
-            return rerender(cloneElement(component as ReactElement, { reset: true }));
+            return rerender(cloneElement(component as ReactElement<any>, { reset: true }));
         });
         cy.get('.focused').should('not.exist');
     });

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, {
     Component,
     Children,
-    type LegacyRef,
+    type Ref,
     type CSSProperties,
     type ReactInstance,
     type ReactElement,
@@ -63,7 +63,7 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
 
     static defaultProps = {
         prefix: 'next-',
-        itemsRenderer: (items: ReactInstance, ref: LegacyRef<HTMLUListElement>) => (
+        itemsRenderer: (items: ReactInstance, ref: Ref<HTMLUListElement>) => (
             <ul ref={ref}>{items}</ul>
         ),
         minSize: 1,
@@ -396,9 +396,9 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
         const { from, size } = this.state;
         const items = [];
 
-        const childrenArray: Array<ReactElement | undefined | null> = [];
+        const childrenArray: Array<ReactElement<any> | undefined | null> = [];
 
-        Children.forEach(children, (child: ReactElement | undefined | null) => {
+        Children.forEach(children, (child: ReactElement<any> | undefined | null) => {
             childrenArray.push(child);
         });
 

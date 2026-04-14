@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';

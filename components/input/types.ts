@@ -535,7 +535,7 @@ export interface InputProps extends InputCommonHTMLAttributes, CommonPropsWithou
      * 自定义 input 样式
      * @en Custom input style
      */
-    inputRender?: (input: React.ReactElement) => React.ReactNode;
+    inputRender?: (input: React.ReactElement<any>) => React.ReactNode;
     /**
      * 自定义 input 样式
      * @en Custom input style

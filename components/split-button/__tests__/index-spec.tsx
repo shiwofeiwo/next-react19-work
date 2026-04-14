@@ -20,7 +20,9 @@ describe('SplitButton', () => {
             ).as('btn');
             cy.get<MountReturn>('@btn').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as React.ReactElement, { selectedKeys: ['b'] })
+                    React.cloneElement(component as React.ReactElement<any>, {
+                        selectedKeys: ['b'],
+                    })
                 );
             });
             cy.get('li[title="b"][role="option"]').should('have.class', 'next-selected');
@@ -31,7 +33,7 @@ describe('SplitButton', () => {
             cy.get('.next-menu').should('have.length', 0);
             cy.get<MountReturn>('@btn').then(({ component, rerender }) => {
                 return rerender(
-                    React.cloneElement(component as React.ReactElement, { visible: true })
+                    React.cloneElement(component as React.ReactElement<any>, { visible: true })
                 );
             });
             cy.get('.next-menu').should('have.length', 1);

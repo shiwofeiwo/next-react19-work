@@ -102,7 +102,7 @@ export const createContainer = function (id: string) {
  * @param node - React element to mount and run axe-core tests on
  * @param id - id to set on the wrapper div, defaults to a11y root id
  */
-export const mountReact = function (node: ReactElement, id = A11Y_ROOT_ID) {
+export const mountReact = function (node: ReactElement<any>, id = A11Y_ROOT_ID) {
     return cy.mount(<div id={id}>{node}</div>);
 };
 
@@ -114,7 +114,7 @@ export const mountReact = function (node: ReactElement, id = A11Y_ROOT_ID) {
  * `rules` - set properties for rules
  */
 export const testReact = async function (
-    node: ReactElement,
+    node: ReactElement<any>,
     options: A11yTestOptions & { delay?: number } = {}
 ) {
     await new Promise<unknown>(resolve => {

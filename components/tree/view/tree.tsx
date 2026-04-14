@@ -417,7 +417,7 @@ export class Tree extends Component<TreeProps, TreeState> {
     dragNodesKeys: Key[];
 
     normalListRef: React.MutableRefObject<HTMLUListElement | null>;
-    virtualListRef: React.RefObject<InstanceType<typeof VirtualList>>;
+    virtualListRef: React.RefObject<InstanceType<typeof VirtualList> | null>;
 
     constructor(props: TreeProps) {
         super(props);
@@ -1258,7 +1258,7 @@ export class Tree extends Component<TreeProps, TreeState> {
         });
 
         const treeRender = (
-            items: (React.ReactElement | React.ReactElement[])[],
+            items: (React.ReactElement<any> | React.ReactElement<any>[])[],
             ref?: React.RefCallback<HTMLUListElement>
         ) => {
             return (
@@ -1283,7 +1283,7 @@ export class Tree extends Component<TreeProps, TreeState> {
                     <VirtualList
                         ref={this.virtualListRef}
                         itemsRenderer={(
-                            items: React.ReactElement[],
+                            items: React.ReactElement<any>[],
                             ref: React.RefCallback<HTMLUListElement>
                         ) => treeRender(items, ref)}
                         {...virtualListProps}

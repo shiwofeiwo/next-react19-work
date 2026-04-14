@@ -54,13 +54,15 @@ describe('Dropdown', () => {
 
         cy.get<MountReturn>('@dropdown').then(({ component, rerender }) => {
             return rerender(
-                React.cloneElement(component as React.ReactElement, { visible: false })
+                React.cloneElement(component as React.ReactElement<any>, { visible: false })
             );
         });
         cy.get('.next-overlay-wrapper').should('not.exist');
 
         cy.get<MountReturn>('@dropdown').then(({ component, rerender }) => {
-            return rerender(React.cloneElement(component as React.ReactElement, { visible: true }));
+            return rerender(
+                React.cloneElement(component as React.ReactElement<any>, { visible: true })
+            );
         });
         cy.get('.next-overlay-wrapper').should('exist');
         cy.get('.next-menu-item').first().click();

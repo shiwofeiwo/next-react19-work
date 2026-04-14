@@ -179,7 +179,7 @@ export interface OverlayAnimateProps {
      * 子元素
      * @en The element to be wrapped
      */
-    children: ReactElement;
+    children: ReactElement<any>;
     /**
      * 过渡的超时时间。
      * @en The duration of the transition.

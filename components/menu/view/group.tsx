@@ -1,4 +1,4 @@
-import React, { Component, cloneElement, type ReactChild } from 'react';
+import React, { Component, cloneElement, type ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Item from './item';
@@ -27,7 +27,7 @@ export default class Group extends Component<GroupProps> {
             className
         );
 
-        const newChildren = (children as ReactChild[]).map(child => {
+        const newChildren = (children as (ReactElement<any> | number | string)[]).map(child => {
             // to fix https://github.com/alibaba-fusion/next/issues/952
             if (typeof child !== 'function' && typeof child !== 'object') {
                 return child;

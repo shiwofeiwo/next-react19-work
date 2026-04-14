@@ -1,4 +1,4 @@
-import React, { Component, Children, type ReactNode, ReactElement } from 'react';
+import React, { Component, Children, type ReactNode, type ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 import AnimateChild from './child';
@@ -92,7 +92,7 @@ class Animate extends Component<AnimateProps> {
         const animateChildren = Children.map(children, child => {
             return (
                 <AnimateChild
-                    key={(child as ReactElement)?.key}
+                    key={(child as ReactElement<any>)?.key}
                     names={this.normalizeNames(animation)!}
                     onAppear={beforeAppear}
                     onAppearing={onAppear}

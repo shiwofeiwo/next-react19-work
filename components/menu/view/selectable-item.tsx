@@ -98,7 +98,7 @@ export default class SelectableItem extends Component<ItemProps> {
             icons,
         } = root.props;
 
-        let iconsSelect = icons.select as ReactElement;
+        let iconsSelect = icons.select as ReactElement<any>;
 
         if (!isValidElement(icons.select) && icons.select) {
             iconsSelect = <span>{icons.select}</span>;

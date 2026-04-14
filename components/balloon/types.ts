@@ -157,7 +157,7 @@ export interface BalloonV2Props extends HTMLAttributesWeak, CommonProps {
      * @en Trigger element
      * @defaultValue <span/>
      */
-    trigger?: ReactElement | string;
+    trigger?: ReactElement<any> | string;
 
     /**
      * 触发行为，鼠标悬浮，鼠标点击 ('hover','click') 或者它们组成的数组，如 ['hover', 'click'], 强烈不建议使用'focus'，若弹窗内容有复杂交互请使用 click
@@ -443,7 +443,7 @@ export interface BalloonV1Props extends HTMLAttributesWeak, CommonProps {
      * @en Trigger element
      * @defaultValue <span/>
      */
-    trigger?: ReactElement | string;
+    trigger?: ReactElement<any> | string;
 
     /**
      * 触发行为，鼠标悬浮，鼠标点击 ('hover','click') 或者它们组成的数组，如 ['hover', 'click'], 强烈不建议使用'focus'，若弹窗内容有复杂交互请使用 click
@@ -636,7 +636,7 @@ export interface TooltipV2Props extends HTMLAttributesWeak, CommonProps {
      * @en Trigger element
      * @defaultValue <span/>
      */
-    trigger?: ReactElement | string;
+    trigger?: ReactElement<any> | string;
 
     /**
      * 触发行为，鼠标悬浮，鼠标点击 ('hover', 'click') 或者它们组成的数组，如 ['hover', 'click'], 强烈不建议使用'focus'，若有复杂交互，推荐使用 triggerType 为 click 的 Balloon 组件
@@ -803,7 +803,7 @@ export interface TooltipV1Props extends HTMLAttributesWeak, CommonProps {
      * @en Trigger element
      * @defaultValue <span/>
      */
-    trigger?: ReactElement | string;
+    trigger?: ReactElement<any> | string;
 
     /**
      * 触发行为，鼠标悬浮，鼠标点击 ('hover', 'click') 或者它们组成的数组，如 ['hover', 'click'], 强烈不建议使用'focus'，若有复杂交互，推荐使用 triggerType 为 click 的 Balloon 组件

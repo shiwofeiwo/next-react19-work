@@ -275,7 +275,7 @@ class HeaderPanel extends React.PureComponent<HeaderPanelProps> {
         const { createPanelBtns } = this;
         const { panelMode } = this.props;
 
-        let nodes: ReactElement[] = [];
+        let nodes: ReactElement<any>[] = [];
 
         const textFieldNode = this.renderTextField();
 
@@ -329,7 +329,7 @@ class HeaderPanel extends React.PureComponent<HeaderPanelProps> {
         const { prefixCls } = this;
         const { shape, showTitle, value, mode, showModeSwitch } = this.props;
 
-        const nodes: ReactElement[] = [];
+        const nodes: ReactElement<any>[] = [];
 
         if (shape === CALENDAR_SHAPE.PANEL) {
             return this.renderPanelHeader();

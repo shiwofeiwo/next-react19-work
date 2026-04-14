@@ -154,7 +154,7 @@ const Popup = (props: PopupProps) => {
         v1Props.points = align.split(' ');
     }
 
-    const maskRender = (node: ReactElement) => (
+    const maskRender = (node: ReactElement<any>) => (
         <Animate.OverlayAnimate
             visible={visible}
             animation={animation ? { in: 'fadeIn', out: 'fadeOut' } : false}

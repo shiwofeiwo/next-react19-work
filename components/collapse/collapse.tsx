@@ -164,11 +164,11 @@ class Collapse extends React.Component<
         // 是否有 child 传入过 key
         const allKeys = React.Children.map(
             this.props.children,
-            (child: ReactElement) => child && child.key
+            (child: ReactElement<any>) => child && child.key
         );
         const hasKeys = Boolean(allKeys && allKeys.length);
 
-        return React.Children.map(this.props.children, (child: ReactElement, index) => {
+        return React.Children.map(this.props.children, (child: ReactElement<any>, index) => {
             if (
                 child &&
                 typeof child.type === 'function' &&

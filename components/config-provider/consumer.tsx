@@ -38,7 +38,7 @@ export type ConsumerState = Pick<
 >;
 
 export interface ConsumerProps {
-    children?: ((state: ConsumerState) => ReactElement) | ReactNode;
+    children?: ((state: ConsumerState) => ReactElement<any>) | ReactNode;
 }
 
 /**
