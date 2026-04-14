@@ -25,6 +25,56 @@ type InnerMonthPickerProps = ClassPropsWithDefault<
     typeof MonthPicker.defaultProps
 >;
 
+const MONTH_PICKER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // MonthPicker-specific keys
+    'label',
+    'state',
+    'placeholder',
+    'defaultVisibleMonth',
+    'onVisibleMonthChange',
+    'value',
+    'defaultValue',
+    'format',
+    'disabledDate',
+    'footerRender',
+    'onChange',
+    'size',
+    'disabled',
+    'hasClear',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupTriggerType',
+    'popupAlign',
+    'popupContainer',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'inputProps',
+    'dateCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'dateInputAriaLabel',
+    'isPreview',
+    'renderPreview',
+    'className',
+    'name',
+    'popupComponent',
+    'popupContent',
+];
+
 /**
  * DatePicker.MonthPicker
  */
@@ -373,7 +423,7 @@ class MonthPicker extends Component<MonthPickerProps, MonthPickerState> {
         const PopupComponent = popupComponent ? popupComponent : Popup;
 
         return (
-            <div {...obj.pickOthers(MonthPicker.propTypes, others)} className={monthPickerCls}>
+            <div {...obj.pickOthers(MONTH_PICKER_PROP_KEYS, others)} className={monthPickerCls}>
                 <PopupComponent
                     autoFocus
                     align={popupAlign}

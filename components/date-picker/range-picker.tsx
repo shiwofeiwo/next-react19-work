@@ -65,6 +65,64 @@ type InnerRangePickerProps = ClassPropsWithDefault<
     typeof RangePicker.defaultProps
 >;
 
+const RANGE_PICKER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // RangePicker-specific keys
+    'type',
+    'defaultVisibleMonth',
+    'onVisibleMonthChange',
+    'value',
+    'defaultValue',
+    'format',
+    'showTime',
+    'resetTime',
+    'disabledDate',
+    'footerRender',
+    'onChange',
+    'onOk',
+    'label',
+    'state',
+    'size',
+    'disabled',
+    'hasClear',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupTriggerType',
+    'popupAlign',
+    'popupContainer',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'inputProps',
+    'dateCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'startDateInputAriaLabel',
+    'startTimeInputAriaLabel',
+    'endDateInputAriaLabel',
+    'endTimeInputAriaLabel',
+    'isPreview',
+    'renderPreview',
+    'className',
+    'name',
+    'popupComponent',
+    'popupContent',
+    'disableChangeMode',
+    'yearRange',
+];
+
 /**
  * DatePicker.RangePicker
  */
@@ -1065,7 +1123,7 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
         const PopupComponent = popupComponent ? popupComponent : Popup;
 
         return (
-            <div {...obj.pickOthers(RangePicker.propTypes, others)} className={classNames}>
+            <div {...obj.pickOthers(RANGE_PICKER_PROP_KEYS, others)} className={classNames}>
                 <PopupComponent
                     align={popupAlign}
                     {...popupProps}

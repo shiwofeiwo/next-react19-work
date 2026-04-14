@@ -22,6 +22,56 @@ const { Popup } = Overlay;
 
 type InnerWeekPickerProps = ClassPropsWithDefault<WeekPickerProps, typeof WeekPicker.defaultProps>;
 
+const WEEK_PICKER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // WeekPicker-specific keys
+    'label',
+    'state',
+    'placeholder',
+    'defaultVisibleMonth',
+    'onVisibleMonthChange',
+    'value',
+    'defaultValue',
+    'format',
+    'disabledDate',
+    'footerRender',
+    'onChange',
+    'size',
+    'disabled',
+    'hasClear',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupTriggerType',
+    'popupAlign',
+    'popupContainer',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'inputProps',
+    'dateCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'dateInputAriaLabel',
+    'isPreview',
+    'renderPreview',
+    'className',
+    'name',
+    'popupComponent',
+    'popupContent',
+];
+
 /**
  * DatePicker.WeekPicker
  */
@@ -319,7 +369,7 @@ class WeekPicker extends Component<WeekPickerProps, WeekPickerState> {
 
         return (
             <div
-                {...obj.pickOthers(WeekPicker.propTypes, others)}
+                {...obj.pickOthers(WEEK_PICKER_PROP_KEYS, others)}
                 className={classnames(`${prefix}week-picker`, className)}
             >
                 <PopupComponent

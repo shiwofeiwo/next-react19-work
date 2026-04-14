@@ -21,6 +21,51 @@ const { Popup } = Overlay;
 
 type InnerYearPickerProps = ClassPropsWithDefault<YearPickerProps, typeof YearPicker.defaultProps>;
 
+const YEAR_PICKER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // YearPicker-specific keys
+    'label',
+    'state',
+    'placeholder',
+    'defaultVisibleYear',
+    'value',
+    'defaultValue',
+    'format',
+    'disabledDate',
+    'footerRender',
+    'onChange',
+    'size',
+    'disabled',
+    'hasClear',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupTriggerType',
+    'popupAlign',
+    'popupContainer',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'inputProps',
+    'monthCellRender',
+    'yearCellRender',
+    'dateInputAriaLabel',
+    'isPreview',
+    'renderPreview',
+    'className',
+];
+
 /**
  * DatePicker.YearPicker
  */
@@ -358,7 +403,7 @@ class YearPicker extends Component<YearPickerProps, YearPickerState> {
         const PopupComponent = popupComponent ? popupComponent : Popup;
 
         return (
-            <div {...obj.pickOthers(YearPicker.propTypes, others)} className={yearPickerCls}>
+            <div {...obj.pickOthers(YEAR_PICKER_PROP_KEYS, others)} className={yearPickerCls}>
                 <PopupComponent
                     autoFocus
                     align={popupAlign}

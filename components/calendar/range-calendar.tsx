@@ -35,6 +35,39 @@ type InnerRangeCalendarProps = ClassPropsWithDefault<
     typeof RangeCalendar.defaultProps
 >;
 
+const RANGE_CALENDAR_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // RangeCalendar-specific keys
+    'defaultStartValue',
+    'defaultEndValue',
+    'startValue',
+    'endValue',
+    'mode',
+    'disableChangeMode',
+    'format',
+    'yearRange',
+    'showOtherMonth',
+    'defaultVisibleMonth',
+    'onVisibleMonthChange',
+    'disabledDate',
+    'onSelect',
+    'dateCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'locale',
+    'className',
+];
+
 class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarState> {
     static propTypes = {
         ...ConfigProvider.propTypes,
@@ -345,7 +378,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
         );
 
         return (
-            <div {...obj.pickOthers(RangeCalendar.propTypes, others)} className={classNames}>
+            <div {...obj.pickOthers(RANGE_CALENDAR_PROP_KEYS, others)} className={classNames}>
                 {header}
                 <div className={`${prefix}calendar-body`}>{table}</div>
             </div>

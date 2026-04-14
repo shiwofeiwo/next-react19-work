@@ -28,6 +28,53 @@ const { Popup } = Overlay;
 
 type InnerDatePickerProps = ClassPropsWithDefault<DatePickerProps, typeof DatePicker.defaultProps>;
 
+const DATE_PICKER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // DatePicker-specific keys
+    'label',
+    'state',
+    'placeholder',
+    'value',
+    'defaultValue',
+    'format',
+    'disabledDate',
+    'footerRender',
+    'onChange',
+    'size',
+    'disabled',
+    'hasClear',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupTriggerType',
+    'popupAlign',
+    'popupContainer',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'inputProps',
+    'yearCellRender',
+    'dateInputAriaLabel',
+    'isPreview',
+    'renderPreview',
+    'locale',
+    'className',
+    'name',
+    'popupComponent',
+    'popupContent',
+];
+
 /**
  * DatePicker
  */
@@ -598,7 +645,7 @@ class DatePicker extends Component<DatePickerProps, DatePickerState> {
         const PopupComponent = popupComponent ? popupComponent : Popup;
 
         return (
-            <div {...obj.pickOthers(DatePicker.propTypes, others)} className={datePickerCls}>
+            <div {...obj.pickOthers(DATE_PICKER_PROP_KEYS, others)} className={datePickerCls}>
                 <PopupComponent
                     autoFocus
                     align={popupAlign}

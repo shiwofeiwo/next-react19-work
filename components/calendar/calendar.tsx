@@ -42,6 +42,41 @@ const isValueChanged = (value: MomentInput, oldValue: MomentInput) => {
 
 type InnerCalendarProps = ClassPropsWithDefault<CalendarProps, typeof Calendar.defaultProps>;
 
+const CALENDAR_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Calendar-specific keys
+    'defaultValue',
+    'value',
+    'mode',
+    'modes',
+    'disableChangeMode',
+    'format',
+    'showOtherMonth',
+    'defaultVisibleMonth',
+    'shape',
+    'onSelect',
+    'onModeChange',
+    'onVisibleMonthChange',
+    'className',
+    'dateCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'yearRange',
+    'disabledDate',
+    'locale',
+    'onChange',
+];
+
 /** Calendar */
 class Calendar extends Component<CalendarProps, CalendarState> {
     static propTypes = {
@@ -296,7 +331,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         };
 
         return (
-            <div {...obj.pickOthers(Calendar.propTypes, others)} className={classNames}>
+            <div {...obj.pickOthers(CALENDAR_PROP_KEYS, others)} className={classNames}>
                 {shape === 'panel' ? (
                     panelHeaders[state.mode]
                 ) : (

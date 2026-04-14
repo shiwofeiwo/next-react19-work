@@ -20,6 +20,36 @@ import type {
 
 const { pickProps, pickOthers } = obj;
 
+const CALENDAR2_PROP_KEYS = [
+    'rtl',
+    'name',
+    'prefix',
+    'locale',
+    'shape',
+    'mode',
+    'value',
+    'defaultValue',
+    'panelValue',
+    'defaultPanelValue',
+    'disabledDate',
+    'dateCellRender',
+    'quarterCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'headerRender',
+    'onChange',
+    'onSelect',
+    'onPanelChange',
+    'cellProps',
+    'cellClassName',
+    'panelMode',
+    'onPrev',
+    'onNext',
+    'onSuperPrev',
+    'onSuperNext',
+    'colNum',
+];
+
 // CALENDAR_MODE => DATE_PANEL_MODE
 function getPanelMode(mode: CalendarMode | CalendarPanelMode) {
     return mode && (mode === CALENDAR_MODE.YEAR ? DATE_PANEL_MODE.MONTH : DATE_PANEL_MODE.DATE);
@@ -236,7 +266,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
 
         return (
             <div
-                {...pickOthers(Calendar.propTypes, restProps)}
+                {...pickOthers(CALENDAR2_PROP_KEYS, restProps)}
                 dir={rtl ? 'rtl' : undefined}
                 className={classNames}
             >
