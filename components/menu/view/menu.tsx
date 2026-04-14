@@ -34,6 +34,63 @@ const { pickOthers, isNil } = obj;
 const noop = () => {};
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
 
+const MENU_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Menu-specific keys
+    'className',
+    'onItemClick',
+    'openKeys',
+    'defaultOpenKeys',
+    'defaultOpenAll',
+    'onOpen',
+    'mode',
+    'triggerType',
+    'openMode',
+    'inlineIndent',
+    'inlineArrowDirection',
+    'popupAutoWidth',
+    'popupAlign',
+    'popupProps',
+    'popupClassName',
+    'popupStyle',
+    'selectedKeys',
+    'defaultSelectedKeys',
+    'onSelect',
+    'selectMode',
+    'shallowSelect',
+    'hasSelectedIcon',
+    'labelToggleChecked',
+    'isSelectIconRight',
+    'direction',
+    'hozAlign',
+    'hozInLine',
+    'renderMore',
+    'header',
+    'footer',
+    'footerWrapperClassName',
+    'autoFocus',
+    'focusedKey',
+    'focusable',
+    'onItemFocus',
+    'onBlur',
+    'embeddable',
+    'onItemKeyDown',
+    'expandAnimation',
+    'itemClassName',
+    'icons',
+    'flatenContent',
+];
+
 const getIndicatorsItem = (
     items: ReactElement<any>[],
     isPlaceholder: boolean,
@@ -885,7 +942,7 @@ export class Menu extends Component<MenuProps, MenuState> {
             flatenContent,
         } = this.props;
         const { newChildren } = this.state;
-        const others = pickOthers(Menu.propTypes, this.props);
+        const others = pickOthers(MENU_PROP_KEYS, this.props);
 
         const newClassName = cx(
             {

@@ -6,6 +6,25 @@ import { obj } from '../util';
 import type { IconProps } from './types';
 import ConfigProvider from '../config-provider';
 
+const ICON_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Icon-specific keys
+    'type',
+    'size',
+    'className',
+    'style',
+];
+
 /**
  * Icon
  */
@@ -43,7 +62,7 @@ class Icon extends Component<IconProps> {
 
     render() {
         const { prefix, type, size, className, rtl, style, children } = this.props;
-        const others = obj.pickOthers(Object.assign({}, Icon.propTypes), this.props);
+        const others = obj.pickOthers(ICON_PROP_KEYS, this.props);
 
         const classes = cx({
             [`${prefix}icon`]: true,

@@ -20,6 +20,22 @@ const { bindCtx } = func;
 const { setStyle } = dom;
 const Popup = Overlay.Popup;
 
+const POPUP_ITEM_PROP_KEYS = [
+    '_key',
+    'root',
+    'level',
+    'hasSubMenu',
+    'noIcon',
+    'rtl',
+    'selectable',
+    'label',
+    'children',
+    'className',
+    'triggerType',
+    'align',
+    'autoWidth',
+];
+
 export type PopupItemWithDefaultsProps = ClassPropsWithDefault<
     PopupItemProps,
     typeof PopupItem.defaultProps
@@ -235,7 +251,7 @@ export default class PopupItem extends Component<PopupItemProps> {
             align,
             noIcon,
         } = this.props as PopupItemInMenuProps;
-        const others = obj.pickOthers(PopupItem.propTypes, this.props);
+        const others = obj.pickOthers(POPUP_ITEM_PROP_KEYS, this.props);
         const {
             prefix,
             selectMode,

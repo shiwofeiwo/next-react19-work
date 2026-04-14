@@ -10,6 +10,23 @@ const noop = {};
 const { bindCtx } = func;
 const { pickOthers } = obj;
 
+const CHECKABLE_ITEM_PROP_KEYS = [
+    '_key',
+    'root',
+    'disabled',
+    'inlineIndent',
+    'checked',
+    'indeterminate',
+    'onChange',
+    'checkType',
+    'checkDisabled',
+    'helper',
+    'children',
+    'onKeyDown',
+    'onClick',
+    'id',
+];
+
 export type CheckableItemWithDefaultsProps = ClassPropsWithDefault<
     CheckableItemProps,
     typeof CheckableItem.defaultProps
@@ -105,7 +122,7 @@ export default class CheckableItem extends Component<CheckableItemProps> {
         const { _key, root, checked, disabled, onClick, helper, children } = this
             .props as CheckableItemInMenuProps;
         const { prefix, labelToggleChecked } = root.props;
-        const others = pickOthers(CheckableItem.propTypes, this.props);
+        const others = pickOthers(CHECKABLE_ITEM_PROP_KEYS, this.props);
 
         const newProps = {
             _key,

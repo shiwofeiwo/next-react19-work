@@ -22,6 +22,26 @@ import type { ChildPropsInMenu, ItemProps, SubMenuProps } from '../types';
 const { Expand } = Animate;
 const { bindCtx } = func;
 
+const SUB_MENU_PROP_KEYS = [
+    '_key',
+    'root',
+    'level',
+    'inlineLevel',
+    'groupIndent',
+    'label',
+    'selectable',
+    'mode',
+    'noIcon',
+    'children',
+    'onMouseEnter',
+    'onMouseLeave',
+    'subMenuContentClassName',
+    'triggerType',
+    'align',
+    'parentMode',
+    'parent',
+];
+
 export type SubMenuWithDefaultsProps = ClassPropsWithDefault<
     SubMenuProps,
     typeof SubMenu.defaultProps
@@ -171,7 +191,7 @@ export default class SubMenu extends Component<SubMenuProps> {
             selectedKeys,
         });
 
-        const others = obj.pickOthers(SubMenu.propTypes, this.props);
+        const others = obj.pickOthers(SUB_MENU_PROP_KEYS, this.props);
 
         const liProps: HTMLAttributes<HTMLLIElement> = {
             className: cx(

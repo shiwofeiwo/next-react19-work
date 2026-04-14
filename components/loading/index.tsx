@@ -6,6 +6,34 @@ import ConfigProvider from '../config-provider';
 import { obj, func } from '../util';
 import type { LoadingProps } from './types';
 
+const LOADING_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Loading-specific keys
+    'tip',
+    'tipAlign',
+    'visible',
+    'onVisibleChange',
+    'className',
+    'style',
+    'size',
+    'indicator',
+    'color',
+    'fullScreen',
+    'disableScroll',
+    'safeNode',
+    'inline',
+];
+
 /** Loading */
 class Loading extends React.Component<LoadingProps> {
     static propTypes = {
@@ -94,7 +122,7 @@ class Loading extends React.Component<LoadingProps> {
             [`${prefix}loading-right-tip`]: tipAlign === 'right',
         });
 
-        const others = obj.pickOthers(Loading.propTypes, this.props);
+        const others = obj.pickOthers(LOADING_PROP_KEYS, this.props);
 
         const contentCls = classNames({
             [`${prefix}loading-component`]: visible,

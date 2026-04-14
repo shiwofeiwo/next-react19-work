@@ -16,6 +16,24 @@ import type { ChildItemPropsInMenu, ItemProps } from '../types';
 const { bindCtx } = func;
 const { pickOthers } = obj;
 
+const SELECTABLE_ITEM_PROP_KEYS = [
+    '_key',
+    'root',
+    'selected',
+    'onSelect',
+    'inlineIndent',
+    'disabled',
+    'helper',
+    'children',
+    'className',
+    'onKeyDown',
+    'onClick',
+    'needIndent',
+    'hasSelectedIcon',
+    'isSelectIconRight',
+    'icons',
+];
+
 export type ItemWithDefaultsProps = ClassPropsWithDefault<
     ItemProps,
     typeof SelectableItem.defaultProps
@@ -125,7 +143,7 @@ export default class SelectableItem extends Component<ItemProps> {
         const { _key, root, className, disabled, helper, children, needIndent } = this
             .props as ItemInMenuProps;
         const { prefix } = root.props;
-        const others = pickOthers(SelectableItem.propTypes, this.props);
+        const others = pickOthers(SELECTABLE_ITEM_PROP_KEYS, this.props);
         const selected = this.getSelected();
 
         const newProps: Partial<ItemProps> = {

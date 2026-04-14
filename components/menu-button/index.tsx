@@ -13,6 +13,30 @@ import type { MenuButtonProps, MenuButtonState } from './types';
 
 const { Popup } = Overlay;
 
+const MENU_BUTTON_PROP_KEYS = [
+    'prefix',
+    'label',
+    'autoWidth',
+    'popupTriggerType',
+    'popupContainer',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'defaultSelectedKeys',
+    'selectedKeys',
+    'selectMode',
+    'onItemClick',
+    'onSelect',
+    'menuProps',
+    'style',
+    'className',
+    'children',
+];
+
 /**
  * MenuButton
  */
@@ -167,7 +191,7 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
             <Button
                 style={style}
                 className={classNames}
-                {...obj.pickOthers(MenuButton.propTypes, others)}
+                {...obj.pickOthers(MENU_BUTTON_PROP_KEYS, others)}
             >
                 {label} <Icon type="arrow-down" className={`${prefix}menu-btn-arrow`} />
             </Button>

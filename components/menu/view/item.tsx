@@ -8,6 +8,25 @@ import type { ChildItemPropsInMenu, ItemProps as NormalItemProps } from '../type
 const { bindCtx } = func;
 const { pickOthers } = obj;
 
+const ITEM_PROP_KEYS = [
+    '_key',
+    'level',
+    'inlineLevel',
+    'groupIndent',
+    'root',
+    'menu',
+    'parent',
+    'parentMode',
+    'type',
+    'component',
+    'disabled',
+    'className',
+    'onClick',
+    'onKeyDown',
+    'needIndent',
+    'replaceClassName',
+];
+
 export type ItemProps = Omit<NormalItemProps, 'onSelect' | 'inlineIndent'>;
 export type ItemWithDefaultsProps = ClassPropsWithDefault<ItemProps, typeof Item.defaultProps>;
 export type ItemInMenuProps = ChildItemPropsInMenu<ItemWithDefaultsProps>;
@@ -159,7 +178,7 @@ export default class Item extends Component<ItemProps> {
             parentMode,
             _key,
         } = this.props as ItemInMenuProps;
-        const others = pickOthers(Item.propTypes, this.props);
+        const others = pickOthers(ITEM_PROP_KEYS, this.props);
 
         const { prefix, focusable, inlineIndent, itemClassName, rtl } = root.props;
         const focused = this.getFocused();
