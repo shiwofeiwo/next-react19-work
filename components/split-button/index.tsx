@@ -13,6 +13,37 @@ import Menu, { type MenuProps } from '../menu';
 
 const { Popup } = Overlay;
 
+const SPLIT_BUTTON_PROP_KEYS = [
+    'prefix',
+    'style',
+    'type',
+    'size',
+    'label',
+    'component',
+    'ghost',
+    'defaultSelectedKeys',
+    'selectedKeys',
+    'selectMode',
+    'onSelect',
+    'onItemClick',
+    'triggerProps',
+    'autoWidth',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupTriggerType',
+    'popupAlign',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'popupContainer',
+    'followTrigger',
+    'menuProps',
+    'leftButtonProps',
+    'className',
+    'children',
+];
+
 class SplitButton extends React.Component<SplitButtonProps> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -200,7 +231,7 @@ class SplitButton extends React.Component<SplitButtonProps> {
 
         return (
             <Button.Group
-                {...obj.pickOthers(SplitButton.propTypes, others)}
+                {...obj.pickOthers(SPLIT_BUTTON_PROP_KEYS, others)}
                 className={classNames}
                 style={style}
                 size={size}

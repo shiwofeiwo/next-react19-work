@@ -6,6 +6,8 @@ import type { CellProps } from './types';
 
 const { pickOthers } = obj;
 
+const CELL_PROP_KEYS = ['device', 'colSpan', 'rowSpan', 'component'];
+
 /**
  * ResponsiveGrid.Cell
  */
@@ -29,7 +31,7 @@ class Cell extends Component<CellProps> {
         const { component, children } = this.props;
         const View = component!;
 
-        const others = pickOthers(Object.keys(Cell.propTypes), this.props);
+        const others = pickOthers(CELL_PROP_KEYS, this.props);
 
         return <View {...others}>{children}</View>;
     }

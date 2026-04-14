@@ -14,6 +14,40 @@ const Group = Input.Group;
 const AutoComplete = Select.AutoComplete;
 const { noop } = func;
 
+const SEARCH_PROP_KEYS = [
+    'prefix',
+    'shape',
+    'type',
+    'size',
+    'defaultValue',
+    'value',
+    'onChange',
+    'onSearch',
+    'defaultFilterValue',
+    'fillProps',
+    'filter',
+    'filterValue',
+    'onFilterChange',
+    'dataSource',
+    'placeholder',
+    'searchText',
+    'style',
+    'className',
+    'filterProps',
+    'buttonProps',
+    'popupContent',
+    'followTrigger',
+    'visible',
+    'hasClear',
+    'hasIcon',
+    'disabled',
+    'locale',
+    'rtl',
+    'icons',
+    'autoHighlightFirstItem',
+    'onToggleHighlightItem',
+];
+
 export interface SearchState {
     value: string | number;
     filterValue: string | undefined;
@@ -346,7 +380,7 @@ class Search extends React.Component<SearchProps, SearchState> {
             );
         }
 
-        const _othersAttributes = obj.pickOthers(Search.propTypes, others);
+        const _othersAttributes = obj.pickOthers(SEARCH_PROP_KEYS, others);
         const othersAttributes: typeof _othersAttributes & { visible?: boolean } =
             _othersAttributes;
         if (visible !== undefined) {

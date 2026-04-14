@@ -28,6 +28,77 @@ import type {
 const { bindCtx, noop } = func;
 const isIE9 = env.ieVersion === 9;
 
+const SELECT_PROP_KEYS = [
+    // Base keys
+    'prefix',
+    'size',
+    'value',
+    'defaultValue',
+    'placeholder',
+    'autoWidth',
+    'label',
+    'hasClear',
+    'state',
+    'readOnly',
+    'disabled',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupContainer',
+    'popupClassName',
+    'popupStyle',
+    'popupProps',
+    'followTrigger',
+    'popupContent',
+    'menuProps',
+    'filterLocal',
+    'filter',
+    'defaultHighlightKey',
+    'highlightKey',
+    'onToggleHighlightItem',
+    'autoHighlightFirstItem',
+    'useVirtual',
+    'className',
+    'children',
+    'dataSource',
+    'itemRender',
+    'mode',
+    'notFoundContent',
+    'locale',
+    'rtl',
+    'popupComponent',
+    'isPreview',
+    'renderPreview',
+    'showDataSourceChildren',
+    // Select-specific keys
+    'hasBorder',
+    'hasArrow',
+    'showSearch',
+    'onSearch',
+    'onSearchClear',
+    'hasSelectAll',
+    'fillProps',
+    'useDetailValue',
+    'cacheValue',
+    'valueRender',
+    'style',
+    'searchValue',
+    'tagInline',
+    'tagClosable',
+    'adjustTagSize',
+    'maxTagCount',
+    'maxTagPlaceholder',
+    'hiddenSelected',
+    'onRemove',
+    'onFocus',
+    'onBlur',
+    'onMouseEnter',
+    'onMouseLeave',
+    'onKeyDown',
+    'popupAutoFocus',
+    'autoClearSearchValue',
+];
+
 /**
  * 无障碍化注意事项：
  * 1. Select 无搜索情况下，不应该让 Input 可 focus，此时外层 wrap 必须可 focus，并且需要相应 focus 事件让外边框发生变化
@@ -945,7 +1016,7 @@ class Select extends Base<SelectProps, SelectState> {
             onMouseLeave,
             rtl,
         } = this.props;
-        const others = obj.pickOthers(Select.propTypes, this.props);
+        const others = obj.pickOthers(SELECT_PROP_KEYS, this.props);
         // select 不是输入框，应过滤掉 addonTextAfter
         if ('addonTextAfter' in others) {
             delete others.addonTextAfter;

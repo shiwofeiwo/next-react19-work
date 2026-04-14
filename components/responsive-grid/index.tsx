@@ -16,6 +16,18 @@ import type { ResponsiveGridProps, CellProps } from './types';
 const { ieVersion } = env;
 const { pickOthers, isReactFragmentElement } = obj;
 
+const RESPONSIVE_GRID_PROP_KEYS = [
+    'prefix',
+    'className',
+    'device',
+    'rows',
+    'columns',
+    'gap',
+    'component',
+    'dense',
+    'style',
+];
+
 type WithTypeMarkComponent = JSXElementConstructor<unknown> & { _typeMark: string };
 
 const createChildren = (
@@ -113,7 +125,7 @@ class ResponsiveGrid extends Component<ResponsiveGridProps> {
         };
         const View = component!;
 
-        const others = pickOthers(Object.keys(ResponsiveGrid.propTypes), this.props);
+        const others = pickOthers(RESPONSIVE_GRID_PROP_KEYS, this.props);
 
         const styleSheet = getStyle(style, styleProps);
 

@@ -10,6 +10,30 @@ import type { StepProps, StepState } from '../types';
 const getHeight = (el: HTMLElement) => dom.getStyle(el, 'height') as number;
 const setHeight = (el: HTMLElement, height: number | string) => dom.setStyle(el, 'height', height);
 
+const STEP_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Step-specific keys
+    'current',
+    'direction',
+    'labelPlacement',
+    'shape',
+    'readOnly',
+    'animation',
+    'className',
+    'itemRender',
+    'stretch',
+];
+
 /** Step */
 class Step extends Component<StepProps, StepState> {
     static propTypes = {
@@ -136,7 +160,7 @@ class Step extends Component<StepProps, StepState> {
             rtl,
             stretch,
         } = this.props;
-        const others = obj.pickOthers(Step.propTypes, this.props);
+        const others = obj.pickOthers(STEP_PROP_KEYS, this.props);
         let { prefix, direction } = this.props;
         // prefix is injected via ConfigProvider.config() HOC in index.tsx
         const { parentWidth, parentHeight } = this.state;

@@ -12,6 +12,41 @@ import type { DeprecatedStepProps, ItemProps, StepStatus } from '../types';
 const getWidth = (el: HTMLElement) => dom.getStyle(el, 'width') as number;
 const getHeight = (el: HTMLElement) => dom.getStyle(el, 'height') as number;
 
+const STEP_ITEM_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // StepItem-specific keys
+    'status',
+    'title',
+    'direction',
+    'labelPlacement',
+    'shape',
+    'icon',
+    'content',
+    'itemRender',
+    'percent',
+    'index',
+    'total',
+    'animation',
+    'disabled',
+    'parentWidth',
+    'parentHeight',
+    'onClick',
+    'className',
+    'readOnly',
+    'onResize',
+    'stretch',
+];
+
 /** Step.Item */
 class StepItem extends Component<ItemProps> {
     static propTypes = {
@@ -341,7 +376,7 @@ class StepItem extends Component<ItemProps> {
         const { prefix, className, status, title, index, total, shape, disabled, readOnly } =
             this.props;
 
-        const others = obj.pickOthers(StepItem.propTypes, this.props);
+        const others = obj.pickOthers(STEP_ITEM_PROP_KEYS, this.props);
 
         const stepCls = classNames({
             [`${prefix}step-item`]: true,

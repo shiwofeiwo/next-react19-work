@@ -10,6 +10,56 @@ import type { AutoCompleteProps, ObjectItem, VisibleChangeType } from './types';
 
 const { bindCtx, noop } = func;
 
+const AUTOCOMPLETE_PROP_KEYS = [
+    // Base keys
+    'prefix',
+    'size',
+    'value',
+    'defaultValue',
+    'placeholder',
+    'autoWidth',
+    'label',
+    'hasClear',
+    'state',
+    'readOnly',
+    'disabled',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'popupContainer',
+    'popupClassName',
+    'popupStyle',
+    'popupProps',
+    'followTrigger',
+    'popupContent',
+    'menuProps',
+    'filterLocal',
+    'filter',
+    'defaultHighlightKey',
+    'highlightKey',
+    'onToggleHighlightItem',
+    'autoHighlightFirstItem',
+    'useVirtual',
+    'className',
+    'children',
+    'dataSource',
+    'itemRender',
+    'mode',
+    'notFoundContent',
+    'locale',
+    'rtl',
+    'popupComponent',
+    'isPreview',
+    'renderPreview',
+    'showDataSourceChildren',
+    // AutoComplete-specific keys
+    'fillProps',
+    'onChange',
+    'onKeyDown',
+    'highlightHolder',
+    'style',
+];
+
 export interface AutoCompleteState extends BaseState {
     value: string;
     highlightKey: string;
@@ -305,7 +355,7 @@ class AutoComplete extends Base<AutoCompleteProps, AutoCompleteState> {
             state,
             rtl,
         } = props;
-        const others = obj.pickOthers(AutoComplete.propTypes, props);
+        const others = obj.pickOthers(AUTOCOMPLETE_PROP_KEYS, props);
         const othersData = obj.pickAttrsWith(others, 'data-');
 
         const value = this.state.value;
