@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { obj, func, type ClassPropsWithDefault } from '../util';
 import NextField, { type FieldOption } from '../field';
 import RGrid from '../responsive-grid';
+import FormContext from './context';
 import type { ChildExtraProperties, FormProps, RemoveUndefined } from './types';
 
 export type FormWithDefaultProps = ClassPropsWithDefault<FormProps, typeof Form.defaultProps>;
@@ -111,16 +112,6 @@ export default class Form extends Component<FormProps> {
 
     readonly props: FormWithDefaultProps;
 
-    static childContextTypes = {
-        _formField: PropTypes.object,
-        _formSize: PropTypes.string,
-        _formDisabled: PropTypes.bool,
-        _formPreview: PropTypes.bool,
-        _formFullWidth: PropTypes.bool,
-        _formLabelForErrorMessage: PropTypes.bool,
-        _formMarginToDisplayHelp: PropTypes.bool,
-    };
-
     _formField: NextField | null;
     constructor(props: FormProps) {
         super(props);
@@ -151,18 +142,6 @@ export default class Form extends Component<FormProps> {
 
             props.saveField!(this._formField);
         }
-    }
-
-    getChildContext() {
-        return {
-            _formField: this.props.field ? this.props.field : this._formField,
-            _formSize: this.props.size,
-            _formDisabled: this.props.disabled,
-            _formPreview: this.props.isPreview,
-            _formFullWidth: this.props.fullWidth,
-            _formLabelForErrorMessage: this.props.useLabelForErrorMessage,
-            _formMarginToDisplayHelp: this.props.preferMarginToDisplayHelp,
-        };
     }
 
     componentDidUpdate(prevProps: FormProps) {
@@ -214,23 +193,35 @@ export default class Form extends Component<FormProps> {
 
         const newChildren = getNewChildren(children, this.props);
 
+        const formContextValue = {
+            _formField: this.props.field ? this.props.field : this._formField,
+            _formSize: this.props.size,
+            _formDisabled: this.props.disabled,
+            _formPreview: this.props.isPreview,
+            _formFullWidth: this.props.fullWidth,
+            _formLabelForErrorMessage: this.props.useLabelForErrorMessage,
+            _formMarginToDisplayHelp: this.props.preferMarginToDisplayHelp,
+        };
+
         return (
-            <Tag
-                role="form"
-                {...obj.pickOthers(Form.propTypes, this.props)}
-                className={formClassName}
-                style={style}
-                dir={rtl ? 'rtl' : undefined}
-                onSubmit={onSubmit}
-            >
-                {responsive ? (
-                    <RGrid gap={gap} device={device}>
-                        {newChildren}
-                    </RGrid>
-                ) : (
-                    newChildren
-                )}
-            </Tag>
+            <FormContext.Provider value={formContextValue}>
+                <Tag
+                    role="form"
+                    {...obj.pickOthers(Form.propTypes, this.props)}
+                    className={formClassName}
+                    style={style}
+                    dir={rtl ? 'rtl' : undefined}
+                    onSubmit={onSubmit}
+                >
+                    {responsive ? (
+                        <RGrid gap={gap} device={device}>
+                            {newChildren}
+                        </RGrid>
+                    ) : (
+                        newChildren
+                    )}
+                </Tag>
+            </FormContext.Provider>
         );
     }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
 import { func, obj } from '../util';
+import FormContext from './context';
 import type { SubmitProps } from './types';
 
 class Submit extends React.Component<SubmitProps> {
@@ -17,13 +18,11 @@ class Submit extends React.Component<SubmitProps> {
         onClick: func.noop,
     };
 
-    static contextTypes = {
-        _formField: PropTypes.object,
-    };
+    static contextType = FormContext;
 
     handleClick = () => {
         const { onClick, validate } = this.props;
-        const field = this.context._formField || this.props.field;
+        const field = this.context?._formField || this.props.field;
 
         if (!field) {
             onClick!();

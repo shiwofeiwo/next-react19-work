@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
 import { func, obj } from '../util';
+import FormContext from './context';
 import type { ResetProps } from './types';
 
 class Reset extends React.Component<ResetProps> {
@@ -18,13 +19,11 @@ class Reset extends React.Component<ResetProps> {
         onClick: func.noop,
     };
 
-    static contextTypes = {
-        _formField: PropTypes.object,
-    };
+    static contextType = FormContext;
 
     handleClick = () => {
         const { names, toDefault, onClick } = this.props;
-        const field = this.context._formField || this.props.field;
+        const field = this.context?._formField || this.props.field;
 
         if (!field) {
             onClick!();

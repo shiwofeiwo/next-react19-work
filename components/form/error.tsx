@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import ConfigProvider from '../config-provider';
+import FormContext from './context';
 import type { ErrorProps } from './types';
 import type NextField from '../field';
 
@@ -23,9 +24,7 @@ class Error extends Component<ErrorProps> {
         preferMarginToDisplayHelp: false,
     };
 
-    static contextTypes = {
-        _formField: PropTypes.object,
-    };
+    static contextType = FormContext;
 
     static _typeMark = 'form_error';
 
@@ -56,7 +55,7 @@ class Error extends Component<ErrorProps> {
             );
         }
 
-        const field: NextField = this.context._formField || _field;
+        const field: NextField = this.context?._formField || _field;
 
         if (!field || !name) {
             return null;
