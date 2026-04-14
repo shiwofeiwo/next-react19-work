@@ -29,6 +29,57 @@ const { Popup } = Overlay;
 const { noop, checkDate, checkRangeDate } = func;
 const timePickerLocale = nextLocale.TimePicker;
 
+const TIME_PICKER2_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // TimePicker2-specific keys
+    'label',
+    'state',
+    'placeholder',
+    'value',
+    'defaultValue',
+    'size',
+    'hasClear',
+    'format',
+    'hourStep',
+    'minuteStep',
+    'secondStep',
+    'disabledHours',
+    'disabledMinutes',
+    'disabledSeconds',
+    'renderTimeMenuItems',
+    'visible',
+    'defaultVisible',
+    'popupContainer',
+    'popupAlign',
+    'popupTriggerType',
+    'onVisibleChange',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'disabled',
+    'hasBorder',
+    'isPreview',
+    'renderPreview',
+    'onChange',
+    'className',
+    'name',
+    'preset',
+    'inputProps',
+    'popupComponent',
+    'type',
+];
+
 const presetPropType = PropTypes.shape({
     label: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.func, checkDateValue]),
@@ -617,7 +668,7 @@ class TimePicker2 extends Component<TimePickerProps, TimePickerState> {
         const oKable = !!(isRange ? inputValue && inputValue[inputType!] : inputValue);
 
         return (
-            <div {...obj.pickOthers(TimePicker2.propTypes, others)} className={classNames}>
+            <div {...obj.pickOthers(TIME_PICKER2_PROP_KEYS, others)} className={classNames}>
                 <PopupComponent
                     align={popupAlign}
                     {...popupProps}

@@ -23,6 +23,54 @@ const { Popup } = Overlay;
 const { noop } = func;
 const timePickerLocale = nextLocale.TimePicker;
 
+const TIME_PICKER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // TimePicker-specific keys
+    'label',
+    'state',
+    'placeholder',
+    'value',
+    'defaultValue',
+    'size',
+    'hasClear',
+    'format',
+    'hourStep',
+    'minuteStep',
+    'secondStep',
+    'disabledHours',
+    'disabledMinutes',
+    'disabledSeconds',
+    'renderTimeMenuItems',
+    'visible',
+    'defaultVisible',
+    'popupAlign',
+    'popupTriggerType',
+    'onVisibleChange',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'disabled',
+    'isPreview',
+    'renderPreview',
+    'onChange',
+    'className',
+    'name',
+    'inputProps',
+    'popupComponent',
+    'popupContent',
+];
+
 type InnerTimePickerProps = ClassPropsWithDefault<TimePickerProps, typeof TimePicker.defaultProps>;
 
 /**
@@ -350,7 +398,7 @@ class TimePicker extends Component<TimePickerProps, TimePickerState> {
         const PopupComponent = popupComponent ? popupComponent : Popup;
 
         return (
-            <div {...obj.pickOthers(TimePicker.propTypes, others)} className={classNames}>
+            <div {...obj.pickOthers(TIME_PICKER_PROP_KEYS, others)} className={classNames}>
                 <PopupComponent
                     autoFocus
                     align={popupAlign}

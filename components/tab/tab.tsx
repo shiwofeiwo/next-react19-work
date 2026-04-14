@@ -14,6 +14,47 @@ export interface TabState {
     activeKey?: string;
 }
 
+const TAB_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Tab-specific keys
+    'activeKey',
+    'defaultActiveKey',
+    'shape',
+    'animation',
+    'excessMode',
+    'tabPosition',
+    'size',
+    'triggerType',
+    'lazyLoad',
+    'unmountInactiveTabs',
+    'navStyle',
+    'navClassName',
+    'contentStyle',
+    'contentClassName',
+    'extra',
+    'disableKeyboard',
+    'onClick',
+    'onChange',
+    'onClose',
+    'tabRender',
+    'popupProps',
+    'className',
+    'icons',
+    'showAdd',
+    'onAdd',
+    'addIcon',
+];
+
 /** Tab */
 class Tab extends Component<TabProps, TabState> {
     static displayName = 'Tab';
@@ -318,7 +359,7 @@ class Tab extends Component<TabProps, TabState> {
             <div
                 dir={rtl ? 'rtl' : undefined}
                 className={classNames}
-                {...obj.pickOthers(Tab.propTypes, others)}
+                {...obj.pickOthers(TAB_PROP_KEYS, others)}
             >
                 {tabChildren}
             </div>

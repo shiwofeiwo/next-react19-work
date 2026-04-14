@@ -12,6 +12,34 @@ const { noop, bindCtx } = func;
 
 const PRESET_COLOR_REG = /blue|green|orange|red|turquoise|yellow/;
 
+const TAG_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Tag-specific keys
+    'type',
+    'size',
+    'color',
+    'animation',
+    'closeArea',
+    'closable',
+    'onClose',
+    'afterClose',
+    'afterAppear',
+    'className',
+    'onClick',
+    '_shape',
+    'disabled',
+];
+
 class Tag extends Component<TagProps, { visible: boolean }> {
     static propTypes = {
         ...ConfigProvider.propTypes,
@@ -216,7 +244,7 @@ class Tag extends Component<TagProps, { visible: boolean }> {
         } = this.props;
         const { visible } = this.state;
         const isPresetColor = this.isPresetColor();
-        const others = obj.pickOthers(Tag.propTypes, this.props);
+        const others = obj.pickOthers(TAG_PROP_KEYS, this.props);
         const { style, ...otherTagProps } = others;
         const shape = closable ? 'closable' : _shape;
         const bodyClazz = classNames(
