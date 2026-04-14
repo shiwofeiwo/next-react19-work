@@ -1,4 +1,4 @@
-import { Component, Children, type ReactNode } from 'react';
+import React, { Component, Children, type ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import getContextProps from './get-context-props';
@@ -16,6 +16,7 @@ import Consumer from './consumer';
 import ErrorBoundary from './error-boundary';
 import Cache from './cache';
 import datejs from '../util/date';
+import ConfigContext from './context';
 import type {
     ConfigProviderProps,
     ComponentCommonProps,
@@ -47,6 +48,8 @@ const setDateLocale = (locale?: { dateLocale?: string; momentLocale?: string }) 
 };
 
 class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderProps, 'locale'>> {
+    static contextType = ConfigContext;
+    declare context: ContextState;
     static propTypes = {
         /**
          * 样式类名的品牌前缀
@@ -97,30 +100,6 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
     static defaultProps = {
         warning: true,
         errorBoundary: false,
-    };
-
-    static contextTypes = {
-        nextPrefix: PropTypes.string,
-        nextLocale: PropTypes.object,
-        nextDefaultPropsConfig: PropTypes.object,
-        nextPure: PropTypes.bool,
-        nextRtl: PropTypes.bool,
-        nextWarning: PropTypes.bool,
-        nextDevice: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-        nextPopupContainer: PropTypes.any,
-        nextErrorBoundary: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    };
-
-    static childContextTypes = {
-        nextPrefix: PropTypes.string,
-        nextLocale: PropTypes.object,
-        nextDefaultPropsConfig: PropTypes.object,
-        nextPure: PropTypes.bool,
-        nextRtl: PropTypes.bool,
-        nextWarning: PropTypes.bool,
-        nextDevice: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-        nextPopupContainer: PropTypes.any,
-        nextErrorBoundary: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     };
 
     /**
@@ -185,7 +164,7 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
         super(props, context);
         childContextCache.add(
             this,
-            Object.assign({}, childContextCache.get(this, {}), this.getChildContext())
+            Object.assign({}, childContextCache.get(this, {}), this._getMergedContext())
         );
 
         setMomentLocale(this.props.locale);
@@ -196,7 +175,7 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
         };
     }
 
-    getChildContext() {
+    private _getMergedContext(): ContextState {
         const {
             prefix,
             locale,
@@ -253,7 +232,7 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
     componentDidUpdate() {
         childContextCache.add(
             this,
-            Object.assign({}, childContextCache.get(this, {}), this.getChildContext())
+            Object.assign({}, childContextCache.get(this, {}), this._getMergedContext())
         );
     }
 
@@ -262,7 +241,11 @@ class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderP
     }
 
     render(): ReactNode {
-        return Children.only(this.props.children);
+        return (
+            <ConfigContext.Provider value={this._getMergedContext()}>
+                {Children.only(this.props.children)}
+            </ConfigContext.Provider>
+        );
     }
 }
 

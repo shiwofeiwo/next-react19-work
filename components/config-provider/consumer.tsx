@@ -1,6 +1,7 @@
-import { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { ConfigProviderProps } from './types';
+import ConfigContext from './context';
 
 /**
  * Creates an object with the same values as object and keys
@@ -44,8 +45,12 @@ export interface ConsumerProps {
 /**
  * Consumer
  */
-const Consumer = ({ children }: ConsumerProps, context: Record<PropertyKey, string>) =>
-    typeof children === 'function' ? children(transformContext(context)) : null;
+const Consumer = ({ children }: ConsumerProps) => {
+    const context = React.useContext(ConfigContext);
+    return typeof children === 'function'
+        ? children(transformContext(context as Record<PropertyKey, string>))
+        : null;
+};
 
 /**
  * PropTypes
@@ -54,19 +59,6 @@ Consumer.propTypes = {
     // Render context as function
     // Function(context: object): ReactElement
     children: PropTypes.func,
-};
-
-/**
- * ContextTypes (legacy context)
- */
-Consumer.contextTypes = {
-    nextPrefix: PropTypes.string,
-    nextLocale: PropTypes.object,
-    nextPure: PropTypes.bool,
-    newRtl: PropTypes.bool,
-    nextWarning: PropTypes.bool,
-    nextDevice: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-    nextPopupContainer: PropTypes.any,
 };
 
 export default Consumer;

@@ -12,6 +12,7 @@ import hoistNonReactStatic from 'hoist-non-react-statics';
 import { obj, log } from '../util';
 import getContextProps from './get-context-props';
 import ErrorBoundary from './error-boundary';
+import ConfigContext from './context';
 import { type Locale } from '../locale/types';
 import type {
     ConfigOptions,
@@ -20,6 +21,7 @@ import type {
     OverlayCommonProps,
     ConfigProviderProps,
     ConfiguredComponentClass,
+    ContextState,
     PartialLocale,
     NonReactStatics,
     NonBlank,
@@ -130,6 +132,8 @@ function config<
 
     class ConfigedComponent extends React.Component<P> {
         static displayName = `Config(${getDisplayName(Component)})`;
+        static contextType = ConfigContext;
+        declare context: ContextState;
         static propTypes = {
             ...((Component as ComponentType).propTypes || {}),
             prefix: PropTypes.string,
@@ -140,18 +144,6 @@ function config<
             device: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
             popupContainer: PropTypes.any,
             errorBoundary: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-        };
-        static contextTypes = {
-            ...((Component as ComponentType).contextTypes || {}),
-            nextPrefix: PropTypes.string,
-            nextLocale: PropTypes.object,
-            nextDefaultPropsConfig: PropTypes.object,
-            nextPure: PropTypes.bool,
-            nextRtl: PropTypes.bool,
-            nextWarning: PropTypes.bool,
-            nextDevice: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-            nextPopupContainer: PropTypes.any,
-            nextErrorBoundary: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
         };
 
         // ref data
@@ -180,7 +172,8 @@ function config<
         }
 
         private _deprecated(...args: Parameters<PropsDeprecatedPrinter>) {
-            if (this.context.nextWarning !== false) {
+            const ctx = this.context as ContextState | null;
+            if (ctx?.nextWarning !== false) {
                 log.deprecated(...args);
             }
         }
@@ -211,7 +204,7 @@ function config<
                 nextDevice,
                 nextPopupContainer,
                 nextErrorBoundary,
-            } = this.context;
+            } = (this.context as ContextState) || {};
 
             const displayName = options.componentName || getDisplayName(Component);
             const contextProps = getContextProps(
