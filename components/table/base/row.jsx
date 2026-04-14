@@ -172,7 +172,9 @@ export default class Row extends React.Component {
                 notRenderCellIndex.push([rowIndex + j, colIndex + i]);
             }
         }
-        [].push.apply((this.context || {}).notRenderCellIndex, notRenderCellIndex);
+        if (this.context && this.context.notRenderCellIndex) {
+            [].push.apply(this.context.notRenderCellIndex, notRenderCellIndex);
+        }
     }
 
     render() {

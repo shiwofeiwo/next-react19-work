@@ -38,8 +38,9 @@ export default class GroupListRow extends Row {
         });
 
         // clear notRenderCellIndex, incase of cached data
-        const ctx = this.context || {};
-        ctx.notRenderCellIndex = [];
+        if (this.context && this.context.notRenderCellIndex) {
+            this.context.notRenderCellIndex.length = 0;
+        }
 
         return (
             <table
