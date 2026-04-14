@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, { ReactElement, ElementType } from 'react';
 import ReactDOM from 'react-dom';
 import { create, ReactTestRendererTree } from 'react-test-renderer';
@@ -10,20 +11,17 @@ export function render<P = unknown>(element: ReactElement<P>) {
     let inc: any;
     const container = document.createElement('div');
     document.body.appendChild(container);
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(element, container, function () {
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
-        inc = this;
-    });
+    const root = createRoot(container);
+    root.render(element);
     return {
         setProps: (props: Partial<P>) => {
             const clonedElement = React.cloneElement(element, props);
-            // eslint-disable-next-line react/no-deprecated
-            ReactDOM.render(clonedElement, container);
+            const root = createRoot(container);
+            root.render(clonedElement);
         },
         unmount: () => {
-            // eslint-disable-next-line react/no-deprecated
-            ReactDOM.unmountComponentAtNode(container);
+            const root = createRoot(container);
+            root.unmount();
             if (document.body.contains(container)) {
                 document.body.removeChild(container);
             }

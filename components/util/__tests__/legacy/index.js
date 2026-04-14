@@ -1,3 +1,4 @@
+import { createRoot } from "react-dom/client";
 /* eslint-disable react/no-deprecated */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,17 +9,17 @@ const render = element => {
     let inc;
     const container = document.createElement('div');
     document.body.appendChild(container);
-    ReactDOM.render(element, container, function() {
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
-        inc = this;
-    });
+    const root = createRoot(container);
+    root.render(element);
     return {
         setProps: props => {
             const clonedElement = React.cloneElement(element, props);
-            ReactDOM.render(clonedElement, container);
+            const root = createRoot(container);
+            root.render(clonedElement);
         },
         unmount: () => {
-            ReactDOM.unmountComponentAtNode(container);
+            const root = createRoot(container);
+            root.unmount();
             document.body.removeChild(container);
         },
         instance: () => {

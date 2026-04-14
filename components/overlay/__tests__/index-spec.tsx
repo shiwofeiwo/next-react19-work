@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, {
     useRef,
     useState,
@@ -452,8 +453,8 @@ describe('Overlay', () => {
     it('fix bug on Gateway when settting ContainerNode', done => {
         const container = document.createElement('div');
         document.body.append(container);
-        // eslint-disable-next-line react/no-deprecated
-        ReactDOM.render(<OverlayDemo />, container);
+        const root = createRoot(container);
+        root.render(<OverlayDemo />);
 
         cy.get('#container0 .next-overlay-wrapper').should('exist');
 

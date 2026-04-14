@@ -1,3 +1,4 @@
+import { createRoot } from "react-dom/client";
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -33,17 +34,19 @@ const render = element => {
     const container = document.createElement('div');
     container.className = 'container';
     document.body.appendChild(container);
-    ReactDOM.render(element, container, function () {
-        inc = this;
-    });
+    const root = createRoot(container);
+    root.render(element);
     return {
         setProps: props => {
-            ReactDOM.unmountComponentAtNode(container);
+            const root = createRoot(container);
+            root.unmount();
             const clonedElement = React.cloneElement(element, props);
-            ReactDOM.render(clonedElement, container);
+            const root = createRoot(container);
+            root.render(clonedElement);
         },
         unmount: () => {
-            ReactDOM.unmountComponentAtNode(container);
+            const root = createRoot(container);
+            root.unmount();
             document.body.removeChild(container);
         },
         instance: () => {

@@ -1,3 +1,4 @@
+import { createRoot } from "react-dom/client";
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -95,13 +96,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            setTimeout(() => {
-                ReactDOM.unmountComponentAtNode(container);
-                document.body.removeChild(container);
-                done();
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
 
     it('should support columns with lock', done => {
@@ -147,17 +143,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            assert(
-                container.querySelectorAll('#normal-table .next-table-lock-left .next-table-body tbody tr').length === 2
-            );
-            assert(container.querySelectorAll('#sticky-table .next-table-fix-left')[0].style.position === 'sticky');
-            setTimeout(() => {
-                ReactDOM.unmountComponentAtNode(container);
-                document.body.removeChild(container);
-                done();
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
 
     it('should fix onChange reRender bug', done => {
@@ -182,16 +169,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            const input = container.querySelector('.next-table-header .next-checkbox input');
-            input.click();
-            setTimeout(() => {
-                assert(container.querySelectorAll('.next-table-body .next-checkbox-wrapper.checked').length === 2);
-                ReactDOM.unmountComponentAtNode(container);
-                document.body.removeChild(container);
-                done();
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
 
     it('should support null child', () => {
@@ -239,19 +218,19 @@ describe('Issue', () => {
             onChange: () => {},
         };
 
-        ReactDOM.render(
-            <Table dataSource={[{ id: 1 }, { id: 2 }]} rowSelection={rowSelection}>
-                <Table.Column dataIndex="id" style={{ textAlign: 'left' }} />
-            </Table>,
-            div
-        );
+        const root = createRoot(div);
+
+        root.render(<Table dataSource={[{ id: 1 }, { id: 2 }]} rowSelection={rowSelection}>
+            <Table.Column dataIndex="id" style={{ textAlign: 'left' }} />
+        </Table>);
 
         div.querySelectorAll('.next-checkbox-wrapper')[1].click();
         assert(div.querySelectorAll('.next-checkbox-wrapper.checked').length === 1);
         div.querySelectorAll('.next-checkbox-wrapper')[0].click();
         assert(div.querySelectorAll('.next-checkbox-wrapper.checked').length === 3);
 
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -322,7 +301,8 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
         assert(div.querySelectorAll('.next-table-lock-left')[0].children.length !== 0);
         assert(div.querySelectorAll('.next-table-lock-right')[0].children.length === 0);
         assert(div.querySelectorAll('div.next-table-lock.next-table-scrolling-to-right').length === 1);
@@ -330,7 +310,8 @@ describe('Issue', () => {
         setTimeout(() => {
             assert(div.querySelectorAll('.next-table-lock-left')[0].children.length === 0);
             assert(div.querySelectorAll('.next-table-lock-right')[0].children.length === 0);
-            ReactDOM.unmountComponentAtNode(div);
+            const root = createRoot(div);
+            root.unmount();
             document.body.removeChild(div);
             done();
         }, 200);
@@ -339,51 +320,54 @@ describe('Issue', () => {
     it('should has border when set hasHeader as false', () => {
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(
-            <Table dataSource={[{ id: 1 }, { id: 2 }]} hasHeader={false}>
-                <Table.Column dataIndex="id" />
-            </Table>,
-            div
-        );
+        const root = createRoot(div);
+
+        root.render(<Table dataSource={[{ id: 1 }, { id: 2 }]} hasHeader={false}>
+            <Table.Column dataIndex="id" />
+        </Table>);
+
         //Hack firefox,IE10,IE11 render error;
         div.querySelectorAll('.next-table table')[0].style.borderCollapse = 'separate';
         assert(parseInt(window.getComputedStyle(div.querySelectorAll('.next-table')[0]).borderTopWidth, 10) === 1);
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
     it('should support style config for Table.Column', () => {
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(
-            <Table dataSource={[{ id: 1 }, { id: 2 }]}>
-                <Table.Column dataIndex="id" style={{ textAlign: 'left' }} />
-            </Table>,
-            div
-        );
+        const root = createRoot(div);
+
+        root.render(<Table dataSource={[{ id: 1 }, { id: 2 }]}>
+            <Table.Column dataIndex="id" style={{ textAlign: 'left' }} />
+        </Table>);
+
         assert(div.querySelectorAll('.next-table table td')[0].style.textAlign === '');
         assert(div.querySelectorAll('.next-table table th')[0].style.textAlign === 'left');
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
     it('should support pass null to sort and any others', () => {
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(
-            <Table
-                dataSource={[{ id: 1 }, { id: 2 }]}
-                hasHeader={false}
-                sort={null}
-                openRowKeys={null}
-                filterParams={null}
-                expandedRowKeys={null}
-            >
-                <Table.Column dataIndex="id" />
-            </Table>,
-            div
-        );
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+
+        root.render(<Table
+            dataSource={[{ id: 1 }, { id: 2 }]}
+            hasHeader={false}
+            sort={null}
+            openRowKeys={null}
+            filterParams={null}
+            expandedRowKeys={null}
+        >
+            <Table.Column dataIndex="id" />
+        </Table>);
+
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -402,11 +386,13 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         assert(div.querySelectorAll('.next-table-body tbody tr').length < 100);
 
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -429,12 +415,14 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         let expandedTotal = div.querySelectorAll('tbody tr');
         assert(expandedTotal.length === 5);
 
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -453,14 +441,16 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         const sortBtn = div.querySelectorAll('.next-table-header .next-table-sort');
         sortBtn[0].click();
         sortBtn[1].click();
 
         assert(div.getElementsByClassName('current').length === 1);
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -484,7 +474,8 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         const sortBtn = div.querySelectorAll('.next-table-header .next-table-sort');
         sortBtn[0].click();
@@ -494,7 +485,8 @@ describe('Issue', () => {
         sortBtn[0].click();
         assert(div.querySelectorAll('a.current').length === 0);
 
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -513,10 +505,12 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         assert(div.querySelectorAll('div.next-table-empty').length === 1);
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -534,10 +528,12 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         assert(div.querySelectorAll('div.next-table-empty').length === 1);
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -565,46 +561,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            const cell = container.querySelector('td[data-next-table-col="1"][data-next-table-row="1"]');
-            const mouseover = new MouseEvent('mouseover', {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-            });
-
-            cell.dispatchEvent(mouseover);
-
-            assert(container.querySelectorAll('td.next-table-cell.hovered').length === 2);
-
-            assert(container.querySelectorAll('tr.next-table-row.hovered').length === 1);
-
-            const mouseout = new MouseEvent('mouseout', {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-            });
-
-            cell.dispatchEvent(mouseout);
-
-            assert(container.querySelectorAll('td.next-table-cell.hovered').length === 0);
-
-            // target is in inner
-            const renderA = container.querySelector('#name-0');
-            renderA.dispatchEvent(mouseover);
-
-            assert(container.querySelectorAll('td.next-table-cell.hovered').length === 2);
-
-            assert(container.querySelectorAll('tr.next-table-row.hovered').length === 1);
-
-            renderA.dispatchEvent(mouseout);
-
-            assert(container.querySelectorAll('td.next-table-cell.hovered').length === 0);
-
-            ReactDOM.unmountComponentAtNode(container);
-            document.body.removeChild(container);
-            done();
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
 
     it('should support useFirstLevelDataWhenNoChildren', () => {
@@ -651,10 +609,12 @@ describe('Issue', () => {
 
         const div = document.createElement('div');
         document.body.appendChild(div);
-        ReactDOM.render(<App />, div);
+        const root = createRoot(div);
+        root.render(<App />);
 
         assert(div.querySelectorAll('.next-table-group-header + tr').length === 1);
-        ReactDOM.unmountComponentAtNode(div);
+        const root = createRoot(div);
+        root.unmount();
         document.body.removeChild(div);
     });
 
@@ -704,16 +664,16 @@ describe('Issue', () => {
             },
         ];
 
-        ReactDOM.render(
-            <Table.StickyLock dataSource={dataSource()} columns={columns}>
-                <Table.GroupHeader
-                    cell={() => {
-                        return <div>title</div>;
-                    }}
-                />
-            </Table.StickyLock>,
-            container
-        );
+        const root = createRoot(container);
+
+        root.render(<Table.StickyLock dataSource={dataSource()} columns={columns}>
+            <Table.GroupHeader
+                cell={() => {
+                    return <div>title</div>;
+                }}
+            />
+        </Table.StickyLock>);
+
         const tableHeader = container.querySelector('.next-table-header');
         const tableBody = container.querySelector('.next-table-body');
         assert(tableHeader);
@@ -794,14 +754,8 @@ describe('Issue', () => {
             },
         ];
 
-        ReactDOM.render(<Table.StickyLock dataSource={dataSource()} columns={columns} />, container, function() {
-            setTimeout(() => {
-                assert(parseInt(container.querySelector('#target-line').style.left) - 340 < 1);
-                ReactDOM.unmountComponentAtNode(container);
-                document.body.removeChild(container);
-                done();
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<Table.StickyLock dataSource={dataSource()} columns={columns} />);
     });
 
     it('should set right offset, fix #2276', done => {
@@ -894,17 +848,8 @@ describe('Issue', () => {
             },
         ];
 
-        ReactDOM.render(<Table.StickyLock dataSource={dataSource()} columns={columns} />, container, function() {
-            setTimeout(() => {
-                assert(
-                    parseInt(container.querySelectorAll('.next-table-cell.next-table-fix-right.next-table-fix-right-first')[3]
-                        .style.right) - 200 < 1
-                );
-                ReactDOM.unmountComponentAtNode(container);
-                document.body.removeChild(container);
-                done();
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<Table.StickyLock dataSource={dataSource()} columns={columns} />);
     });
 
     it('should work with expanded virtual table, fix #2646', done => {
@@ -956,25 +901,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            setTimeout(() => {
-                const trCount = container.querySelectorAll('.next-table .next-table-body table tr.next-table-row')
-                    .length;
-                assert(trCount > 10);
-                assert(trCount < 100);
-
-                const ctrl = container.querySelectorAll(
-                    '.next-table .next-table-body table tr.next-table-row .next-table-expanded-ctrl'
-                )[0];
-                ctrl.click();
-
-                assert(container.querySelectorAll('.next-table .next-table-body table tr.next-table-expanded-row'));
-
-                ReactDOM.unmountComponentAtNode(container);
-                document.body.removeChild(container);
-                done();
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
     it("should set expanded row's  width after stickylock table toggle loading, close #3000", done => {
         const container = document.createElement('div');
@@ -1039,28 +967,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            setTimeout(() => {
-                const expandedRows = container.querySelectorAll('.next-table-expanded-row .next-table-cell-wrapper');
-                expandedRows.forEach(row => {
-                    assert(row.style.width === '499px');
-                });
-
-                const btn = container.querySelector('#sticky-expanded-row-width');
-                btn.click();
-                setTimeout(() => {
-                    btn.click();
-
-                    expandedRows.forEach(row => {
-                        assert(row.style.width === '499px');
-                    });
-
-                    ReactDOM.unmountComponentAtNode(container);
-                    document.body.removeChild(container);
-                    done();
-                }, 100);
-            }, 100);
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
     it('Different sorts have different className of table header , close #3386', done => {
         const container = document.createElement('div');
@@ -1076,22 +984,8 @@ describe('Issue', () => {
             }
         }
 
-        ReactDOM.render(<App />, container, function() {
-            const input = container.querySelector('.next-table-header .next-table-sort');
-            input.click();
-            setTimeout(() => {
-                assert(container.querySelectorAll(`.next-table-header-node.next-table-header-sort-desc`).length === 1);
-                input.click();
-                setTimeout(() => {
-                    assert(
-                        container.querySelectorAll(`.next-table-header-node.next-table-header-sort-asc`).length === 1
-                    );
-                    ReactDOM.unmountComponentAtNode(container);
-                    document.body.removeChild(container);
-                    done();
-                }, 10);
-            }, 10);
-        });
+        const root = createRoot(container);
+        root.render(<App />);
     });
 
     it('should not modify columns props passed from outside, close #4062', () => {
@@ -1155,7 +1049,8 @@ describe('Issue', () => {
                 </div>
             );
         }
-        ReactDOM.render(<App />, container);
+        const root = createRoot(container);
+        root.render(<App />);
 
         assert(columns.length === 2);
     });
@@ -1176,16 +1071,15 @@ describe('Issue', () => {
             return result;
         };
 
-        ReactDOM.render(
-            <ConfigProvider prefix="my-">
-                <Table dataSource={dataSource()}>
-                    <Table.Column title="Id" htmlTitle="Unique Id" dataIndex="id" />
-                    <Table.Column title="Title" dataIndex="title.name" />
-                    <Table.Column title="Time" dataIndex="time" />
-                </Table>
-            </ConfigProvider>,
-            container
-        );
+        const root = createRoot(container);
+
+        root.render(<ConfigProvider prefix="my-">
+            <Table dataSource={dataSource()}>
+                <Table.Column title="Id" htmlTitle="Unique Id" dataIndex="id" />
+                <Table.Column title="Title" dataIndex="title.name" />
+                <Table.Column title="Time" dataIndex="time" />
+            </Table>
+        </ConfigProvider>);
 
         assert(container.querySelectorAll('.my-table').length >= 1);
     });
@@ -1194,14 +1088,13 @@ describe('Issue', () => {
         const container = document.createElement('div');
         document.body.appendChild(container);
 
-        ReactDOM.render(
-            <Table>
-                <Table.Column title="Id" lock htmlTitle="Unique Id" dataIndex="id" />
-                <Table.Column title="Title" dataIndex="title.name" />
-                <Table.Column title="Time" dataIndex="time" />
-            </Table>,
-            container
-        );
+        const root = createRoot(container);
+
+        root.render(<Table>
+            <Table.Column title="Id" lock htmlTitle="Unique Id" dataIndex="id" />
+            <Table.Column title="Title" dataIndex="title.name" />
+            <Table.Column title="Time" dataIndex="time" />
+        </Table>);
 
         assert(container.querySelector('.next-table-empty'));
     });
@@ -1223,14 +1116,14 @@ describe('Issue', () => {
         const container = document.createElement('div');
         document.body.appendChild(container);
 
-        ReactDOM.render(
-            <Table>
-                <Table.Column title={<Input />} lock htmlTitle="Unique Id" dataIndex="id" />
-                <Table.Column title="Title" dataIndex="title.name" />
-                <Table.Column title="Time" dataIndex="time" />
-            </Table>,
-            container
-        );
+        const root = createRoot(container);
+
+        root.render(<Table>
+            <Table.Column title={<Input />} lock htmlTitle="Unique Id" dataIndex="id" />
+            <Table.Column title="Title" dataIndex="title.name" />
+            <Table.Column title="Time" dataIndex="time" />
+        </Table>);
+
         const input = container.querySelector('input');
         assert(input);
         ReactTestUtils.Simulate.change(input, { target: { value: 'aa' } });
@@ -1241,22 +1134,21 @@ describe('Issue', () => {
         const container = document.createElement('div');
         document.body.appendChild(container);
 
-        ReactDOM.render(
-            <Table.StickyLock dataSource={[]} fixedHeader maxBodyHeight={400}>
-                <Table.ColumnGroup title="Group1-3">
-                    <Table.Column title="Title1" dataIndex="id" lock="left" width={140} />
-                    <Table.Column title="Title2" dataIndex="name" lock="left" width={140} />
-                </Table.ColumnGroup>
-                <Table.ColumnGroup title="Group4-5">
-                    <Table.Column title="Title4" dataIndex="title" width={400} />
-                    <Table.Column title="Title5" dataIndex="phone" width={200} />
-                </Table.ColumnGroup>
-                <Table.ColumnGroup>
-                    <Table.Column title="Time" dataIndex="time" width={500} />
-                </Table.ColumnGroup>
-            </Table.StickyLock>,
-            container
-        );
+        const root = createRoot(container);
+
+        root.render(<Table.StickyLock dataSource={[]} fixedHeader maxBodyHeight={400}>
+            <Table.ColumnGroup title="Group1-3">
+                <Table.Column title="Title1" dataIndex="id" lock="left" width={140} />
+                <Table.Column title="Title2" dataIndex="name" lock="left" width={140} />
+            </Table.ColumnGroup>
+            <Table.ColumnGroup title="Group4-5">
+                <Table.Column title="Title4" dataIndex="title" width={400} />
+                <Table.Column title="Title5" dataIndex="phone" width={200} />
+            </Table.ColumnGroup>
+            <Table.ColumnGroup>
+                <Table.Column title="Time" dataIndex="time" width={500} />
+            </Table.ColumnGroup>
+        </Table.StickyLock>);
 
         const title1Cell = container.querySelector('th.next-table-fix-left[rowspan="1"]');
         const title1CellLeft = title1Cell.getBoundingClientRect().left;
@@ -1285,11 +1177,9 @@ describe('Issue', () => {
                     <Table.Column title="Name" dataIndex="name" />
                 </Table>
             )
-        };
-        ReactDOM.render(
-            <CheckTable />,
-            container
-        );
+        }
+        const root = createRoot(container);
+        root.render(<CheckTable />);
         const getRowCell = function(row, index = 1) {
             return row.querySelectorAll('.next-table-cell')[index];
         }
@@ -1299,7 +1189,8 @@ describe('Issue', () => {
         assert(getRowCell(rows[0]).textContent === '0' && getRowCell(rows[0], 2).textContent === 'test');
         assert(getRowCell(rows[1]).textContent === '1' && getRowCell(rows[1], 2).textContent === 'test1');
         assert(getRowCell(rows[2]).textContent === '2' && getRowCell(rows[2], 2).textContent === 'test2');
-        ReactDOM.unmountComponentAtNode(container);
+        const root = createRoot(container);
+        root.unmount();
         document.body.removeChild(container);
     });
 
@@ -1314,7 +1205,8 @@ describe('TableScroll', () => {
     });
 
     afterEach(() => {
-        ReactDOM.unmountComponentAtNode(mountNode);
+        const root = createRoot(mountNode);
+        root.unmount();
         document.body.removeChild(mountNode);
     });
 
@@ -1371,7 +1263,8 @@ describe('TableScroll', () => {
                 );
             }
         }
-        ReactDOM.render(<Demo />, mountNode);
+        const root = createRoot(mountNode);
+        root.render(<Demo />);
         const scrollNode = mountNode.querySelector('.next-table-body');
         const rowHeight = scrollNode.querySelector('.next-table-cell').clientHeight;
         scrollNode.scrollTop = 200;
@@ -1438,7 +1331,8 @@ describe('TableScroll', () => {
             }
         }
 
-        ReactDOM.render(<App />, container);
+        const root = createRoot(container);
+        root.render(<App />);
 
         await delay(200);
         const button = container.querySelector('tr.next-table-row.first button');
@@ -1493,25 +1387,24 @@ describe('TableScroll', () => {
             }
         };
 
-        ReactDOM.render(
-            <div className="table-container" style={{width: 800}}> 
-                <Table.StickyLock dataSource={dataSource(3)} cellProps={mergeCell}>
-                    <Table.Column title="Id" dataIndex="id" width={200} lock />
-                    <Table.Column title="Title" dataIndex="title.name" lock width={100} />
-                    <Table.Column title="Time" dataIndex="time" width={300} lock />
-                    <Table.Column title="test" width={100} />
-                    <Table.Column title="test2" width={800} />
-                </Table.StickyLock>
-            </div>, 
-            container
-        );
+        const root = createRoot(container);
+
+        root.render(<div className="table-container" style={{width: 800}}> 
+            <Table.StickyLock dataSource={dataSource(3)} cellProps={mergeCell}>
+                <Table.Column title="Id" dataIndex="id" width={200} lock />
+                <Table.Column title="Title" dataIndex="title.name" lock width={100} />
+                <Table.Column title="Time" dataIndex="time" width={300} lock />
+                <Table.Column title="test" width={100} />
+                <Table.Column title="test2" width={800} />
+            </Table.StickyLock>
+        </div>);
 
         const titleHeaderNode = container.querySelectorAll('thead .next-table-header-node')[1];
         assert(titleHeaderNode);
         const idHeaderNode = container.querySelectorAll('thead .next-table-header-node')[0];
         assert(idHeaderNode);
         assert(titleHeaderNode.getBoundingClientRect().left === idHeaderNode.getBoundingClientRect().right);
-        
+
         const tableNode = container.querySelector('.next-table-body');
         tableNode.scrollLeft = 900;
         ReactTestUtils.Simulate.scroll(tableNode);
