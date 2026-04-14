@@ -6,9 +6,36 @@ import { polyfill } from 'react-lifecycles-compat';
 import zhCN from '../locale/zh-cn';
 import { func, obj } from '../util';
 import Base from './base';
-import List from './list';
+import List, { LIST_PROP_KEYS } from './list';
 import Upload from './upload';
 import type { CardProps, CardState, ObjectFile, UploadFile } from './types';
+
+const CARD_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Card-specific keys
+    'value',
+    'defaultValue',
+    'onPreview',
+    'onChange',
+    'onRemove',
+    'onCancel',
+    'itemRender',
+    'reUpload',
+    'showDownload',
+    'onProgress',
+    'isPreview',
+    'renderPreview',
+];
 
 /**
  * Upload.Card
@@ -144,8 +171,8 @@ class Card extends Base<CardProps, CardState> {
         const children = this.props.children || locale!.card!.addPhoto;
 
         const onRemoveFunc = disabled ? func.prevent : onRemove;
-        const othersForList = obj.pickOthers(Card.propTypes, this.props);
-        const othersForUpload = obj.pickOthers(List.propTypes!, othersForList);
+        const othersForList = obj.pickOthers(CARD_PROP_KEYS, this.props);
+        const othersForUpload = obj.pickOthers(LIST_PROP_KEYS, othersForList);
 
         if (isPreview) {
             if (typeof renderPreview === 'function') {

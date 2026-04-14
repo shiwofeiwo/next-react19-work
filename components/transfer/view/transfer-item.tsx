@@ -10,6 +10,27 @@ const { bindCtx } = func;
 const { pickOthers } = obj;
 const { getOffset } = dom;
 
+const TRANSFER_ITEM_PROP_KEYS = [
+    'prefix',
+    'mode',
+    'value',
+    'disabled',
+    'item',
+    'onCheck',
+    'onClick',
+    'needHighlight',
+    'itemRender',
+    'draggable',
+    'onDragStart',
+    'onDragOver',
+    'onDragEnd',
+    'onDrop',
+    'dragPosition',
+    'dragValue',
+    'dragOverValue',
+    'panelPosition',
+];
+
 type CheckboxItemProps = React.ComponentPropsWithRef<typeof CheckboxItem>;
 type MenuItemProps = React.ComponentPropsWithRef<typeof Item>;
 type ItemRef = React.ComponentRef<typeof CheckboxItem> | React.ComponentRef<typeof Item> | null;
@@ -143,7 +164,7 @@ export default class TransferItem extends Component<TransferItemProps, TransferI
             panelPosition,
             dragPosition,
         } = this.props;
-        const others = pickOthers(Object.keys(TransferItem.propTypes), this.props);
+        const others = pickOthers(TRANSFER_ITEM_PROP_KEYS, this.props);
         const { highlight } = this.state;
         const isSimple = mode === 'simple';
 

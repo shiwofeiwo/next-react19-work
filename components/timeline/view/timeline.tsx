@@ -8,6 +8,25 @@ import ConfigProvider from '../../config-provider';
 import nextLocale from '../../locale/zh-cn';
 import type { TimelineProps, TimelineState } from '../types';
 
+const TIMELINE_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Timeline-specific keys
+    'fold',
+    'className',
+    'animation',
+    'mode',
+];
+
 /** Timeline */
 class Timeline extends Component<TimelineProps, TimelineState> {
     static displayName = 'Timeline';
@@ -136,7 +155,7 @@ class Timeline extends Component<TimelineProps, TimelineState> {
         }
 
         return (
-            <ul {...obj.pickOthers(Timeline.propTypes, others)} className={timelineCls}>
+            <ul {...obj.pickOthers(TIMELINE_PROP_KEYS, others)} className={timelineCls}>
                 {cloneChildren}
             </ul>
         );

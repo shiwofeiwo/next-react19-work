@@ -21,6 +21,50 @@ const { config } = ConfigProvider;
 const { bindCtx } = func;
 const { pickOthers } = obj;
 
+const TRANSFER_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Transfer-specific keys
+    'mode',
+    'dataSource',
+    'value',
+    'defaultValue',
+    'onChange',
+    'onSelect',
+    'disabled',
+    'leftDisabled',
+    'rightDisabled',
+    'itemRender',
+    'filter',
+    'onSearch',
+    'searchPlaceholder',
+    'showSearch',
+    'searchProps',
+    'notFoundContent',
+    'titles',
+    'operations',
+    'defaultLeftChecked',
+    'defaultRightChecked',
+    'listClassName',
+    'listStyle',
+    'sortable',
+    'onSort',
+    'locale',
+    'id',
+    'children',
+    'useVirtual',
+    'showCheckAll',
+];
+
 const getLeftValue = (dataSource: Array<TransferDataItem>, rightValue: Array<string>) => {
     return dataSource
         .map(item => item.value)
@@ -569,7 +613,7 @@ class Transfer extends Component<TransferProps, TransferState> {
             customerList: children,
             showCheckAll,
         };
-        const others = pickOthers(Transfer.propTypes, this.props);
+        const others = pickOthers(TRANSFER_PROP_KEYS, this.props);
 
         if (rtl) {
             others.dir = 'rtl';

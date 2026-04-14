@@ -29,6 +29,66 @@ const { Node: TreeNode } = Tree;
 const { bindCtx } = func;
 const POS_REGEXP = /^\d+(-\d+){1,}$/;
 
+const TREE_SELECT_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // TreeSelect-specific keys
+    'size',
+    'placeholder',
+    'disabled',
+    'hasArrow',
+    'hasBorder',
+    'hasClear',
+    'label',
+    'readOnly',
+    'autoWidth',
+    'dataSource',
+    'preserveNonExistentValue',
+    'value',
+    'defaultValue',
+    'onChange',
+    'tagInline',
+    'maxTagPlaceholder',
+    'autoClearSearch',
+    'showSearch',
+    'filterLocal',
+    'onSearch',
+    'onSearchClear',
+    'notFoundContent',
+    'multiple',
+    'treeCheckable',
+    'treeCheckStrictly',
+    'treeCheckedStrategy',
+    'treeDefaultExpandAll',
+    'treeDefaultExpandedKeys',
+    'treeLoadData',
+    'treeProps',
+    'defaultVisible',
+    'visible',
+    'onVisibleChange',
+    'popupStyle',
+    'popupClassName',
+    'popupContainer',
+    'popupProps',
+    'followTrigger',
+    'isPreview',
+    'renderPreview',
+    'useVirtual',
+    'immutable',
+    'clickToCheck',
+    'valueRender',
+    'useDetailValue',
+];
+
 const flatDataSource = (props: TreeSelectProps) => {
     const _k2n: KeyEntities = {};
     const _p2n: KeyEntities = {};
@@ -906,7 +966,7 @@ class TreeSelect extends Component<TreeSelectProps, TreeSelectState> {
             tagInline,
             valueRender,
         } = this.props;
-        const others = obj.pickOthers(Object.keys(TreeSelect.propTypes), this.props);
+        const others = obj.pickOthers(TREE_SELECT_PROP_KEYS, this.props);
         const { value, visible } = this.state;
 
         const valueRenderProps =

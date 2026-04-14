@@ -15,6 +15,30 @@ import type { ListProps, UploadFile, ImageError, ObjectFile } from './types';
 
 const isIE9 = env.ieVersion === 9;
 
+export const LIST_PROP_KEYS = [
+    'prefix',
+    'locale',
+    'listType',
+    'value',
+    'closable',
+    'onRemove',
+    'onCancel',
+    'onImageError',
+    'onPreview',
+    'previewOnFileName',
+    'extraRender',
+    'actionRender',
+    'itemRender',
+    'progressProps',
+    'children',
+    'uploader',
+    'showDownload',
+    'useDataURL',
+    'rtl',
+    'isPreview',
+    'fileNameRender',
+];
+
 class List extends Component<ListProps> {
     static propTypes = {
         prefix: PropTypes.string,

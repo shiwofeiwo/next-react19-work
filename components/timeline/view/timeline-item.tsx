@@ -9,6 +9,36 @@ import { obj } from '../../util';
 import type { ItemProps } from '../types';
 
 const { Expand } = Animate;
+
+const TIMELINE_ITEM_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // TimelineItem-specific keys
+    'index',
+    'total',
+    'folderIndex',
+    'foldShow',
+    'state',
+    'icon',
+    'dot',
+    'time',
+    'title',
+    'timeLeft',
+    'content',
+    'toggleFold',
+    'className',
+    'animation',
+];
+
 /** Timeline.Item */
 class TimelineItem extends Component<ItemProps> {
     static displayName = 'TimelineItem';
@@ -123,7 +153,7 @@ class TimelineItem extends Component<ItemProps> {
         const timelineNode =
             (folderIndex && foldShow) || !folderIndex ? (
                 <div
-                    {...obj.pickOthers(TimelineItem.propTypes, others)}
+                    {...obj.pickOthers(TIMELINE_ITEM_PROP_KEYS, others)}
                     className={itemCls}
                     ref={e => {
                         this['timeline-item'] = e;
