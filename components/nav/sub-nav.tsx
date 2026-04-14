@@ -29,9 +29,8 @@ class SubNav extends Component<SubNavProps> {
     static contextType = NavContext;
 
     render() {
-        const { prefix, iconOnly, iconOnlyWidth, hasArrow, noIcon, mode } = this
-            .context as NavContextValue;
-        const { className, icon, label, children, level, ...others } = this.props;
+        const { prefix, iconOnly, iconOnlyWidth, hasArrow, mode } = this.context as NavContextValue;
+        const { className, icon, label, children, level, noIcon, ...others } = this.props;
         const cls = classNames({
             [`${prefix}nav-sub-nav-item`]: true,
             [`${prefix}nav-popup`]: mode === 'popup',

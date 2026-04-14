@@ -9,7 +9,6 @@ export interface NavContextValue {
     hasTooltip?: boolean;
     hasArrow?: boolean;
     isCollapse?: boolean;
-    noIcon?: boolean;
 }
 
 const NavContext = React.createContext<NavContextValue>({});

@@ -101,7 +101,7 @@ class Nav extends Component<NavProps> {
             ...others
         } = this.props;
 
-        const parentCtx: NavContextValue = this.context || {};
+        const parentCtx = this.context as NavContextValue;
         const { isCollapse } = parentCtx;
 
         const newIconOnly = 'iconOnly' in this.props ? iconOnly : isCollapse;
