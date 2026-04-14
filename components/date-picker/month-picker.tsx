@@ -81,7 +81,6 @@ const MONTH_PICKER_PROP_KEYS = [
 class MonthPicker extends Component<MonthPickerProps, MonthPickerState> {
     static displayName = 'MonthPicker';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         label: PropTypes.node,
@@ -350,8 +349,7 @@ class MonthPicker extends Component<MonthPickerProps, MonthPickerState> {
         }
 
         if (isPreview) {
-            // @ts-expect-error 应是 propTypes
-            return this.renderPreview(obj.pickOthers(others, MonthPicker.PropTypes));
+            return this.renderPreview(obj.pickOthers(MONTH_PICKER_PROP_KEYS, others));
         }
 
         const panelInputCls = `${prefix}month-picker-panel-input`;

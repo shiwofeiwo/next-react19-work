@@ -39,7 +39,6 @@ export default class Col extends Component<ColProps> {
     static isNextCol = true;
 
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         pure: PropTypes.bool,
         rtl: PropTypes.bool,

@@ -92,7 +92,6 @@ type SharedInputProps = DateInputProps & {
 class TimePicker2 extends Component<TimePickerProps, TimePickerState> {
     static displayName = 'TimePicker2';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         label: PropTypes.node,
@@ -596,8 +595,7 @@ class TimePicker2 extends Component<TimePickerProps, TimePickerState> {
         }
 
         if (isPreview) {
-            // @ts-expect-error TimePicker2 上不存在 PropTypes 属性，应该是 propTypes
-            return this.renderPreview(obj.pickOthers(others, TimePicker2.PropTypes));
+            return this.renderPreview(obj.pickOthers(TIME_PICKER2_PROP_KEYS, others));
         }
 
         const sharedInputProps: SharedInputProps = {

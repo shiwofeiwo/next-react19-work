@@ -26,7 +26,6 @@ export default function ShellBase(props: { componentName?: string }) {
         static _typeMark = componentName;
 
         static propTypes = {
-            ...ConfigProvider.propTypes,
             prefix: PropTypes.string,
             device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
             type: PropTypes.oneOf(['light', 'dark', 'brand']),

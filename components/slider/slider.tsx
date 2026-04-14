@@ -6,6 +6,20 @@ import InnerSlider, { type ThisType as InnerSliderType } from './slick/inner-sli
 import ConfigProvider from '../config-provider';
 import type { SliderProps } from './types';
 
+// ConfigProvider prop keys for runtime iteration
+const CONFIG_PROVIDER_PROP_KEYS = [
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+];
+
 type CommonKeys = keyof SliderProps & keyof typeof ConfigProvider.propTypes;
 type ObjWithCommonProps = Pick<SliderProps, CommonKeys>;
 
@@ -123,9 +137,9 @@ export default class Slider extends Component<SliderProps> {
         const { prefix, arrowPosition, slideDirection, style, className, children } = this.props;
 
         const globalProps: ObjWithCommonProps = {};
-        Object.keys(ConfigProvider.propTypes).forEach((key: CommonKeys) => {
+        CONFIG_PROVIDER_PROP_KEYS.forEach(key => {
             // @ts-expect-error 类型错误
-            globalProps[key] = this.props[key];
+            globalProps[key as CommonKeys] = this.props[key as keyof SliderProps];
         });
 
         const sliderProps = obj.pickOthers(['className', 'style', 'slideDirection'], this.props);

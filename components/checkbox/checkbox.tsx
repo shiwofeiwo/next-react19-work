@@ -68,7 +68,6 @@ export interface PrivateCheckboxProps extends CheckboxProps {
 class Checkbox extends UIState<PrivateCheckboxProps, CheckboxState> {
     static displayName = 'Checkbox';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         className: PropTypes.string,

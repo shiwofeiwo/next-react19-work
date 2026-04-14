@@ -53,7 +53,6 @@ export interface GroupState {
 
 class RadioGroup extends Component<GroupProps, GroupState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,

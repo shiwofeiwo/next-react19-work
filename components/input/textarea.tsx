@@ -7,6 +7,44 @@ import { obj, env } from '../util';
 import Base from './base';
 import type { TextAreaProps } from './types';
 
+// All prop keys for TextArea component (includes Base props and TextArea's own props)
+const TEXTAREA_PROP_KEYS = [
+    // Base props
+    'prefix',
+    'value',
+    'defaultValue',
+    'onChange',
+    'onKeyDown',
+    'disabled',
+    'maxLength',
+    'showLimitHint',
+    'cutString',
+    'readOnly',
+    'trim',
+    'placeholder',
+    'onFocus',
+    'onBlur',
+    'getValueLength',
+    'inputStyle',
+    'className',
+    'style',
+    'htmlType',
+    'name',
+    'rtl',
+    'state',
+    'locale',
+    'isPreview',
+    'renderPreview',
+    'size',
+    'composition',
+    'onCompositionStart',
+    'onCompositionEnd',
+    // TextArea's own props
+    'hasBorder',
+    'autoHeight',
+    'rows',
+];
+
 function onNextFrame(cb: () => void) {
     if (window.requestAnimationFrame) {
         return window.requestAnimationFrame(cb);
@@ -282,7 +320,10 @@ export default class TextArea extends Base<TextAreaProps> {
         const dataProps = obj.pickAttrsWith(this.props, 'data-');
         // Custom props are transparently transmitted to the core input node by default
         // 自定义属性默认透传到核心 node 节点：input
-        const others = obj.pickOthers(Object.assign({}, dataProps, TextArea.propTypes), this.props);
+        const others = obj.pickOthers(
+            [...Object.keys(dataProps), ...TEXTAREA_PROP_KEYS],
+            this.props
+        );
 
         const textareStyle: CSSProperties = {
             ...props.style,

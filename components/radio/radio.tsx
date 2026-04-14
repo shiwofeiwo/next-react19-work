@@ -46,7 +46,6 @@ interface RadioState extends UIStateState {
 class Radio extends UIState<RadioWithContextProps, RadioState> {
     static displayName = 'Radio';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         className: PropTypes.string,
         id: PropTypes.string,
         style: PropTypes.object,

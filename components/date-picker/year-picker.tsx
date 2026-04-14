@@ -332,8 +332,7 @@ class YearPicker extends Component<YearPickerProps, YearPickerState> {
         }
 
         if (isPreview) {
-            // @ts-expect-error 应是 propTypes
-            return this.renderPreview(obj.pickOthers(others, YearPicker.PropTypes));
+            return this.renderPreview(obj.pickOthers(YEAR_PICKER_PROP_KEYS, others));
         }
 
         const panelInputCls = `${prefix}year-picker-panel-input`;

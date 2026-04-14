@@ -54,7 +54,6 @@ const ICON_SIZE_MAP = {
 
 class Rating extends Component<RatingProps, RatingState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         defaultValue: PropTypes.number,
         value: PropTypes.number,

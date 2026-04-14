@@ -42,7 +42,6 @@ const TAG_PROP_KEYS = [
 
 class Tag extends Component<TagProps, { visible: boolean }> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         type: PropTypes.oneOf(['normal', 'primary']),
         size: PropTypes.oneOf(['small', 'medium', 'large']),
         color: PropTypes.string,

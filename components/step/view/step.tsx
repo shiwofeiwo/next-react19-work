@@ -37,7 +37,6 @@ const STEP_PROP_KEYS = [
 /** Step */
 class Step extends Component<StepProps, StepState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         current: PropTypes.number,

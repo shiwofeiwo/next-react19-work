@@ -8,6 +8,61 @@ import { func, dom, obj, KEYCODE } from '../../util';
 import TreeNode from './tree-node';
 import VirtualList from '../../virtual-list';
 
+// All prop keys for Tree component
+const TREE_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'pure',
+    'className',
+    'children',
+    'dataSource',
+    'showLine',
+    'selectable',
+    'selectedKeys',
+    'defaultSelectedKeys',
+    'onSelect',
+    'multiple',
+    'checkable',
+    'checkedKeys',
+    'defaultCheckedKeys',
+    'checkStrictly',
+    'checkedStrategy',
+    'onCheck',
+    'expandedKeys',
+    'defaultExpandedKeys',
+    'defaultExpandAll',
+    'autoExpandParent',
+    'onExpand',
+    'editable',
+    'onEditFinish',
+    'draggable',
+    'onDragStart',
+    'onDragEnter',
+    'onDragOver',
+    'onDragLeave',
+    'onDragEnd',
+    'onDrop',
+    'canDrop',
+    'loadData',
+    'filterTreeNode',
+    'onRightClick',
+    'isLabelBlock',
+    'isNodeBlock',
+    'animation',
+    'focusedKey',
+    'renderChildNodes',
+    'focusable',
+    'autoFocus',
+    'onItemFocus',
+    'onBlur',
+    'onItemKeyDown',
+    'labelRender',
+    'useVirtual',
+    'immutable',
+    'virtualListProps',
+    'clickToCheck',
+];
+
 import {
     normalizeToArray,
     isDescendantOrSelf,
@@ -1240,7 +1295,7 @@ export class Tree extends Component<TreeProps, TreeState> {
         } = this.props;
         const { dataSource } = this.state;
         const { style, ...others }: Omit<TreeProps, keyof typeof Tree.propTypes> = pickOthers(
-            Object.keys(Tree.propTypes),
+            TREE_PROP_KEYS,
             this.props
         );
 

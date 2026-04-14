@@ -19,6 +19,59 @@ const { Popup } = Overlay;
 const { pickProps, pickOthers } = obj;
 const { renderNode, checkDate, checkRangeDate } = func;
 
+// All prop keys for Picker component
+const PICKER_PROP_KEYS = [
+    'rtl',
+    'prefix',
+    'locale',
+    'name',
+    'mode',
+    'type',
+    'value',
+    'defaultValue',
+    'defaultPanelValue',
+    'disabledDate',
+    'visible',
+    'defaultVisible',
+    'dateCellRender',
+    'onOk',
+    'onChange',
+    'onVisibleChange',
+    'onPanelChange',
+    'onCalendarChange',
+    'showTime',
+    'resetTime',
+    'timePanelProps',
+    'disabledTime',
+    'titleRender',
+    'preset',
+    'extraFooterRender',
+    'showOk',
+    'trigger',
+    'hasBorder',
+    'inputProps',
+    'hasClear',
+    'placeholder',
+    'disabled',
+    'inputReadOnly',
+    'format',
+    'label',
+    'separator',
+    'outputFormat',
+    'followTrigger',
+    'popupTriggerType',
+    'popupAlign',
+    'popupContainer',
+    'popupStyle',
+    'popupClassName',
+    'popupComponent',
+    'popupProps',
+    'isPreview',
+    'renderPreview',
+    'className',
+    'style',
+];
+
 class Picker extends React.Component {
     static propTypes = {
         rtl: PT.bool,
@@ -741,7 +794,7 @@ class Picker extends React.Component {
 
         return (
             <div
-                {...pickOthers(Picker.propTypes, restProps)}
+                {...pickOthers(PICKER_PROP_KEYS, restProps)}
                 dir={rtl ? 'rtl' : undefined}
                 className={classnames(className, prefixCls)}
                 style={this.props.style}

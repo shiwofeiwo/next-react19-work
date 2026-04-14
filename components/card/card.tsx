@@ -41,7 +41,6 @@ export default class Card extends Component<CardProps> {
     static displayName = 'Card';
 
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         media: PropTypes.node,

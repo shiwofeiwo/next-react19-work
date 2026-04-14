@@ -105,7 +105,6 @@ const filterCheckedValue = (
  */
 class Transfer extends Component<TransferProps, TransferState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         pure: PropTypes.bool,
         rtl: PropTypes.bool,

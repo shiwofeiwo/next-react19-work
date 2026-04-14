@@ -16,6 +16,39 @@ const { bindCtx } = func;
 const { isPromise, pickOthers, pickAttrsWith } = obj;
 const isRoot = (pos: string) => /^0-(\d)+$/.test(pos);
 
+// All prop keys for TreeNode component
+const TREENODE_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    '_key',
+    'className',
+    'children',
+    'label',
+    'selectable',
+    'checkable',
+    'editable',
+    'draggable',
+    'disabled',
+    'checkboxDisabled',
+    'isLeaf',
+    'root',
+    'eventKey',
+    'pos',
+    'expanded',
+    'selected',
+    'checked',
+    'indeterminate',
+    'dragOver',
+    'dragOverGapTop',
+    'dragOverGapBottom',
+    'parentNode',
+    'onKeyDown',
+    'size',
+    'posinset',
+    'isLastChild',
+    'icon',
+];
+
 /**
  * Tree.Node
  */
@@ -538,10 +571,7 @@ export class TreeNode extends Component<NodeProps, NodeState> {
 
         const ARIA_PREFIX = 'aria-';
         const ariaProps = pickAttrsWith(this.props, ARIA_PREFIX);
-        const others: Record<string, unknown> = pickOthers(
-            Object.keys(TreeNode.propTypes),
-            this.props
-        );
+        const others: Record<string, unknown> = pickOthers(TREENODE_PROP_KEYS, this.props);
 
         const hasRenderChildNodes = root && root.props.renderChildNodes;
         const shouldShouldLine = !isNodeBlock && showLine && !hasRenderChildNodes;
@@ -590,7 +620,9 @@ export class TreeNode extends Component<NodeProps, NodeState> {
             typeof isNodeBlock === 'object' ? parseInt((isNodeBlock.indent as string) || 24) : 24;
         const innerStyle = isNodeBlock
             ? {
-                  [paddingLeftProp]: `${(useVirtual ? 0 : indent * (level! - 1)) + defaultPaddingLeft}px`,
+                  [paddingLeftProp]: `${
+                      (useVirtual ? 0 : indent * (level! - 1)) + defaultPaddingLeft
+                  }px`,
               }
             : (null as unknown as undefined);
 

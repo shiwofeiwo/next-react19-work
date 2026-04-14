@@ -78,7 +78,6 @@ const WEEK_PICKER_PROP_KEYS = [
 class WeekPicker extends Component<WeekPickerProps, WeekPickerState> {
     static displayName = 'WeekPicker';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         label: PropTypes.node,
@@ -337,8 +336,7 @@ class WeekPicker extends Component<WeekPickerProps, WeekPickerState> {
         }
 
         if (isPreview) {
-            // @ts-expect-error 应是 propTypes
-            return this.renderPreview(obj.pickOthers(others, WeekPicker.PropTypes));
+            return this.renderPreview(obj.pickOthers(WEEK_PICKER_PROP_KEYS, others));
         }
 
         const trigger = (

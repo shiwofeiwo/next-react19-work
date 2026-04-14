@@ -11,7 +11,6 @@ import type { SwitchProps, SwitchState } from './types';
 class Switch extends React.Component<SwitchProps, SwitchState> {
     static displayName = 'Switch';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         name: PropTypes.string,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,

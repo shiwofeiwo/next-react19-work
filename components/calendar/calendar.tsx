@@ -80,7 +80,6 @@ const CALENDAR_PROP_KEYS = [
 /** Calendar */
 class Calendar extends Component<CalendarProps, CalendarState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         defaultValue: checkMomentObj,

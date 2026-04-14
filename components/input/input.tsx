@@ -20,6 +20,59 @@ function preventDefault(e: UIEvent) {
     e.preventDefault();
 }
 
+// All prop keys for Input component (includes Base props and Input's own props)
+const INPUT_PROP_KEYS = [
+    // Base props
+    'prefix',
+    'value',
+    'defaultValue',
+    'onChange',
+    'onKeyDown',
+    'disabled',
+    'maxLength',
+    'showLimitHint',
+    'cutString',
+    'readOnly',
+    'trim',
+    'placeholder',
+    'onFocus',
+    'onBlur',
+    'getValueLength',
+    'inputStyle',
+    'className',
+    'style',
+    'htmlType',
+    'name',
+    'rtl',
+    'state',
+    'locale',
+    'isPreview',
+    'renderPreview',
+    'size',
+    'composition',
+    'onCompositionStart',
+    'onCompositionEnd',
+    // Input's own props
+    'label',
+    'hasClear',
+    'hasBorder',
+    'onPressEnter',
+    'hint',
+    'innerBefore',
+    'innerAfter',
+    'addonBefore',
+    'addonAfter',
+    'addonTextBefore',
+    'addonTextAfter',
+    'autoComplete',
+    'autoFocus',
+    'inputRender',
+    'extra',
+    'innerBeforeClassName',
+    'innerAfterClassName',
+    'hoverShowClear',
+];
+
 /** Input */
 class Input<P extends InputProps = InputProps> extends Base<P> {
     static displayName = 'Input';
@@ -254,7 +307,7 @@ class Input<P extends InputProps = InputProps> extends Base<P> {
 
         // Custom props are transparently transmitted to the core input node by default
         // 自定义属性默认透传到核心 node 节点：input
-        const others = obj.pickOthers(Object.assign({}, dataProps, Input.propTypes), this.props);
+        const others = obj.pickOthers([...Object.keys(dataProps), ...INPUT_PROP_KEYS], this.props);
 
         if (isPreview) {
             const { value } = props;

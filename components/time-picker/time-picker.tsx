@@ -78,7 +78,6 @@ type InnerTimePickerProps = ClassPropsWithDefault<TimePickerProps, typeof TimePi
  */
 class TimePicker extends Component<TimePickerProps, TimePickerState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         label: PropTypes.node,
@@ -337,8 +336,7 @@ class TimePicker extends Component<TimePickerProps, TimePickerState> {
         }
 
         if (isPreview) {
-            // @ts-expect-error TimePicker 上没有 PropTypes，应该是 propTypes
-            return this.renderPreview(obj.pickOthers(others, TimePicker.PropTypes));
+            return this.renderPreview(obj.pickOthers(TIME_PICKER_PROP_KEYS, others));
         }
 
         const inputValue = inputing ? inputStr : (value && value.format(format)) || '';

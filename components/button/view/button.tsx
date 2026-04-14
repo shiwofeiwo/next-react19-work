@@ -44,7 +44,6 @@ const BUTTON_PROP_KEYS = [
 export default class Button extends Component<ButtonProps> {
     static displayName = 'Button';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         type: PropTypes.oneOf(['primary', 'secondary', 'normal']),

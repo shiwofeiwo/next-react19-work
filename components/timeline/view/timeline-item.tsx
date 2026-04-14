@@ -43,7 +43,6 @@ const TIMELINE_ITEM_PROP_KEYS = [
 class TimelineItem extends Component<ItemProps> {
     static displayName = 'TimelineItem';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         index: PropTypes.number,
         total: PropTypes.number,

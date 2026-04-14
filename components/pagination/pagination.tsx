@@ -79,7 +79,6 @@ type PaginationPropsWithDefault = ClassPropsWithDefault<
 class Pagination extends Component<PaginationProps, PaginationState> {
     static displayName = 'Pagination';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         pure: PropTypes.bool,
         rtl: PropTypes.bool,

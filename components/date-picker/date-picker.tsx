@@ -80,7 +80,6 @@ const DATE_PICKER_PROP_KEYS = [
  */
 class DatePicker extends Component<DatePickerProps, DatePickerState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         label: PropTypes.node,
@@ -503,8 +502,7 @@ class DatePicker extends Component<DatePickerProps, DatePickerState> {
         }
 
         if (isPreview) {
-            // @ts-expect-error 应该使用 propTypes
-            return this.renderPreview(obj.pickOthers(others, DatePicker.PropTypes));
+            return this.renderPreview(obj.pickOthers(DATE_PICKER_PROP_KEYS, others));
         }
 
         const sharedInputProps = {

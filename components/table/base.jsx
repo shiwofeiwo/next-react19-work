@@ -22,6 +22,67 @@ import TableContext from './context';
 const Children = React.Children,
     noop = () => {};
 
+// All prop keys for Table component (includes ConfigProvider keys)
+const TABLE_PROP_KEYS = [
+    // ConfigProvider keys
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Table-specific keys
+    'tableLayout',
+    'tableWidth',
+    'className',
+    'style',
+    'size',
+    'dataSource',
+    'entireDataSource',
+    'onRowClick',
+    'onRowMouseEnter',
+    'onRowMouseLeave',
+    'onSort',
+    'onFilter',
+    'onResizeChange',
+    'rowProps',
+    'getRowClassName',
+    'primaryKey',
+    'sort',
+    'crossHeight',
+    'hasHeader',
+    'hasBorder',
+    'isLoading',
+    'loading',
+    'emptyContent',
+    'noCol',
+    'fixedHeader',
+    'maxIndex',
+    'offsetTop',
+    'scrollToEnd',
+    'onScroll',
+    'stickyFooter',
+    'footerHeight',
+    'expandedRowRender',
+    'expandedRowIndent',
+    'indent',
+    'filterMode',
+    'filterProps',
+    'pagination',
+    'sortIcons',
+    'showHover',
+    'highlightRow',
+    'rowSelection',
+    'operation',
+    'hidden',
+    'lockType',
+    'expandedIndexRender',
+];
+
 //<Table>
 //    <Table.Column/>
 //    <Table.ColumnGroup>
@@ -43,7 +104,6 @@ class Table extends React.Component {
     static Sort = SortComponent;
 
     static propTypes = {
-        ...ConfigProvider.propTypes,
         /**
          * 样式类名的品牌前缀
          */
@@ -836,7 +896,7 @@ class Table extends React.Component {
                     className={cls}
                     style={style}
                     ref={ref || this.getTableEl}
-                    {...obj.pickOthers(Object.keys(Table.propTypes), others)}
+                    {...obj.pickOthers(TABLE_PROP_KEYS, others)}
                 >
                     {table}
                     {loading ? <LoadingComponent className={loadingcls} /> : null}

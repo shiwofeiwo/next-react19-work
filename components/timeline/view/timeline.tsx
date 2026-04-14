@@ -31,7 +31,6 @@ const TIMELINE_PROP_KEYS = [
 class Timeline extends Component<TimelineProps, TimelineState> {
     static displayName = 'Timeline';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         fold: PropTypes.array,

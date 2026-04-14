@@ -37,7 +37,6 @@ const LOADING_PROP_KEYS = [
 /** Loading */
 class Loading extends React.Component<LoadingProps> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         tip: PropTypes.any,
         tipAlign: PropTypes.oneOf(['right', 'bottom']),

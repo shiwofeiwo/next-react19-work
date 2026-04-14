@@ -323,7 +323,6 @@ export class Menu extends Component<MenuProps, MenuState> {
     static isNextMenu = true;
 
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         pure: PropTypes.bool,
         rtl: PropTypes.bool,

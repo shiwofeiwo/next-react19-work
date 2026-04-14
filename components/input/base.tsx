@@ -18,7 +18,6 @@ class Base<
     S extends BaseState = BaseState,
 > extends React.Component<P, S> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         onChange: PropTypes.func,

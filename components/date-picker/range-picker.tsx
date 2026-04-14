@@ -129,7 +129,6 @@ const RANGE_PICKER_PROP_KEYS = [
 class RangePicker extends Component<RangePickerProps, RangePickerState> {
     static displayName = 'RangePicker';
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         type: PropTypes.oneOf(['date', 'month', 'year']),
@@ -828,8 +827,7 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
         if (isPreview) {
             return this.renderPreview(
                 [state.startValue!, state.endValue!],
-                // @ts-expect-error 应为 propTypes
-                obj.pickOthers(others, RangePicker.PropTypes)
+                obj.pickOthers(RANGE_PICKER_PROP_KEYS, others)
             );
         }
 

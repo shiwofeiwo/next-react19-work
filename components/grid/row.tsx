@@ -38,7 +38,6 @@ const ROW_PROP_KEYS = [
  */
 export default class Row extends Component<RowProps> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         pure: PropTypes.bool,
         rtl: PropTypes.bool,

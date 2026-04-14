@@ -30,7 +30,6 @@ const ICON_PROP_KEYS = [
  */
 class Icon extends Component<IconProps> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         type: PropTypes.string,
         children: PropTypes.node,
         size: PropTypes.oneOfType([

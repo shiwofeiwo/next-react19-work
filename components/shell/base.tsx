@@ -13,7 +13,6 @@ export default function Base(props: { componentName?: string }) {
         static _typeMark = `Shell_${componentName}`;
 
         static propTypes = {
-            ...ConfigProvider.propTypes,
             prefix: PropTypes.string,
             collapse: PropTypes.bool,
             miniable: PropTypes.bool,

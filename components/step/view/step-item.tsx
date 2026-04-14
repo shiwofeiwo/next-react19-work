@@ -50,7 +50,6 @@ const STEP_ITEM_PROP_KEYS = [
 /** Step.Item */
 class StepItem extends Component<ItemProps> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         status: PropTypes.oneOf(['wait', 'process', 'finish']),

@@ -70,7 +70,6 @@ const RANGE_CALENDAR_PROP_KEYS = [
 
 class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarState> {
     static propTypes = {
-        ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
         rtl: PropTypes.bool,
         defaultStartValue: checkMomentObj,
