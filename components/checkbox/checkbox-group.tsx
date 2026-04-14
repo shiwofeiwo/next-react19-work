@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { obj } from '../util';
 import Checkbox from './checkbox';
+import CheckboxGroupContext from './context';
+import type { CheckboxGroupContextValue } from './context';
 import type { CheckboxData, GroupProps, GroupState, ValueItem } from './types';
 
 const { pickOthers } = obj;
@@ -49,13 +51,6 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
         isPreview: false,
     };
 
-    static childContextTypes = {
-        onChange: PropTypes.func,
-        __group__: PropTypes.bool,
-        selectedValue: PropTypes.array,
-        disabled: PropTypes.bool,
-    };
-
     constructor(props: GroupProps) {
         super(props);
 
@@ -77,15 +72,6 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
         };
 
         this.onChange = this.onChange.bind(this);
-    }
-
-    getChildContext() {
-        return {
-            __group__: true,
-            onChange: this.onChange,
-            selectedValue: this.state.value,
-            disabled: this.props.disabled,
-        };
     }
 
     static getDerivedStateFromProps(nextProps: GroupProps) {
@@ -125,6 +111,14 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
         const { className, style, prefix, disabled, direction, rtl, isPreview, renderPreview } =
             this.props;
         const others = pickOthers(CheckboxGroup.propTypes, this.props);
+
+        const groupValue: CheckboxGroupContextValue = {
+            __group__: true,
+            onChange: this.onChange,
+            selectedValue: this.state.value,
+            disabled: !!this.props.disabled,
+            prefix: prefix || 'next-',
+        };
 
         // 如果内嵌标签跟 dataSource 同时存在，以内嵌标签为主
         let children;
@@ -194,16 +188,20 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
 
             if ('renderPreview' in this.props) {
                 return (
-                    <div {...others} dir={rtl ? 'rtl' : undefined} className={previewCls}>
-                        {renderPreview?.(previewed, this.props)}
-                    </div>
+                    <CheckboxGroupContext.Provider value={groupValue}>
+                        <div {...others} dir={rtl ? 'rtl' : undefined} className={previewCls}>
+                            {renderPreview?.(previewed, this.props)}
+                        </div>
+                    </CheckboxGroupContext.Provider>
                 );
             }
 
             return (
-                <p {...others} dir={rtl ? 'rtl' : undefined} className={previewCls}>
-                    {previewed.map(item => item.label).join(', ')}
-                </p>
+                <CheckboxGroupContext.Provider value={groupValue}>
+                    <p {...others} dir={rtl ? 'rtl' : undefined} className={previewCls}>
+                        {previewed.map(item => item.label).join(', ')}
+                    </p>
+                </CheckboxGroupContext.Provider>
             );
         }
 
@@ -214,9 +212,11 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
         });
 
         return (
-            <span dir={rtl ? 'rtl' : undefined} {...others} className={cls} style={style}>
-                {children}
-            </span>
+            <CheckboxGroupContext.Provider value={groupValue}>
+                <span dir={rtl ? 'rtl' : undefined} {...others} className={cls} style={style}>
+                    {children}
+                </span>
+            </CheckboxGroupContext.Provider>
         );
     }
 }

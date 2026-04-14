@@ -7,13 +7,16 @@ import ConfigProvider from '../config-provider';
 import Icon from '../icon';
 import withCheckboxContext, { type CheckboxContext } from './with-context';
 import { obj, func } from '../util';
-import type { CheckboxProps } from './types';
+import type { CheckboxProps, ValueItem } from './types';
 
 const noop = func.noop;
 function isChecked(
     selectedValue: CheckboxContext['selectedValue'],
     value: CheckboxProps['value']
 ): boolean {
+    if (!selectedValue || value === undefined) {
+        return false;
+    }
     return selectedValue.indexOf(value) > -1;
 }
 
@@ -138,7 +141,7 @@ class Checkbox extends UIState<PrivateCheckboxProps, CheckboxState> {
             return;
         }
         if (context.__group__) {
-            context.onChange(value, event);
+            context.onChange?.(value as ValueItem, event);
         } else {
             if (!('checked' in this.props)) {
                 this.setState({
