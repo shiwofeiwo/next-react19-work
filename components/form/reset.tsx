@@ -5,6 +5,8 @@ import { func, obj } from '../util';
 import FormContext from './context';
 import type { ResetProps } from './types';
 
+const RESET_PROP_KEYS = ['names', 'onClick', 'toDefault', 'field', 'children'];
+
 class Reset extends React.Component<ResetProps> {
     static displayName = 'Reset';
     static propTypes = {
@@ -43,7 +45,7 @@ class Reset extends React.Component<ResetProps> {
         const { children } = this.props;
 
         return (
-            <Button {...obj.pickOthers(Reset.propTypes, this.props)} onClick={this.handleClick}>
+            <Button {...obj.pickOthers(RESET_PROP_KEYS, this.props)} onClick={this.handleClick}>
                 {children}
             </Button>
         );

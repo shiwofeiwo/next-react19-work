@@ -62,6 +62,36 @@ const getNewChildren: (children: ReactNode, props: FormProps) => ReactNode = (
     });
 };
 
+const FORM_PROP_KEYS = [
+    'prefix',
+    'inline',
+    'size',
+    'fullWidth',
+    'labelAlign',
+    'labelTextAlign',
+    'field',
+    'saveField',
+    'labelCol',
+    'wrapperCol',
+    'onSubmit',
+    'children',
+    'className',
+    'style',
+    'value',
+    'onChange',
+    'component',
+    'fieldOptions',
+    'rtl',
+    'device',
+    'responsive',
+    'isPreview',
+    'useLabelForErrorMessage',
+    'preferMarginToDisplayHelp',
+    'colon',
+    'disabled',
+    'gap',
+];
+
 /** Form */
 export default class Form extends Component<FormProps> {
     static displayName = 'Form';
@@ -207,7 +237,7 @@ export default class Form extends Component<FormProps> {
             <FormContext.Provider value={formContextValue}>
                 <Tag
                     role="form"
-                    {...obj.pickOthers(Form.propTypes, this.props)}
+                    {...obj.pickOthers(FORM_PROP_KEYS, this.props)}
                     className={formClassName}
                     style={style}
                     dir={rtl ? 'rtl' : undefined}

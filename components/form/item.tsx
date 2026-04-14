@@ -15,6 +15,63 @@ const { Cell } = RGrid;
 
 const { isNil } = obj;
 
+const ITEM_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'label',
+    'labelCol',
+    'wrapperCol',
+    'help',
+    'name',
+    'extra',
+    'validateState',
+    'hasFeedback',
+    'style',
+    'id',
+    'children',
+    'size',
+    'fullWidth',
+    'labelAlign',
+    'labelTextAlign',
+    'className',
+    'required',
+    'asterisk',
+    'requiredMessage',
+    'requiredTrigger',
+    'min',
+    'max',
+    'minmaxMessage',
+    'minmaxTrigger',
+    'minLength',
+    'maxLength',
+    'minmaxLengthMessage',
+    'minmaxLengthTrigger',
+    'length',
+    'lengthMessage',
+    'lengthTrigger',
+    'pattern',
+    'patternMessage',
+    'patternTrigger',
+    'format',
+    'formatMessage',
+    'formatTrigger',
+    'validator',
+    'validatorTrigger',
+    'autoValidate',
+    'device',
+    'responsive',
+    'colSpan',
+    'labelWidth',
+    'isPreview',
+    'renderPreview',
+    'errorMessageName',
+    'useLabelForErrorMessage',
+    'preferMarginToDisplayHelp',
+    'colon',
+    'disabled',
+    'valueName',
+];
+
 export default class Item extends Component<ItemProps> {
     static displayName = 'Item';
     static propTypes = {
@@ -386,7 +443,7 @@ export default class Item extends Component<ItemProps> {
 
         return (
             <Tag
-                {...obj.pickOthers(Item.propTypes, this.props)}
+                {...obj.pickOthers(ITEM_PROP_KEYS, this.props)}
                 className={itemClassName}
                 style={style}
             >

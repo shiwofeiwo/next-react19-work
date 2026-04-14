@@ -15,6 +15,23 @@ import { obj } from '../util';
 
 type BooleanRecord = TypeRecord<boolean>;
 
+const ROW_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'rtl',
+    'className',
+    'style',
+    'children',
+    'gutter',
+    'wrap',
+    'fixed',
+    'fixedWidth',
+    'align',
+    'justify',
+    'hidden',
+    'component',
+];
+
 /**
  * Grid.Row
  * @order 1
@@ -83,7 +100,7 @@ export default class Row extends Component<RowProps> {
             rtl,
             ...others
         } = this.props;
-        const domOtherProps = obj.pickOthers(Row.propTypes, others);
+        const domOtherProps = obj.pickOthers(ROW_PROP_KEYS, others);
         const Tag = component as
             | string
             | FunctionComponent<Record<string, unknown> & { className: string }>

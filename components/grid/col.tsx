@@ -8,6 +8,29 @@ import { obj } from '../util';
 const breakPoints: BreakPoints[] = ['xxs', 'xs', 's', 'm', 'l', 'xl'];
 
 type BooleanRecord = TypeRecord<boolean>;
+
+const COL_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'rtl',
+    'className',
+    'style',
+    'children',
+    'span',
+    'fixedSpan',
+    'offset',
+    'fixedOffset',
+    'align',
+    'hidden',
+    'xxs',
+    'xs',
+    's',
+    'm',
+    'l',
+    'xl',
+    'component',
+];
+
 /**
  * Grid.Col
  * @order 2
@@ -93,7 +116,7 @@ export default class Col extends Component<ColProps> {
             rtl,
             ...others
         } = this.props;
-        const domOtherProps = obj.pickOthers(Col.propTypes, others);
+        const domOtherProps = obj.pickOthers(COL_PROP_KEYS, others);
         const Tag = component as
             | string
             | FunctionComponent<Record<string, unknown> & { className: string }>

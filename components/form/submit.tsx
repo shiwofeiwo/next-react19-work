@@ -5,6 +5,8 @@ import { func, obj } from '../util';
 import FormContext from './context';
 import type { SubmitProps } from './types';
 
+const SUBMIT_PROP_KEYS = ['onClick', 'validate', 'field', 'children'];
+
 class Submit extends React.Component<SubmitProps> {
     static displayName = 'Submit';
     static propTypes = {
@@ -46,7 +48,7 @@ class Submit extends React.Component<SubmitProps> {
         const { children } = this.props;
 
         return (
-            <Button {...obj.pickOthers(Submit.propTypes, this.props)} onClick={this.handleClick}>
+            <Button {...obj.pickOthers(SUBMIT_PROP_KEYS, this.props)} onClick={this.handleClick}>
                 {children}
             </Button>
         );

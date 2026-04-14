@@ -9,6 +9,26 @@ import type { InnerProps } from './types';
 const noop = () => {};
 const { pickOthers } = obj;
 
+const INNER_PROP_KEYS = [
+    'prefix',
+    'className',
+    'closeable',
+    'role',
+    'title',
+    'placement',
+    'rtl',
+    'onClose',
+    'locale',
+    'headerStyle',
+    'bodyStyle',
+    'afterClose',
+    'beforeOpen',
+    'beforeClose',
+    'cache',
+    'shouldUpdatePosition',
+    'v2',
+];
+
 interface ariaRoleProps {
     role?: string;
     'aria-modal'?: boolean | 'true' | 'false';
@@ -98,7 +118,7 @@ export default class Inner extends Component<InnerProps> {
     render() {
         const { prefix, className, closeable, placement, role, rtl, v2 } = this.props;
 
-        const others = pickOthers(Object.keys(Inner.propTypes), this.props);
+        const others = pickOthers(INNER_PROP_KEYS, this.props);
         const newClassName = cx({
             [`${prefix}drawer`]: true,
             [`${prefix}drawer-${placement}`]: !v2,

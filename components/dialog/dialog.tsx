@@ -7,6 +7,48 @@ import Inner from './inner';
 import { type CustomCSSStyleKey } from '../util/dom';
 import type { DialogV1Props } from './types';
 
+const DIALOG_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'rtl',
+    'className',
+    'visible',
+    'title',
+    'children',
+    'footer',
+    'footerAlign',
+    'footerActions',
+    'onOk',
+    'onCancel',
+    'okProps',
+    'cancelProps',
+    'closeMode',
+    'cache',
+    'afterClose',
+    'hasMask',
+    'animation',
+    'autoFocus',
+    'overlayProps',
+    'locale',
+    'popupContainer',
+    'height',
+    'v2',
+    'width',
+    'top',
+    'bottom',
+    'closeIcon',
+    'centered',
+    'overflowScroll',
+    'wrapperClassName',
+    'closeable',
+    'onClose',
+    'align',
+    'isFullScreen',
+    'shouldUpdatePosition',
+    'minMargin',
+    'noPadding',
+];
+
 const noop = () => {};
 const { limitTabRange } = focus;
 const { bindCtx } = func;
@@ -281,7 +323,7 @@ export default class Dialog extends Component<DialogV1Props> {
             height,
             noPadding,
         } = this.props;
-        const others = pickOthers(Object.keys(Dialog.propTypes), this.props);
+        const others = pickOthers(DIALOG_PROP_KEYS, this.props);
 
         return (
             <Inner

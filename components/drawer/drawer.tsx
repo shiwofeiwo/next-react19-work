@@ -10,6 +10,35 @@ const noop: InnerProps['onClose'] = () => {};
 const { Popup } = Overlay;
 const { pickOthers } = obj;
 
+const DRAWER_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'rtl',
+    'className',
+    'visible',
+    'onVisibleChange',
+    'trigger',
+    'triggerType',
+    'children',
+    'cache',
+    'animation',
+    'hasMask',
+    'onClose',
+    'afterOpen',
+    'placement',
+    'title',
+    'headerStyle',
+    'bodyStyle',
+    'closeable',
+    'closeMode',
+    'width',
+    'height',
+    'afterClose',
+    'locale',
+    'popupContainer',
+    'v2',
+];
+
 interface CloseConfig {
     canCloseByEsc?: boolean;
     canCloseByCloseClick?: boolean;
@@ -170,7 +199,7 @@ export default class Drawer extends Component<DrawerProps> {
             placement,
             rtl,
         } = this.props;
-        const others = pickOthers(Drawer.propTypes, this.props);
+        const others = pickOthers(DRAWER_PROP_KEYS, this.props);
 
         return (
             <Inner
