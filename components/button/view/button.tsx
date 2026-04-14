@@ -13,6 +13,34 @@ function mapIconSize(size: NonNullable<ButtonProps['size']>): ButtonProps['iconS
     }[size];
 }
 
+const BUTTON_PROP_KEYS = [
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Button-specific props
+    'className',
+    'type',
+    'size',
+    'icons',
+    'iconSize',
+    'htmlType',
+    'component',
+    'loading',
+    'ghost',
+    'text',
+    'warning',
+    'disabled',
+    'onClick',
+    'onMouseUp',
+];
+
 export default class Button extends Component<ButtonProps> {
     static displayName = 'Button';
     static propTypes = {
@@ -170,7 +198,7 @@ export default class Button extends Component<ButtonProps> {
 
         const TagName = component!;
         const tagAttrs = {
-            ...obj.pickOthers(Object.keys(Button.propTypes), others),
+            ...obj.pickOthers(BUTTON_PROP_KEYS, others),
             type: htmlType,
             disabled: disabled,
             onClick: onClick,

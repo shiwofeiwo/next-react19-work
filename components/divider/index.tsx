@@ -9,6 +9,8 @@ import ConfigProvider from '../config-provider';
 /**
  * Divider
  */
+const DIVIDER_PROP_KEYS = ['prefix', 'children', 'className', 'dashed', 'direction', 'orientation'];
+
 class Divider extends Component<DividerProps> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -28,7 +30,7 @@ class Divider extends Component<DividerProps> {
 
     render() {
         const { prefix, className, dashed, direction, orientation, children } = this.props;
-        const others = obj.pickOthers(Divider.propTypes, this.props);
+        const others = obj.pickOthers(DIVIDER_PROP_KEYS, this.props);
 
         const cls = classNames(
             {

@@ -53,6 +53,59 @@ export type CascaderSelectPropsWithDefault = ClassPropsWithDefault<
 /**
  * CascaderSelect
  */
+const CASCADER_SELECT_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'className',
+    'size',
+    'placeholder',
+    'disabled',
+    'hasArrow',
+    'hasBorder',
+    'hasClear',
+    'label',
+    'readOnly',
+    'dataSource',
+    'defaultValue',
+    'value',
+    'onChange',
+    'defaultExpandedValue',
+    'expandedValue',
+    'expandTriggerType',
+    'onExpand',
+    'useVirtual',
+    'multiple',
+    'changeOnSelect',
+    'canOnlyCheckLeaf',
+    'checkStrictly',
+    'listStyle',
+    'listClassName',
+    'displayRender',
+    'itemRender',
+    'showSearch',
+    'filter',
+    'onSearch',
+    'resultRender',
+    'resultAutoWidth',
+    'notFoundContent',
+    'locale',
+    'loadData',
+    'header',
+    'footer',
+    'defaultVisible',
+    'visible',
+    'onVisibleChange',
+    'popupStyle',
+    'popupClassName',
+    'popupContainer',
+    'popupProps',
+    'followTrigger',
+    'isPreview',
+    'renderPreview',
+    'immutable',
+    'autoClearSearchValue',
+];
+
 class CascaderSelect extends Component<CascaderSelectProps, CascaderSelectState> {
     static displayName = 'CascaderSelect';
     static propTypes = {
@@ -833,7 +886,7 @@ class CascaderSelect extends Component<CascaderSelectProps, CascaderSelectState>
             resultAutoWidth,
         } = this.props;
         const { value, searchValue, visible } = this.state;
-        const others = pickOthers(CascaderSelect.propTypes, this.props);
+        const others = pickOthers(CASCADER_SELECT_PROP_KEYS, this.props);
         // mode 应与 multiple api 保持一致
         if (multiple && 'mode' in others && others.mode !== 'multiple') {
             delete others.mode;

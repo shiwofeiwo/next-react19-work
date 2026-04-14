@@ -107,6 +107,22 @@ const getInnerStyle: typeof getStyle = (style, styleProps) => {
 /**
  * Box
  */
+const BOX_PROP_KEYS = [
+    'prefix',
+    'style',
+    'className',
+    'flex',
+    'direction',
+    'wrap',
+    'spacing',
+    'margin',
+    'padding',
+    'justify',
+    'align',
+    'device',
+    'component',
+];
+
 class Box extends React.Component<BoxProps> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -197,7 +213,7 @@ class Box extends React.Component<BoxProps> {
         };
         const View = component!;
 
-        const others = pickOthers(Object.keys(Box.propTypes), this.props);
+        const others = pickOthers(BOX_PROP_KEYS, this.props);
         const styleSheet = getStyle(style, styleProps);
 
         const boxs = createChildren(children, {

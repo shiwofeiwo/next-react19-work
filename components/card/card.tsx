@@ -12,6 +12,31 @@ import type { CardProps } from './types';
 
 const { pickOthers } = obj;
 
+const CARD_PROP_KEYS = [
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Card-specific props
+    'className',
+    'media',
+    'title',
+    'subTitle',
+    'actions',
+    'showTitleBullet',
+    'showHeadDivider',
+    'contentHeight',
+    'extra',
+    'free',
+    'hasBorder',
+];
+
 export default class Card extends Component<CardProps> {
     static displayName = 'Card';
 
@@ -71,7 +96,7 @@ export default class Card extends Component<CardProps> {
             className
         );
 
-        const others = pickOthers(Card.propTypes, this.props);
+        const others = pickOthers(CARD_PROP_KEYS, this.props);
 
         others.dir = rtl ? 'rtl' : undefined;
 

@@ -10,6 +10,22 @@ import type { CheckboxData, GroupProps, GroupState, ValueItem } from './types';
 
 const { pickOthers } = obj;
 
+const CHECKBOX_GROUP_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'className',
+    'style',
+    'disabled',
+    'dataSource',
+    'value',
+    'defaultValue',
+    'children',
+    'onChange',
+    'direction',
+    'isPreview',
+    'renderPreview',
+];
+
 /** Checkbox.Group */
 class CheckboxGroup extends React.Component<GroupProps, GroupState> {
     static displayName = 'CheckboxGroup';
@@ -110,7 +126,7 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
     render() {
         const { className, style, prefix, disabled, direction, rtl, isPreview, renderPreview } =
             this.props;
-        const others = pickOthers(CheckboxGroup.propTypes, this.props);
+        const others = pickOthers(CHECKBOX_GROUP_PROP_KEYS, this.props);
 
         const groupValue: CheckboxGroupContextValue = {
             __group__: true,

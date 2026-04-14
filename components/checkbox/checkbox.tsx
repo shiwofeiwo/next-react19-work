@@ -10,6 +10,37 @@ import { obj, func } from '../util';
 import type { CheckboxProps, ValueItem } from './types';
 
 const noop = func.noop;
+
+const CHECKBOX_PROP_KEYS = [
+    'prefix',
+    'locale',
+    'defaultPropsConfig',
+    'errorBoundary',
+    'pure',
+    'warning',
+    'rtl',
+    'device',
+    'children',
+    'popupContainer',
+    // Checkbox-specific props
+    'className',
+    'id',
+    'style',
+    'checked',
+    'defaultChecked',
+    'disabled',
+    'label',
+    'indeterminate',
+    'defaultIndeterminate',
+    'onChange',
+    'onMouseEnter',
+    'onMouseLeave',
+    'value',
+    'name',
+    'isPreview',
+    'renderPreview',
+];
+
 function isChecked(
     selectedValue: CheckboxContext['selectedValue'],
     value: CheckboxProps['value']
@@ -181,7 +212,7 @@ class Checkbox extends UIState<PrivateCheckboxProps, CheckboxState> {
         const indeterminate = !!this.state.indeterminate;
         const prefix = context.prefix || this.props.prefix;
 
-        const others = obj.pickOthers(Checkbox.propTypes, otherProps);
+        const others = obj.pickOthers(CHECKBOX_PROP_KEYS, otherProps);
         const othersData = obj.pickAttrsWith(others, 'data-') as ReturnType<
             typeof obj.pickAttrsWith<typeof others, 'data-'>
         > & { title?: string };
@@ -191,7 +222,7 @@ class Checkbox extends UIState<PrivateCheckboxProps, CheckboxState> {
 
         let childInput = (
             <input
-                {...obj.pickOthers(Checkbox.propTypes, otherProps)}
+                {...obj.pickOthers(CHECKBOX_PROP_KEYS, otherProps)}
                 id={id}
                 value={value as string}
                 name={name}

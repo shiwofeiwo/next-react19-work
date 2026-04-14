@@ -112,6 +112,37 @@ const normalizeValue = <T,>(value: T): NormalizeValueReturns<T> => {
 /**
  * Cascader
  */
+const CASCADER_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'pure',
+    'className',
+    'dataSource',
+    'defaultValue',
+    'value',
+    'onChange',
+    'onSelect',
+    'defaultExpandedValue',
+    'expandedValue',
+    'expandTriggerType',
+    'onExpand',
+    'useVirtual',
+    'multiple',
+    'canOnlySelectLeaf',
+    'canOnlyCheckLeaf',
+    'checkStrictly',
+    'listStyle',
+    'listClassName',
+    'itemRender',
+    'loadData',
+    'searchValue',
+    'onBlur',
+    'filteredPaths',
+    'filteredListStyle',
+    'resultRender',
+    'immutable',
+];
+
 class Cascader extends Component<CascaderProps, CascaderState> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -801,7 +832,7 @@ class Cascader extends Component<CascaderProps, CascaderState> {
             searchValue,
         } = this.props;
         // FIXME 这样做风险比较大，propTypes 如果不全，就会出现一些 div 接收不了的参数传导到 div
-        const others = pickOthers(Cascader.propTypes, this.props);
+        const others = pickOthers(CASCADER_PROP_KEYS, this.props);
         const { value } = this.state;
 
         if (rtl) {

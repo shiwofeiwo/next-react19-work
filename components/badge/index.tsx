@@ -8,6 +8,19 @@ import type { BadgeProps } from './types';
 
 export type { BadgeProps };
 
+const BADGE_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'className',
+    'style',
+    'children',
+    'count',
+    'showZero',
+    'content',
+    'overflowCount',
+    'dot',
+];
+
 /**
  * Badge
  */
@@ -70,7 +83,7 @@ class Badge extends Component<BadgeProps> {
         } = this.props;
         const count = parseInt(originCount as string, 10);
         const overflowCount = parseInt(originOverflowCount as string, 10);
-        const others = obj.pickOthers(Badge.propTypes, this.props);
+        const others = obj.pickOthers(BADGE_PROP_KEYS, this.props);
 
         // 如果是数字，则添加默认的 title
         if (count || (count === 0 && showZero)) {

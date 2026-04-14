@@ -22,6 +22,52 @@ const alignList = ['t', 'r', 'b', 'l', 'tl', 'tr', 'bl', 'br', 'lt', 'lb', 'rt',
 
 let alignMap = normalMap;
 
+const BALLOON_PROP_KEYS = [
+    'prefix',
+    'pure',
+    'rtl',
+    'className',
+    'style',
+    'children',
+    'size',
+    'type',
+    'title',
+    'visible',
+    'defaultVisible',
+    'onVisibleChange',
+    'alignEdge',
+    'v2',
+    'arrowPointToCenter',
+    'placementOffset',
+    'closable',
+    'align',
+    'offset',
+    'trigger',
+    'triggerType',
+    'onClick',
+    'onClose',
+    'onHover',
+    'autoAdjust',
+    'needAdjust',
+    'delay',
+    'mouseEnterDelay',
+    'mouseLeaveDelay',
+    'afterClose',
+    'shouldUpdatePosition',
+    'autoFocus',
+    'safeNode',
+    'safeId',
+    'animation',
+    'cache',
+    'popupContainer',
+    'container',
+    'popupStyle',
+    'popupClassName',
+    'popupProps',
+    'followTrigger',
+    'id',
+];
+
 class Balloon extends React.Component<BalloonProps, BalloonState> {
     readonly props: BalloonV1Props & BalloonV2Props;
     static displayName = 'Balloon';
@@ -286,7 +332,7 @@ class Balloon extends React.Component<BalloonProps, BalloonState> {
 
         const content = (
             <BalloonInner
-                {...obj.pickOthers(Object.keys(Balloon.propTypes), others)}
+                {...obj.pickOthers(BALLOON_PROP_KEYS, others)}
                 id={id}
                 title={title}
                 prefix={_prefix}

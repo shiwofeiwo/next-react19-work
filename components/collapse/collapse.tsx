@@ -7,6 +7,21 @@ import { func, obj } from '../util';
 import Panel from './panel';
 import type { CollapseProps, DataItem, KeyType } from './types';
 
+const COLLAPSE_PROP_KEYS = [
+    'prefix',
+    'style',
+    'dataSource',
+    'defaultExpandedKeys',
+    'expandedKeys',
+    'onExpand',
+    'disabled',
+    'className',
+    'accordion',
+    'children',
+    'id',
+    'rtl',
+];
+
 /** Collapse */
 class Collapse extends React.Component<
     CollapseProps,
@@ -195,7 +210,7 @@ class Collapse extends React.Component<
             [className!]: className,
         });
 
-        const others = obj.pickOthers(Collapse.propTypes, this.props);
+        const others = obj.pickOthers(COLLAPSE_PROP_KEYS, this.props);
         return (
             <div
                 id={id}

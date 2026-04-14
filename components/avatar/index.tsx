@@ -6,6 +6,19 @@ import Icon from '../icon';
 import { obj } from '../util';
 import type { AvatarProps } from './types';
 
+const AVATAR_PROP_KEYS = [
+    'prefix',
+    'children',
+    'className',
+    'size',
+    'shape',
+    'icon',
+    'src',
+    'onError',
+    'alt',
+    'srcSet',
+];
+
 /**
  * Avatar
  */
@@ -61,7 +74,7 @@ class Avatar extends Component<AvatarProps> {
         const { isImgExist } = this.state;
         let { children } = this.props;
 
-        const others = obj.pickOthers(Avatar.propTypes, this.props);
+        const others = obj.pickOthers(AVATAR_PROP_KEYS, this.props);
         const cls = classNames(
             {
                 [`${prefix}avatar`]: true,

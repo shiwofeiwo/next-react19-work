@@ -9,6 +9,26 @@ import type { ItemProps, ItemState } from './types';
 const { bindCtx } = func;
 const { pickOthers } = obj;
 
+const CASCADER_MENU_ITEM_PROP_KEYS = [
+    'prefix',
+    'className',
+    'disabled',
+    'selected',
+    'onSelect',
+    'expanded',
+    'canExpand',
+    'menu',
+    'expandTriggerType',
+    'onExpand',
+    'onFold',
+    'checkable',
+    'checked',
+    'indeterminate',
+    'checkboxDisabled',
+    'onCheck',
+    'children',
+];
+
 export default class CascaderMenuItem extends Component<ItemProps, ItemState> {
     static menuChildType = 'item';
 
@@ -111,7 +131,7 @@ export default class CascaderMenuItem extends Component<ItemProps, ItemState> {
             onCheck,
             children,
         } = this.props;
-        const others = pickOthers(CascaderMenuItem.propTypes, this.props);
+        const others = pickOthers(CASCADER_MENU_ITEM_PROP_KEYS, this.props);
         const { loading } = this.state;
 
         const itemProps: CheckboxItemProps | MenuItemProps = {

@@ -12,6 +12,24 @@ import type { BalloonInnerProps } from './types';
 
 const { noop } = func;
 
+const BALLOON_INNER_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'closable',
+    'children',
+    'title',
+    'className',
+    'alignEdge',
+    'onClose',
+    'style',
+    'align',
+    'type',
+    'isTooltip',
+    'locale',
+    'pure',
+    'v2',
+];
+
 class BalloonInner extends React.Component<BalloonInnerProps> {
     static propTypes = {
         prefix: PropTypes.string,
@@ -106,7 +124,7 @@ class BalloonInner extends React.Component<BalloonInnerProps> {
                 dir={rtl ? 'rtl' : undefined}
                 className={classes}
                 style={style}
-                {...obj.pickOthers(Object.keys(BalloonInner.propTypes), others)}
+                {...obj.pickOthers(BALLOON_INNER_PROP_KEYS, others)}
             >
                 <div className={`${prefix}balloon-arrow`}>
                     <div className={`${prefix}balloon-arrow-content`} />
