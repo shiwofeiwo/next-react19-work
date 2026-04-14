@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import ConfigProvider from '../config-provider';
+import NavContext from '../nav/context';
 import type { BaseProps } from './types';
 
 export default function Base(props: { componentName?: string }) {
@@ -31,18 +32,6 @@ export default function Base(props: { componentName?: string }) {
             onCollapseChange: () => {},
             fixed: false,
         };
-
-        static childContextTypes = {
-            isCollapse: PropTypes.bool,
-        };
-
-        getChildContext() {
-            const { collapse } = this.props;
-
-            return {
-                isCollapse: collapse,
-            };
-        }
 
         render() {
             const {
@@ -82,9 +71,11 @@ export default function Base(props: { componentName?: string }) {
             }
 
             return (
-                <Tag className={cls} {...others}>
-                    {newChildren}
-                </Tag>
+                <NavContext.Provider value={{ isCollapse: collapse }}>
+                    <Tag className={cls} {...others}>
+                        {newChildren}
+                    </Tag>
+                </NavContext.Provider>
             );
         }
     }

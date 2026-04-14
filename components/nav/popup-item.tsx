@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
 import Icon from '../icon';
+import NavContext, { type NavContextValue } from './context';
 import type { PopupItemProps } from './types';
 
 /**
@@ -19,15 +20,10 @@ class PopupItem extends Component<PopupItemProps> {
         children: PropTypes.node,
     };
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-        iconOnly: PropTypes.bool,
-        iconOnlyWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        hasArrow: PropTypes.bool,
-    };
+    static contextType = NavContext;
 
     render() {
-        const { prefix, iconOnly, iconOnlyWidth, hasArrow } = this.context;
+        const { prefix, iconOnly, iconOnlyWidth, hasArrow } = this.context as NavContextValue;
         const { className, icon, label, children, ...others } = this.props;
         const cls = classNames({
             [`${prefix}nav-popup-item`]: true,

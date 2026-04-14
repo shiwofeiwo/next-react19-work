@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
 import Icon from '../icon';
+import NavContext, { type NavContextValue } from './context';
 import type { SubNavProps } from './types';
 
 /**
@@ -25,16 +26,11 @@ class SubNav extends Component<SubNavProps> {
         selectable: false,
     };
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-        mode: PropTypes.string,
-        iconOnly: PropTypes.bool,
-        iconOnlyWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        hasArrow: PropTypes.bool,
-    };
+    static contextType = NavContext;
 
     render() {
-        const { prefix, iconOnly, iconOnlyWidth, hasArrow, noIcon, mode } = this.context;
+        const { prefix, iconOnly, iconOnlyWidth, hasArrow, noIcon, mode } = this
+            .context as NavContextValue;
         const { className, icon, label, children, level, ...others } = this.props;
         const cls = classNames({
             [`${prefix}nav-sub-nav-item`]: true,

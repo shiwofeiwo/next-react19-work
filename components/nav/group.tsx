@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
+import NavContext, { type NavContextValue } from './context';
 import type { GroupProps } from './types';
 
 /**
@@ -26,13 +27,10 @@ class Group extends Component<GroupProps> {
         children: PropTypes.node,
     };
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-        iconOnly: PropTypes.bool,
-    };
+    static contextType = NavContext;
 
     render() {
-        const { prefix, iconOnly } = this.context;
+        const { prefix, iconOnly } = this.context as NavContextValue;
         const { className, children, label, ...others } = this.props;
 
         let newLabel = label;

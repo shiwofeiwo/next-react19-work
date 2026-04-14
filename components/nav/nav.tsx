@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Menu from '../menu';
+import NavContext, { type NavContextValue } from './context';
 import type { NavProps } from './types';
 
 type MenuInstance = InstanceType<typeof Menu>;
@@ -64,48 +65,11 @@ class Nav extends Component<NavProps> {
         popupProps: {},
     };
 
-    static childContextTypes = {
-        prefix: PropTypes.string,
-        mode: PropTypes.string,
-        iconOnly: PropTypes.bool,
-        iconOnlyWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        iconTextOnly: PropTypes.bool,
-        hasTooltip: PropTypes.bool,
-        hasArrow: PropTypes.bool,
-    };
-
-    static contextTypes = {
-        isCollapse: PropTypes.bool,
-    };
+    static contextType = NavContext;
 
     static displayName = 'Nav';
 
     menu: MenuInstance | null;
-
-    getChildContext() {
-        const {
-            prefix,
-            direction,
-            mode,
-            iconOnly,
-            iconOnlyWidth,
-            iconTextOnly,
-            hasTooltip,
-            hasArrow,
-        } = this.props;
-
-        const { isCollapse } = this.context;
-
-        return {
-            prefix,
-            mode: direction === 'hoz' ? 'popup' : mode,
-            iconOnly: 'iconOnly' in this.props ? iconOnly : isCollapse,
-            iconOnlyWidth: 'iconOnlyWidth' in this.props ? iconOnlyWidth : undefined,
-            iconTextOnly,
-            hasTooltip,
-            hasArrow,
-        };
-    }
 
     getMenuRef: React.Ref<MenuInstance> = ref => {
         this.menu = ref;
@@ -137,7 +101,8 @@ class Nav extends Component<NavProps> {
             ...others
         } = this.props;
 
-        const { isCollapse } = this.context;
+        const parentCtx: NavContextValue = this.context || {};
+        const { isCollapse } = parentCtx;
 
         const newIconOnly = 'iconOnly' in this.props ? iconOnly : isCollapse;
 
@@ -198,10 +163,22 @@ class Nav extends Component<NavProps> {
             },
         };
 
+        const navValue: NavContextValue = {
+            prefix,
+            mode: direction === 'hoz' ? 'popup' : mode,
+            iconOnly: newIconOnly,
+            iconOnlyWidth: 'iconOnlyWidth' in this.props ? iconOnlyWidth : undefined,
+            iconTextOnly,
+            hasTooltip,
+            hasArrow,
+        };
+
         return (
-            <Menu className={cls} style={newStyle} {...props} {...others} ref={this.getMenuRef}>
-                {children}
-            </Menu>
+            <NavContext.Provider value={navValue}>
+                <Menu className={cls} style={newStyle} {...props} {...others} ref={this.getMenuRef}>
+                    {children}
+                </Menu>
+            </NavContext.Provider>
         );
     }
 }

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Menu from '../menu';
 import Icon from '../icon';
 import Balloon from '../balloon';
+import NavContext, { type NavContextValue } from './context';
 import type { ItemProps } from './types';
 
 const { Tooltip } = Balloon;
@@ -27,16 +28,11 @@ class Item extends Component<ItemProps> {
         parentMode: PropTypes.oneOf(['inline', 'popup']),
     };
 
-    static contextTypes = {
-        prefix: PropTypes.string,
-        iconOnly: PropTypes.bool,
-        iconOnlyWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        iconTextOnly: PropTypes.bool,
-        hasTooltip: PropTypes.bool,
-    };
+    static contextType = NavContext;
 
     render() {
-        const { prefix, iconOnly, iconOnlyWidth, hasTooltip, iconTextOnly } = this.context;
+        const { prefix, iconOnly, iconOnlyWidth, hasTooltip, iconTextOnly } = this
+            .context as NavContextValue;
         const { icon, children, className, ...others } = this.props;
         const iconEl =
             typeof icon === 'string' ? <Icon className={`${prefix}nav-icon`} type={icon} /> : icon;
