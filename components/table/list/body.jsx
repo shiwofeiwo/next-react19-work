@@ -2,20 +2,18 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import BodyComponent from '../base/body';
+import TableContext from '../context';
 
 export default class ListBody extends React.Component {
-    static contextTypes = {
-        getNode: PropTypes.func,
-        onFixedScrollSync: PropTypes.func,
-    };
+    static contextType = TableContext;
 
     componentDidMount() {
-        const { getNode } = this.context;
+        const { getNode } = this.context || {};
         getNode && getNode('body', findDOMNode(this));
     }
 
     onScroll = e => {
-        const { onFixedScrollSync } = this.context;
+        const { onFixedScrollSync } = this.context || {};
         onFixedScrollSync && onFixedScrollSync(e);
     };
 

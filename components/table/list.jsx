@@ -8,6 +8,7 @@ import BodyComponent from './list/body';
 import HeaderComponent from './fixed/header';
 import WrapperComponent from './fixed/wrapper';
 import { statics } from './util';
+import TableContext from './context';
 
 export default function list(BaseComponent) {
     class ListTable extends React.Component {
@@ -22,21 +23,9 @@ export default function list(BaseComponent) {
             ...BaseComponent.defaultProps,
         };
 
-        static childContextTypes = {
-            listHeader: PropTypes.any,
-            listFooter: PropTypes.any,
-            rowSelection: PropTypes.object,
-        };
+        static contextType = TableContext;
 
         state = {};
-
-        getChildContext() {
-            return {
-                listHeader: this.listHeader,
-                listFooter: this.listFooter,
-                rowSelection: this.rowSelection,
-            };
-        }
 
         normalizeDataSource(dataSource) {
             const ret = [];
@@ -89,13 +78,22 @@ export default function list(BaseComponent) {
                 });
             }
             return (
-                <BaseComponent
-                    {...others}
-                    components={components}
-                    children={ret.length > 0 ? ret : undefined}
-                    className={className}
-                    prefix={prefix}
-                />
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        listHeader: this.listHeader,
+                        listFooter: this.listFooter,
+                        rowSelection: this.rowSelection,
+                    }}
+                >
+                    <BaseComponent
+                        {...others}
+                        components={components}
+                        children={ret.length > 0 ? ret : undefined}
+                        className={className}
+                        prefix={prefix}
+                    />
+                </TableContext.Provider>
             );
         }
     }

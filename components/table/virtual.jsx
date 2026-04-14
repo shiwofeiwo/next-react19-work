@@ -5,6 +5,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import { dom } from '../util';
 import VirtualBody from './virtual/body';
 import { statics } from './util';
+import TableContext from './context';
 
 const noop = () => {};
 export default function virtual(BaseComponent) {
@@ -41,14 +42,7 @@ export default function virtual(BaseComponent) {
             keepForwardRenderRows: 10,
         };
 
-        static childContextTypes = {
-            onVirtualScroll: PropTypes.func,
-            bodyHeight: PropTypes.number,
-            innerTop: PropTypes.number,
-            getBodyNode: PropTypes.func,
-            getTableInstanceForVirtual: PropTypes.func,
-            rowSelection: PropTypes.object,
-        };
+        static contextType = TableContext;
 
         constructor(props, context) {
             super(props, context);
@@ -61,17 +55,6 @@ export default function virtual(BaseComponent) {
                 scrollToRow: this.props.scrollToRow,
                 height: this.props.maxBodyHeight,
                 hasVirtualData,
-            };
-        }
-
-        getChildContext() {
-            return {
-                onVirtualScroll: this.onScroll,
-                bodyHeight: this.computeBodyHeight(),
-                innerTop: this.computeInnerTop(),
-                getBodyNode: this.getBodyNode,
-                getTableInstanceForVirtual: this.getTableInstance,
-                rowSelection: this.rowSelection,
             };
         }
 
@@ -301,14 +284,26 @@ export default function virtual(BaseComponent) {
             }
 
             return (
-                <BaseComponent
-                    {...others}
-                    scrollToRow={scrollToRow}
-                    dataSource={newDataSource}
-                    entireDataSource={entireDataSource}
-                    components={components}
-                    fixedHeader={fixedHeader}
-                />
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        onVirtualScroll: this.onScroll,
+                        bodyHeight: this.computeBodyHeight(),
+                        innerTop: this.computeInnerTop(),
+                        getBodyNode: this.getBodyNode,
+                        getTableInstanceForVirtual: this.getTableInstance,
+                        rowSelection: this.rowSelection,
+                    }}
+                >
+                    <BaseComponent
+                        {...others}
+                        scrollToRow={scrollToRow}
+                        dataSource={newDataSource}
+                        entireDataSource={entireDataSource}
+                        components={components}
+                        fixedHeader={fixedHeader}
+                    />
+                </TableContext.Provider>
             );
         }
     }

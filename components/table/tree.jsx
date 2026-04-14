@@ -4,6 +4,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import RowComponent from './tree/row';
 import CellComponent from './tree/cell';
 import { statics } from './util';
+import TableContext from './context';
 
 const noop = () => {};
 
@@ -53,28 +54,12 @@ export default function tree(BaseComponent) {
             indent: 12,
         };
 
-        static childContextTypes = {
-            openTreeRowKeys: PropTypes.array,
-            indent: PropTypes.number,
-            treeStatus: PropTypes.array,
-            onTreeNodeClick: PropTypes.func,
-            isTree: PropTypes.bool,
-        };
+        static contextType = TableContext;
 
         constructor(props, context) {
             super(props, context);
             this.state = {
                 openRowKeys: props.openRowKeys || props.defaultOpenRowKeys || [],
-            };
-        }
-
-        getChildContext() {
-            return {
-                openTreeRowKeys: this.state.openRowKeys,
-                indent: this.props.indent,
-                treeStatus: this.getTreeNodeStatus(this.ds),
-                onTreeNodeClick: this.onTreeNodeClick,
-                isTree: this.props.isTree,
             };
         }
 
@@ -194,7 +179,20 @@ export default function tree(BaseComponent) {
 
                 dataSource = this.normalizeDataSource(dataSource);
             }
-            return <BaseComponent {...others} dataSource={dataSource} components={components} />;
+            return (
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        openTreeRowKeys: this.state.openRowKeys,
+                        indent: this.props.indent,
+                        treeStatus: this.getTreeNodeStatus(this.ds),
+                        onTreeNodeClick: this.onTreeNodeClick,
+                        isTree: this.props.isTree,
+                    }}
+                >
+                    <BaseComponent {...others} dataSource={dataSource} components={components} />
+                </TableContext.Provider>
+            );
         }
     }
     statics(TreeTable, BaseComponent);

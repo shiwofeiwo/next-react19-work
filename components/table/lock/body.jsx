@@ -2,6 +2,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import FixedBody from '../fixed/body';
+import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class LockBody extends React.Component {
@@ -9,19 +10,16 @@ export default class LockBody extends React.Component {
         ...FixedBody.propTypes,
     };
 
-    static contextTypes = {
-        ...FixedBody.contextTypes,
-        getLockNode: PropTypes.func,
-        onLockBodyScroll: PropTypes.func,
-        lockType: PropTypes.oneOf(['left', 'right']),
-    };
+    static contextType = TableContext;
 
     componentDidMount() {
-        this.context.getLockNode('body', findDOMNode(this), this.context.lockType);
+        const { getLockNode, lockType } = this.context || {};
+        getLockNode && getLockNode('body', findDOMNode(this), lockType);
     }
 
     onBodyScroll = event => {
-        this.context.onLockBodyScroll(event);
+        const { onLockBodyScroll } = this.context || {};
+        onLockBodyScroll && onLockBodyScroll(event);
     };
 
     render() {

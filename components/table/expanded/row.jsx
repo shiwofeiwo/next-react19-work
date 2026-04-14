@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { log } from '../../util';
 import Row from '../lock/row';
+import TableContext from '../context';
 
 export default class ExpandedRow extends React.Component {
     static propTypes = {
@@ -12,18 +13,10 @@ export default class ExpandedRow extends React.Component {
         ...Row.defaultProps,
     };
 
-    static contextTypes = {
-        openRowKeys: PropTypes.array,
-        expandedRowRender: PropTypes.func,
-        expandedRowIndent: PropTypes.array,
-        expandedIndexSimulate: PropTypes.bool,
-        expandedRowWidthEquals2Table: PropTypes.bool,
-        lockType: PropTypes.oneOf(['left', 'right']),
-        getExpandedRowRef: PropTypes.func,
-    };
+    static contextType = TableContext;
 
     getExpandedRow = (parentKey, ref) => {
-        const { getExpandedRowRef } = this.context;
+        const { getExpandedRowRef } = this.context || {};
         getExpandedRowRef && getExpandedRowRef(parentKey, ref);
     };
 
@@ -35,7 +28,7 @@ export default class ExpandedRow extends React.Component {
             lockType,
             expandedIndexSimulate,
             expandedRowWidthEquals2Table,
-        } = this.context;
+        } = this.context || {};
         const expandedIndex = expandedIndexSimulate ? (rowIndex - 1) / 2 : rowIndex;
 
         const { columns, cellRef } = this.props;
@@ -128,7 +121,7 @@ export default class ExpandedRow extends React.Component {
     render() {
         /* eslint-disable no-unused-vars*/
         const { record, rowIndex, columns, ...others } = this.props;
-        const { expandedIndexSimulate } = this.context;
+        const { expandedIndexSimulate } = this.context || {};
 
         if (record.__expanded) {
             return this.renderExpandedRow(record, rowIndex, columns);

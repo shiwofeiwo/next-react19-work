@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { obj, dom } from '../../util';
 import { fetchDataByPath } from '../util';
+import TableContext from '../context';
 
 const noop = () => {};
 
@@ -42,10 +43,7 @@ export default class Row extends React.Component {
         wrapper: row => row,
     };
 
-    static contextTypes = {
-        notRenderCellIndex: PropTypes.array,
-        lockType: PropTypes.oneOf(['left', 'right']),
-    };
+    static contextType = TableContext;
 
     shouldComponentUpdate(nextProps) {
         if (nextProps.pure) {
@@ -103,7 +101,7 @@ export default class Row extends React.Component {
         // use params first, it's for list
         rowIndex = rowIndex !== undefined ? rowIndex : this.props.rowIndex;
 
-        const { lockType } = this.context;
+        const { lockType } = this.context || {};
         return columns.map((child, index) => {
             /* eslint-disable no-unused-vars, prefer-const */
             const { dataIndex, align, alignHeader, width, colSpan, style, cellStyle, __colIndex, ...others } = child;
@@ -114,7 +112,7 @@ export default class Row extends React.Component {
             const value = fetchDataByPath(record, dataIndex);
             const attrs = getCellProps(rowIndex, colIndex, dataIndex, record) || {};
 
-            if (this.context.notRenderCellIndex) {
+            if (this.context && this.context.notRenderCellIndex) {
                 const matchCellIndex = this.context.notRenderCellIndex
                     .map(cellIndex => cellIndex.toString())
                     .indexOf([rowIndex, colIndex].toString());
@@ -174,7 +172,7 @@ export default class Row extends React.Component {
                 notRenderCellIndex.push([rowIndex + j, colIndex + i]);
             }
         }
-        [].push.apply(this.context.notRenderCellIndex, notRenderCellIndex);
+        [].push.apply((this.context || {}).notRenderCellIndex, notRenderCellIndex);
     }
 
     render() {

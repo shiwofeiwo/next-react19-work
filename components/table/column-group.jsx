@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TableContext from './context';
 
 /**
  * Table.ColumnGroup
@@ -13,9 +14,7 @@ export default class ColumnGroup extends React.Component {
         title: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.func]),
     };
 
-    static childContextTypes = {
-        parent: PropTypes.any,
-    };
+    static contextType = TableContext;
 
     static defaultProps = {
         title: 'column-group',
@@ -23,13 +22,11 @@ export default class ColumnGroup extends React.Component {
 
     static _typeMark = 'columnGroup';
 
-    getChildContext() {
-        return {
-            parent: this,
-        };
-    }
-
     render() {
-        return null;
+        return (
+            <TableContext.Provider value={{ ...(this.context || {}), parent: this }}>
+                {null}
+            </TableContext.Provider>
+        );
     }
 }

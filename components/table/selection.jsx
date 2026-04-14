@@ -8,6 +8,7 @@ import zhCN from '../locale/zh-cn';
 import SelectionRow from './selection/row';
 import Col from './column';
 import { statics } from './util';
+import TableContext from './context';
 
 const { makeChain } = func;
 
@@ -59,14 +60,7 @@ export default function selection(BaseComponent) {
             prefix: 'next-',
         };
 
-        static contextTypes = {
-            listHeader: PropTypes.any,
-        };
-
-        static childContextTypes = {
-            rowSelection: PropTypes.object,
-            selectedRowKeys: PropTypes.array,
-        };
+        static contextType = TableContext;
 
         constructor(props, context) {
             super(props, context);
@@ -75,13 +69,6 @@ export default function selection(BaseComponent) {
                     props.rowSelection && 'selectedRowKeys' in props.rowSelection
                         ? props.rowSelection.selectedRowKeys || []
                         : [],
-            };
-        }
-
-        getChildContext() {
-            return {
-                rowSelection: this.props.rowSelection,
-                selectedRowKeys: this.state.selectedRowKeys,
             };
         }
 
@@ -292,7 +279,7 @@ export default function selection(BaseComponent) {
 
         flatDataSource(dataSource) {
             let ret = dataSource;
-            const { listHeader } = this.context;
+            const { listHeader } = this.context || {};
 
             if (listHeader) {
                 ret = [];
@@ -326,7 +313,17 @@ export default function selection(BaseComponent) {
                 components = { ...components };
                 components.Row = components.Row || SelectionRow;
             }
-            return <BaseComponent {...others} columns={columns} components={components} children={children} />;
+            return (
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        rowSelection: this.props.rowSelection,
+                        selectedRowKeys: this.state.selectedRowKeys,
+                    }}
+                >
+                    <BaseComponent {...others} columns={columns} components={components} children={children} />
+                </TableContext.Provider>
+            );
         }
     }
     statics(SelectionTable, BaseComponent);

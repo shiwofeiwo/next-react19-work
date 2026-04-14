@@ -9,6 +9,7 @@ import LockBody from './lock/body';
 import LockHeader from './lock/header';
 import LockWrapper from './fixed/wrapper';
 import { statics, setStickyStyle } from './util';
+import TableContext from './context';
 
 export default function stickyLock(BaseComponent) {
     /** Table */
@@ -29,11 +30,7 @@ export default function stickyLock(BaseComponent) {
             ...BaseComponent.defaultProps,
         };
 
-        static childContextTypes = {
-            getTableInstance: PropTypes.func,
-            getLockNode: PropTypes.func,
-            onLockBodyScroll: PropTypes.func,
-        };
+        static contextType = TableContext;
 
         state = {};
 
@@ -47,14 +44,6 @@ export default function stickyLock(BaseComponent) {
 
             this.pingLeft = false;
             this.pingRight = false;
-        }
-
-        getChildContext() {
-            return {
-                getTableInstance: this.getTableInstance,
-                getLockNode: this.getNode,
-                onLockBodyScroll: this.onLockBodyScroll,
-            };
         }
 
         componentDidMount() {
@@ -384,14 +373,23 @@ export default function stickyLock(BaseComponent) {
             });
 
             return (
-                <BaseComponent
-                    {...others}
-                    dataSource={dataSource}
-                    columns={normalizedChildren}
-                    prefix={prefix}
-                    components={components}
-                    className={className}
-                />
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        getTableInstance: this.getTableInstance,
+                        getLockNode: this.getNode,
+                        onLockBodyScroll: this.onLockBodyScroll,
+                    }}
+                >
+                    <BaseComponent
+                        {...others}
+                        dataSource={dataSource}
+                        columns={normalizedChildren}
+                        prefix={prefix}
+                        components={components}
+                        className={className}
+                    />
+                </TableContext.Provider>
             );
         }
     }

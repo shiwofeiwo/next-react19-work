@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TableContext from './context';
 
 /**
  * Table.Column
@@ -94,9 +95,7 @@ export default class Column extends React.Component {
         wordBreak: PropTypes.oneOf(['all', 'word']),
     };
 
-    static contextTypes = {
-        parent: PropTypes.any,
-    };
+    static contextType = TableContext;
 
     static defaultProps = {
         cell: value => value,

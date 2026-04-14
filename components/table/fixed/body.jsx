@@ -2,6 +2,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import BodyComponent from '../base/body';
+import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class FixedBody extends React.Component {
@@ -14,20 +15,15 @@ export default class FixedBody extends React.Component {
         tableWidth: PropTypes.number,
     };
 
-    static contextTypes = {
-        fixedHeader: PropTypes.bool,
-        maxBodyHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        onFixedScrollSync: PropTypes.func,
-        getNode: PropTypes.func,
-    };
+    static contextType = TableContext;
 
     componentDidMount() {
-        const { getNode } = this.context;
+        const { getNode } = this.context || {};
         getNode && getNode('body', findDOMNode(this));
     }
 
     onBodyScroll = event => {
-        const { onFixedScrollSync } = this.context;
+        const { onFixedScrollSync } = this.context || {};
         // sync scroll left to header
         onFixedScrollSync && onFixedScrollSync(event);
 
@@ -40,7 +36,7 @@ export default class FixedBody extends React.Component {
     render() {
         /*eslint-disable no-unused-vars */
         const { className, colGroup, onLockScroll, tableWidth, ...others } = this.props;
-        const { maxBodyHeight, fixedHeader } = this.context;
+        const { maxBodyHeight, fixedHeader } = this.context || {};
         const style = {};
         if (fixedHeader) {
             style.maxHeight = maxBodyHeight;

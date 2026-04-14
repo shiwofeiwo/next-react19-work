@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './fixed/header';
 import StickyHeader from './sticky/header';
 import { statics } from './util';
+import TableContext from './context';
 
 export default function sticky(BaseComponent) {
     /** Table */
@@ -30,21 +31,9 @@ export default function sticky(BaseComponent) {
             ...BaseComponent.defaultProps,
         };
 
-        static childContextTypes = {
-            Header: PropTypes.any,
-            offsetTop: PropTypes.number,
-            affixProps: PropTypes.object,
-        };
+        static contextType = TableContext;
 
         state = {};
-
-        getChildContext() {
-            return {
-                Header: this.props.components.Header || Header,
-                offsetTop: this.props.offsetTop,
-                affixProps: this.props.affixProps,
-            };
-        }
 
         render() {
             /* eslint-disable no-unused-vars */
@@ -57,12 +46,21 @@ export default function sticky(BaseComponent) {
                 maxBodyHeight = Math.max(maxBodyHeight, 10000);
             }
             return (
-                <BaseComponent
-                    {...others}
-                    components={components}
-                    fixedHeader={fixedHeader}
-                    maxBodyHeight={maxBodyHeight}
-                />
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        Header: this.props.components.Header || Header,
+                        offsetTop: this.props.offsetTop,
+                        affixProps: this.props.affixProps,
+                    }}
+                >
+                    <BaseComponent
+                        {...others}
+                        components={components}
+                        fixedHeader={fixedHeader}
+                        maxBodyHeight={maxBodyHeight}
+                    />
+                </TableContext.Provider>
             );
         }
     }

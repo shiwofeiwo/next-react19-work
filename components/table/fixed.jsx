@@ -7,6 +7,7 @@ import HeaderComponent from './fixed/header';
 import BodyComponent from './fixed/body';
 import WrapperComponent from './fixed/wrapper';
 import { statics } from './util';
+import TableContext from './context';
 
 export default function fixed(BaseComponent, stickyLock) {
     /** Table */
@@ -40,25 +41,9 @@ export default function fixed(BaseComponent, stickyLock) {
             prefix: 'next-',
         };
 
-        static childContextTypes = {
-            fixedHeader: PropTypes.bool,
-            getNode: PropTypes.func,
-            onFixedScrollSync: PropTypes.func,
-            getTableInstanceForFixed: PropTypes.func,
-            maxBodyHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        };
+        static contextType = TableContext;
 
         state = {};
-
-        getChildContext() {
-            return {
-                fixedHeader: this.props.fixedHeader,
-                maxBodyHeight: this.props.maxBodyHeight,
-                getTableInstanceForFixed: this.getTableInstance,
-                onFixedScrollSync: this.onFixedScrollSync,
-                getNode: this.getNode,
-            };
-        }
 
         componentDidMount() {
             this.adjustFixedHeaderSize();
@@ -207,14 +192,25 @@ export default function fixed(BaseComponent, stickyLock) {
             }
 
             return (
-                <BaseComponent
-                    {...others}
-                    dataSource={dataSource}
-                    lockType={lockType}
-                    components={components}
-                    className={className}
-                    prefix={prefix}
-                />
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        fixedHeader: this.props.fixedHeader,
+                        maxBodyHeight: this.props.maxBodyHeight,
+                        getTableInstanceForFixed: this.getTableInstance,
+                        onFixedScrollSync: this.onFixedScrollSync,
+                        getNode: this.getNode,
+                    }}
+                >
+                    <BaseComponent
+                        {...others}
+                        dataSource={dataSource}
+                        lockType={lockType}
+                        components={components}
+                        className={className}
+                        prefix={prefix}
+                    />
+                </TableContext.Provider>
             );
         }
     }

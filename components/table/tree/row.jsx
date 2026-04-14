@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Row from '../selection/row';
+import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class TreeRow extends React.Component {
@@ -13,15 +14,12 @@ export default class TreeRow extends React.Component {
         ...Row.defaultProps,
     };
 
-    static contextTypes = {
-        treeStatus: PropTypes.array,
-        openRowKeys: PropTypes.array,
-    };
+    static contextType = TableContext;
 
     render() {
         /* eslint-disable no-unused-vars*/
         const { className, record, primaryKey, prefix, ...others } = this.props;
-        const { treeStatus, openRowKeys } = this.context;
+        const { treeStatus, openRowKeys } = this.context || {};
         const cls = classnames({
             hidden: !(treeStatus.indexOf(record[primaryKey]) > -1) && record.__level !== 0,
             [`${prefix}table-row-level-${record.__level}`]: true,

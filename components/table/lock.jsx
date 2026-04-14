@@ -9,6 +9,7 @@ import LockBody from './lock/body';
 import LockHeader from './lock/header';
 import LockWrapper from './fixed/wrapper';
 import { statics } from './util';
+import TableContext from './context';
 
 const { ieVersion } = env;
 export default function lock(BaseComponent) {
@@ -30,13 +31,7 @@ export default function lock(BaseComponent) {
             ...BaseComponent.defaultProps,
         };
 
-        static childContextTypes = {
-            getTableInstance: PropTypes.func,
-            getLockNode: PropTypes.func,
-            onLockBodyScroll: PropTypes.func,
-            onRowMouseEnter: PropTypes.func,
-            onRowMouseLeave: PropTypes.func,
-        };
+        static contextType = TableContext;
 
         constructor(props, context) {
             super(props, context);
@@ -45,16 +40,6 @@ export default function lock(BaseComponent) {
         }
 
         state = {};
-
-        getChildContext() {
-            return {
-                getTableInstance: this.getTableInstance,
-                getLockNode: this.getNode,
-                onLockBodyScroll: this.onLockBodyScroll,
-                onRowMouseEnter: this.onRowMouseEnter,
-                onRowMouseLeave: this.onRowMouseLeave,
-            };
-        }
 
         componentDidMount() {
             events.on(window, 'resize', this.adjustSize);
@@ -700,20 +685,44 @@ export default function lock(BaseComponent) {
                     />,
                 ];
                 return (
-                    <BaseComponent
-                        {...others}
-                        tableWidth={tableWidth}
-                        dataSource={dataSource}
-                        columns={normalizedChildren}
-                        prefix={prefix}
-                        lengths={lengths}
-                        wrapperContent={content}
-                        components={components}
-                        className={className}
-                    />
+                    <TableContext.Provider
+                        value={{
+                            ...(this.context || {}),
+                            getTableInstance: this.getTableInstance,
+                            getLockNode: this.getNode,
+                            onLockBodyScroll: this.onLockBodyScroll,
+                            onRowMouseEnter: this.onRowMouseEnter,
+                            onRowMouseLeave: this.onRowMouseLeave,
+                        }}
+                    >
+                        <BaseComponent
+                            {...others}
+                            tableWidth={tableWidth}
+                            dataSource={dataSource}
+                            columns={normalizedChildren}
+                            prefix={prefix}
+                            lengths={lengths}
+                            wrapperContent={content}
+                            components={components}
+                            className={className}
+                        />
+                    </TableContext.Provider>
                 );
             }
-            return <BaseComponent {...this.props} />;
+            return (
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        getTableInstance: this.getTableInstance,
+                        getLockNode: this.getNode,
+                        onLockBodyScroll: this.onLockBodyScroll,
+                        onRowMouseEnter: this.onRowMouseEnter,
+                        onRowMouseLeave: this.onRowMouseLeave,
+                    }}
+                >
+                    <BaseComponent {...this.props} />
+                </TableContext.Provider>
+            );
         }
     }
     statics(LockTable, BaseComponent);

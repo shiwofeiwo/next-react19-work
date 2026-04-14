@@ -8,6 +8,7 @@ import { KEYCODE, dom, events } from '../util';
 import RowComponent from './expanded/row';
 import Col from './column';
 import { statics } from './util';
+import TableContext from './context';
 
 const noop = () => {};
 
@@ -75,31 +76,11 @@ export default function expanded(BaseComponent, stickyLock) {
             prefix: 'next-',
         };
 
-        static childContextTypes = {
-            openRowKeys: PropTypes.array,
-            expandedRowRender: PropTypes.func,
-            expandedIndexSimulate: PropTypes.bool,
-            expandedRowWidthEquals2Table: PropTypes.bool,
-            expandedRowIndent: PropTypes.array,
-            getExpandedRowRef: PropTypes.func,
-            getTableInstanceForExpand: PropTypes.func,
-        };
+        static contextType = TableContext;
 
         state = {
             openRowKeys: this.props.openRowKeys || this.props.defaultOpenRowKeys || [],
         };
-
-        getChildContext() {
-            return {
-                openRowKeys: this.state.openRowKeys,
-                expandedRowRender: this.props.expandedRowRender,
-                expandedIndexSimulate: this.props.expandedIndexSimulate,
-                expandedRowWidthEquals2Table: stickyLock,
-                getExpandedRowRef: this.saveExpandedRowRef,
-                getTableInstanceForExpand: this.getTableInstance,
-                expandedRowIndent: stickyLock ? [0, 0] : this.props.expandedRowIndent,
-            };
-        }
 
         static getDerivedStateFromProps(nextProps) {
             if ('openRowKeys' in nextProps) {
@@ -307,15 +288,28 @@ export default function expanded(BaseComponent, stickyLock) {
             }
 
             return (
-                <BaseComponent
-                    {...others}
-                    columns={columns}
-                    dataSource={dataSource}
-                    entireDataSource={entireDataSource}
-                    components={components}
+                <TableContext.Provider
+                    value={{
+                        ...(this.context || {}),
+                        openRowKeys: this.state.openRowKeys,
+                        expandedRowRender: this.props.expandedRowRender,
+                        expandedIndexSimulate: this.props.expandedIndexSimulate,
+                        expandedRowWidthEquals2Table: stickyLock,
+                        expandedRowIndent: stickyLock ? [0, 0] : this.props.expandedRowIndent,
+                        getExpandedRowRef: this.saveExpandedRowRef,
+                        getTableInstanceForExpand: this.getTableInstance,
+                    }}
                 >
-                    {children}
-                </BaseComponent>
+                    <BaseComponent
+                        {...others}
+                        columns={columns}
+                        dataSource={dataSource}
+                        entireDataSource={entireDataSource}
+                        components={components}
+                    >
+                        {children}
+                    </BaseComponent>
+                </TableContext.Provider>
             );
         }
     }

@@ -17,6 +17,7 @@ import FilterComponent from './base/filter';
 import SortComponent from './base/sort';
 import Column from './column';
 import ColumnGroup from './column-group';
+import TableContext from './context';
 
 const Children = React.Children,
     noop = () => {};
@@ -336,17 +337,7 @@ class Table extends React.Component {
         crossline: false,
     };
 
-    static childContextTypes = {
-        notRenderCellIndex: PropTypes.array,
-        lockType: PropTypes.oneOf(['left', 'right']),
-    };
-
-    static contextTypes = {
-        getTableInstance: PropTypes.func,
-        getTableInstanceForFixed: PropTypes.func,
-        getTableInstanceForVirtual: PropTypes.func,
-        getTableInstanceForExpand: PropTypes.func,
-    };
+    static contextType = TableContext;
 
     constructor(props, context) {
         super(props, context);
@@ -355,7 +346,7 @@ class Table extends React.Component {
             getTableInstanceForVirtual,
             getTableInstanceForFixed,
             getTableInstanceForExpand,
-        } = this.context;
+        } = this.context || {};
         getTableInstance && getTableInstance(props.lockType, this);
         getTableInstanceForFixed && getTableInstanceForFixed(props.lockType, this);
         getTableInstanceForVirtual && getTableInstanceForVirtual(props.lockType, this);
@@ -366,13 +357,6 @@ class Table extends React.Component {
     state = {
         sort: this.props.sort || {},
     };
-
-    getChildContext() {
-        return {
-            notRenderCellIndex: this.notRenderCellIndex || [],
-            lockType: this.props.lockType,
-        };
-    }
 
     static getDerivedStateFromProps(nextProps) {
         const state = {};
@@ -841,15 +825,23 @@ class Table extends React.Component {
         });
 
         return (
-            <div
-                className={cls}
-                style={style}
-                ref={ref || this.getTableEl}
-                {...obj.pickOthers(Object.keys(Table.propTypes), others)}
+            <TableContext.Provider
+                value={{
+                    ...(this.context || {}),
+                    notRenderCellIndex: this.notRenderCellIndex || [],
+                    lockType: this.props.lockType,
+                }}
             >
-                {table}
-                {loading ? <LoadingComponent className={loadingcls} /> : null}
-            </div>
+                <div
+                    className={cls}
+                    style={style}
+                    ref={ref || this.getTableEl}
+                    {...obj.pickOthers(Object.keys(Table.propTypes), others)}
+                >
+                    {table}
+                    {loading ? <LoadingComponent className={loadingcls} /> : null}
+                </div>
+            </TableContext.Provider>
         );
     }
 }

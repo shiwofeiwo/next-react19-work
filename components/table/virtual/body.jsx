@@ -2,6 +2,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import BodyComponent from '../base/body';
+import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class VirtualBody extends React.Component {
@@ -13,28 +14,17 @@ export default class VirtualBody extends React.Component {
         tableWidth: PropTypes.number,
     };
 
-    static contextTypes = {
-        maxBodyHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        onBodyScroll: PropTypes.func,
-        onFixedScrollSync: PropTypes.func,
-        onVirtualScroll: PropTypes.func,
-        onLockBodyScroll: PropTypes.func,
-        bodyHeight: PropTypes.number,
-        innerTop: PropTypes.number,
-        getNode: PropTypes.func,
-        getBodyNode: PropTypes.func,
-        getLockNode: PropTypes.func,
-        lockType: PropTypes.oneOf(['left', 'right']),
-    };
+    static contextType = TableContext;
 
     componentDidMount() {
         const bodyNode = findDOMNode(this);
+        const { getNode, getBodyNode, getLockNode, lockType } = this.context || {};
         // // for fixed
-        this.context.getNode('body', bodyNode);
+        getNode && getNode('body', bodyNode);
         // for virtual
-        this.context.getBodyNode(bodyNode, this.context.lockType);
+        getBodyNode && getBodyNode(bodyNode, lockType);
         // for lock
-        this.context.getLockNode('body', bodyNode, this.context.lockType);
+        getLockNode && getLockNode('body', bodyNode, lockType);
     }
 
     tableRef = table => {
@@ -46,17 +36,18 @@ export default class VirtualBody extends React.Component {
     };
 
     onScroll = current => {
+        const { onFixedScrollSync, onLockBodyScroll, onVirtualScroll } = this.context || {};
         // for fixed
-        this.context.onFixedScrollSync(current);
+        onFixedScrollSync && onFixedScrollSync(current);
         // for lock
-        this.context.onLockBodyScroll(current);
+        onLockBodyScroll && onLockBodyScroll(current);
         // for virtual
-        this.context.onVirtualScroll();
+        onVirtualScroll && onVirtualScroll();
     };
 
     render() {
         const { prefix, className, colGroup, tableWidth, ...others } = this.props;
-        const { maxBodyHeight, bodyHeight, innerTop } = this.context;
+        const { maxBodyHeight, bodyHeight, innerTop } = this.context || {};
         const style = {
             width: tableWidth,
         };

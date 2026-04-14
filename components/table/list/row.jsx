@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { log } from '../../util';
 import Row from '../base/row';
+import TableContext from '../context';
 
 export default class GroupListRow extends Row {
-    static contextTypes = {
-        listHeader: PropTypes.any,
-        listFooter: PropTypes.any,
-        rowSelection: PropTypes.object,
-        notRenderCellIndex: PropTypes.array,
-        lockType: PropTypes.oneOf(['left', 'right']),
-    };
+    static contextType = TableContext;
 
     render() {
         /* eslint-disable no-unused-vars*/
@@ -43,7 +38,8 @@ export default class GroupListRow extends Row {
         });
 
         // clear notRenderCellIndex, incase of cached data
-        this.context.notRenderCellIndex = [];
+        const ctx = this.context || {};
+        ctx.notRenderCellIndex = [];
 
         return (
             <table
@@ -65,15 +61,18 @@ export default class GroupListRow extends Row {
     }
 
     isChildrenSelection() {
-        return this.context.listHeader && this.context.listHeader.hasChildrenSelection;
+        const { listHeader } = this.context || {};
+        return listHeader && listHeader.hasChildrenSelection;
     }
 
     isFirstLevelDataWhenNoChildren() {
-        return this.context.listHeader && this.context.listHeader.useFirstLevelDataWhenNoChildren;
+        const { listHeader } = this.context || {};
+        return listHeader && listHeader.useFirstLevelDataWhenNoChildren;
     }
 
     isSelection() {
-        return this.context.listHeader && this.context.listHeader.hasSelection;
+        const { listHeader } = this.context || {};
+        return listHeader && listHeader.hasSelection;
     }
 
     renderChildren() {
@@ -93,6 +92,7 @@ export default class GroupListRow extends Row {
             return toRenderList.map((child, index) => {
                 const cells = this.renderCells(child, index);
                 if (this.isChildrenSelection()) {
+                    const ctx = this.context || {};
                     if (!child[primaryKey]) {
                         log.warning(
                             'record.children/recored should contains primaryKey when childrenSelection is true.'
@@ -100,7 +100,7 @@ export default class GroupListRow extends Row {
                     }
                     return <tr key={child[primaryKey]}>{cells}</tr>;
                 }
-                if (this.context.rowSelection) {
+                if (ctx.rowSelection) {
                     cells.shift();
                     cells[0] =
                         cells[0] &&
@@ -117,7 +117,8 @@ export default class GroupListRow extends Row {
     renderContent(type) {
         const { columns, prefix, record, rowIndex } = this.props;
         const cameType = type.charAt(0).toUpperCase() + type.substr(1);
-        const list = this.context[`list${cameType}`];
+        const ctx = this.context || {};
+        const list = ctx[`list${cameType}`];
         let listNode;
         if (list) {
             if (React.isValidElement(list.cell)) {
@@ -130,7 +131,7 @@ export default class GroupListRow extends Row {
             }
             if (listNode) {
                 let cells = this.renderCells(record);
-                if (type === 'header' && this.context.rowSelection && this.isSelection()) {
+                if (type === 'header' && ctx.rowSelection && this.isSelection()) {
                     cells = cells.slice(0, 1);
                     cells.push(
                         <td colSpan={columns.length - 1} key="listNode">

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '../../icon';
 import { KEYCODE } from '../../util';
 import CellComponent from '../base/cell';
+import TableContext from '../context';
 
 export default class TreeCell extends React.Component {
     static propTypes = {
@@ -17,17 +18,12 @@ export default class TreeCell extends React.Component {
         indent: 20,
     };
 
-    static contextTypes = {
-        openTreeRowKeys: PropTypes.array,
-        indent: PropTypes.number,
-        onTreeNodeClick: PropTypes.func,
-        isTree: PropTypes.bool,
-        rowSelection: PropTypes.object,
-    };
+    static contextType = TableContext;
 
     onTreeNodeClick = (record, e) => {
         e.stopPropagation();
-        this.context.onTreeNodeClick(record);
+        const { onTreeNodeClick } = this.context || {};
+        onTreeNodeClick && onTreeNodeClick(record);
     };
 
     expandedKeydown = (record, e) => {
@@ -41,7 +37,7 @@ export default class TreeCell extends React.Component {
 
     render() {
         const { colIndex, record, prefix, primaryKey, locale, rtl, children } = this.props;
-        const { openTreeRowKeys: openRowKeys, indent, isTree, rowSelection } = this.context;
+        const { openTreeRowKeys: openRowKeys, indent, isTree, rowSelection } = this.context || {};
         const treeArrowNodeIndex = rowSelection ? 1 : 0;
         let firstCellStyle, treeArrowNode;
         if (colIndex === treeArrowNodeIndex) {
