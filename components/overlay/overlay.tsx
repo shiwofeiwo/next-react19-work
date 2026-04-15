@@ -6,7 +6,6 @@ import React, {
     type ReactInstance,
     type MouseEvent,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { dom, events, focus, func, guid, KEYCODE, support } from '../util';
@@ -505,9 +504,20 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
         return this.contentRef;
     }
 
-    getContentNode() {
+    getContentNode(): HTMLElement | null {
         try {
-            return findDOMNode(this.contentRef) as HTMLElement;
+            const ref = this.contentRef;
+            if (!ref) return null;
+            if (ref instanceof Element) {
+                return ref as unknown as HTMLElement;
+            }
+            if (
+                'getDOMNode' in ref &&
+                typeof (ref as Record<string, unknown>).getDOMNode === 'function'
+            ) {
+                return (ref as { getDOMNode: () => HTMLElement }).getDOMNode();
+            }
+            return null;
         } catch (err) {
             return null;
         }

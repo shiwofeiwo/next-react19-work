@@ -1,5 +1,4 @@
 import React, { Component, type MouseEvent, type KeyboardEvent, type ReactNode } from 'react';
-import { findDOMNode } from 'react-dom';
 import cx from 'classnames';
 import { func, obj, KEYCODE, type ClassPropsWithDefault } from '../../util';
 import type { ChildItemPropsInMenu, ItemProps as NormalItemProps } from '../types';
@@ -50,18 +49,16 @@ export default class Item extends Component<ItemProps> {
     }
 
     componentDidMount() {
-        this.itemNode = findDOMNode(this) as HTMLElement;
-
         const { parentMode, root, menu } = this.props as ItemInMenuProps;
         if (menu) {
-            this.menuNode = findDOMNode(menu) as HTMLElement;
+            this.menuNode = menu.getDOMNode();
         } else if (parentMode === 'popup') {
             this.menuNode = this.itemNode.parentNode as HTMLElement;
         } else {
-            this.menuNode = findDOMNode(root) as HTMLElement;
+            this.menuNode = root.getDOMNode();
             const { prefix, header, footer } = root.props;
             if (header || footer) {
-                this.menuNode = this.menuNode.querySelector<HTMLElement>(`.${prefix}menu-content`);
+                this.menuNode = this.menuNode?.querySelector<HTMLElement>(`.${prefix}menu-content`);
             }
         }
 
@@ -144,6 +141,10 @@ export default class Item extends Component<ItemProps> {
         return;
     }
 
+    getDOMNode() {
+        return this.itemNode;
+    }
+
     render() {
         const {
             inlineLevel,
@@ -200,6 +201,9 @@ export default class Item extends Component<ItemProps> {
         return (
             <TagName
                 role={role}
+                ref={(c: any) => {
+                    this.itemNode = c;
+                }}
                 title={this.getTitle(children)}
                 {...others}
                 className={newClassName}

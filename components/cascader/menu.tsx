@@ -5,7 +5,6 @@ import React, {
     type ComponentElement,
     type ComponentRef,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import Menu, { type MenuProps } from '../menu';
 import VirtualList from '../virtual-list';
 import type { CascaderMenuProps, ItemProps } from './types';
@@ -38,7 +37,7 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
             setTimeout(() => instance.scrollTo(selectedIndex), 0);
         } else {
             const itemSelector = `.${prefix}menu-item`;
-            const menu = findDOMNode(this.menuEl) as HTMLElement;
+            const menu = (this.menuEl as any)?.getDOMNode() as HTMLElement;
             const targetItem = menu.querySelectorAll(itemSelector)[selectedIndex] as HTMLElement;
             if (targetItem) {
                 menu.scrollTop =

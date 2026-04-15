@@ -4,7 +4,6 @@ import React, {
     type CSSProperties,
     type ReactElement,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import Icon from '../../icon';
 import Overlay from '../../overlay';
@@ -554,7 +553,7 @@ class Nav extends React.Component<NavProps, NavState> {
     }
 
     navRefHandler = (ref: HTMLUListElement | AnimateInstanceType | null) => {
-        const domNode = findDOMNode(ref);
+        const domNode = ref instanceof Element ? ref : (ref as any)?.getDOMNode?.();
         if (domNode instanceof HTMLUListElement) {
             this.nav = domNode;
         }
@@ -577,16 +576,14 @@ class Nav extends React.Component<NavProps, NavState> {
     };
 
     prevBtnHandler = (ref: HTMLButtonElement) => {
-        const domNode = findDOMNode(ref);
-        if (domNode instanceof HTMLButtonElement) {
-            this.prevBtn = domNode;
+        if (ref instanceof HTMLButtonElement) {
+            this.prevBtn = ref;
         }
     };
 
     nextBtnHandler = (ref: HTMLButtonElement | null) => {
-        const domNode = findDOMNode(ref);
-        if (domNode instanceof HTMLButtonElement) {
-            this.nextBtn = domNode;
+        if (ref instanceof HTMLButtonElement) {
+            this.nextBtn = ref;
         }
     };
 

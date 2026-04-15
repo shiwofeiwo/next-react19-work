@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { findDOMNode } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Button from '../button';
@@ -57,6 +56,7 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
     };
 
     menu: HTMLElement | undefined;
+    containerRef: HTMLElement | null = null;
 
     constructor(props: MenuButtonProps) {
         super(props);
@@ -102,7 +102,7 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
     };
 
     onPopupOpen = () => {
-        const button = findDOMNode(this) as HTMLElement;
+        const button = this.containerRef;
         if (this.props.autoWidth && button && this.menu) {
             this.menu.style.width = `${button.offsetWidth}px`;
         }
@@ -118,7 +118,7 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
     };
 
     _menuRefHandler = (ref: React.ComponentRef<typeof Menu> | null) => {
-        this.menu = findDOMNode(ref) as HTMLElement;
+        this.menu = (ref as any)?.getDOMNode() as HTMLElement;
 
         const refFn = this.props.menuProps?.ref;
         if (typeof refFn === 'function') {
@@ -167,6 +167,13 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
                 style={style}
                 className={classNames}
                 {...obj.pickOthers(MENU_BUTTON_PROP_KEYS, others)}
+                ref={(c: any) => {
+                    if (c instanceof Element) {
+                        this.containerRef = c as HTMLElement;
+                    } else if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
+                        this.containerRef = c.getDOMNode();
+                    }
+                }}
             >
                 {label} <Icon type="arrow-down" className={`${prefix}menu-btn-arrow`} />
             </Button>

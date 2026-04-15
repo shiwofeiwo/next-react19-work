@@ -5,7 +5,6 @@ import React, {
     type ReactNode,
     type UIEvent,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import { func, dom, events, obj } from '../util';
 import Menu, { type ItemProps, type MenuProps } from '../menu';
@@ -314,7 +313,7 @@ export default class Base<
         clearTimeout(this.highlightTimer);
         this.highlightTimer = window.setTimeout(() => {
             try {
-                const menuNode = findDOMNode(this.menuRef) as HTMLElement;
+                const menuNode = (this.menuRef as any)?.getDOMNode?.() as HTMLElement;
                 const itemNode = menuNode.querySelector<
                     HTMLElement & { scrollIntoViewIfNeeded?: () => void }
                 >(`.${prefix}select-menu-item.${prefix}focused`);
@@ -508,7 +507,7 @@ export default class Base<
     }
 
     saveSelectRef = (ref: HTMLElement | null) => {
-        this.selectDOM = findDOMNode(ref) as HTMLElement;
+        this.selectDOM = ref!;
     };
 
     saveInputRef = (ref: InstanceType<typeof Input>) => {

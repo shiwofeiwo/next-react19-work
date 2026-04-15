@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import Menu from '../../menu';
 import type { SelectMenuProps } from '../types';
 
@@ -21,7 +20,7 @@ export default class SelectMenu extends Component<SelectMenuProps> {
         }
 
         const itemSelector = `.${prefix}menu-item`;
-        const menu = findDOMNode(this.menuEl) as HTMLElement;
+        const menu = (this.menuEl as any)?.getDOMNode() as HTMLElement;
         const targetItem = menu!.querySelectorAll(itemSelector)[selectedIndex] as HTMLElement;
         if (targetItem) {
             menu.scrollTop =

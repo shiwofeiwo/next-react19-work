@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Icon from '../icon';
@@ -126,7 +125,7 @@ class SplitButton extends React.Component<SplitButtonProps> {
     };
 
     _menuRefHandler = (ref: React.ComponentRef<typeof Menu>) => {
-        this.menu = findDOMNode(ref) as HTMLUListElement;
+        this.menu = (ref as any)?.getDOMNode() as HTMLUListElement;
 
         const refFn = this.props.menuProps!.ref;
         if (typeof refFn === 'function') {
@@ -135,7 +134,10 @@ class SplitButton extends React.Component<SplitButtonProps> {
     };
 
     _wrapperRefHandler = (ref: React.ComponentRef<typeof Button.Group>) => {
-        this.wrapper = findDOMNode(ref) as HTMLDivElement;
+        this.wrapper =
+            ref instanceof Element
+                ? (ref as unknown as HTMLDivElement)
+                : ((ref as any)?.getDOMNode?.() as HTMLDivElement);
     };
 
     render() {

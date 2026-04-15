@@ -5,7 +5,6 @@ import React, {
     type ReactElement,
     type ReactNode,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import cx from 'classnames';
 import Icon from '../../icon';
 import Overlay, { type PopupProps } from '../../overlay';
@@ -52,6 +51,7 @@ export default class PopupItem extends Component<PopupItemProps> {
     popup: ComponentRef<typeof Popup> | null;
     popupProps: PopupProps;
     popupNode: HTMLElement;
+    containerRef: HTMLElement | null = null;
     readonly props: PopupItemWithDefaultsProps;
 
     constructor(props: PopupItemProps) {
@@ -62,6 +62,10 @@ export default class PopupItem extends Component<PopupItemProps> {
 
     getPopup(ref: ComponentRef<typeof Popup> | null) {
         this.popup = ref;
+    }
+
+    getDOMNode() {
+        return this.containerRef;
     }
 
     getOpen() {
@@ -99,7 +103,7 @@ export default class PopupItem extends Component<PopupItemProps> {
         const popupAutoWidth = 'autoWidth' in this.props ? autoWidth : rootPopupAutoWidth;
         try {
             // avoid errors while dom removed and js executing
-            const itemNode = findDOMNode(this) as HTMLElement;
+            const itemNode = this.containerRef as HTMLElement;
             const menuNode = itemNode.parentNode as HTMLElement;
             // @ts-expect-error FIXME: popup 类型改造完成后可删除该行
             this.popupNode = this.popup!.getInstance().overlay.getInstance().getContentNode();
@@ -170,7 +174,15 @@ export default class PopupItem extends Component<PopupItemProps> {
         );
 
         return (
-            <NewItem {...itemProps} {...others}>
+            <NewItem
+                {...itemProps}
+                {...others}
+                ref={(c: any) => {
+                    if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
+                        this.containerRef = c.getDOMNode();
+                    }
+                }}
+            >
                 <span className={`${prefix}menu-item-text`}>{label}</span>
                 {children}
             </NewItem>
@@ -189,7 +201,7 @@ export default class PopupItem extends Component<PopupItemProps> {
         const open = this.getOpen();
 
         if (direction === 'hoz' && level === 1 && selectable) {
-            positionProps.target = () => findDOMNode(this);
+            positionProps.target = () => this.containerRef;
         }
 
         const { className: posCls, ...otherPostion } = positionProps;
@@ -265,7 +277,7 @@ export default class PopupItem extends Component<PopupItemProps> {
         } else {
             if (popupAlign === 'outside') {
                 positionProps.target = () => {
-                    return findDOMNode(root);
+                    return root.getDOMNode();
                 };
                 positionProps.align = 'tl tr';
 
@@ -273,7 +285,7 @@ export default class PopupItem extends Component<PopupItemProps> {
             } else {
                 if (triggerIsIcon) {
                     positionProps.target = () => {
-                        return findDOMNode(this);
+                        return this.containerRef;
                     };
                 }
                 positionProps.align = 'tl tr';

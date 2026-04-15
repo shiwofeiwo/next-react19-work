@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Icon from '../icon';
 import Button from '../button';
 import ConfigProvider from '../config-provider';
@@ -69,7 +68,7 @@ class CardCollapseContent extends Component<CardCollapseContentProps, CardCollap
             const childrenHeight = this._getNodeChildrenHeight(this.content);
             this.content.style.height = `${childrenHeight}px`; // get the real height
         } else {
-            const el = ReactDOM.findDOMNode(this.footer) as Element | null;
+            const el = this.footer;
             let height = this.props.contentHeight;
 
             if (el) {

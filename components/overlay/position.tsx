@@ -1,5 +1,4 @@
-import { Component, Children } from 'react';
-import { findDOMNode } from 'react-dom';
+import { Component, Children, cloneElement, isValidElement } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import { func, dom, events } from '../util';
 import position from './utils/position';
@@ -33,6 +32,7 @@ export default class Position extends Component<PositionProps> {
 
     updateCount = 0;
     resizeTimeout: number;
+    containerRef: HTMLElement | null = null;
 
     constructor(props: PositionProps) {
         super(props);
@@ -170,11 +170,7 @@ export default class Position extends Component<PositionProps> {
     }
 
     getContentNode(): null | HTMLElement {
-        try {
-            return findDOMNode(this) as HTMLElement;
-        } catch (err) {
-            return null;
-        }
+        return this.containerRef;
     }
 
     getTargetNode() {
@@ -192,6 +188,18 @@ export default class Position extends Component<PositionProps> {
     }
 
     render() {
-        return Children.only(this.props.children);
+        const child = Children.only(this.props.children);
+        if (isValidElement(child)) {
+            return cloneElement(child, {
+                ref: (c: any) => {
+                    if (c instanceof Element) {
+                        this.containerRef = c;
+                    } else if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
+                        this.containerRef = c.getDOMNode();
+                    }
+                },
+            });
+        }
+        return child;
     }
 }

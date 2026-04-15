@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import Input from '../../input';
 
 export interface TreeNodeInputProps {
@@ -9,8 +8,10 @@ export interface TreeNodeInputProps {
     onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 export default class TreeNodeInput extends Component<TreeNodeInputProps> {
+    containerRef: Element | null = null;
+
     componentDidMount() {
-        const inputWrapperNode = findDOMNode(this) as Element;
+        const inputWrapperNode = this.containerRef as Element;
         inputWrapperNode.querySelector('input')!.focus();
     }
 
@@ -23,6 +24,13 @@ export default class TreeNodeInput extends Component<TreeNodeInputProps> {
                 className={`${prefix}tree-node-input`}
                 defaultValue={defaultValue as string | number | undefined}
                 {...others}
+                ref={(c: any) => {
+                    if (c instanceof Element) {
+                        this.containerRef = c;
+                    } else if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
+                        this.containerRef = c.getDOMNode();
+                    }
+                }}
             />
         );
     }

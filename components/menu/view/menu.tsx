@@ -10,7 +10,6 @@ import React, {
     type MouseEvent,
     type KeyboardEvent,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import cx from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import SubMenu from './sub-menu';
@@ -406,6 +405,7 @@ export class Menu extends Component<MenuProps, MenuState> {
     readonly props: MenuPropsWithDefaults;
     popupNodes: HTMLElement[];
     menuNode: HTMLUListElement;
+    containerRef: HTMLUListElement | null = null;
     menuContent: HTMLUListElement | null;
     menuHeader: HTMLLIElement | null;
     menuFooter: HTMLLIElement | null;
@@ -452,7 +452,7 @@ export class Menu extends Component<MenuProps, MenuState> {
     }
 
     componentDidMount() {
-        this.menuNode = findDOMNode(this) as HTMLUListElement;
+        this.menuNode = this.containerRef!;
         this.adjustChildrenWidth();
 
         if (this.props.hozInLine) {
@@ -472,6 +472,10 @@ export class Menu extends Component<MenuProps, MenuState> {
 
     componentWillUnmount() {
         events.off(window, 'resize', this.adjustChildrenWidth);
+    }
+
+    getDOMNode() {
+        return this.containerRef;
     }
 
     adjustChildrenWidth() {
@@ -942,6 +946,9 @@ export class Menu extends Component<MenuProps, MenuState> {
         return (
             <ul
                 role={role}
+                ref={(c: HTMLUListElement | null) => {
+                    this.containerRef = c;
+                }}
                 onBlur={this.onBlur}
                 className={newClassName}
                 // @ts-expect-error FIXME: handleEnter 未定义，可移除

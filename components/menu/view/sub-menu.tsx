@@ -7,7 +7,6 @@ import React, {
     type ReactNode,
     type HTMLAttributes,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import cx from 'classnames';
 import Animate from '../../animate';
 import Icon, { type IconProps } from '../../icon';
@@ -59,6 +58,7 @@ export default class SubMenu extends Component<SubMenuProps> {
 
     readonly props: SubMenuWithDefaultsProps;
     itemNode: HTMLElement;
+    containerRef: HTMLElement | null = null;
 
     constructor(props: SubMenuProps) {
         super(props);
@@ -73,7 +73,11 @@ export default class SubMenu extends Component<SubMenuProps> {
     }
 
     componentDidMount() {
-        this.itemNode = findDOMNode(this) as HTMLElement;
+        this.itemNode = this.containerRef!;
+    }
+
+    getDOMNode() {
+        return this.containerRef;
     }
 
     afterLeave() {
@@ -248,7 +252,14 @@ export default class SubMenu extends Component<SubMenuProps> {
 
         return (
             // @ts-expect-error others.onSelect 签名不匹配
-            <li role={roleItem} {...others} {...liProps}>
+            <li
+                role={roleItem}
+                {...others}
+                {...liProps}
+                ref={(c: HTMLLIElement | null) => {
+                    this.containerRef = c;
+                }}
+            >
                 <NewItem {...itemProps}>
                     <span className={`${prefix}menu-item-text`}>{label}</span>
                     {noIcon ? null : <Icon {...arrorProps} />}
@@ -283,7 +294,16 @@ export default class SubMenu extends Component<SubMenuProps> {
         others.rtl = rtl;
 
         return (
-            <PopupItem {...others} noIcon={noIcon} hasSubMenu>
+            <PopupItem
+                {...others}
+                noIcon={noIcon}
+                hasSubMenu
+                ref={(c: any) => {
+                    if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
+                        this.containerRef = c.getDOMNode();
+                    }
+                }}
+            >
                 <ul
                     role="menu"
                     dir={rtl ? 'rtl' : undefined}

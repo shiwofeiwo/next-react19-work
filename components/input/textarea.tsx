@@ -1,5 +1,5 @@
 import React, { type CSSProperties, type DOMAttributes } from 'react';
-import ReactDOM from 'react-dom';
+
 import classNames from 'classnames';
 import zhCN from '../locale/zh-cn';
 import { obj, env } from '../util';
@@ -135,7 +135,7 @@ export default class TextArea extends Base<TextAreaProps> {
         { minRows, maxRows }: { minRows?: string | number; maxRows?: string | number },
         value?: string | number | null
     ) {
-        const node = ReactDOM.findDOMNode(this.helpRef) as HTMLTextAreaElement;
+        const node = this.helpRef;
         if (!node) {
             return {};
         }
@@ -160,7 +160,7 @@ export default class TextArea extends Base<TextAreaProps> {
     }
 
     _getHeight(value: string | number) {
-        const node = ReactDOM.findDOMNode(this.helpRef) as HTMLTextAreaElement;
+        const node = this.helpRef;
         if (!node) {
             return 0;
         }

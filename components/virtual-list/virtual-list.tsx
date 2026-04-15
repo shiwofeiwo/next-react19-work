@@ -8,7 +8,6 @@ import React, {
 } from 'react';
 import cx from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
-import { findDOMNode } from 'react-dom';
 import { events } from '../util';
 import { type VirtualListProps, type VirtualListState } from './types';
 
@@ -339,7 +338,10 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
         try {
             // <Select useVirtual /> 模式下，在快速点击切换Tab的情况下（Select实例快速出现、消失） 有时会出现this.items不存在，导致页面报错。怀疑是Select的异步timer渲染逻辑引起的
             for (let i = 0, l = childrenLength; i < l; ++i) {
-                const ulRef = findDOMNode(this.items) as HTMLElement;
+                const ulRef =
+                    this.items instanceof Element
+                        ? this.items
+                        : ((this.items as any)?.getDOMNode?.() as HTMLElement);
                 const height = (ulRef.children[i] as HTMLElement).offsetHeight;
                 if (height > 0) {
                     cache[from + i] = height;

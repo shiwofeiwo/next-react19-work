@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import React, { Component, Children, type ReactNode, type ReactElement } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
@@ -87,7 +86,8 @@ class Step extends Component<StepProps, StepState> {
 
     adjustHeight() {
         const { shape, direction, prefix, labelPlacement } = this.props;
-        const step = ReactDOM.findDOMNode(this.step) as HTMLOListElement;
+        const step = this.step!;
+        if (!step) return;
         if (shape !== 'arrow' && direction === 'hoz' && labelPlacement === 'ver') {
             const height = (
                 Array.prototype.slice.call(

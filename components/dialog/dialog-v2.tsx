@@ -226,7 +226,11 @@ const Dialog = (props: DialogV2Props) => {
         }
 
         if (e.type === 'click' && dialogRef.current) {
-            const dialogNode = ReactDOM.findDOMNode(dialogRef.current);
+            const dialogRefCurrent = dialogRef.current;
+            const dialogNode =
+                dialogRefCurrent instanceof Element
+                    ? dialogRefCurrent
+                    : (dialogRefCurrent as any).getDOMNode?.();
             if (dialogNode && dialogNode.contains(e.target as Element)) {
                 return;
             }

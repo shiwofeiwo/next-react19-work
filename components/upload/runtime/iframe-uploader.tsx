@@ -1,6 +1,5 @@
 /* istanbul ignore file */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { log, func, obj } from '../../util';
 import { uid } from '../util';
 import type { IframeUploaderProps, ObjectFile, RequestOption, UploadFile } from '../types';
@@ -31,6 +30,7 @@ class IframeUploader extends React.Component<IframeUploaderProps> {
     inputEl: HTMLInputElement;
     formEl: HTMLFormElement;
     dataEl: HTMLSpanElement;
+    containerRef: HTMLElement | null = null;
     file: UploadFile | object = {};
     uid = '';
 
@@ -131,7 +131,8 @@ class IframeUploader extends React.Component<IframeUploaderProps> {
     }
 
     updateInputWH() {
-        const rootNode = ReactDOM.findDOMNode(this) as HTMLElement;
+        const rootNode = this.containerRef;
+        if (!rootNode) return;
         const inputNode = this.inputEl;
         inputNode.style.height = `${rootNode.offsetHeight}px`;
         inputNode.style.width = `${rootNode.offsetWidth}px`;
@@ -212,6 +213,9 @@ class IframeUploader extends React.Component<IframeUploaderProps> {
 
         return (
             <span
+                ref={(c: HTMLSpanElement | null) => {
+                    this.containerRef = c;
+                }}
                 className={className}
                 style={{
                     position: 'relative',

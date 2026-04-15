@@ -1,5 +1,4 @@
 import React, { Component, Children, cloneElement, createRef } from 'react';
-import { findDOMNode } from 'react-dom';
 import { cloneDeep } from 'lodash';
 import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
@@ -537,7 +536,7 @@ export class Tree extends Component<TreeProps, TreeState> {
     scrollFilterNodeIntoView(arg?: boolean) {
         const { prefix } = this.props;
         try {
-            const treeNode = findDOMNode(this.normalListRef.current) as HTMLElement;
+            const treeNode = this.normalListRef.current as HTMLElement;
             const itemNode = treeNode.querySelector<
                 HTMLLIElement & { scrollIntoViewIfNeeded: (centerIfNeeded?: boolean) => void }
             >(`.${prefix}tree-node.${prefix}filtered`);

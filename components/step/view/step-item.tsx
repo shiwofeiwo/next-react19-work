@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import React, { Component, type ReactNode } from 'react';
 import classNames from 'classnames';
 import ResizeObserver from 'resize-observer-polyfill';
@@ -85,7 +84,7 @@ class StepItem extends Component<ItemProps> {
 
     componentDidMount() {
         const { shape, direction, labelPlacement, index, total, stretch } = this.props;
-        this.body && this.ro.observe(ReactDOM.findDOMNode(this.body) as HTMLDivElement);
+        this.body && this.ro.observe(this.body);
         if (shape === 'arrow') {
             return;
         }

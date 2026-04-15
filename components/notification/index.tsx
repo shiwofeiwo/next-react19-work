@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import ConfigProvider from '../config-provider';
 import Animate from '../animate';
 import Message from '../message';
@@ -36,6 +35,7 @@ interface NotificationState {
 
 // let instance: Notification;
 let instance: InstanceType<typeof ConfigedNotification> | null;
+let mountContainer: HTMLDivElement | null = null;
 let mounting = false;
 let waitOpens: NotificationOptions[] = [];
 function close(key: string) {
@@ -215,6 +215,7 @@ function open(options: NotificationOptions = {}) {
         if (!mounting) {
             mounting = true;
             const div = document.createElement('div');
+            mountContainer = div;
             if (config.getContainer) {
                 const root = config.getContainer();
                 root.appendChild(div);
@@ -248,11 +249,12 @@ function open(options: NotificationOptions = {}) {
 
 function destroy() {
     if (!instance) return;
-    const mountNode = ReactDOM.findDOMNode(instance)?.parentNode;
+    const mountNode = mountContainer;
     if (mountNode) {
         const root = createRoot(mountNode as Element);
         root.unmount();
         mountNode.parentNode?.removeChild(mountNode);
+        mountContainer = null;
     }
 }
 

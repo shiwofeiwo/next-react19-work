@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
 import Icon from '../../icon';
@@ -104,7 +103,7 @@ export class TreeNode extends Component<NodeProps, NodeState> {
     }
 
     componentDidMount() {
-        this.itemLabelWrapperNode = findDOMNode(this.labelWrapperEl) as HTMLDivElement;
+        this.itemLabelWrapperNode = this.labelWrapperEl;
         this.setFocus();
     }
 

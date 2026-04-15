@@ -1,5 +1,5 @@
 import { Component, Children, cloneElement } from 'react';
-import { findDOMNode, createPortal } from 'react-dom';
+import { createPortal } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
 import { func } from '../util';
 import findNode from './utils/find-node';
@@ -49,7 +49,11 @@ class Gateway extends Component<GatewayProps, GatewayState> {
 
     getChildNode() {
         try {
-            return findDOMNode(this.child);
+            const child = this.child;
+            if (child && 'nodeType' in child) {
+                return child as Element;
+            }
+            return null;
         } catch (err) {
             return null;
         }

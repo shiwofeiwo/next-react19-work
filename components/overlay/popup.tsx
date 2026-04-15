@@ -5,7 +5,6 @@ import React, {
     type MouseEventHandler,
     type KeyboardEventHandler,
 } from 'react';
-import { findDOMNode } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
 import { func, KEYCODE } from '../util';
 import Overlay from './overlay';
@@ -33,6 +32,7 @@ class Popup extends Component<PopupProps, PopupState> {
     };
 
     static displayName = 'Popup';
+    triggerRef: Element | null = null;
     _mouseNotFirstOnMask: boolean;
     _isForwardContent: boolean | null;
     overlay: InstanceType<typeof Overlay> | null;
@@ -79,6 +79,10 @@ class Popup extends Component<PopupProps, PopupState> {
             this[time] && clearTimeout(this[time]!);
         });
     }
+
+    saveTriggerRef = (ref: Element | null) => {
+        this.triggerRef = ref;
+    };
 
     handleVisibleChange(visible: boolean, type: string | object, e?: MouseEvent | KeyboardEvent) {
         if (!('visible' in this.props)) {
@@ -236,7 +240,13 @@ class Popup extends Component<PopupProps, PopupState> {
             });
         }
 
-        return trigger && cloneElement(trigger, props);
+        return (
+            trigger &&
+            cloneElement(trigger, {
+                ...props,
+                ref: makeChain(this.saveTriggerRef as any, (trigger as any).ref),
+            })
+        );
     }
 
     renderContent() {
@@ -281,7 +291,15 @@ class Popup extends Component<PopupProps, PopupState> {
             ...others
         } = this.props;
         let { container } = this.props;
-        const findTriggerNode = () => findDOMNode(this);
+        const findTriggerNode = () => {
+            const ref = this.triggerRef;
+            if (!ref) return null;
+            if (ref instanceof Element) return ref;
+            if ('getDOMNode' in ref && typeof (ref as any).getDOMNode === 'function') {
+                return (ref as any).getDOMNode();
+            }
+            return null;
+        };
         const safeNodes = Array.isArray(safeNode) ? [...safeNode] : [safeNode];
         safeNodes.unshift(findTriggerNode);
 
