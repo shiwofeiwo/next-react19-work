@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
 import Icon from '../icon';
@@ -15,18 +14,6 @@ const { Tooltip } = Balloon;
  */
 class Item extends Component<ItemProps> {
     static menuChildType = 'item';
-
-    static propTypes = {
-        /**
-         * 自定义图标，可以使用 Icon 的 type，也可以使用组件 `<Icon type="icon type" />`
-         */
-        icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-        /**
-         * 导航内容
-         */
-        children: PropTypes.node,
-        parentMode: PropTypes.oneOf(['inline', 'popup']),
-    };
 
     static contextType = NavContext;
 

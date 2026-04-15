@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
 import ConfigProvider from '../config-provider';
 import { obj } from '../util';
 import type { BoxProps } from './types';
@@ -124,58 +123,6 @@ const BOX_PROP_KEYS = [
 ];
 
 class Box extends React.Component<BoxProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.any,
-        /**
-         * 布局属性
-         */
-        flex: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-            PropTypes.number,
-        ]),
-        /**
-         * 布局方向，默认为 column ，一个元素占据一整行
-         * @defaultValue column
-         */
-        direction: PropTypes.oneOf(['row', 'column', 'row-reverse']),
-        /**
-         * 是否折行 支持IE11+
-         */
-        wrap: PropTypes.bool,
-        /**
-         * 元素之间的间距 [bottom&top, right&left]
-         */
-        spacing: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-        /**
-         * 设置 margin [bottom&top, right&left]
-         */
-        margin: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-        /**
-         * 设置 padding [bottom&top, right&left]
-         */
-        padding: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-        /**
-         * 沿着主轴方向，子元素们的排布关系 （兼容性同 justify-content ）
-         */
-        justify: PropTypes.oneOf([
-            'flex-start',
-            'center',
-            'flex-end',
-            'space-between',
-            'space-around',
-        ]),
-        /**
-         * 垂直主轴方向，子元素们的排布关系 （兼容性同 align-items ）
-         */
-        align: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'baseline', 'stretch']),
-        device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
-        /**
-         * 定制标签名， 例如section等
-         */
-        component: PropTypes.string,
-    };
     static defaultProps = {
         prefix: 'next-',
         direction: 'column',

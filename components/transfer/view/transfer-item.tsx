@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Menu from '../../menu';
 import { func, obj, dom } from '../../util';
@@ -37,27 +36,6 @@ type ItemRef = React.ComponentRef<typeof CheckboxItem> | React.ComponentRef<type
 
 export default class TransferItem extends Component<TransferItemProps, TransferItemState> {
     static menuChildType = CheckboxItem.menuChildType;
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        mode: PropTypes.oneOf(['normal', 'simple']),
-        value: PropTypes.array,
-        disabled: PropTypes.bool,
-        item: PropTypes.object,
-        onCheck: PropTypes.func,
-        onClick: PropTypes.func,
-        needHighlight: PropTypes.bool,
-        itemRender: PropTypes.func,
-        draggable: PropTypes.bool,
-        onDragStart: PropTypes.func,
-        onDragOver: PropTypes.func,
-        onDragEnd: PropTypes.func,
-        onDrop: PropTypes.func,
-        dragPosition: PropTypes.oneOf(['left', 'right']),
-        dragValue: PropTypes.string,
-        dragOverValue: PropTypes.string,
-        panelPosition: PropTypes.oneOf(['left', 'right']),
-    };
 
     addHighlightTimer: ReturnType<typeof setTimeout>;
     removeHighlightTimer: ReturnType<typeof setTimeout>;

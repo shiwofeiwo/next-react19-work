@@ -1,17 +1,10 @@
 import React, { Component, type ElementType } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { CardActionsProps } from './types';
 
 class CardActions extends Component<CardActionsProps> {
     static displayName = 'CardActions';
-    static propTypes = {
-        prefix: PropTypes.string,
-        component: PropTypes.elementType,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         component: 'div',

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { func, obj } from '../util';
 import Icon from '../icon';
@@ -31,23 +30,6 @@ const BALLOON_INNER_PROP_KEYS = [
 ];
 
 class BalloonInner extends React.Component<BalloonInnerProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        closable: PropTypes.bool,
-        children: PropTypes.any,
-        title: PropTypes.node,
-        className: PropTypes.string,
-        alignEdge: PropTypes.bool,
-        onClose: PropTypes.func,
-        style: PropTypes.any,
-        align: PropTypes.string,
-        type: PropTypes.string,
-        isTooltip: PropTypes.bool,
-        locale: PropTypes.object,
-        pure: PropTypes.bool,
-        v2: PropTypes.bool,
-    };
     static defaultProps = {
         prefix: 'next-',
         closable: true,

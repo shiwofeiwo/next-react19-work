@@ -1,5 +1,4 @@
 import React, { type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
@@ -69,29 +68,6 @@ const RANGE_CALENDAR_PROP_KEYS = [
 ];
 
 class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        defaultStartValue: checkMomentObj,
-        defaultEndValue: checkMomentObj,
-        startValue: checkMomentObj,
-        endValue: checkMomentObj,
-        mode: PropTypes.oneOf(CALENDAR_MODES),
-        disableChangeMode: PropTypes.bool,
-        format: PropTypes.string,
-        yearRange: PropTypes.arrayOf(PropTypes.number),
-        showOtherMonth: PropTypes.bool,
-        defaultVisibleMonth: PropTypes.func,
-        onVisibleMonthChange: PropTypes.func,
-        disabledDate: PropTypes.func,
-        onSelect: PropTypes.func,
-        dateCellRender: PropTypes.func,
-        monthCellRender: PropTypes.func,
-        yearCellRender: PropTypes.func, // 兼容 0.x yearCellRender
-        locale: PropTypes.object,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

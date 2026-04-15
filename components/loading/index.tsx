@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Overlay from '../overlay';
 import ConfigProvider from '../config-provider';
@@ -36,25 +35,6 @@ const LOADING_PROP_KEYS = [
 
 /** Loading */
 class Loading extends React.Component<LoadingProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        tip: PropTypes.any,
-        tipAlign: PropTypes.oneOf(['right', 'bottom']),
-        visible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        size: PropTypes.oneOf(['large', 'medium']),
-        indicator: PropTypes.any,
-        color: PropTypes.string,
-        fullScreen: PropTypes.bool,
-        disableScroll: PropTypes.bool,
-        safeNode: PropTypes.any,
-        children: PropTypes.any,
-        inline: PropTypes.bool,
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         visible: true,

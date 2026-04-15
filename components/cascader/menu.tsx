@@ -5,7 +5,6 @@ import React, {
     type ComponentElement,
     type ComponentRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import Menu, { type MenuProps } from '../menu';
 import VirtualList from '../virtual-list';
@@ -13,12 +12,6 @@ import type { CascaderMenuProps, ItemProps } from './types';
 import CascaderMenuItem from './item';
 
 export default class CascaderMenu extends Component<CascaderMenuProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        useVirtual: PropTypes.bool,
-        children: PropTypes.node,
-    };
     virtualEl: InstanceType<typeof VirtualList> | null;
     menuEl: HTMLDivElement;
 

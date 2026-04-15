@@ -1,5 +1,4 @@
 import React, { type ReactElement, type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import Overlay from '../overlay';
 import { func, obj, log } from '../util';
@@ -71,51 +70,6 @@ const BALLOON_PROP_KEYS = [
 class Balloon extends React.Component<BalloonProps, BalloonState> {
     readonly props: BalloonV1Props & BalloonV2Props;
     static displayName = 'Balloon';
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.any,
-        size: PropTypes.string,
-        type: PropTypes.oneOf(['normal', 'primary']),
-        title: PropTypes.node,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        alignEdge: PropTypes.bool,
-        v2: PropTypes.bool,
-        arrowPointToCenter: PropTypes.bool,
-        placementOffset: PropTypes.number,
-        closable: PropTypes.bool,
-        align: PropTypes.oneOf(alignList),
-        offset: PropTypes.array,
-        trigger: PropTypes.any,
-        triggerType: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        onClick: PropTypes.func,
-        onClose: PropTypes.func,
-        onHover: PropTypes.func,
-        autoAdjust: PropTypes.bool,
-        needAdjust: PropTypes.bool,
-        delay: PropTypes.number,
-        mouseEnterDelay: PropTypes.number,
-        mouseLeaveDelay: PropTypes.number,
-        afterClose: PropTypes.func,
-        shouldUpdatePosition: PropTypes.bool,
-        autoFocus: PropTypes.bool,
-        safeNode: PropTypes.string,
-        safeId: PropTypes.string,
-        animation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        cache: PropTypes.bool,
-        popupContainer: PropTypes.any,
-        container: PropTypes.any,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        id: PropTypes.string,
-    };
     static defaultProps = {
         prefix: 'next-',
         pure: false,

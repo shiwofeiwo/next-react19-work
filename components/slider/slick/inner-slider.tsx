@@ -1,5 +1,4 @@
 import React, { type ReactElement, Component } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import { events, func, obj } from '../../util';
 import EventHandlersMixin from './mixins/event-handlers';
@@ -20,38 +19,6 @@ export type ThisType = InstanceType<typeof InnerSlider> &
     typeof EventHandlersMixin;
 
 class InnerSlider extends Component<InnerSliderProps, InnerSliderState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        animation: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        arrows: PropTypes.bool,
-        arrowSize: PropTypes.oneOf(['medium', 'large']),
-        arrowPosition: PropTypes.oneOf(['inner', 'outer']),
-        arrowDirection: PropTypes.oneOf(['hoz', 'ver']),
-        centerPadding: PropTypes.any,
-        children: PropTypes.any,
-        centerMode: PropTypes.bool,
-        dots: PropTypes.bool,
-        dotsDirection: PropTypes.oneOf(['hoz', 'ver']),
-        dotsClass: PropTypes.string,
-        focusOnSelect: PropTypes.bool,
-        cssEase: PropTypes.string,
-        speed: PropTypes.number,
-        infinite: PropTypes.bool,
-        defaultActiveIndex: PropTypes.number,
-        rtl: PropTypes.bool,
-        slidesToShow: PropTypes.number,
-        lazyLoad: PropTypes.bool,
-        activeIndex: PropTypes.number,
-        slidesToScroll: PropTypes.number,
-        variableWidth: PropTypes.bool,
-        vertical: PropTypes.bool,
-        verticalSwiping: PropTypes.bool,
-        prevArrow: PropTypes.element,
-        nextArrow: PropTypes.element,
-        dotsRender: PropTypes.func,
-        triggerType: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         arrowDirection: 'hoz',

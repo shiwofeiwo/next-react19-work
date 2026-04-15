@@ -7,7 +7,6 @@ import React, {
     type JSXElementConstructor,
     type ComponentPropsWithoutRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import { obj, log } from '../util';
 import getContextProps from './get-context-props';
@@ -134,18 +133,6 @@ function config<
         static displayName = `Config(${getDisplayName(Component)})`;
         static contextType = ConfigContext;
         declare context: ContextState;
-        static propTypes = {
-            ...((Component as ComponentType).propTypes || {}),
-            prefix: PropTypes.string,
-            locale: PropTypes.object,
-            defaultPropsConfig: PropTypes.object,
-            pure: PropTypes.bool,
-            rtl: PropTypes.bool,
-            device: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-            popupContainer: PropTypes.any,
-            errorBoundary: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-        };
-
         // ref data
         private _instance: R;
 

@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import type { DividerProps, ChildItemPropsInMenu } from '../types';
 
 export default class Divider extends Component<DividerProps> {
     static menuChildType = 'divider';
-
-    static propTypes = {
-        root: PropTypes.object,
-        className: PropTypes.string,
-    };
 
     render() {
         const { root, className, parentMode, parent, ...others } = this

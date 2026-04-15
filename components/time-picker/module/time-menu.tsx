@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { checkMomentObj } from '../utils';
 import type { TimeMenuListItem, TimeMenuProps } from '../types';
@@ -33,19 +32,6 @@ function scrollTo(element: HTMLElement, to: number, duration: number) {
 const noop = () => {};
 
 class TimeMenu extends React.Component<TimeMenuProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        title: PropTypes.node,
-        mode: PropTypes.oneOf(['hour', 'minute', 'second']),
-        step: PropTypes.number,
-        activeIndex: PropTypes.number,
-        value: checkMomentObj,
-        disabledItems: PropTypes.func,
-        renderTimeMenuItems: PropTypes.func,
-        onSelect: PropTypes.func,
-        disabled: PropTypes.bool,
-    };
-
     static defaultProps = {
         step: 1,
         disabledItems: () => false,

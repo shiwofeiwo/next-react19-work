@@ -1,21 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { getPercent } from '../utils';
 import type { RangeSelectedProps } from '../types';
 
 export default class Selected extends React.Component<RangeSelectedProps> {
     static displayName = 'Selected';
-    static propTypes = {
-        min: PropTypes.number,
-        max: PropTypes.number,
-        slider: PropTypes.string,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        prefix: PropTypes.string,
-        reverse: PropTypes.bool,
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         slider: 'single',

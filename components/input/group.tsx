@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { GroupProps } from './types';
@@ -9,18 +8,6 @@ import type { GroupProps } from './types';
  */
 class Group extends React.Component<GroupProps> {
     static displayName = 'Group';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.node,
-        addonBefore: PropTypes.node,
-        addonBeforeClassName: PropTypes.string,
-        addonAfter: PropTypes.node,
-        addonAfterClassName: PropTypes.string,
-        rtl: PropTypes.bool,
-    };
 
     static defaultProps = {
         prefix: 'next-',

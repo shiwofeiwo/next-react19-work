@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Menu from '../menu';
@@ -14,38 +13,6 @@ type MenuProps = React.ComponentProps<typeof Menu>;
  * @remarks 继承自 `Menu` 的能力请查看 `Menu` 文档
  */
 class Nav extends Component<NavProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.node,
-        type: PropTypes.oneOf(['normal', 'primary', 'secondary', 'line']),
-        direction: PropTypes.oneOf(['hoz', 'ver']),
-        hozAlign: PropTypes.oneOf(['left', 'right']),
-        activeDirection: PropTypes.oneOf([null, 'top', 'bottom', 'left', 'right']),
-        mode: PropTypes.oneOf(['inline', 'popup']),
-        triggerType: PropTypes.oneOf(['click', 'hover']),
-        inlineIndent: PropTypes.number,
-        defaultOpenAll: PropTypes.bool,
-        openMode: PropTypes.oneOf(['single', 'multiple']),
-        selectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        defaultSelectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        onSelect: PropTypes.func,
-        popupAlign: PropTypes.oneOf(['follow', 'outside']),
-        popupClassName: PropTypes.string,
-        iconOnly: PropTypes.bool,
-        iconOnlyWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        iconTextOnly: PropTypes.bool,
-        hasArrow: PropTypes.bool,
-        hasTooltip: PropTypes.bool,
-        header: PropTypes.node,
-        footer: PropTypes.node,
-        embeddable: PropTypes.bool,
-        popupProps: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         pure: false,

@@ -1,19 +1,10 @@
 import React, { Component, cloneElement, type ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Item from './item';
 import type { ChildPropsInMenu, GroupProps } from '../types';
 
 export default class Group extends Component<GroupProps> {
     static menuChildType = 'group';
-
-    static propTypes = {
-        root: PropTypes.object,
-        className: PropTypes.string,
-        label: PropTypes.node,
-        children: PropTypes.node,
-        parentMode: PropTypes.oneOf(['inline', 'popup']),
-    };
 
     render() {
         const { root, className, label, children, parentMode, ...others } = this

@@ -1,6 +1,5 @@
 import React, { type CSSProperties, type DOMAttributes } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import zhCN from '../locale/zh-cn';
 import { obj, env } from '../util';
@@ -83,17 +82,6 @@ const hiddenStyle: CSSProperties = {
 export default class TextArea extends Base<TextAreaProps> {
     static displayName = 'TextArea';
     static getDerivedStateFromProps = Base.getDerivedStateFromProps;
-    static propTypes = {
-        ...Base.propTypes,
-        hasBorder: PropTypes.bool,
-        state: PropTypes.oneOf(['error', 'warning']),
-        autoHeight: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-        rows: PropTypes.number,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        locale: PropTypes.object,
-    };
-
     static defaultProps: TextAreaProps = {
         ...Base.defaultProps,
         hasBorder: true,

@@ -7,8 +7,6 @@ import React, {
 } from 'react';
 import { findDOMNode } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
-import PropTypes from 'prop-types';
-
 import { func, KEYCODE } from '../util';
 import Overlay from './overlay';
 import type { PopupProps, PopupState } from './types';
@@ -20,87 +18,6 @@ const { noop, makeChain, bindCtx } = func;
  * 继承 Overlay 的 API，除非特别说明
  * */
 class Popup extends Component<PopupProps, PopupState> {
-    static propTypes = {
-        /**
-         * 弹层内容
-         */
-        children: PropTypes.node,
-        /**
-         * 触发弹层显示或隐藏的元素
-         */
-        trigger: PropTypes.element,
-        /**
-         * 触发弹层显示或隐藏的操作类型，可以是 'click'，'hover'，'focus'，或者它们组成的数组，如 ['hover', 'focus']
-         */
-        triggerType: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        /**
-         * 当 triggerType 为 click 时才生效，可自定义触发弹层显示的键盘码
-         */
-        triggerClickKeycode: PropTypes.oneOfType([PropTypes.number, PropTypes.array]),
-        /**
-         * 弹层当前是否显示
-         */
-        visible: PropTypes.bool,
-        /**
-         * 弹层默认是否显示
-         */
-        defaultVisible: PropTypes.bool,
-        /**
-         * 弹层显示或隐藏时触发的回调函数
-         */
-        onVisibleChange: PropTypes.func,
-        /**
-         * 设置此属性，弹层无法显示或隐藏
-         */
-        disabled: PropTypes.bool,
-        autoFit: PropTypes.bool,
-        /**
-         * 弹层显示或隐藏的延时时间（以毫秒为单位），在 triggerType 被设置为 hover 时生效
-         */
-        delay: PropTypes.number,
-        /**
-         * 鼠标放置后的延时显示, 单位毫秒 ms
-         */
-        mouseEnterDelay: PropTypes.number,
-        /**
-         * 鼠标离开后的延时显示, 单位毫秒 ms
-         */
-        mouseLeaveDelay: PropTypes.number,
-        /**
-         * trigger 是否可以关闭弹层
-         */
-        canCloseByTrigger: PropTypes.bool,
-        /**
-         * 弹层定位的参照元素
-         */
-        target: PropTypes.any,
-        safeNode: PropTypes.any,
-        /**
-         * 是否跟随trigger滚动
-         */
-        followTrigger: PropTypes.bool,
-        container: PropTypes.any,
-        hasMask: PropTypes.bool,
-        wrapperStyle: PropTypes.object,
-        rtl: PropTypes.bool,
-        /**
-         * 开启 v2 版本
-         */
-        v2: PropTypes.bool,
-        /**
-         * [v2] 快捷位置，包含 'tl' | 't' | 'tr' | 'rt' | 'r' | 'rb' | 'bl' | 'b' | 'br' | 'lt' | 'l' | 'lb'
-         */
-        placement: PropTypes.string,
-        /**
-         * [v2] 弹层偏离触发元素的像素值
-         */
-        placementOffset: PropTypes.number,
-        /**
-         * [v2] 浮窗被遮挡时是否自动调整位置
-         */
-        autoAdjust: PropTypes.bool,
-    };
-
     static defaultProps = {
         triggerType: 'hover',
         triggerClickKeycode: [KEYCODE.SPACE, KEYCODE.ENTER],

@@ -1,5 +1,4 @@
 import React, { type KeyboardEvent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Icon from '../icon';
@@ -8,33 +7,6 @@ import { type PanelProps } from './types';
 
 /** Collapse.Panel */
 class Panel extends React.Component<PanelProps> {
-    static propTypes = {
-        /**
-         * 样式类名的品牌前缀
-         */
-        prefix: PropTypes.string,
-        /**
-         * 子组件接受行内样式
-         */
-        style: PropTypes.object,
-        children: PropTypes.any,
-        isExpanded: PropTypes.bool,
-        /**
-         * 是否禁止用户操作
-         */
-        disabled: PropTypes.bool,
-        /**
-         * 标题
-         */
-        title: PropTypes.node,
-        /**
-         * 扩展 class
-         */
-        className: PropTypes.string,
-        onClick: PropTypes.func,
-        id: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         isExpanded: false,

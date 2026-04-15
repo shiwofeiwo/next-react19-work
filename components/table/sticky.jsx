@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Header from './fixed/header';
 import StickyHeader from './sticky/header';
 import { statics } from './util';
@@ -9,23 +8,6 @@ export default function sticky(BaseComponent) {
     /** Table */
     class StickyTable extends React.Component {
         static StickyHeader = StickyHeader;
-        static propTypes = {
-            /**
-             * 表头是否是sticky
-             */
-            stickyHeader: PropTypes.bool,
-            /**
-             * 距离窗口顶部达到指定偏移量后触发
-             */
-            offsetTop: PropTypes.number,
-            /**
-             * affix组件的的属性
-             */
-            affixProps: PropTypes.object,
-            components: PropTypes.object,
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             components: {},
             ...BaseComponent.defaultProps,

@@ -1,19 +1,10 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import HeaderComponent from '../base/header';
 import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class FixedHeader extends React.Component {
-    static propTypes = {
-        children: PropTypes.any,
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        colGroup: PropTypes.any,
-        tableWidth: PropTypes.number,
-    };
-
     static contextType = TableContext;
 
     componentDidMount() {

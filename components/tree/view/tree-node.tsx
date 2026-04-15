@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
 import Icon from '../../icon';
@@ -53,64 +52,6 @@ const TREENODE_PROP_KEYS = [
  * Tree.Node
  */
 export class TreeNode extends Component<NodeProps, NodeState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        _key: PropTypes.string,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        label: PropTypes.node,
-        /**
-         * 单独设置是否支持选中，覆盖 Tree 的 selectable
-         */
-        selectable: PropTypes.bool,
-        /**
-         * 单独设置是否出现复选框，覆盖 Tree 的 checkable
-         */
-        checkable: PropTypes.bool,
-        /**
-         * 单独设置是否支持编辑，覆盖 Tree 的 editable
-         */
-        editable: PropTypes.bool,
-        /**
-         * 单独设置是否支持拖拽，覆盖 Tree 的 draggable
-         */
-        draggable: PropTypes.bool,
-        /**
-         * 是否禁止节点响应
-         */
-        disabled: PropTypes.bool,
-        /**
-         * 是否禁止勾选节点复选框
-         */
-        checkboxDisabled: PropTypes.bool,
-        /**
-         * 是否是叶子节点，设置loadData时生效
-         */
-        isLeaf: PropTypes.bool,
-        root: PropTypes.object,
-        eventKey: PropTypes.string,
-        pos: PropTypes.string,
-        expanded: PropTypes.bool,
-        selected: PropTypes.bool,
-        checked: PropTypes.bool,
-        indeterminate: PropTypes.bool,
-        dragOver: PropTypes.bool,
-        dragOverGapTop: PropTypes.bool,
-        dragOverGapBottom: PropTypes.bool,
-        parentNode: PropTypes.object,
-        onKeyDown: PropTypes.func,
-        size: PropTypes.number,
-        posinset: PropTypes.number,
-        // 是否是最后一个子节点，数组类型，包含对祖先节点的判断
-        isLastChild: PropTypes.arrayOf(PropTypes.bool),
-        /**
-         * 自定义图标，可以使用 Icon 的 type，也可以使用组件 `<Icon type="icon type" />`
-         * @version 1.21
-         */
-        icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         label: '---',

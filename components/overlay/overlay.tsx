@@ -7,7 +7,6 @@ import React, {
     type MouseEvent,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { dom, events, focus, func, guid, KEYCODE, support } from '../util';
@@ -51,50 +50,6 @@ const containerNodeList = [] as Array<{
  * Overlay
  */
 class Overlay extends Component<OverlayV1Props, OverlayState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.any,
-        visible: PropTypes.bool,
-        onRequestClose: PropTypes.func,
-        target: PropTypes.any,
-        align: PropTypes.string,
-        offset: PropTypes.array,
-        container: PropTypes.any,
-        hasMask: PropTypes.bool,
-        canCloseByEsc: PropTypes.bool,
-        canCloseByOutSideClick: PropTypes.bool,
-        canCloseByMask: PropTypes.bool,
-        beforeOpen: PropTypes.func,
-        onOpen: PropTypes.func,
-        afterOpen: PropTypes.func,
-        beforeClose: PropTypes.func,
-        onClose: PropTypes.func,
-        afterClose: PropTypes.func,
-        beforePosition: PropTypes.func,
-        onPosition: PropTypes.func,
-        shouldUpdatePosition: PropTypes.bool,
-        autoFocus: PropTypes.bool,
-        needAdjust: PropTypes.bool,
-        disableScroll: PropTypes.bool,
-        useCapture: PropTypes.bool,
-        cache: PropTypes.bool,
-        safeNode: PropTypes.any,
-        wrapperClassName: PropTypes.string,
-        wrapperStyle: PropTypes.object,
-        animation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        onMaskMouseEnter: PropTypes.func,
-        onMaskMouseLeave: PropTypes.func,
-        onClick: PropTypes.func,
-        maskClass: PropTypes.string,
-        isChildrenInMask: PropTypes.bool,
-        pinFollowBaseElementWhenFixed: PropTypes.bool,
-        v2: PropTypes.bool,
-        points: PropTypes.array,
-    };
     static defaultProps = {
         prefix: 'next-',
         pure: false,

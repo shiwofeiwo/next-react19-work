@@ -1,37 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import type { Dayjs } from 'dayjs';
 
 import nextLocale from '../locale/zh-cn';
 import { func, datejs, pickAttrs } from '../util';
 import TimeMenu from './module/time-menu';
-import SharedPT from './prop-types';
+
 import type { PannelType, PanelProps, DisabledItems } from './types';
 
 const { noop } = func;
 
 class TimePickerPanel extends Component<PanelProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        value: SharedPT.value,
-        showHour: PropTypes.bool,
-        showMinute: PropTypes.bool,
-        showSecond: PropTypes.bool,
-        hourStep: PropTypes.number,
-        minuteStep: PropTypes.number,
-        secondStep: PropTypes.number,
-        disabledHours: PropTypes.func,
-        disabledMinutes: PropTypes.func,
-        disabledSeconds: PropTypes.func,
-        renderTimeMenuItems: PropTypes.func,
-        onSelect: PropTypes.func,
-        isRange: PropTypes.bool,
-        locale: PropTypes.object,
-        disabled: PropTypes.bool,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         showHour: true,

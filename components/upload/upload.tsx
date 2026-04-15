@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 
@@ -24,49 +23,6 @@ const noop = func.noop;
 
 class Upload extends Base<UploadProps, UploadState> {
     static displayName = 'Upload';
-
-    static propTypes = {
-        ...html5Uploader.propTypes,
-        ...List.propTypes,
-        prefix: PropTypes.string.isRequired,
-        action: PropTypes.string,
-        value: PropTypes.array,
-        defaultValue: PropTypes.array,
-        shape: PropTypes.oneOf(['card']),
-        listType: PropTypes.oneOf(['text', 'image', 'card', 'none']),
-        list: PropTypes.any,
-        name: PropTypes.string,
-        data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-        formatter: PropTypes.func,
-        limit: PropTypes.number,
-        timeout: PropTypes.number,
-        dragable: PropTypes.bool,
-        closable: PropTypes.bool,
-        useDataURL: PropTypes.bool,
-        disabled: PropTypes.bool,
-        onSelect: PropTypes.func,
-        onProgress: PropTypes.func,
-        onChange: PropTypes.func,
-        onSuccess: PropTypes.func,
-        afterSelect: PropTypes.func,
-        onRemove: PropTypes.func,
-        onError: PropTypes.func,
-        beforeUpload: PropTypes.func,
-        onDrop: PropTypes.func,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.node,
-        autoUpload: PropTypes.bool,
-        request: PropTypes.func,
-        progressProps: PropTypes.object,
-        rtl: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        fileKeyName: PropTypes.string,
-        fileNameRender: PropTypes.func,
-        actionRender: PropTypes.func,
-        previewOnFileName: PropTypes.bool,
-    };
 
     static defaultProps = {
         ...html5Uploader.defaultProps,

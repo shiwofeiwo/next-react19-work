@@ -1,5 +1,4 @@
 import React, { type ReactNode, Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { ItemProps } from './types';
@@ -8,17 +7,6 @@ import type { ItemProps } from './types';
  * Breadcrumb.Item
  */
 class Item extends Component<ItemProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        link: PropTypes.string,
-        activated: PropTypes.bool,
-        separator: PropTypes.node,
-        className: PropTypes.any,
-        children: PropTypes.node,
-        onClick: PropTypes.func,
-    };
-
     static defaultProps = {
         prefix: 'next-',
     };

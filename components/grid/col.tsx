@@ -1,5 +1,4 @@
 import React, { Component, type ComponentClass, type FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ConfigProvider from '../config-provider';
 import { type ColProps, type BreakPoints, type PointProps, type TypeRecord } from './types';
@@ -37,55 +36,6 @@ const COL_PROP_KEYS = [
  */
 export default class Col extends Component<ColProps> {
     static isNextCol = true;
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        /**
-         * 列内容
-         */
-        children: PropTypes.node,
-        /**
-         * 列宽度<br><br>**可选值**:<br>1, 2, 3, ..., 22, 23, 24
-         */
-        span: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        /**
-         * 固定列宽度，宽度值为20 * 栅格数<br><br>**可选值**:<br>1, 2, 3, ..., 28, 29, 30
-         */
-        fixedSpan: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        /**
-         * （不支持IE9浏览器）列偏移<br><br>**可选值**:<br>1, 2, 3, ..., 22, 23, 24
-         */
-        offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        /**
-         * （不支持IE9浏览器）固定列偏移，宽度值为20 * 栅格数<br><br>**可选值**:<br>1, 2, 3, ..., 28, 29, 30
-         */
-        fixedOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        /**
-         * （不支持IE9浏览器）多列垂直方向对齐方式，可覆盖Row的align属性
-         */
-        align: PropTypes.oneOf(['top', 'center', 'bottom', 'baseline', 'stretch']),
-        /**
-         * 列在不同断点下的显示与隐藏<br><br>**可选值**:<br>true(在所有断点下隐藏)<br>false(在所有断点下显示)<br>'xs'(在 xs 断点下隐藏）<br>['xxs', 'xs', 's', 'm', 'l', 'xl'](在 xxs, xs, s, m, l, xl 断点下隐藏）
-         */
-        hidden: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array]),
-
-        xxs: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-
-        xs: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-
-        s: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-
-        m: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-
-        l: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-
-        xl: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-
-        component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    };
 
     static defaultProps = {
         prefix: 'next-',

@@ -1,6 +1,6 @@
 import React, { type ReactElement } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PT from 'prop-types';
+
 import type { Dayjs, ManipulateType } from 'dayjs';
 import { func, datejs } from '../../util';
 
@@ -15,36 +15,6 @@ const { renderNode } = func;
 const { DATE, WEEK, QUARTER, MONTH, YEAR, DECADE } = DATE_PANEL_MODE;
 
 class HeaderPanel extends React.PureComponent<HeaderPanelProps> {
-    static propTypes = {
-        rtl: PT.bool,
-        prefix: PT.string,
-        locale: PT.object,
-        mode: PT.any,
-        shape: PT.string,
-        value: PT.any,
-        panelMode: PT.any,
-        panelValue: PT.any,
-        validValue: PT.any,
-        showTitle: PT.bool,
-        showModeSwitch: PT.bool,
-        onModeChange: PT.func,
-        onPanelValueChange: PT.func,
-        onPanelModeChange: PT.func,
-        onPrev: PT.func,
-        onNext: PT.func,
-        onSuperPrev: PT.func,
-        onSuperNext: PT.func,
-        titleRender: PT.func,
-        /**
-         * 扩展操作区域渲染
-         */
-        renderHeaderExtra: PT.func,
-        /**
-         * 自定义头部渲染
-         */
-        headerRender: PT.func,
-    };
-
     static defaultProps = {
         showTitle: false,
     };

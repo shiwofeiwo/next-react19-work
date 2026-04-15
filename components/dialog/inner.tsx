@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Button from '../button';
 import Icon from '../icon';
@@ -39,33 +38,6 @@ const INNER_PROP_KEYS = [
 ];
 
 export default class Inner extends Component<InnerProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        title: PropTypes.node,
-        children: PropTypes.node,
-        footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-        footerAlign: PropTypes.oneOf(['left', 'center', 'right']),
-        footerActions: PropTypes.array,
-        onOk: PropTypes.func,
-        onCancel: PropTypes.func,
-        okProps: PropTypes.object,
-        cancelProps: PropTypes.object,
-        closeable: PropTypes.bool,
-        onClose: PropTypes.func,
-        locale: PropTypes.object,
-        role: PropTypes.string,
-        rtl: PropTypes.bool,
-        width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        // set value for a fixed height dialog. Passing a value will absolutely position the footer to the bottom.
-        height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        v2: PropTypes.bool,
-        closeIcon: PropTypes.node,
-        pure: PropTypes.bool,
-        noPadding: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         footerAlign: 'right',

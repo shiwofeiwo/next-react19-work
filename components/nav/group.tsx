@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
 import NavContext, { type NavContextValue } from './context';
@@ -11,21 +10,6 @@ import type { GroupProps } from './types';
  */
 class Group extends Component<GroupProps> {
     static menuChildType = 'group';
-
-    static propTypes = {
-        /**
-         * 自定义类名
-         */
-        className: PropTypes.string,
-        /**
-         * 标签内容
-         */
-        label: PropTypes.node,
-        /**
-         * 导航项和子导航
-         */
-        children: PropTypes.node,
-    };
 
     static contextType = NavContext;
 

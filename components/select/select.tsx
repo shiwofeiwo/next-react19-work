@@ -6,7 +6,6 @@ import React, {
     type MouseEvent,
     type ReactNode,
 } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 
@@ -117,57 +116,6 @@ export interface SelectState extends BaseState {
  * Select
  */
 class Select extends Base<SelectProps, SelectState> {
-    static propTypes = {
-        ...Base.propTypes,
-        mode: PropTypes.oneOf(['single', 'multiple', 'tag']),
-        value: PropTypes.any,
-        defaultValue: PropTypes.any,
-        onChange: PropTypes.func,
-        dataSource: PropTypes.arrayOf(
-            PropTypes.oneOfType([
-                PropTypes.shape({
-                    value: PropTypes.any,
-                    label: PropTypes.any,
-                    disabled: PropTypes.bool,
-                    children: PropTypes.array,
-                }),
-                PropTypes.bool,
-                PropTypes.number,
-                PropTypes.string,
-            ])
-        ),
-        hasBorder: PropTypes.bool,
-        hasArrow: PropTypes.bool,
-        showSearch: PropTypes.bool,
-        onSearch: PropTypes.func,
-        onSearchClear: PropTypes.func,
-        hasSelectAll: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        fillProps: PropTypes.string,
-        useDetailValue: PropTypes.bool,
-        cacheValue: PropTypes.bool,
-        valueRender: PropTypes.func,
-        itemRender: PropTypes.func,
-        notFoundContent: PropTypes.node,
-        style: PropTypes.object,
-        searchValue: PropTypes.string,
-        tagInline: PropTypes.bool,
-        tagClosable: PropTypes.bool,
-        adjustTagSize: PropTypes.bool,
-        maxTagCount: PropTypes.number,
-        maxTagPlaceholder: PropTypes.func,
-        hiddenSelected: PropTypes.bool,
-        onRemove: PropTypes.func,
-        onFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        locale: PropTypes.object,
-        popupAutoFocus: PropTypes.bool,
-        showDataSourceChildren: PropTypes.bool,
-        autoClearSearchValue: PropTypes.bool,
-    };
-
     static defaultProps: SelectProps = {
         ...Base.defaultProps,
         locale: zhCN.Select,

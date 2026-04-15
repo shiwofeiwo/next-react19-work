@@ -1,5 +1,4 @@
 import React, { Component, Children, type ReactNode, type ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 import AnimateChild from './child';
 import type { AnimateProps } from './types';
@@ -15,23 +14,6 @@ const FirstChild = (props: { children: ReactNode }) => {
  */
 class Animate extends Component<AnimateProps> {
     static displayName = 'Animate';
-    static propTypes = {
-        animation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-        animationAppear: PropTypes.bool,
-        component: PropTypes.any,
-        singleMode: PropTypes.bool,
-        children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
-        beforeAppear: PropTypes.func,
-        onAppear: PropTypes.func,
-        afterAppear: PropTypes.func,
-        beforeEnter: PropTypes.func,
-        onEnter: PropTypes.func,
-        afterEnter: PropTypes.func,
-        beforeLeave: PropTypes.func,
-        onLeave: PropTypes.func,
-        afterLeave: PropTypes.func,
-    };
-
     static defaultProps = {
         animationAppear: true,
         component: 'div',

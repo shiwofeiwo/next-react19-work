@@ -1,5 +1,4 @@
 import React, { Component, type ChangeEvent, type ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
@@ -52,28 +51,6 @@ export interface GroupState {
 }
 
 class RadioGroup extends Component<GroupProps, GroupState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        name: PropTypes.string,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-        component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-        onChange: PropTypes.func,
-        disabled: PropTypes.bool,
-        shape: PropTypes.oneOf(['normal', 'button']),
-        size: PropTypes.oneOf(['large', 'medium', 'small']),
-        dataSource: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.string),
-            PropTypes.arrayOf(PropTypes.object),
-        ]),
-        children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
-        direction: PropTypes.oneOf(['hoz', 'ver']),
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-    };
-
     static defaultProps = {
         dataSource: [],
         size: 'medium',

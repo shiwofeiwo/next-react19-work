@@ -1,5 +1,4 @@
 import React, { Component, Children, type ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import getContextProps from './get-context-props';
 import {
@@ -51,53 +50,6 @@ const setDateLocale = (locale?: { dateLocale?: string; momentLocale?: string }) 
 class ConfigProvider extends Component<ConfigProviderProps, Pick<ConfigProviderProps, 'locale'>> {
     static contextType = ConfigContext;
     declare context: ContextState;
-    static propTypes = {
-        /**
-         * 样式类名的品牌前缀
-         */
-        prefix: PropTypes.string,
-        /**
-         * 国际化文案对象，属性为组件的 displayName
-         */
-        locale: PropTypes.object,
-        /**
-         * 组件 API 的默认配置
-         */
-        defaultPropsConfig: PropTypes.object,
-        /**
-         * 是否开启错误捕捉 errorBoundary
-         * 如需自定义参数，请传入对象 对象接受参数列表如下：
-         *
-         * fallbackUI `Function(error?: {}, errorInfo?: {}) => Element` 捕获错误后的展示
-         * afterCatch `Function(error?: {}, errorInfo?: {})` 捕获错误后的行为，比如埋点上传
-         */
-        errorBoundary: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-        /**
-         * 是否开启 Pure Render 模式，会提高性能，但是也会带来副作用
-         */
-        pure: PropTypes.bool,
-        /**
-         * 是否在开发模式下显示组件属性被废弃的 warning 提示
-         */
-        warning: PropTypes.bool,
-        /**
-         * 是否开启 rtl 模式
-         */
-        rtl: PropTypes.bool,
-        /**
-         * 设备类型，针对不同的设备类型组件做出对应的响应式变化
-         */
-        device: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-        /**
-         * 组件树
-         */
-        children: PropTypes.any,
-        /**
-         * 指定浮层渲染的父节点，可以为节点 id 的字符串，也可以返回节点的函数
-         */
-        popupContainer: PropTypes.any,
-    };
-
     static defaultProps = {
         warning: true,
         errorBoundary: false,

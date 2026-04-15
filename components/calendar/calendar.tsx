@@ -1,5 +1,4 @@
 import React, { Component, type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { type MomentInput, type Moment } from 'moment';
 import classnames from 'classnames';
@@ -79,31 +78,6 @@ const CALENDAR_PROP_KEYS = [
 
 /** Calendar */
 class Calendar extends Component<CalendarProps, CalendarState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        defaultValue: checkMomentObj,
-        value: checkMomentObj,
-        mode: PropTypes.oneOf(CALENDAR_MODES),
-        modes: PropTypes.array,
-        disableChangeMode: PropTypes.bool,
-        format: PropTypes.string,
-        showOtherMonth: PropTypes.bool,
-        defaultVisibleMonth: PropTypes.func,
-        shape: PropTypes.oneOf(['card', 'fullscreen', 'panel']),
-        onSelect: PropTypes.func,
-        onModeChange: PropTypes.func,
-        onVisibleMonthChange: PropTypes.func,
-        className: PropTypes.string,
-        dateCellRender: PropTypes.func,
-        monthCellRender: PropTypes.func,
-        yearCellRender: PropTypes.func, // 兼容 0.x yearCellRender
-        yearRange: PropTypes.arrayOf(PropTypes.number),
-        disabledDate: PropTypes.func,
-        locale: PropTypes.object,
-        onChange: PropTypes.func,
-    };
-
     static defaultProps: CalendarProps = {
         prefix: 'next-',
         rtl: false,

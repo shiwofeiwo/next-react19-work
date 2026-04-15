@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
 import { func, support, events, dom, guid } from '../util';
 import type { AnimateChildProps } from './types';
@@ -23,19 +22,6 @@ function getStyleProperty(node: HTMLElement, name: string) {
 
 export default class AnimateChild extends Component<AnimateChildProps> {
     static displayName = 'AnimateChild';
-    static propTypes = {
-        names: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-        onAppear: PropTypes.func,
-        onAppearing: PropTypes.func,
-        onAppeared: PropTypes.func,
-        onEnter: PropTypes.func,
-        onEntering: PropTypes.func,
-        onEntered: PropTypes.func,
-        onExit: PropTypes.func,
-        onExiting: PropTypes.func,
-        onExited: PropTypes.func,
-    };
-
     static defaultProps = {
         onAppear: noop,
         onAppearing: noop,

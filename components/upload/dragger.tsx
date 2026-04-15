@@ -1,5 +1,4 @@
 import React, { type DragEvent, Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../icon';
 import { func } from '../util';
@@ -12,22 +11,6 @@ import type { DraggerProps } from './types';
  * IE10+ 支持。继承 Upload 的 API，除非特别说明
  */
 class Dragger extends Component<DraggerProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        locale: PropTypes.object,
-        shape: PropTypes.string,
-        onDragOver: PropTypes.func,
-        onDragLeave: PropTypes.func,
-        onDrop: PropTypes.func,
-        limit: PropTypes.number,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        defaultValue: PropTypes.array,
-        children: PropTypes.node,
-        listType: PropTypes.string,
-        timeout: PropTypes.number,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         onDragOver: func.noop,

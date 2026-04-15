@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component, type ComponentRef, type ComponentType } from 'react';
 import Overlay from '../overlay';
 import Inner from './inner';
@@ -51,37 +50,6 @@ interface CloseConfig {
  * */
 export default class Drawer extends Component<DrawerProps> {
     static displayName = 'Drawer';
-
-    static propTypes = {
-        ...((Popup as ComponentType).propTypes || {}),
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        trigger: PropTypes.element,
-        triggerType: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        closeable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        cache: PropTypes.bool,
-        closeMode: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.oneOf(['close', 'mask', 'esc'])),
-            PropTypes.oneOf(['close', 'mask', 'esc']),
-        ]),
-        onClose: PropTypes.func,
-        afterOpen: PropTypes.func,
-        placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-        title: PropTypes.node,
-        headerStyle: PropTypes.object,
-        bodyStyle: PropTypes.object,
-        visible: PropTypes.bool,
-        hasMask: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        animation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        locale: PropTypes.object,
-        popupContainer: PropTypes.any,
-        v2: PropTypes.bool,
-        afterClose: PropTypes.func,
-    };
 
     static defaultProps = {
         prefix: 'next-',

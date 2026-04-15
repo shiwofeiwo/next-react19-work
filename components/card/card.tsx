@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import ConfigProvider from '../config-provider';
@@ -39,23 +38,6 @@ const CARD_PROP_KEYS = [
 
 export default class Card extends Component<CardProps> {
     static displayName = 'Card';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        media: PropTypes.node,
-        title: PropTypes.node,
-        subTitle: PropTypes.node,
-        actions: PropTypes.node,
-        showTitleBullet: PropTypes.bool,
-        showHeadDivider: PropTypes.bool,
-        contentHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        extra: PropTypes.node,
-        free: PropTypes.bool,
-        hasBorder: PropTypes.bool,
-        className: PropTypes.string,
-        children: PropTypes.node,
-    };
 
     static defaultProps = {
         prefix: 'next-',

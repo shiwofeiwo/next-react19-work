@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { obj } from '../util';
@@ -12,15 +11,6 @@ import ConfigProvider from '../config-provider';
 const DIVIDER_PROP_KEYS = ['prefix', 'children', 'className', 'dashed', 'direction', 'orientation'];
 
 class Divider extends Component<DividerProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        dashed: PropTypes.bool,
-        direction: PropTypes.oneOf(['hoz', 'ver']),
-        orientation: PropTypes.oneOf(['left', 'right', 'center']),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         direction: 'hoz',

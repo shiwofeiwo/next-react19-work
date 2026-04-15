@@ -1,5 +1,4 @@
 import React, { Component, type ReactElement, type FocusEvent, type ComponentType } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
@@ -144,37 +143,6 @@ const CASCADER_PROP_KEYS = [
 ];
 
 class Cascader extends Component<CascaderProps, CascaderState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        pure: PropTypes.bool,
-        className: PropTypes.string,
-        dataSource: PropTypes.arrayOf(PropTypes.object),
-        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-        onChange: PropTypes.func,
-        onSelect: PropTypes.func,
-        defaultExpandedValue: PropTypes.arrayOf(PropTypes.string),
-        expandedValue: PropTypes.arrayOf(PropTypes.string),
-        expandTriggerType: PropTypes.oneOf(['click', 'hover']),
-        onExpand: PropTypes.func,
-        useVirtual: PropTypes.bool,
-        multiple: PropTypes.bool,
-        canOnlySelectLeaf: PropTypes.bool,
-        canOnlyCheckLeaf: PropTypes.bool,
-        checkStrictly: PropTypes.bool,
-        listStyle: PropTypes.object,
-        listClassName: PropTypes.string,
-        itemRender: PropTypes.func,
-        loadData: PropTypes.func,
-        searchValue: PropTypes.string,
-        onBlur: PropTypes.func,
-        filteredPaths: PropTypes.array,
-        filteredListStyle: PropTypes.object,
-        resultRender: PropTypes.func,
-        immutable: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

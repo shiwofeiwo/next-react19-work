@@ -1,5 +1,4 @@
 import React, { Component, type KeyboardEvent, type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
@@ -53,30 +52,6 @@ const ICON_SIZE_MAP = {
 } as const;
 
 class Rating extends Component<RatingProps, RatingState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        defaultValue: PropTypes.number,
-        value: PropTypes.number,
-        count: PropTypes.number,
-        showGrade: PropTypes.bool,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        allowHalf: PropTypes.bool,
-        allowClear: PropTypes.bool,
-        onChange: PropTypes.func,
-        onHoverChange: PropTypes.func,
-        disabled: PropTypes.bool,
-        readAs: PropTypes.func,
-        iconType: PropTypes.string,
-        strokeMode: PropTypes.bool,
-        className: PropTypes.string,
-        id: PropTypes.string,
-        rtl: PropTypes.bool,
-        locale: PropTypes.object,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        readOnly: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         size: 'medium',

@@ -1,28 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { func } from '../../util';
 import Uploader from './uploader';
 import Selecter from './selecter';
 import type { Html5Props, UploadFile } from '../types';
 
 export default class Html5Uploader extends Component<Html5Props> {
-    static propTypes = {
-        ...Selecter.propTypes,
-        action: PropTypes.string,
-        accept: PropTypes.string,
-        data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-        headers: PropTypes.object,
-        withCredentials: PropTypes.bool,
-        beforeUpload: PropTypes.func,
-        onProgress: PropTypes.func,
-        onSuccess: PropTypes.func,
-        onError: PropTypes.func,
-        children: PropTypes.node,
-        timeout: PropTypes.number,
-        method: PropTypes.oneOf(['post', 'put']),
-        request: PropTypes.func,
-    };
-
     static defaultProps = {
         ...Selecter.defaultProps,
         name: 'file',

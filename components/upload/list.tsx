@@ -1,5 +1,4 @@
 import React, { Component, type KeyboardEvent, type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import ConfigProvider from '../config-provider';
@@ -40,30 +39,6 @@ export const LIST_PROP_KEYS = [
 ];
 
 class List extends Component<ListProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        locale: PropTypes.object,
-        listType: PropTypes.oneOf(['text', 'image', 'card']),
-        value: PropTypes.array,
-        closable: PropTypes.bool,
-        onRemove: PropTypes.func,
-        onCancel: PropTypes.func,
-        onImageError: PropTypes.func,
-        onPreview: PropTypes.func,
-        previewOnFileName: PropTypes.bool,
-        extraRender: PropTypes.func,
-        actionRender: PropTypes.func,
-        itemRender: PropTypes.func,
-        progressProps: PropTypes.object,
-        children: PropTypes.node,
-        uploader: PropTypes.any,
-        showDownload: PropTypes.bool,
-        useDataURL: PropTypes.bool,
-        rtl: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        fileNameRender: PropTypes.func,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         listType: 'text',

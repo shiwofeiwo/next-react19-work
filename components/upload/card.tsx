@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 
@@ -43,24 +42,6 @@ const CARD_PROP_KEYS = [
  */
 class Card extends Base<CardProps, CardState> {
     static displayName = 'Card';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        locale: PropTypes.object,
-        children: PropTypes.object,
-        value: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-        defaultValue: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-        onPreview: PropTypes.func,
-        onChange: PropTypes.func,
-        onRemove: PropTypes.func,
-        onCancel: PropTypes.func,
-        itemRender: PropTypes.func,
-        reUpload: PropTypes.bool,
-        showDownload: PropTypes.bool,
-        onProgress: PropTypes.func,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-    };
 
     static defaultProps = {
         prefix: 'next-',

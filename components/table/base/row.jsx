@@ -1,6 +1,5 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { obj, dom } from '../../util';
 import { fetchDataByPath } from '../util';
@@ -9,26 +8,6 @@ import TableContext from '../context';
 const noop = () => {};
 
 export default class Row extends React.Component {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        primaryKey: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string]),
-        className: PropTypes.string,
-        columns: PropTypes.array,
-        record: PropTypes.any,
-        Cell: PropTypes.func,
-        rowIndex: PropTypes.number,
-        getCellProps: PropTypes.func,
-        onClick: PropTypes.func,
-        onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        children: PropTypes.any,
-        cellRef: PropTypes.func,
-        colGroup: PropTypes.object,
-        locale: PropTypes.object,
-        wrapper: PropTypes.func,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         primaryKey: 'id',

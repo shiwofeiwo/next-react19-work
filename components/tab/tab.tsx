@@ -1,5 +1,4 @@
 import React, { Component, type ReactElement, type KeyboardEvent } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { KEYCODE, obj } from '../util';
@@ -58,44 +57,6 @@ const TAB_PROP_KEYS = [
 /** Tab */
 class Tab extends Component<TabProps, TabState> {
     static displayName = 'Tab';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        device: PropTypes.oneOf(['tablet', 'desktop', 'phone']),
-        activeKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        defaultActiveKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        shape: PropTypes.oneOf(['pure', 'wrapped', 'text', 'capsule']),
-        animation: PropTypes.bool,
-        excessMode: PropTypes.oneOf(['slide', 'dropdown']),
-        tabPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-        size: PropTypes.oneOf(['small', 'medium']),
-        triggerType: PropTypes.oneOf(['hover', 'click']),
-        lazyLoad: PropTypes.bool,
-        unmountInactiveTabs: PropTypes.bool,
-        navStyle: PropTypes.object,
-        navClassName: PropTypes.string,
-        contentStyle: PropTypes.object,
-        contentClassName: PropTypes.string,
-        extra: PropTypes.node,
-        disableKeyboard: PropTypes.bool,
-        onClick: PropTypes.func,
-        onChange: PropTypes.func,
-        onClose: PropTypes.func,
-        tabRender: PropTypes.func,
-        popupProps: PropTypes.object,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        locale: PropTypes.object,
-        icons: PropTypes.shape({
-            prev: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-            next: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-            dropdown: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-        }),
-        showAdd: PropTypes.bool,
-        onAdd: PropTypes.func,
-        addIcon: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         shape: 'pure',

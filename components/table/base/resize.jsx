@@ -1,21 +1,8 @@
 import React from 'react';
-import T from 'prop-types';
+
 import { events, dom } from '../../util';
 
-class Resize extends React.Component {
-    static propTypes = {
-        prefix: T.string,
-        rtl: T.bool,
-        onChange: T.func,
-        dataIndex: T.string,
-        tableEl: T.any,
-        resizeProxyDomRef: T.any,
-        cellDomRef: T.any,
-        col: T.any,
-        hasLock: T.bool,
-        asyncResizable: T.bool,
-    };
-    constructor() {
+class Resize extends React.Component {    constructor() {
         super();
 
         this.cellMinWidth = 40;

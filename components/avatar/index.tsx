@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Icon from '../icon';
@@ -23,22 +22,6 @@ const AVATAR_PROP_KEYS = [
  * Avatar
  */
 class Avatar extends Component<AvatarProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        size: PropTypes.oneOfType([
-            PropTypes.oneOf(['small', 'medium', 'large']),
-            PropTypes.number,
-        ]),
-        shape: PropTypes.oneOf(['circle', 'square']),
-        icon: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-        src: PropTypes.string,
-        onError: PropTypes.func,
-        alt: PropTypes.string,
-        srcSet: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         size: 'medium',

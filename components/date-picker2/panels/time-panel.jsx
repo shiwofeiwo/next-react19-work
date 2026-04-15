@@ -1,22 +1,13 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PT from 'prop-types';
+
 import TimePickerPanel from '../../time-picker2/panel';
-import SharedPT from '../prop-types';
+
 import { func } from '../../util';
 
 const DECADE_TIME_FORMAT = 'HH:mm:ss';
 
 class TimePanel extends React.PureComponent {
-    static propTypes = {
-        rtl: PT.bool,
-        prefix: PT.string,
-        locale: PT.object,
-        value: SharedPT.date,
-        timePanelProps: PT.object,
-        onSelect: PT.func,
-    };
-
     formater = v => {
         const { timePanelProps = {} } = this.props;
         const { showHour, showMinute, showSecond } = this.getShow();

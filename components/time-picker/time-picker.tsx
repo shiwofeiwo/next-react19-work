@@ -4,7 +4,6 @@ import React, {
     type SyntheticEvent,
     type KeyboardEvent,
 } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
@@ -77,45 +76,6 @@ type InnerTimePickerProps = ClassPropsWithDefault<TimePickerProps, typeof TimePi
  * TimePicker
  */
 class TimePicker extends Component<TimePickerProps, TimePickerState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        label: PropTypes.node,
-        state: PropTypes.oneOf(['error', 'success']),
-        placeholder: PropTypes.string,
-        value: checkDateValue,
-        defaultValue: checkDateValue,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        hasClear: PropTypes.bool,
-        format: PropTypes.string,
-        hourStep: PropTypes.number,
-        minuteStep: PropTypes.number,
-        secondStep: PropTypes.number,
-        disabledHours: PropTypes.func,
-        disabledMinutes: PropTypes.func,
-        disabledSeconds: PropTypes.func,
-        renderTimeMenuItems: PropTypes.func,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        popupContainer: PropTypes.any,
-        popupAlign: PropTypes.string,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        onVisibleChange: PropTypes.func,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        disabled: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        onChange: PropTypes.func,
-        className: PropTypes.string,
-        name: PropTypes.string,
-        inputProps: PropTypes.object,
-        popupComponent: PropTypes.elementType,
-        popupContent: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PT from 'prop-types';
+
 import classnames from 'classnames';
 
-import SharedPT from '../prop-types';
+
 import { func, obj } from '../../util';
 import defaultLocale from '../../locale/zh-cn';
 
@@ -30,18 +30,6 @@ function normalizePreset(preset) {
 }
 
 class FooterPanel extends React.PureComponent {
-    static propTypes = {
-        rtl: PT.bool,
-        className: PT.string,
-        prefix: PT.string,
-        locale: PT.object,
-        showOk: PT.bool,
-        preset: PT.oneOfType([PT.array, PT.object]),
-        onOk: PT.func,
-        oKable: PT.bool,
-        extraRender: SharedPT.render,
-    };
-
     static defaultProps = {
         locale: defaultLocale.DatePicker,
     };

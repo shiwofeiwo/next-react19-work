@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import { obj } from '../util';
 import InnerSlider, { type ThisType as InnerSliderType } from './slick/inner-slider';
 import ConfigProvider from '../config-provider';
@@ -110,56 +109,6 @@ type ObjWithCommonProps = Pick<SliderProps, CommonKeys>;
  */
 export default class Slider extends Component<SliderProps> {
     static displayName = 'Slider';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        className: PropTypes.any,
-        adaptiveHeight: PropTypes.bool,
-        animation: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        arrows: PropTypes.bool,
-        arrowSize: PropTypes.oneOf(['medium', 'large']),
-        arrowPosition: PropTypes.oneOf(['inner', 'outer']),
-        arrowDirection: PropTypes.oneOf(['hoz', 'ver']),
-        autoplay: PropTypes.bool,
-        autoplaySpeed: PropTypes.number,
-        nextArrow: PropTypes.element,
-        prevArrow: PropTypes.element,
-        centerMode: PropTypes.bool,
-        dots: PropTypes.bool,
-        dotsDirection: PropTypes.oneOf(['hoz', 'ver']),
-        dotsClass: PropTypes.string,
-        dotsRender: PropTypes.func,
-        draggable: PropTypes.bool,
-        infinite: PropTypes.bool,
-        defaultActiveIndex: PropTypes.number,
-        lazyLoad: PropTypes.bool,
-        slide: PropTypes.string,
-        slideDirection: PropTypes.oneOf(['hoz', 'ver']),
-        slidesToShow: PropTypes.number,
-        slidesToScroll: PropTypes.number,
-        speed: PropTypes.number,
-        activeIndex: PropTypes.number,
-        triggerType: PropTypes.oneOf(['click', 'hover']),
-        onChange: PropTypes.func,
-        onBeforeChange: PropTypes.func, // 兼容 0.x onBeforeChange
-        children: PropTypes.any,
-        style: PropTypes.object,
-        centerPadding: PropTypes.string,
-        cssEase: PropTypes.string, // used
-        edgeFriction: PropTypes.number, // 非无限轮播滑动到边缘时的阻力
-        focusOnSelect: PropTypes.bool,
-        pauseOnHover: PropTypes.bool, // 鼠标经过时停止播放
-        swipe: PropTypes.bool,
-        swipeToSlide: PropTypes.bool,
-        touchMove: PropTypes.bool,
-        touchThreshold: PropTypes.number,
-        useCSS: PropTypes.bool,
-        variableWidth: PropTypes.bool, // used
-        waitForAnimate: PropTypes.bool,
-        edgeEvent: PropTypes.any,
-        swipeEvent: PropTypes.any,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         animation: 'slide',

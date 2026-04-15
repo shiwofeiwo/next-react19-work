@@ -1,11 +1,10 @@
 import React, { type UIEvent } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PT from 'prop-types';
+
 import classnames from 'classnames';
 import { type Dayjs, type ConfigType } from 'dayjs';
 import defaultLocale from '../locale/zh-cn';
 import { func, datejs, obj, type ClassPropsWithDefault } from '../util';
-import SharedPT from './prop-types';
 
 import { CALENDAR_MODE, CALENDAR_SHAPE, DATE_PANEL_MODE } from './constant';
 import HeaderPanel from './panels/header-panel';
@@ -100,36 +99,6 @@ function isValueChanged(newVal: ConfigType, oldVal: ConfigType) {
 type CalendarPropsWithDefault = ClassPropsWithDefault<CalendarProps, typeof Calendar.defaultProps>;
 
 class Calendar extends React.Component<CalendarProps, CalendarState> {
-    static propTypes = {
-        rtl: PT.bool,
-        name: PT.string,
-        prefix: PT.string,
-        locale: PT.object,
-        shape: SharedPT.shape,
-        mode: SharedPT.mode,
-        value: SharedPT.date,
-        defaultValue: SharedPT.date,
-        panelValue: SharedPT.date,
-        defaultPanelValue: SharedPT.date,
-        disabledDate: PT.func,
-        dateCellRender: PT.func,
-        quarterCellRender: PT.func,
-        monthCellRender: PT.func,
-        yearCellRender: PT.func,
-        headerRender: PT.func,
-        onChange: PT.func,
-        onSelect: PT.func,
-        onPanelChange: PT.func,
-        cellProps: PT.object,
-        cellClassName: PT.oneOfType([PT.func, PT.string]),
-        panelMode: PT.any,
-        onPrev: PT.func,
-        onNext: PT.func,
-        onSuperPrev: PT.func,
-        onSuperNext: PT.func,
-        colNum: PT.number,
-    };
-
     static defaultProps = {
         rtl: false,
         prefix: 'next-',

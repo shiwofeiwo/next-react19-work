@@ -1,5 +1,4 @@
 import React, { type Key, type ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
@@ -29,21 +28,6 @@ class Collapse extends React.Component<
         expandedKeys: KeyType[];
     }
 > {
-    static propTypes = {
-        prefix: PropTypes.string,
-        style: PropTypes.object,
-        dataSource: PropTypes.array,
-        defaultExpandedKeys: PropTypes.array,
-        expandedKeys: PropTypes.array,
-        onExpand: PropTypes.func,
-        disabled: PropTypes.bool,
-        className: PropTypes.string,
-        accordion: PropTypes.bool,
-        children: PropTypes.node,
-        id: PropTypes.string,
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         accordion: false,
         prefix: 'next-',

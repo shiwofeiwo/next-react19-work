@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from '../button';
 import { func, obj } from '../util';
 import FormContext from './context';
@@ -9,13 +8,6 @@ const SUBMIT_PROP_KEYS = ['onClick', 'validate', 'field', 'children'];
 
 class Submit extends React.Component<SubmitProps> {
     static displayName = 'Submit';
-    static propTypes = {
-        onClick: PropTypes.func,
-        validate: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-        field: PropTypes.object,
-        children: PropTypes.node,
-    };
-
     static defaultProps = {
         onClick: func.noop,
     };

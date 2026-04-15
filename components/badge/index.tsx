@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import { obj } from '../util';
@@ -25,41 +24,6 @@ const BADGE_PROP_KEYS = [
  * Badge
  */
 class Badge extends Component<BadgeProps> {
-    static propTypes = {
-        // 样式类名的品牌前缀
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        // 自定义类名
-        className: PropTypes.string,
-        // 自定义内联样式
-        style: PropTypes.object,
-        /**
-         * 徽标依托的内容，一般显示在其右上方
-         */
-        children: PropTypes.node,
-        /**
-         * 展示的数字，大于 `overflowCount` 时显示为 `${overflowCount}+`，为 `0` 时默认隐藏
-         */
-        count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        /**
-         * 当`count`为`0`时，是否显示 count
-         * @version 1.16
-         */
-        showZero: PropTypes.bool,
-        /**
-         * 自定义徽标中的内容
-         */
-        content: PropTypes.node,
-        /**
-         * 展示的封顶的数字
-         */
-        overflowCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        /**
-         * 不展示数字，只展示一个小红点
-         */
-        dot: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         count: 0,

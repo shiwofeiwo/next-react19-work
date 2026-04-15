@@ -5,7 +5,6 @@ import React, {
     type FocusEvent,
     type KeyboardEvent,
 } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
@@ -17,37 +16,6 @@ class Base<
     P extends BaseProps = BaseProps,
     S extends BaseState = BaseState,
 > extends React.Component<P, S> {
-    static propTypes = {
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        onChange: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        disabled: PropTypes.bool,
-        maxLength: PropTypes.number,
-        showLimitHint: PropTypes.bool,
-        cutString: PropTypes.bool,
-        readOnly: PropTypes.bool,
-        trim: PropTypes.bool,
-        placeholder: PropTypes.string,
-        onFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        getValueLength: PropTypes.func,
-        inputStyle: PropTypes.object,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        htmlType: PropTypes.string,
-        name: PropTypes.string,
-        rtl: PropTypes.bool,
-        state: PropTypes.oneOf(['error', 'loading', 'success', 'warning']),
-        locale: PropTypes.object,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        composition: PropTypes.bool,
-        onCompositionStart: PropTypes.func,
-        onCompositionEnd: PropTypes.func,
-    };
-
     static defaultProps: Omit<BaseProps, 'state'> = {
         disabled: false,
         prefix: 'next-',

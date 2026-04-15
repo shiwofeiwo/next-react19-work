@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Checkbox from '../../checkbox';
 import Search from '../../search';
@@ -25,35 +24,6 @@ export default class TransferPanel extends Component<TransferPanelProps, Transfe
     searched: boolean;
     list: ListRef;
     enabledDatasource: TransferDataItem[];
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        position: PropTypes.oneOf(['left', 'right']),
-        mode: PropTypes.oneOf(['normal', 'simple']),
-        dataSource: PropTypes.array,
-        value: PropTypes.array,
-        onChange: PropTypes.func,
-        onMove: PropTypes.func,
-        onMoveAll: PropTypes.func,
-        disabled: PropTypes.bool,
-        locale: PropTypes.object,
-        title: PropTypes.node,
-        showSearch: PropTypes.bool,
-        searchProps: PropTypes.object,
-        filter: PropTypes.func,
-        onSearch: PropTypes.func,
-        searchPlaceholder: PropTypes.string,
-        notFoundContent: PropTypes.node,
-        listClassName: PropTypes.string,
-        listStyle: PropTypes.object,
-        itemRender: PropTypes.func,
-        sortable: PropTypes.bool,
-        onSort: PropTypes.func,
-        baseId: PropTypes.string,
-        customerList: PropTypes.func,
-        useVirtual: PropTypes.bool,
-        showCheckAll: PropTypes.bool,
-    };
 
     constructor(props: TransferPanelProps, context: unknown) {
         super(props, context);

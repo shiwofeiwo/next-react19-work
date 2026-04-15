@@ -5,7 +5,6 @@ import React, {
     type KeyboardEvent,
     type SyntheticEvent,
 } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
@@ -128,57 +127,6 @@ const RANGE_PICKER_PROP_KEYS = [
  */
 class RangePicker extends Component<RangePickerProps, RangePickerState> {
     static displayName = 'RangePicker';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        type: PropTypes.oneOf(['date', 'month', 'year']),
-        defaultVisibleMonth: PropTypes.func,
-        onVisibleMonthChange: PropTypes.func,
-        value: PropTypes.array,
-        defaultValue: PropTypes.array,
-        format: PropTypes.string,
-        showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        resetTime: PropTypes.bool,
-        disabledDate: PropTypes.func,
-        footerRender: PropTypes.func,
-        onChange: PropTypes.func,
-        onOk: PropTypes.func,
-        label: PropTypes.node,
-        state: PropTypes.oneOf(['error', 'loading', 'success']),
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        disabled: PropTypes.bool,
-        hasClear: PropTypes.bool,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        popupAlign: PropTypes.string,
-        popupContainer: PropTypes.any,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        inputProps: PropTypes.object,
-        dateCellRender: PropTypes.func,
-        monthCellRender: PropTypes.func,
-        yearCellRender: PropTypes.func,
-        startDateInputAriaLabel: PropTypes.string,
-        startTimeInputAriaLabel: PropTypes.string,
-        endDateInputAriaLabel: PropTypes.string,
-        endTimeInputAriaLabel: PropTypes.string,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        disableChangeMode: PropTypes.bool,
-        yearRange: PropTypes.arrayOf(PropTypes.number),
-        ranges: PropTypes.object,
-        locale: PropTypes.object,
-        className: PropTypes.string,
-        name: PropTypes.string,
-        popupComponent: PropTypes.elementType,
-        popupContent: PropTypes.node,
-        placeholder: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

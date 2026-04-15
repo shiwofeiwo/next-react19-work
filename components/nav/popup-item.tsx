@@ -1,5 +1,4 @@
 import React, { Component, cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
 import Icon from '../icon';
@@ -12,13 +11,6 @@ import type { PopupItemProps } from './types';
  */
 class PopupItem extends Component<PopupItemProps> {
     static menuChildType = 'submenu';
-
-    static propTypes = {
-        className: PropTypes.string,
-        icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-        label: PropTypes.node,
-        children: PropTypes.node,
-    };
 
     static contextType = NavContext;
 

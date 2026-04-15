@@ -5,7 +5,6 @@ import React, {
     type ReactElement,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Icon from '../../icon';
 import Overlay from '../../overlay';
@@ -31,27 +30,6 @@ interface NavState {
 type AnimateInstanceType = InstanceType<typeof Animate>;
 class Nav extends React.Component<NavProps, NavState> {
     static displayName = 'Nav';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        animation: PropTypes.bool,
-        activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        excessMode: PropTypes.string,
-        extra: PropTypes.any,
-        tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-        tabPosition: PropTypes.string,
-        tabRender: PropTypes.func,
-        triggerType: PropTypes.string,
-        popupProps: PropTypes.object,
-        onTriggerEvent: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        onClose: PropTypes.func,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        locale: PropTypes.object,
-        icons: PropTypes.object,
-    };
-
     scroller: HTMLElement;
     scrollTimer: number;
     nav: HTMLUListElement;

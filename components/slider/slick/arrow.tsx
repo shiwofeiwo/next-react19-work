@@ -1,5 +1,4 @@
 import React, { Component, type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../../icon';
 import { obj, func } from '../../util';
@@ -32,25 +31,6 @@ const ARROW_PROP_KEYS = [
 ];
 
 export default class Arrow extends Component<ArrowProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        type: PropTypes.oneOf(['prev', 'next']).isRequired,
-        centerMode: PropTypes.bool,
-        currentSlide: PropTypes.number,
-        infinite: PropTypes.bool,
-        clickHandler: PropTypes.func,
-        slideCount: PropTypes.number,
-        slidesToShow: PropTypes.number,
-        arrow: PropTypes.element,
-        arrowSize: PropTypes.string,
-        arrowPosition: PropTypes.string,
-        arrowDirection: PropTypes.oneOf(['hoz', 'ver']),
-        onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        children: PropTypes.node,
-    };
-
     static defaultProps = {
         onMouseEnter: noop,
         onMouseLeave: noop,

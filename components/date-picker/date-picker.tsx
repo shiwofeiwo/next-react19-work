@@ -1,5 +1,4 @@
 import React, { Component, type HTMLAttributes, type KeyboardEvent, type UIEvent } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
@@ -79,53 +78,6 @@ const DATE_PICKER_PROP_KEYS = [
  * DatePicker
  */
 class DatePicker extends Component<DatePickerProps, DatePickerState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        label: PropTypes.node,
-        state: PropTypes.oneOf(['success', 'loading', 'error']),
-        placeholder: PropTypes.string,
-        defaultVisibleMonth: PropTypes.func,
-        onVisibleMonthChange: PropTypes.func,
-        value: checkDateValue,
-        defaultValue: checkDateValue,
-        format: PropTypes.string,
-        showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        resetTime: PropTypes.bool,
-        disabledDate: PropTypes.func,
-        footerRender: PropTypes.func,
-        onChange: PropTypes.func,
-        onOk: PropTypes.func,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        disabled: PropTypes.bool,
-        hasClear: PropTypes.bool,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        popupAlign: PropTypes.string,
-        popupContainer: PropTypes.any,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        inputProps: PropTypes.object,
-        dateCellRender: PropTypes.func,
-        monthCellRender: PropTypes.func,
-        yearCellRender: PropTypes.func,
-        dateInputAriaLabel: PropTypes.string,
-        timeInputAriaLabel: PropTypes.string,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        locale: PropTypes.object,
-        className: PropTypes.string,
-        name: PropTypes.string,
-        popupComponent: PropTypes.elementType,
-        popupContent: PropTypes.node,
-        disableChangeMode: PropTypes.bool,
-        yearRange: PropTypes.arrayOf(PropTypes.number),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

@@ -1,5 +1,4 @@
 import React, { type JSX } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import { TextProps } from './types';
@@ -7,17 +6,6 @@ import { TextProps } from './types';
  * Typography.Text
  */
 class Text extends React.Component<TextProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        delete: PropTypes.bool,
-        mark: PropTypes.bool,
-        underline: PropTypes.bool,
-        strong: PropTypes.bool,
-        code: PropTypes.bool,
-        component: PropTypes.elementType,
-        children: PropTypes.node,
-        rtl: PropTypes.bool,
-    };
     static defaultProps = {
         prefix: 'next-',
         delete: false,

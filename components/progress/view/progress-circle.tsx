@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import type { ProgressCircleState } from '../types';
 import { type ProgressWithDefaultProps } from './progress';
@@ -13,18 +12,6 @@ const DEFAULT_STROKE_WIDTH = 8;
 const viewBox = `0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_WIDTH}`;
 
 export default class Circle extends Component<ProgressCircleProps, ProgressCircleState> {
-    static propTypes = {
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        percent: PropTypes.number,
-        state: PropTypes.oneOf(['normal', 'success', 'error']),
-        progressive: PropTypes.bool,
-        textRender: PropTypes.func,
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        color: PropTypes.string,
-        backgroundColor: PropTypes.string,
-        rtl: PropTypes.bool,
-    };
     underlay: SVGPathElement | null;
     overlay: SVGPathElement | null;
 

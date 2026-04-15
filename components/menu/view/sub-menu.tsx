@@ -8,7 +8,6 @@ import React, {
     type HTMLAttributes,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Animate from '../../animate';
 import Icon, { type IconProps } from '../../icon';
@@ -51,26 +50,6 @@ export type SubMenuInMenuProps = ChildPropsInMenu<SubMenuWithDefaultsProps>;
 
 export default class SubMenu extends Component<SubMenuProps> {
     static menuChildType = 'submenu';
-
-    static propTypes = {
-        _key: PropTypes.string,
-        root: PropTypes.object,
-        level: PropTypes.number,
-        inlineLevel: PropTypes.number,
-        groupIndent: PropTypes.number,
-        label: PropTypes.node,
-        selectable: PropTypes.bool,
-        mode: PropTypes.oneOf(['inline', 'popup']),
-        noIcon: PropTypes.bool,
-        children: PropTypes.node,
-        onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        subMenuContentClassName: PropTypes.string,
-        triggerType: PropTypes.oneOf(['click', 'hover']),
-        align: PropTypes.oneOf(['outside', 'follow']),
-        parentMode: PropTypes.oneOf(['inline', 'popup']),
-        parent: PropTypes.any,
-    };
 
     static defaultProps = {
         groupIndent: 0,

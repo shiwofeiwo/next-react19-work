@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import type { CommonProps } from '../../util/types';
 
@@ -11,13 +10,6 @@ export interface TreeNodeIndentProps {
 export default class TreeNodeIndent extends Component<
     TreeNodeIndentProps & Pick<CommonProps, 'prefix'>
 > {
-    static propTypes = {
-        prefix: PropTypes.string,
-        level: PropTypes.number,
-        isLastChild: PropTypes.arrayOf(PropTypes.bool),
-        showLine: PropTypes.bool,
-    };
-
     static defaultProps = {
         isLastChild: [],
     };

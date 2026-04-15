@@ -6,7 +6,6 @@ import React, {
     type UIEvent,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { func, dom, events, obj } from '../util';
 import Menu, { type ItemProps, type MenuProps } from '../menu';
@@ -48,49 +47,6 @@ export default class Base<
     P extends BaseProps = BaseProps,
     S extends BaseState = BaseState,
 > extends React.Component<P, S> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        value: PropTypes.any,
-        defaultValue: PropTypes.any,
-        placeholder: PropTypes.string,
-        autoWidth: PropTypes.bool,
-        label: PropTypes.node,
-        hasClear: PropTypes.bool,
-        state: PropTypes.oneOf(['error', 'loading', 'success', 'warning']),
-        readOnly: PropTypes.bool,
-        disabled: PropTypes.bool,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupContainer: PropTypes.any,
-        popupClassName: PropTypes.any,
-        popupStyle: PropTypes.object,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        popupContent: PropTypes.node,
-        menuProps: PropTypes.object,
-        filterLocal: PropTypes.bool,
-        filter: PropTypes.func,
-        defaultHighlightKey: PropTypes.string,
-        highlightKey: PropTypes.string,
-        onToggleHighlightItem: PropTypes.func,
-        autoHighlightFirstItem: PropTypes.bool,
-        useVirtual: PropTypes.bool,
-        className: PropTypes.any,
-        children: PropTypes.any,
-        dataSource: PropTypes.array,
-        itemRender: PropTypes.func,
-        mode: PropTypes.string,
-        notFoundContent: PropTypes.node,
-        locale: PropTypes.object,
-        rtl: PropTypes.bool,
-        popupComponent: PropTypes.any,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        showDataSourceChildren: PropTypes.bool,
-    };
-
     static defaultProps: BaseProps = {
         prefix: 'next-',
         size: 'medium',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Icon from '../icon';
@@ -45,37 +44,6 @@ const SPLIT_BUTTON_PROP_KEYS = [
 ];
 
 class SplitButton extends React.Component<SplitButtonProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        style: PropTypes.object,
-        type: PropTypes.oneOf(['normal', 'primary', 'secondary']),
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        label: PropTypes.node,
-        component: PropTypes.oneOf(['button', 'a']),
-        ghost: PropTypes.oneOf(['light', 'dark', false, true]),
-        defaultSelectedKeys: PropTypes.array,
-        selectedKeys: PropTypes.array,
-        selectMode: PropTypes.oneOf(['single', 'multiple']),
-        onSelect: PropTypes.func,
-        onItemClick: PropTypes.func,
-        triggerProps: PropTypes.object,
-        autoWidth: PropTypes.bool,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        popupAlign: PropTypes.string,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        popupContainer: PropTypes.any,
-        followTrigger: PropTypes.bool,
-        menuProps: PropTypes.object,
-        leftButtonProps: PropTypes.object,
-        className: PropTypes.string,
-        children: PropTypes.any,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         type: 'normal',

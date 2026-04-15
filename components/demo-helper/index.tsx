@@ -1,6 +1,5 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import md5 from 'md5';
 
@@ -55,11 +54,6 @@ class DisplaySwitch extends React.Component<{
     onClick: React.MouseEventHandler;
     hidden?: boolean;
 }> {
-    static propTypes = {
-        onClick: PropTypes.func,
-        hidden: PropTypes.bool,
-    };
-
     static defaultProps = {
         onClick: () => {},
     };
@@ -194,25 +188,6 @@ interface DemoState {
 
 class Demo extends React.Component<DemoProps, DemoState> {
     static displayName = 'Demo';
-
-    static propTypes = {
-        parentDisplayName: PropTypes.string,
-        defaultBackground: PropTypes.oneOf(['dark', 'light']),
-        title: PropTypes.string,
-        block: PropTypes.bool,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        demoIndex: PropTypes.string,
-        demoItems: PropTypes.object,
-        demoScope: PropTypes.object,
-        demoTitle: PropTypes.string,
-        showType: PropTypes.string,
-        switchVisible: PropTypes.func,
-        switchBackground: PropTypes.bool,
-        demoFunction: PropTypes.object,
-        onFunctionChange: PropTypes.func,
-        style: PropTypes.object,
-    };
 
     static defaultProps = {
         defaultBackground: 'light',
@@ -556,21 +531,6 @@ interface DemoGroupProps extends BaseProps {
 class DemoGroup extends React.Component<DemoGroupProps> {
     static displayName = 'DemoGroup';
 
-    static propTypes = {
-        label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        block: PropTypes.bool,
-        height: PropTypes.string,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        demoIndex: PropTypes.string,
-        demoItems: PropTypes.object,
-        demoScope: PropTypes.object,
-        demoTitle: PropTypes.string,
-        demoShapeLevel: PropTypes.string,
-        showType: PropTypes.string,
-        switchVisible: PropTypes.func,
-    };
-
     static defaultProps = {
         block: false,
         height: '',
@@ -705,18 +665,6 @@ interface DemoHeadProps extends BaseProps {
 
 class DemoHead extends React.Component<DemoHeadProps> {
     static displayName = 'DemoHead';
-
-    static propTypes = {
-        cols: PropTypes.array,
-        theme: PropTypes.object,
-        demoIndex: PropTypes.string,
-        demoItems: PropTypes.object,
-        demoScope: PropTypes.object,
-        demoTitle: PropTypes.string,
-        demoShapeLevel: PropTypes.string,
-        showType: PropTypes.string,
-        switchVisible: PropTypes.func,
-    };
 
     static defaultProps = {
         cols: [],

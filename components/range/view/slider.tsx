@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import { getPercent } from '../utils';
 import type { RangeSliderProps } from '../types';
 
@@ -35,15 +34,6 @@ function Slider({ prefix, hasMovingClass, min, max, value, onKeyDown, rtl }: Ran
         </div>
     );
 }
-
-Slider.propTypes = {
-    min: PropTypes.number,
-    max: PropTypes.number,
-    value: PropTypes.number,
-    prefix: PropTypes.string,
-    hasMovingClass: PropTypes.bool,
-    rtl: PropTypes.bool,
-};
 
 Slider.defaultProps = {
     prefix: 'next-',

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import * as PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Button from '../button';
@@ -45,30 +44,6 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
     static Group = Menu.Group;
     static Divider = Menu.Divider;
     static displayName = 'MenuButton';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        label: PropTypes.node,
-        autoWidth: PropTypes.bool,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        popupContainer: PropTypes.any,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        defaultSelectedKeys: PropTypes.array,
-        selectedKeys: PropTypes.array,
-        selectMode: PropTypes.oneOf(['single', 'multiple']),
-        onItemClick: PropTypes.func,
-        onSelect: PropTypes.func,
-        menuProps: PropTypes.object,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        children: PropTypes.any,
-    };
 
     static defaultProps = {
         prefix: 'next-',

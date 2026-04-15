@@ -7,7 +7,6 @@ import React, {
     type MouseEvent,
 } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ConfigProvider from '../config-provider';
 import Icon from '../icon';
@@ -78,44 +77,6 @@ type PaginationPropsWithDefault = ClassPropsWithDefault<
  */
 class Pagination extends Component<PaginationProps, PaginationState> {
     static displayName = 'Pagination';
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        device: PropTypes.oneOf(['desktop', 'tablet', 'phone']),
-        className: PropTypes.string,
-        locale: PropTypes.object,
-        type: PropTypes.oneOf(['normal', 'simple', 'mini']),
-        shape: PropTypes.oneOf(['normal', 'arrow-only', 'arrow-prev-only', 'no-border']),
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        current: PropTypes.number,
-        defaultCurrent: PropTypes.number,
-        onChange: PropTypes.func,
-        total: PropTypes.number,
-        totalRender: PropTypes.func,
-        pageShowCount: PropTypes.number,
-        pageSize: PropTypes.number,
-        pageSizeSelector: PropTypes.oneOf([false, 'filter', 'dropdown']),
-        pageSizeList: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.number),
-            PropTypes.arrayOf(
-                PropTypes.shape({
-                    label: PropTypes.string,
-                    value: PropTypes.number,
-                })
-            ),
-        ]),
-        pageNumberRender: PropTypes.func,
-        pageSizePosition: PropTypes.oneOf(['start', 'end']),
-        useFloatLayout: PropTypes.bool,
-        onPageSizeChange: PropTypes.func,
-        hideOnlyOnePage: PropTypes.bool,
-        showJump: PropTypes.bool,
-        link: PropTypes.string,
-        popupProps: PropTypes.object,
-        selectProps: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         pure: false,

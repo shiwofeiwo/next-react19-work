@@ -1,6 +1,5 @@
 import React, { Children } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
@@ -16,56 +15,6 @@ export default function expanded(BaseComponent, stickyLock) {
     /** Table */
     class ExpandedTable extends React.Component {
         static ExpandedRow = RowComponent;
-        static propTypes = {
-            /**
-             * 额外渲染行的渲染函数
-             * @param {Object} record 该行所对应的数据
-             * @param {Number} index 该行所对应的序列
-             * @returns {Element}
-             */
-            expandedRowRender: PropTypes.func,
-            /**
-             * 设置行是否可展开，设置 false 为不可展开
-             * @param {Object} record 该行所对应的数据
-             * @param {Number} index 该行所对应的序列
-             * @returns {Boolean} 是否可展开
-             * @version 1.21
-             */
-            rowExpandable: PropTypes.func,
-            /**
-             * 额外渲染行的缩进
-             */
-            expandedRowIndent: PropTypes.array,
-            /**
-             * 默认情况下展开的渲染行或者Tree, 传入此属性为受控状态
-             */
-            openRowKeys: PropTypes.array,
-            /**
-             * 默认情况下展开的 Expand行 或者 Tree行，非受控模式
-             * @version 1.23.22
-             */
-            defaultOpenRowKeys: PropTypes.array,
-            /**
-             * 是否显示点击展开额外渲染行的+号按钮
-             */
-            hasExpandedRowCtrl: PropTypes.bool,
-            /**
-             * 设置额外渲染行的属性
-             */
-            getExpandedColProps: PropTypes.func,
-            /**
-             * 在额外渲染行或者Tree展开或者收起的时候触发的事件
-             * @param {Array} openRowKeys 展开的渲染行的key
-             * @param {String} currentRowKey 当前点击的渲染行的key
-             * @param {Boolean} expanded 当前点击是展开还是收起
-             * @param {Object} currentRecord 当前点击额外渲染行的记录
-             */
-            onRowOpen: PropTypes.func,
-            onExpandedRowClick: PropTypes.func,
-            locale: PropTypes.object,
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             ...BaseComponent.defaultProps,
             getExpandedColProps: noop,

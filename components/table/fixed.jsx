@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import { dom } from '../util';
@@ -15,22 +14,6 @@ export default function fixed(BaseComponent, stickyLock) {
         static FixedHeader = HeaderComponent;
         static FixedBody = BodyComponent;
         static FixedWrapper = WrapperComponent;
-        static propTypes = {
-            /**
-             * 是否具有表头
-             */
-            hasHeader: PropTypes.bool,
-            /**
-             * 表头是否固定，该属性配合maxBodyHeight使用，当内容区域的高度超过maxBodyHeight的时候，在内容区域会出现滚动条
-             */
-            fixedHeader: PropTypes.bool,
-            /**
-             * 最大内容区域的高度,在`fixedHeader`为`true`的时候,超过这个高度会出现滚动条
-             */
-            maxBodyHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             ...BaseComponent.defaultProps,
             hasHeader: true,

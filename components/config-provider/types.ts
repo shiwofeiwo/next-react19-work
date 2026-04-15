@@ -1,4 +1,3 @@
-import type * as PropTypes from 'prop-types';
 import type { ErrorInfo, JSXElementConstructor, Component, PropsWithChildren } from 'react';
 import type * as React from 'react';
 import type { ComponentLocaleObject, Locale } from '../locale/types';
@@ -193,9 +192,7 @@ export interface ConfiguredComponent<P, R> extends Component<P> {
 export interface ConfiguredComponentClass<P, R, OP> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     new (props: P, context?: any): ConfiguredComponent<P, R> & OP;
-    propTypes: PropTypes.WeakValidationMap<P> | undefined;
     displayName: string;
-    contextTypes: PropTypes.ValidationMap<ContextState> | undefined;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types

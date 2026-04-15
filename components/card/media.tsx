@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import { log } from '../util';
@@ -11,24 +10,6 @@ const MEDIA_COMPONENTS = ['video', 'audio', 'picture', 'iframe', 'img'];
 
 class CardMedia extends Component<CardMediaProps> {
     static displayName = 'CardMedia';
-    static propTypes = {
-        prefix: PropTypes.string,
-        /**
-         * 设置标签类型
-         */
-        component: PropTypes.elementType,
-        /**
-         * 背景图片地址
-         */
-        image: PropTypes.string,
-        /**
-         * 媒体源文件地址
-         */
-        src: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         component: 'div',

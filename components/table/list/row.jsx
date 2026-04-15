@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { log } from '../../util';
 import Row from '../base/row';

@@ -1,6 +1,5 @@
 import React, { Component, type MouseEvent, type KeyboardEvent, type ReactElement } from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
 import Affix from '../affix';
@@ -24,13 +23,6 @@ export default function ShellBase(props: { componentName?: string }) {
         static displayName = componentName;
 
         static _typeMark = componentName;
-
-        static propTypes = {
-            prefix: PropTypes.string,
-            device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
-            type: PropTypes.oneOf(['light', 'dark', 'brand']),
-            fixedHeader: PropTypes.bool,
-        };
 
         static defaultProps = {
             prefix: 'next-',

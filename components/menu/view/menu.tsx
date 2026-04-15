@@ -11,7 +11,6 @@ import React, {
     type KeyboardEvent,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import SubMenu from './sub-menu';
@@ -321,55 +320,6 @@ export type MenuPropsWithDefaults = ClassPropsWithDefault<MenuProps, typeof Menu
 
 export class Menu extends Component<MenuProps, MenuState> {
     static isNextMenu = true;
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        onItemClick: PropTypes.func,
-        openKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        defaultOpenKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        defaultOpenAll: PropTypes.bool,
-        onOpen: PropTypes.func,
-        mode: PropTypes.oneOf(['inline', 'popup']),
-        triggerType: PropTypes.oneOf(['click', 'hover']),
-        openMode: PropTypes.oneOf(['single', 'multiple']),
-        inlineIndent: PropTypes.number,
-        inlineArrowDirection: PropTypes.oneOf(['down', 'right']),
-        popupAutoWidth: PropTypes.bool,
-        popupAlign: PropTypes.oneOf(['follow', 'outside']),
-        popupProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-        popupClassName: PropTypes.string,
-        popupStyle: PropTypes.object,
-        selectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        defaultSelectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        onSelect: PropTypes.func,
-        selectMode: PropTypes.oneOf(['single', 'multiple']),
-        shallowSelect: PropTypes.bool,
-        hasSelectedIcon: PropTypes.bool,
-        labelToggleChecked: PropTypes.bool,
-        isSelectIconRight: PropTypes.bool,
-        direction: PropTypes.oneOf(['ver', 'hoz']),
-        hozAlign: PropTypes.oneOf(['left', 'right']),
-        hozInLine: PropTypes.bool,
-        renderMore: PropTypes.func,
-        header: PropTypes.node,
-        footer: PropTypes.node,
-        footerWrapperClassName: PropTypes.string,
-        autoFocus: PropTypes.bool,
-        focusedKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-        focusable: PropTypes.bool,
-        onItemFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        embeddable: PropTypes.bool,
-        onItemKeyDown: PropTypes.func,
-        expandAnimation: PropTypes.bool,
-        itemClassName: PropTypes.string,
-        icons: PropTypes.object,
-        flatenContent: PropTypes.bool,
-    };
 
     static defaultProps = {
         prefix: 'next-',

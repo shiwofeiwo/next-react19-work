@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../icon';
 import zhCN from '../locale/zh-cn';
@@ -37,26 +36,6 @@ interface ariaRoleProps {
 }
 
 export default class Inner extends Component<InnerProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        closeable: PropTypes.bool,
-        role: PropTypes.string,
-        title: PropTypes.node,
-        placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-        rtl: PropTypes.bool,
-        onClose: PropTypes.func,
-        locale: PropTypes.object,
-        headerStyle: PropTypes.object,
-        bodyStyle: PropTypes.object,
-        afterClose: PropTypes.func,
-        beforeOpen: PropTypes.func,
-        beforeClose: PropTypes.func,
-        cache: PropTypes.bool,
-        shouldUpdatePosition: PropTypes.bool,
-        v2: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         closeable: true,

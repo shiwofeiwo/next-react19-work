@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import UIState, { type UIStateState } from '../mixin-ui-state';
@@ -67,27 +66,6 @@ export interface PrivateCheckboxProps extends CheckboxProps {
  */
 class Checkbox extends UIState<PrivateCheckboxProps, CheckboxState> {
     static displayName = 'Checkbox';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        id: PropTypes.string,
-        style: PropTypes.object,
-        checked: PropTypes.bool,
-        defaultChecked: PropTypes.bool,
-        disabled: PropTypes.bool,
-        label: PropTypes.node,
-        indeterminate: PropTypes.bool,
-        defaultIndeterminate: PropTypes.bool,
-        onChange: PropTypes.func,
-        onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-        name: PropTypes.string,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-    };
-
     static defaultProps = {
         defaultChecked: false,
         defaultIndeterminate: false,

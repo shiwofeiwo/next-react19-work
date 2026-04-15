@@ -1,13 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Row from '../base/row';
 import TableContext from '../context';
 
 export default class LockRow extends React.Component {
-    static propTypes = {
-        ...Row.propTypes,
-    };
-
     static contextType = TableContext;
 
     static defaultProps = {

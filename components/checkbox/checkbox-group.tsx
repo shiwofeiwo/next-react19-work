@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { obj } from '../util';
@@ -29,35 +28,6 @@ const CHECKBOX_GROUP_PROP_KEYS = [
 /** Checkbox.Group */
 class CheckboxGroup extends React.Component<GroupProps, GroupState> {
     static displayName = 'CheckboxGroup';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        disabled: PropTypes.bool,
-        dataSource: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.string),
-            PropTypes.arrayOf(PropTypes.object),
-        ]),
-        value: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.string,
-            PropTypes.number,
-            PropTypes.bool,
-        ]),
-        defaultValue: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.string,
-            PropTypes.number,
-            PropTypes.bool,
-        ]),
-        children: PropTypes.arrayOf(PropTypes.element),
-        onChange: PropTypes.func,
-        direction: PropTypes.oneOf(['hoz', 'ver']),
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-    };
 
     static defaultProps = {
         dataSource: [],

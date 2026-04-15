@@ -1,5 +1,4 @@
 import React, { type ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import UIState, { type UIStateState } from '../mixin-ui-state';
@@ -45,23 +44,6 @@ interface RadioState extends UIStateState {
 
 class Radio extends UIState<RadioWithContextProps, RadioState> {
     static displayName = 'Radio';
-    static propTypes = {
-        className: PropTypes.string,
-        id: PropTypes.string,
-        style: PropTypes.object,
-        checked: PropTypes.bool,
-        defaultChecked: PropTypes.bool,
-        label: PropTypes.node,
-        onChange: PropTypes.func,
-        onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        disabled: PropTypes.bool,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-        name: PropTypes.string,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-    };
-
     static defaultProps = {
         onChange: noop,
         onMouseLeave: noop,

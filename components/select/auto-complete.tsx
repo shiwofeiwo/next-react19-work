@@ -1,5 +1,4 @@
 import React, { type ChangeEvent, type KeyboardEvent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 
@@ -69,29 +68,6 @@ export interface AutoCompleteState extends BaseState {
  * Select.AutoComplete
  */
 class AutoComplete extends Base<AutoCompleteProps, AutoCompleteState> {
-    static propTypes = {
-        ...Base.propTypes,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        onChange: PropTypes.func,
-        dataSource: PropTypes.arrayOf(
-            PropTypes.oneOfType([
-                PropTypes.shape({
-                    value: PropTypes.string,
-                    label: PropTypes.any,
-                    disabled: PropTypes.bool,
-                    children: PropTypes.array,
-                }),
-                PropTypes.string,
-            ])
-        ),
-        fillProps: PropTypes.string,
-        itemRender: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        highlightHolder: PropTypes.bool,
-        style: PropTypes.object,
-    };
-
     static defaultProps = {
         ...Base.defaultProps,
         onKeyDown: noop,

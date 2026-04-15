@@ -1,5 +1,4 @@
 import React, { Component, type ReactElement, type MouseEvent, type CSSProperties } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { dom } from '../../util';
 import type { OptionProps, TrackProps } from '../types';
@@ -188,11 +187,6 @@ const renderSlides = (specProps: TrackProps) => {
 };
 
 export default class Track extends Component<TrackProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        trackStyle: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
     };

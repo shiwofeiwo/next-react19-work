@@ -1,5 +1,4 @@
 import React, { isValidElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import { type SearchProps } from './types';
@@ -59,68 +58,6 @@ export interface SearchState {
  *  输入框部分继承 Select.AutoComplete 的能力，可以直接用 AutoComplete 的 api
  */
 class Search extends React.Component<SearchProps, SearchState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-
-        shape: PropTypes.oneOf(['normal', 'simple']),
-
-        type: PropTypes.oneOf(['primary', 'secondary', 'normal', 'dark']),
-
-        size: PropTypes.oneOf(['large', 'medium']),
-
-        defaultValue: PropTypes.string,
-
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-        onChange: PropTypes.func,
-
-        onSearch: PropTypes.func,
-
-        defaultFilterValue: PropTypes.string,
-
-        fillProps: PropTypes.string,
-
-        filter: PropTypes.array,
-
-        filterValue: PropTypes.string,
-
-        onFilterChange: PropTypes.func,
-
-        dataSource: PropTypes.array,
-
-        placeholder: PropTypes.string,
-
-        searchText: PropTypes.node,
-
-        style: PropTypes.object,
-
-        className: PropTypes.string,
-
-        filterProps: PropTypes.object,
-
-        buttonProps: PropTypes.object,
-
-        popupContent: PropTypes.node,
-
-        followTrigger: PropTypes.bool,
-
-        visible: PropTypes.bool,
-
-        hasClear: PropTypes.bool,
-
-        hasIcon: PropTypes.bool,
-
-        disabled: PropTypes.bool,
-        locale: PropTypes.object,
-        rtl: PropTypes.bool,
-
-        icons: PropTypes.object,
-
-        autoHighlightFirstItem: PropTypes.bool,
-
-        onToggleHighlightItem: PropTypes.func,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         shape: 'normal',

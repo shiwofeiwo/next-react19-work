@@ -1,16 +1,10 @@
 import React, { Component, ErrorInfo, ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import { ErrorBoundaryConfig } from './types';
 
 function DefaultUI() {
     // fixme: string is not a valid react component return type
     return '' as unknown as ReactElement<any>;
 }
-
-DefaultUI.propTypes = {
-    error: PropTypes.object,
-    errorInfo: PropTypes.object,
-};
 
 export type ErrorBoundaryProps = ErrorBoundaryConfig;
 
@@ -20,12 +14,6 @@ interface ErrorBoundaryState {
 }
 
 export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-    static propTypes = {
-        children: PropTypes.element,
-        afterCatch: PropTypes.func,
-        fallbackUI: PropTypes.func,
-    };
-
     constructor(props: ErrorBoundaryProps) {
         super(props);
         this.state = { error: null, errorInfo: null };

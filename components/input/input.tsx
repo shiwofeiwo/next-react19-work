@@ -7,7 +7,6 @@ import React, {
     type KeyboardEvent,
     type DOMAttributes,
 } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../icon';
 import { obj, func } from '../util';
@@ -77,33 +76,6 @@ const INPUT_PROP_KEYS = [
 class Input<P extends InputProps = InputProps> extends Base<P> {
     static displayName = 'Input';
     static getDerivedStateFromProps = Base.getDerivedStateFromProps;
-    static propTypes = {
-        ...Base.propTypes,
-        label: PropTypes.node,
-        hasClear: PropTypes.bool,
-        hasBorder: PropTypes.bool,
-        state: PropTypes.oneOf(['error', 'loading', 'success', 'warning']),
-        onPressEnter: PropTypes.func,
-        htmlType: PropTypes.string,
-        htmlSize: PropTypes.string,
-        hint: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-        innerBefore: PropTypes.node,
-        innerAfter: PropTypes.node,
-        addonBefore: PropTypes.node,
-        addonAfter: PropTypes.node,
-        addonTextBefore: PropTypes.node,
-        addonTextAfter: PropTypes.node,
-        autoComplete: PropTypes.string,
-        autoFocus: PropTypes.bool,
-        inputRender: PropTypes.func,
-        extra: PropTypes.node,
-        innerBeforeClassName: PropTypes.string,
-        innerAfterClassName: PropTypes.string,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        hoverShowClear: PropTypes.bool,
-    };
-
     static defaultProps: InputProps = {
         ...Base.defaultProps,
         autoComplete: 'off',

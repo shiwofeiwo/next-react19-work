@@ -1,6 +1,5 @@
 import { Component, Children } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import ResizeObserver from 'resize-observer-polyfill';
 import { func, dom, events } from '../util';
 import position from './utils/position';
@@ -17,22 +16,6 @@ const MAX_UPDATE_COUNT = 50;
 export default class Position extends Component<PositionProps> {
     static displayName = 'Position';
     static VIEWPORT = position.VIEWPORT;
-
-    static propTypes = {
-        children: PropTypes.node,
-        target: PropTypes.any,
-        container: PropTypes.any,
-        align: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        offset: PropTypes.array,
-        beforePosition: PropTypes.func,
-        onPosition: PropTypes.func,
-        needAdjust: PropTypes.bool,
-        autoFit: PropTypes.bool,
-        needListenResize: PropTypes.bool,
-        shouldUpdatePosition: PropTypes.bool,
-        rtl: PropTypes.bool,
-        pinFollowBaseElementWhenFixed: PropTypes.bool,
-    };
 
     static defaultProps = {
         align: 'tl bl',

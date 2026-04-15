@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import Animate from '../animate';
@@ -19,16 +18,6 @@ const getDigitArray = (num: number | string) =>
         .map(i => parseInt(i, 10));
 
 class Sup extends Component<BadgeSubProps, BadgeSubState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        count: PropTypes.number,
-        showZero: PropTypes.bool,
-        overflowCount: PropTypes.number,
-        content: PropTypes.node,
-        dot: PropTypes.bool,
-        style: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         count: 0,

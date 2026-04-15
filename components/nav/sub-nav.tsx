@@ -1,5 +1,4 @@
 import React, { Component, cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Menu from '../menu';
 import Icon from '../icon';
@@ -12,15 +11,6 @@ import type { SubNavProps } from './types';
  */
 class SubNav extends Component<SubNavProps> {
     static menuChildType = 'submenu';
-
-    static propTypes = {
-        className: PropTypes.string,
-        icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-        label: PropTypes.node,
-        selectable: PropTypes.bool,
-        children: PropTypes.node,
-        noIcon: PropTypes.bool,
-    };
 
     static defaultProps = {
         selectable: false,

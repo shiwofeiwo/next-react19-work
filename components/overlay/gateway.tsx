@@ -1,6 +1,5 @@
 import { Component, Children, cloneElement } from 'react';
 import { findDOMNode, createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import { func } from '../util';
 import findNode from './utils/find-node';
@@ -15,12 +14,6 @@ const getContainerNode = (props: GatewayProps) => {
 
 class Gateway extends Component<GatewayProps, GatewayState> {
     static displayName = 'Gateway';
-    static propTypes = {
-        children: PropTypes.node,
-        container: PropTypes.any,
-        target: PropTypes.any,
-    };
-
     static defaultProps = {
         container: () => document.body,
     };

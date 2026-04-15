@@ -1,24 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { type ProgressWithDefaultProps } from './progress';
 
 type ProgressLineProps = Omit<ProgressWithDefaultProps, 'shape'>;
 export default class Line extends React.PureComponent<ProgressLineProps> {
-    static propTypes = {
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        percent: PropTypes.number,
-        state: PropTypes.oneOf(['normal', 'success', 'error']),
-        progressive: PropTypes.bool,
-        hasBorder: PropTypes.bool,
-        textRender: PropTypes.func,
-        color: PropTypes.string,
-        backgroundColor: PropTypes.string,
-        rtl: PropTypes.bool,
-        prefix: PropTypes.string,
-        className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    };
-
     render() {
         const {
             prefix,

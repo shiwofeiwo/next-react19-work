@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Big from 'big.js';
 import { polyfill } from 'react-lifecycles-compat';
@@ -53,42 +52,6 @@ const NUMBER_PICKER_PROP_KEYS = [
 
 /** NumberPicker */
 class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        type: PropTypes.oneOf(['normal', 'inline']),
-        size: PropTypes.oneOf(['large', 'medium', 'small']),
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        disabled: PropTypes.bool,
-        step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        precision: PropTypes.number,
-        editable: PropTypes.bool,
-        autoFocus: PropTypes.bool,
-        onChange: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        onFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        onCorrect: PropTypes.func,
-        onDisabled: PropTypes.func,
-        max: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        min: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        className: PropTypes.string,
-        style: PropTypes.object,
-        state: PropTypes.oneOf(['error']),
-        format: PropTypes.func,
-        upBtnProps: PropTypes.object,
-        downBtnProps: PropTypes.object,
-        label: PropTypes.node,
-        innerAfter: PropTypes.node,
-        rtl: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
-        hasTrigger: PropTypes.bool,
-        alwaysShowTrigger: PropTypes.bool,
-        stringMode: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         // max: MAX_SAFE_INTEGER,

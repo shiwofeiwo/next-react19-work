@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React, { Component, Children, type ReactNode, type ReactElement } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
@@ -36,20 +35,6 @@ const STEP_PROP_KEYS = [
 
 /** Step */
 class Step extends Component<StepProps, StepState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        current: PropTypes.number,
-        direction: PropTypes.oneOf(['hoz', 'ver']),
-        labelPlacement: PropTypes.oneOf(['hoz', 'ver']),
-        shape: PropTypes.oneOf(['circle', 'arrow', 'dot']),
-        readOnly: PropTypes.bool,
-        animation: PropTypes.bool,
-        className: PropTypes.string,
-        itemRender: PropTypes.func,
-        stretch: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         current: 0,

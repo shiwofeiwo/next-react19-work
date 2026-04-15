@@ -6,7 +6,6 @@ import React, {
     type HTMLAttributes,
     type ComponentPropsWithRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import Select from '../select';
@@ -108,62 +107,6 @@ const CASCADER_SELECT_PROP_KEYS = [
 
 class CascaderSelect extends Component<CascaderSelectProps, CascaderSelectState> {
     static displayName = 'CascaderSelect';
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        className: PropTypes.string,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        placeholder: PropTypes.string,
-        disabled: PropTypes.bool,
-        hasArrow: PropTypes.bool,
-        hasBorder: PropTypes.bool,
-        hasClear: PropTypes.bool,
-        label: PropTypes.node,
-        readOnly: PropTypes.bool,
-        dataSource: PropTypes.arrayOf(PropTypes.object),
-        defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-        onChange: PropTypes.func,
-        defaultExpandedValue: PropTypes.arrayOf(PropTypes.string),
-        expandedValue: PropTypes.arrayOf(PropTypes.string),
-        expandTriggerType: PropTypes.oneOf(['click', 'hover']),
-        onExpand: PropTypes.func,
-        useVirtual: PropTypes.bool,
-        multiple: PropTypes.bool,
-        changeOnSelect: PropTypes.bool,
-        canOnlyCheckLeaf: PropTypes.bool,
-        checkStrictly: PropTypes.bool,
-        listStyle: PropTypes.object,
-        listClassName: PropTypes.string,
-        displayRender: PropTypes.func,
-        itemRender: PropTypes.func,
-        showSearch: PropTypes.bool,
-        filter: PropTypes.func,
-        onSearch: PropTypes.func,
-        resultRender: PropTypes.func,
-        resultAutoWidth: PropTypes.bool,
-        notFoundContent: PropTypes.node,
-        locale: PropTypes.object,
-        loadData: PropTypes.func,
-        header: PropTypes.node,
-        footer: PropTypes.node,
-        defaultVisible: PropTypes.bool,
-        visible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupContainer: PropTypes.any,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        immutable: PropTypes.bool,
-        /**
-         * 查询选中后清除查询条件
-         */
-        autoClearSearchValue: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         pure: false,

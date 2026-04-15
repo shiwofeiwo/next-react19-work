@@ -1,9 +1,9 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
-import PT from 'prop-types';
 
-import SharedPT from '../prop-types';
+
+
 import { func, obj, datejs } from '../../util';
 import { setTime } from '../util';
 
@@ -21,22 +21,7 @@ const TIME_PANEL_PROP_KEYS = [
     'rtl', 'prefix', 'locale', 'value', 'timePanelProps', 'onSelect',
 ];
 
-class DatePanel extends React.Component {
-    static propTypes = {
-        rtl: PT.bool,
-        prefix: PT.string,
-        locale: PT.object,
-        mode: SharedPT.mode,
-        panelMode: PT.any,
-        value: SharedPT.date,
-        disabledDate: PT.func,
-        showTime: PT.bool,
-        resetTime: PT.bool,
-        timePanelProps: PT.object,
-        disabledTime: SharedPT.disabledTime,
-        dateCellRender: PT.func,
-    };
-    static defaultProps = {
+class DatePanel extends React.Component {    static defaultProps = {
         showTime: false,
         resetTime: false,
     };

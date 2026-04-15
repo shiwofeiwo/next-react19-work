@@ -1,5 +1,4 @@
 import React, { Children, Component, type ReactElement, type ReactNode, cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { obj, func, type ClassPropsWithDefault } from '../util';
@@ -95,37 +94,6 @@ const FORM_PROP_KEYS = [
 /** Form */
 export default class Form extends Component<FormProps> {
     static displayName = 'Form';
-    static propTypes = {
-        prefix: PropTypes.string,
-        inline: PropTypes.bool,
-        size: PropTypes.oneOf(['large', 'medium', 'small']),
-        fullWidth: PropTypes.bool,
-        labelAlign: PropTypes.oneOf(['top', 'left', 'inset']),
-        labelTextAlign: PropTypes.oneOf(['left', 'right']),
-        field: PropTypes.any,
-        saveField: PropTypes.func,
-        labelCol: PropTypes.object,
-        wrapperCol: PropTypes.object,
-        onSubmit: PropTypes.func,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        value: PropTypes.object,
-        onChange: PropTypes.func,
-        component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-        fieldOptions: PropTypes.object,
-        rtl: PropTypes.bool,
-        device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
-        responsive: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        useLabelForErrorMessage: PropTypes.bool,
-        preferMarginToDisplayHelp: PropTypes.bool,
-        colon: PropTypes.bool,
-        disabled: PropTypes.bool,
-        // 在 responsive 模式下，透传给 ResponsiveGrid 的，表示 每个 cell 之间的间距， [bottom&top, right&left]
-        gap: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         onSubmit: preventDefault,

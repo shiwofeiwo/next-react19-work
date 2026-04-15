@@ -1,5 +1,4 @@
 import React, { Component, type KeyboardEvent } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import type { Dayjs } from 'dayjs';
@@ -12,7 +11,7 @@ import nextLocale from '../locale/zh-cn';
 import { func, obj, datejs, KEYCODE } from '../util';
 import TimePickerPanel from './panel';
 import { checkDateValue, onTimeKeydown } from './utils';
-import SharedPT from './prop-types';
+
 import { switchInputType, fmtValue, isValueChanged } from '../date-picker2/util';
 import FooterPanel from '../date-picker2/panels/footer-panel';
 import DateInput from './module/date-input';
@@ -80,58 +79,11 @@ const TIME_PICKER2_PROP_KEYS = [
     'type',
 ];
 
-const presetPropType = PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.func, checkDateValue]),
-    ...Button.propTypes,
-});
-
 type SharedInputProps = DateInputProps & {
     ref: (el: InstanceType<typeof DateInput>) => void;
 };
 class TimePicker2 extends Component<TimePickerProps, TimePickerState> {
     static displayName = 'TimePicker2';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        label: PropTypes.node,
-        state: PropTypes.oneOf(['error', 'success']),
-        placeholder: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
-        value: SharedPT.value,
-        defaultValue: SharedPT.value,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        hasClear: PropTypes.bool,
-        format: PropTypes.string,
-        hourStep: PropTypes.number,
-        minuteStep: PropTypes.number,
-        secondStep: PropTypes.number,
-        disabledHours: PropTypes.func,
-        disabledMinutes: PropTypes.func,
-        disabledSeconds: PropTypes.func,
-        renderTimeMenuItems: PropTypes.func,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        popupContainer: PropTypes.any,
-        popupAlign: PropTypes.string,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        onVisibleChange: PropTypes.func,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        disabled: PropTypes.bool,
-        hasBorder: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        onChange: PropTypes.func,
-        className: PropTypes.string,
-        name: PropTypes.string,
-        preset: PropTypes.oneOfType([PropTypes.arrayOf(presetPropType), presetPropType]),
-        inputProps: PropTypes.shape(Input.propTypes!),
-        popupComponent: PropTypes.elementType,
-        type: PropTypes.oneOf(['time', 'range']),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

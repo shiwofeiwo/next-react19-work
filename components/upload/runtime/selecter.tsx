@@ -1,5 +1,4 @@
 import React, { type ChangeEvent, Component, type KeyboardEvent, type DragEvent } from 'react';
-import PropTypes from 'prop-types';
 import { func } from '../../util';
 import { uid } from '../util';
 import type { UploadFile, SelecterProps } from '../types';
@@ -11,24 +10,6 @@ const { noop } = func;
  * [底层能力] 可自定义样式的文件选择器
  */
 export default class Selecter extends Component<SelecterProps> {
-    static propTypes = {
-        id: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        disabled: PropTypes.bool,
-        multiple: PropTypes.bool,
-        webkitdirectory: PropTypes.bool,
-        capture: PropTypes.string,
-        dragable: PropTypes.bool,
-        accept: PropTypes.string,
-        onSelect: PropTypes.func,
-        onDragOver: PropTypes.func,
-        onDragLeave: PropTypes.func,
-        onDrop: PropTypes.func,
-        children: PropTypes.node,
-        name: PropTypes.string,
-    };
-
     static defaultProps = {
         name: 'file',
         multiple: false,

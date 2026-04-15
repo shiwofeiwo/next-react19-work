@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import moment from 'moment';
 import nextLocale from '../locale/zh-cn';
@@ -11,76 +10,6 @@ import type { TimePickerPanelProps } from './types';
 const { noop } = func;
 
 class TimePickerPanel extends Component<TimePickerPanelProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        /**
-         * 时间值（moment 对象）
-         */
-        value: checkMomentObj,
-        /**
-         * 是否显示小时
-         */
-        showHour: PropTypes.bool,
-        /**
-         * 是否显示分钟
-         */
-        showMinute: PropTypes.bool,
-        /**
-         * 是否显示秒
-         */
-        showSecond: PropTypes.bool,
-        /**
-         * 小时选项步长
-         */
-        hourStep: PropTypes.number,
-        /**
-         * 分钟选项步长
-         */
-        minuteStep: PropTypes.number,
-        /**
-         * 秒钟选项步长
-         */
-        secondStep: PropTypes.number,
-        /**
-         * 禁用小时函数
-         * @param index - 时 0 - 23
-         * @returns 是否禁用
-         */
-        disabledHours: PropTypes.func,
-        /**
-         * 禁用分钟函数
-         * @param index - 分 0 - 59
-         * @returns 是否禁用
-         */
-        disabledMinutes: PropTypes.func,
-        /**
-         * 禁用秒函数
-         * @param index - 秒 0 - 59
-         * @returns 是否禁用
-         */
-        disabledSeconds: PropTypes.func,
-        /**
-         * 渲染的可选择时间列表
-         * [\{
-         *  label: '01',
-         *  value: 1
-         * \}]
-         * @param list - 默认渲染的列表
-         * @param mode - 渲染的菜单 hour, minute, second
-         * @param value - 当前时间，可能为 null
-         * @returns 返回需要渲染的数据
-         */
-        renderTimeMenuItems: PropTypes.func,
-        /**
-         * 选择某个日期值时的回调
-         * @param value - 选中后的日期值
-         */
-        onSelect: PropTypes.func,
-        locale: PropTypes.object,
-        disabled: PropTypes.bool,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         showHour: true,

@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Row from '../expanded/row';
 import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class SelectionRow extends React.Component {
-    static propTypes = {
-        ...Row.propTypes,
-    };
-
     static defaultProps = {
         ...Row.defaultProps,
     };

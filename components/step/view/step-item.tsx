@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React, { Component, type ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ResizeObserver from 'resize-observer-polyfill';
 import Icon from '../../icon';
@@ -49,31 +48,6 @@ const STEP_ITEM_PROP_KEYS = [
 
 /** Step.Item */
 class StepItem extends Component<ItemProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        status: PropTypes.oneOf(['wait', 'process', 'finish']),
-        title: PropTypes.node,
-        direction: PropTypes.oneOf(['hoz', 'ver']),
-        labelPlacement: PropTypes.oneOf(['hoz', 'ver']),
-        shape: PropTypes.oneOf(['circle', 'arrow', 'dot']),
-        icon: PropTypes.string,
-        content: PropTypes.node,
-        itemRender: PropTypes.func,
-        percent: PropTypes.number,
-        index: PropTypes.number,
-        total: PropTypes.number,
-        animation: PropTypes.bool,
-        disabled: PropTypes.bool,
-        parentWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        parentHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        onClick: PropTypes.func,
-        className: PropTypes.string,
-        readOnly: PropTypes.bool,
-        onResize: PropTypes.func,
-        stretch: PropTypes.bool,
-    };
-
     static defaultProps = {
         shape: 'circle',
         index: 0,

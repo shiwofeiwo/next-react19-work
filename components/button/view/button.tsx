@@ -1,5 +1,4 @@
 import React, { Component, Children, isValidElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ButtonProps } from '../types';
 import ConfigProvider from '../../config-provider';
@@ -43,39 +42,6 @@ const BUTTON_PROP_KEYS = [
 
 export default class Button extends Component<ButtonProps> {
     static displayName = 'Button';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        type: PropTypes.oneOf(['primary', 'secondary', 'normal']),
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        icons: PropTypes.shape({ loading: PropTypes.node }),
-        iconSize: PropTypes.oneOfType([
-            PropTypes.oneOf([
-                'xxs',
-                'xs',
-                'small',
-                'medium',
-                'large',
-                'xl',
-                'xxl',
-                'xxxl',
-                'inherit',
-            ]),
-            PropTypes.number,
-        ]),
-        htmlType: PropTypes.oneOf(['submit', 'reset', 'button']),
-        component: PropTypes.oneOf(['button', 'a', 'div', 'span']),
-        loading: PropTypes.bool,
-        ghost: PropTypes.oneOf([true, false, 'light', 'dark']),
-        text: PropTypes.bool,
-        warning: PropTypes.bool,
-        disabled: PropTypes.bool,
-        onClick: PropTypes.func,
-        className: PropTypes.string,
-        onMouseUp: PropTypes.func,
-        children: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         type: 'normal',

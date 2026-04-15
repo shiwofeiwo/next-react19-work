@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import ListHeader from './list-header';
 import ListFooter from './list-footer';
@@ -15,11 +14,7 @@ export default function list(BaseComponent) {
         static ListHeader = ListHeader;
         static ListFooter = ListFooter;
         static ListRow = RowComponent;
-        static ListBody = BodyComponent;
-        static propTypes = {
-            ...BaseComponent.propTypes,
-        };
-        static defaultProps = {
+        static ListBody = BodyComponent;        static defaultProps = {
             ...BaseComponent.defaultProps,
         };
 

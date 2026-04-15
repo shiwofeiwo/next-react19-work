@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import { log } from '../util';
@@ -7,27 +6,6 @@ import { ParagraphProps } from './types';
 
 /** Paragraph */
 class Paragraph extends React.Component<ParagraphProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        /**
-         * 额外的样式名 会附加到 root dom 上
-         */
-        className: PropTypes.string,
-        /**
-         * 什么方式展示段落
-         * - 'long' :  展示所有文本
-         * - 'short' : 展示三行以内（非强制）
-         */
-        type: PropTypes.oneOf(['long', 'short']),
-        /**
-         * 组件大小。
-         * - 'medium' : 中号
-         * - 'short' : 小号
-         */
-        size: PropTypes.oneOf(['medium', 'small']),
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         type: 'long',

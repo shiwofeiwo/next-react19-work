@@ -6,7 +6,6 @@ import React, {
     type ReactNode,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../icon';
 import Overlay, { type PopupProps } from '../../overlay';
@@ -44,31 +43,6 @@ export type PopupItemInMenuProps = ChildItemPropsInMenu<PopupItemWithDefaultsPro
 
 export default class PopupItem extends Component<PopupItemProps> {
     static menuChildType = 'submenu';
-
-    static propTypes = {
-        _key: PropTypes.string,
-        root: PropTypes.object,
-        level: PropTypes.number,
-        hasSubMenu: PropTypes.bool,
-        noIcon: PropTypes.bool,
-        rtl: PropTypes.bool,
-        selectable: PropTypes.bool,
-        /**
-         * 标签内容
-         */
-        label: PropTypes.node,
-        /**
-         * 自定义弹层内容
-         */
-        children: PropTypes.node,
-        className: PropTypes.string,
-        /**
-         * 子菜单打开的触发行为
-         */
-        triggerType: PropTypes.oneOf(['click', 'hover']),
-        align: PropTypes.oneOf(['outside', 'follow']),
-        autoWidth: PropTypes.bool,
-    };
 
     static defaultProps = {
         selectable: false,

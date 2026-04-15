@@ -1,6 +1,5 @@
 import React, { Component, type MouseEvent, type KeyboardEvent, type ReactNode } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { func, obj, KEYCODE, type ClassPropsWithDefault } from '../../util';
 import type { ChildItemPropsInMenu, ItemProps as NormalItemProps } from '../types';
@@ -32,25 +31,6 @@ export type ItemWithDefaultsProps = ClassPropsWithDefault<ItemProps, typeof Item
 export type ItemInMenuProps = ChildItemPropsInMenu<ItemWithDefaultsProps>;
 
 export default class Item extends Component<ItemProps> {
-    static propTypes = {
-        _key: PropTypes.string,
-        level: PropTypes.number,
-        inlineLevel: PropTypes.number,
-        groupIndent: PropTypes.number,
-        root: PropTypes.object,
-        menu: PropTypes.any,
-        parent: PropTypes.object,
-        parentMode: PropTypes.oneOf(['inline', 'popup']),
-        type: PropTypes.oneOf(['submenu', 'item']),
-        component: PropTypes.string,
-        disabled: PropTypes.bool,
-        className: PropTypes.string,
-        onClick: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        needIndent: PropTypes.bool,
-        replaceClassName: PropTypes.bool,
-    };
-
     static defaultProps = {
         component: 'li',
         groupIndent: 0,

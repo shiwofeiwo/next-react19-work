@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import ConfigProvider from '../config-provider';
 import NavContext from '../nav/context';
 import type { BaseProps } from './types';
@@ -11,19 +10,6 @@ export default function Base(props: { componentName?: string }) {
         static displayName = componentName;
 
         static _typeMark = `Shell_${componentName}`;
-
-        static propTypes = {
-            prefix: PropTypes.string,
-            collapse: PropTypes.bool,
-            miniable: PropTypes.bool,
-            component: PropTypes.string,
-            trigger: PropTypes.node,
-            triggerProps: PropTypes.object,
-            direction: PropTypes.oneOf(['hoz', 'ver']),
-            align: PropTypes.oneOf(['left', 'right', 'center']),
-            onCollapseChange: PropTypes.func,
-            fixed: PropTypes.bool,
-        };
 
         static defaultProps = {
             prefix: 'next-',

@@ -1,6 +1,4 @@
 import React, { type MouseEvent, type UIEvent } from 'react';
-import PropTypes from 'prop-types';
-
 import Input from './input';
 import Icon from '../icon/index';
 import type { PasswordProps } from './types';
@@ -17,11 +15,6 @@ export default class Password extends Input<PasswordProps> {
     static displayName = 'Password';
 
     static getDerivedStateFromProps = Input.getDerivedStateFromProps;
-
-    static propTypes = {
-        ...Input.propTypes,
-        showToggle: PropTypes.bool,
-    };
     static defaultProps = {
         ...Input.defaultProps,
         showToggle: true,

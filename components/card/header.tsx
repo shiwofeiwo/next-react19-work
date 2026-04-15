@@ -1,32 +1,10 @@
 import React, { Component, type ElementType } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { CardHeaderProps } from './types';
 
 class CardHeader extends Component<CardHeaderProps> {
     static displayName = 'CardHeader';
-    static propTypes = {
-        prefix: PropTypes.string,
-        /**
-         * 卡片的标题
-         */
-        title: PropTypes.node,
-        /**
-         * 卡片的副标题
-         */
-        subTitle: PropTypes.node,
-        /**
-         * 标题区域的用户自定义内容
-         */
-        extra: PropTypes.node,
-        /**
-         * 设置标签类型
-         */
-        component: PropTypes.elementType,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         component: 'div',

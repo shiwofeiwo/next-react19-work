@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import Menu from '../../menu';
 import type { SelectMenuProps } from '../types';
 
 export default class SelectMenu extends Component<SelectMenuProps> {
     static isNextMenu = true;
-    static propTypes = {
-        dataSource: PropTypes.arrayOf(PropTypes.object),
-        value: PropTypes.number,
-        prefix: PropTypes.string,
-        onChange: PropTypes.func,
-        children: PropTypes.node,
-    };
     menuEl: InstanceType<typeof Menu> | null;
 
     componentDidMount() {

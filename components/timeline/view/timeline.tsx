@@ -1,5 +1,4 @@
 import React, { Component, Children, type ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 
@@ -30,17 +29,6 @@ const TIMELINE_PROP_KEYS = [
 /** Timeline */
 class Timeline extends Component<TimelineProps, TimelineState> {
     static displayName = 'Timeline';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        fold: PropTypes.array,
-        className: PropTypes.string,
-        children: PropTypes.any,
-        locale: PropTypes.object,
-        animation: PropTypes.bool,
-        mode: PropTypes.oneOf(['left', 'alternate']),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

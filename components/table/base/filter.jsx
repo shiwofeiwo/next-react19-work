@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Dropdown from '../../dropdown';
@@ -10,19 +9,6 @@ import { KEYCODE } from '../../util';
 
 // 共享状态的组件需要变成非受控组件
 class Filter extends React.Component {
-    static propTypes = {
-        dataIndex: PropTypes.string,
-        filters: PropTypes.array,
-        filterMode: PropTypes.string,
-        filterParams: PropTypes.object,
-        filterMenuProps: PropTypes.object,
-        filterProps: PropTypes.object,
-        locale: PropTypes.object,
-        onFilter: PropTypes.func,
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         onFilter: () => {},
     };

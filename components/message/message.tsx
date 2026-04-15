@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import nextLocale from '../locale/zh-cn';
@@ -39,26 +38,6 @@ const noop = () => {};
  * Message
  */
 class Message extends Component<MessageProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        type: PropTypes.oneOf(['success', 'warning', 'error', 'notice', 'help', 'loading']),
-        shape: PropTypes.oneOf(['inline', 'addon', 'toast']),
-        size: PropTypes.oneOf(['medium', 'large']),
-        title: PropTypes.node,
-        children: PropTypes.node,
-        defaultVisible: PropTypes.bool,
-        visible: PropTypes.bool,
-        iconType: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        closeable: PropTypes.bool,
-        onClose: PropTypes.func,
-        afterClose: PropTypes.func,
-        animation: PropTypes.bool,
-        locale: PropTypes.object,
-        rtl: PropTypes.bool,
-    };
     static displayName = 'Message';
     // config 方法被调用后，Message 组件才会挂上 open、close、destory 方法
     static config: (config: toast2.MessageConfig) => void;

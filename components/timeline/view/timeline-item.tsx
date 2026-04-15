@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../../config-provider';
 import Animate from '../../animate';
@@ -42,25 +41,6 @@ const TIMELINE_ITEM_PROP_KEYS = [
 /** Timeline.Item */
 class TimelineItem extends Component<ItemProps> {
     static displayName = 'TimelineItem';
-    static propTypes = {
-        prefix: PropTypes.string,
-        index: PropTypes.number,
-        total: PropTypes.number,
-        folderIndex: PropTypes.number,
-        foldShow: PropTypes.bool,
-        state: PropTypes.oneOf(['done', 'process', 'error', 'success']),
-        icon: PropTypes.string,
-        dot: PropTypes.node,
-        time: PropTypes.node,
-        title: PropTypes.node,
-        timeLeft: PropTypes.node,
-        content: PropTypes.node,
-        toggleFold: PropTypes.func,
-        className: PropTypes.string,
-        locale: PropTypes.object,
-        animation: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         state: 'done',

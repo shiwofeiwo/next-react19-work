@@ -1,15 +1,10 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import FixedBody from '../fixed/body';
 import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class LockBody extends React.Component {
-    static propTypes = {
-        ...FixedBody.propTypes,
-    };
-
     static contextType = TableContext;
 
     componentDidMount() {

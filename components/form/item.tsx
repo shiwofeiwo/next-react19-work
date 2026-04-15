@@ -1,5 +1,4 @@
 import React, { Children, Component, type ReactElement, type ReactNode, cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Grid from '../grid';
@@ -74,63 +73,6 @@ const ITEM_PROP_KEYS = [
 
 export default class Item extends Component<ItemProps> {
     static displayName = 'Item';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        label: PropTypes.node,
-        labelCol: PropTypes.object,
-        wrapperCol: PropTypes.object,
-        help: PropTypes.node,
-        name: PropTypes.string,
-        extra: PropTypes.node,
-        validateState: PropTypes.oneOf(['error', 'success', 'loading', 'warning']),
-        hasFeedback: PropTypes.bool, //TODO: hasFeedback => validateStatus=[error,success,loading]
-        style: PropTypes.object,
-        id: PropTypes.string,
-        children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-        size: PropTypes.oneOf(['large', 'small', 'medium']),
-        fullWidth: PropTypes.bool,
-        labelAlign: PropTypes.oneOf(['top', 'left', 'inset']),
-        labelTextAlign: PropTypes.oneOf(['left', 'right']),
-        className: PropTypes.string,
-        required: PropTypes.bool,
-        asterisk: PropTypes.bool,
-        requiredMessage: PropTypes.string,
-        requiredTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        min: PropTypes.number,
-        max: PropTypes.number,
-        minmaxMessage: PropTypes.string,
-        minmaxTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        minLength: PropTypes.number,
-        maxLength: PropTypes.number,
-        minmaxLengthMessage: PropTypes.string,
-        minmaxLengthTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        length: PropTypes.number,
-        lengthMessage: PropTypes.string,
-        lengthTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        pattern: PropTypes.any,
-        patternMessage: PropTypes.string,
-        patternTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        format: PropTypes.oneOf(['number', 'email', 'url', 'tel']),
-        formatMessage: PropTypes.string,
-        formatTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        validator: PropTypes.func,
-        validatorTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        autoValidate: PropTypes.bool,
-        device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
-        responsive: PropTypes.bool,
-        colSpan: PropTypes.number,
-        labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        errorMessageName: PropTypes.string,
-        useLabelForErrorMessage: PropTypes.bool,
-        preferMarginToDisplayHelp: PropTypes.bool,
-        colon: PropTypes.bool,
-        disabled: PropTypes.bool,
-        valueName: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         hasFeedback: false,

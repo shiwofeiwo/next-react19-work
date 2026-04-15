@@ -1,21 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { inRange, getPercent } from '../utils';
 import type { RangeMarkProps } from '../types';
 
 export default class Mark extends React.Component<RangeMarkProps> {
     static displayName = 'Mark';
-    static propTypes = {
-        min: PropTypes.number,
-        max: PropTypes.number,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        prefix: PropTypes.string,
-        marks: PropTypes.object,
-        marksPosition: PropTypes.string,
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         min: 0,

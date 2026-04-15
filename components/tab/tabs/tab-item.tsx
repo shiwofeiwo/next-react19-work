@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import type { TabItemProps, ItemProps } from '../types';
@@ -7,17 +6,6 @@ import type { TabItemProps, ItemProps } from '../types';
 /** Tab.Item */
 class TabItem extends React.Component<ItemProps> {
     static displayName = 'TabItem';
-    static propTypes = {
-        prefix: PropTypes.string,
-        title: PropTypes.node,
-        closeable: PropTypes.bool,
-        disabled: PropTypes.bool,
-        active: PropTypes.bool,
-        lazyLoad: PropTypes.bool,
-        unmountInactiveTabs: PropTypes.bool,
-        children: PropTypes.any,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         closeable: false,

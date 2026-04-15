@@ -1,9 +1,9 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
-import PT from 'prop-types';
 
-import SharedPT from '../prop-types';
+
+
 import { func, datejs, obj } from '../../util';
 import { setTime, switchInputType, mode2unit } from '../util';
 
@@ -76,24 +76,6 @@ const getPanelValue = ({ mode, value, inputType, showTime }, defaultValue) => {
 };
 
 class RangePanel extends React.Component {
-    static propTypes = {
-        rtl: PT.bool,
-        prefix: PT.string,
-        locale: PT.object,
-        mode: SharedPT.mode,
-        value: PT.arrayOf(SharedPT.date),
-        inputType: SharedPT.inputType,
-        handleCellState: PT.func,
-        disabledDate: PT.func,
-        justBeginInput: PT.bool,
-        resetTime: PT.bool,
-        showTime: PT.bool,
-        timePanelProps: PT.object,
-        disabledTime: PT.object,
-        dateCellRender: PT.func,
-        onCalendarChange: PT.func,
-    };
-
     static defaultProps = {
         disabledDate: () => false,
         justBeginInput: true,

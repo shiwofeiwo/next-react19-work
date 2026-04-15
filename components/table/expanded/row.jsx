@@ -1,14 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { log } from '../../util';
 import Row from '../lock/row';
 import TableContext from '../context';
 
 export default class ExpandedRow extends React.Component {
-    static propTypes = {
-        ...Row.propTypes,
-    };
-
     static defaultProps = {
         ...Row.defaultProps,
     };

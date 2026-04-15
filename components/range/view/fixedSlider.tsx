@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { events, func } from '../../util';
 import Balloon from '../../balloon';
 import { getPercent } from '../utils';
@@ -53,36 +52,11 @@ function sliderFrag(
     );
 }
 
-sliderFrag.propTypes = {
-    prefix: PropTypes.string,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    hasMovingClass: PropTypes.bool,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    value: PropTypes.arrayOf(PropTypes.number),
-    disabled: PropTypes.bool,
-    rtl: PropTypes.bool,
-};
-
 export default class FixedSlider extends React.Component<
     RangeFixedSliderProps,
     RangeFixedSliderState
 > {
     static displayName = 'FixedSlider';
-    static propTypes = {
-        hasTip: PropTypes.bool,
-        tooltipVisible: PropTypes.bool,
-        onTooltipVisibleChange: PropTypes.func,
-        tooltipAnimation: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        tipRender: PropTypes.func,
-        disabled: PropTypes.bool,
-        hasMovingClass: PropTypes.bool,
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         disabled: false,
         hasTip: true,

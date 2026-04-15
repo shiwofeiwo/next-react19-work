@@ -1,5 +1,4 @@
 import React, { Component, Children } from 'react';
-import * as PropTypes from 'prop-types';
 import Overlay from '../overlay';
 import { func } from '../util';
 import type { DropdownProps, DropdownState } from './types';
@@ -8,27 +7,6 @@ const { noop, makeChain, bindCtx } = func;
 const Popup = Overlay.Popup;
 
 export default class Dropdown extends Component<DropdownProps, DropdownState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        trigger: PropTypes.node,
-        triggerType: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        disabled: PropTypes.bool,
-        align: PropTypes.string,
-        offset: PropTypes.array,
-        delay: PropTypes.number,
-        autoFocus: PropTypes.bool,
-        hasMask: PropTypes.bool,
-        autoClose: PropTypes.bool,
-        cache: PropTypes.bool,
-        animation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    };
     static defaultProps = {
         prefix: 'next-',
         pure: false,

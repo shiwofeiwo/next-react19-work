@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { CardBulletHeaderProps } from './types';
 
 class CardBulletHeader extends Component<CardBulletHeaderProps> {
     static displayName = 'CardBulletHeader';
-    static propTypes = {
-        prefix: PropTypes.string,
-        title: PropTypes.node,
-        subTitle: PropTypes.node,
-        showTitleBullet: PropTypes.bool,
-        extra: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         showTitleBullet: true,

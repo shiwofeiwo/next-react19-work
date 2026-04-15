@@ -1,5 +1,4 @@
 import React, { Component, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Animate from '../animate';
 import Icon from '../icon';
@@ -41,25 +40,6 @@ const TAG_PROP_KEYS = [
 ];
 
 class Tag extends Component<TagProps, { visible: boolean }> {
-    static propTypes = {
-        type: PropTypes.oneOf(['normal', 'primary']),
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        color: PropTypes.string,
-        animation: PropTypes.bool,
-        closeArea: PropTypes.oneOf(['tag', 'tail']),
-        closable: PropTypes.bool,
-        onClose: PropTypes.func,
-        afterClose: PropTypes.func,
-        afterAppear: PropTypes.func,
-        className: PropTypes.any,
-        children: PropTypes.node,
-        onClick: PropTypes.func,
-        _shape: PropTypes.oneOf(['default', 'closable', 'checkable']),
-        disabled: PropTypes.bool,
-        rtl: PropTypes.bool,
-        locale: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         type: 'normal',

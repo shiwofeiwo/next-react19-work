@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import RowComponent from './row';
 import CellComponent from './cell';
@@ -7,35 +6,7 @@ import { dom, events } from '../../util';
 
 const noop = () => {};
 
-export default class Body extends React.Component {
-    static propTypes = {
-        loading: PropTypes.bool,
-        emptyContent: PropTypes.any,
-        tableEl: PropTypes.any,
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        components: PropTypes.object,
-        getCellProps: PropTypes.func,
-        cellRef: PropTypes.func,
-        primaryKey: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string]),
-        getRowProps: PropTypes.func,
-        rowRef: PropTypes.func,
-        dataSource: PropTypes.array,
-        children: PropTypes.any,
-        className: PropTypes.string,
-        component: PropTypes.string,
-        colGroup: PropTypes.object,
-        columns: PropTypes.array,
-        onRowClick: PropTypes.func,
-        onRowMouseEnter: PropTypes.func,
-        onRowMouseLeave: PropTypes.func,
-        onBodyMouseOver: PropTypes.func,
-        onBodyMouseOut: PropTypes.func,
-        locale: PropTypes.object,
-        crossline: PropTypes.bool,
-        tableWidth: PropTypes.number,
-    };
-    static defaultProps = {
+export default class Body extends React.Component {    static defaultProps = {
         loading: false,
         prefix: 'next-',
         components: {},

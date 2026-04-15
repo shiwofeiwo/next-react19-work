@@ -4,7 +4,6 @@ import React, {
     type KeyboardEvent,
     type SyntheticEvent,
 } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import { polyfill } from 'react-lifecycles-compat';
@@ -77,46 +76,6 @@ const WEEK_PICKER_PROP_KEYS = [
  */
 class WeekPicker extends Component<WeekPickerProps, WeekPickerState> {
     static displayName = 'WeekPicker';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        label: PropTypes.node,
-        state: PropTypes.oneOf(['success', 'loading', 'error']),
-        placeholder: PropTypes.string,
-        defaultVisibleMonth: PropTypes.func,
-        onVisibleMonthChange: PropTypes.func,
-        value: checkDateValue,
-        defaultValue: checkDateValue,
-        format: PropTypes.string,
-        disabledDate: PropTypes.func,
-        footerRender: PropTypes.func,
-        onChange: PropTypes.func,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        disabled: PropTypes.bool,
-        hasClear: PropTypes.bool,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        popupAlign: PropTypes.string,
-        popupContainer: PropTypes.any,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        inputProps: PropTypes.object,
-        dateCellRender: PropTypes.func,
-        monthCellRender: PropTypes.func,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        yearCellRender: PropTypes.func,
-        locale: PropTypes.object,
-        className: PropTypes.string,
-        name: PropTypes.string,
-        popupComponent: PropTypes.elementType,
-        popupContent: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

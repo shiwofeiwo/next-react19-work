@@ -1,10 +1,9 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PT from 'prop-types';
+
 import classnames from 'classnames';
 import { type Dayjs } from 'dayjs';
 
-import SharedPT from '../prop-types';
 import { TIME_INPUT_TYPE } from '../constant';
 import { func, datejs, obj } from '../../util';
 import { fmtValue } from '../../date-picker2/util';
@@ -13,30 +12,6 @@ import Icon from '../../icon';
 import type { DateInputProps } from '../types';
 
 class DateInput extends React.Component<DateInputProps> {
-    static propTypes = {
-        prefix: PT.string,
-        rtl: PT.bool,
-        locale: PT.object,
-        value: PT.oneOfType([PT.arrayOf(PT.string), PT.string]),
-        inputType: SharedPT.inputType,
-        format: SharedPT.format,
-        isRange: PT.bool,
-        hasClear: PT.bool,
-        onInputTypeChange: PT.func,
-        autoFocus: PT.bool,
-        readOnly: SharedPT.readOnly,
-        placeholder: SharedPT.placeholder,
-        size: SharedPT.size,
-        focus: PT.bool,
-        hasBorder: PT.bool,
-        onKeyDown: PT.func,
-        onClick: PT.func,
-        separator: PT.node,
-        disabled: SharedPT.disabled,
-        inputProps: PT.object,
-        label: PT.node,
-    };
-
     static defaultProps = {
         autoFocus: false,
         readOnly: false,
@@ -162,7 +137,7 @@ class DateInput extends React.Component<DateInputProps> {
 
         // @ts-expect-error 下面 pickProps 使用错误，导致报错
         const sharedProps: InputProps = {
-            // @ts-expect-error 正确写法应该是 obj.pickProps(Input.propTypes, restProps)
+            // @ts-expect-error pickProps argument order is unconventional
             ...obj.pickProps(restProps, Input),
             ...inputProps,
             size,

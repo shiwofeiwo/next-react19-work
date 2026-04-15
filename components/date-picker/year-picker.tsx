@@ -4,7 +4,6 @@ import React, {
     type KeyboardEvent,
     type SyntheticEvent,
 } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
@@ -71,43 +70,6 @@ const YEAR_PICKER_PROP_KEYS = [
  */
 class YearPicker extends Component<YearPickerProps, YearPickerState> {
     static displayName = 'YearPicker';
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        label: PropTypes.node,
-        state: PropTypes.oneOf(['success', 'loading', 'error']),
-        placeholder: PropTypes.string,
-        value: checkDateValue,
-        defaultValue: checkDateValue,
-        format: PropTypes.string,
-        disabledDate: PropTypes.func,
-        footerRender: PropTypes.func,
-        onChange: PropTypes.func,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        disabled: PropTypes.bool,
-        hasClear: PropTypes.bool,
-        visible: PropTypes.bool,
-        defaultVisible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupTriggerType: PropTypes.oneOf(['click', 'hover']),
-        popupAlign: PropTypes.string,
-        popupContainer: PropTypes.any,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        inputProps: PropTypes.object,
-        yearCellRender: PropTypes.func, // 兼容 0.x yearCellRender
-        dateInputAriaLabel: PropTypes.string,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        locale: PropTypes.object,
-        className: PropTypes.string,
-        name: PropTypes.string,
-        popupComponent: PropTypes.elementType,
-        popupContent: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,

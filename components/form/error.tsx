@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import ConfigProvider from '../config-provider';
@@ -9,16 +8,6 @@ import type NextField from '../field';
 
 class Error extends Component<ErrorProps> {
     static displayName = 'Error';
-    static propTypes = {
-        name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        field: PropTypes.object,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-        prefix: PropTypes.string,
-        preferMarginToDisplayHelp: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         preferMarginToDisplayHelp: false,

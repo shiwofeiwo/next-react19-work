@@ -1,17 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Select from '../../select';
 import Radio from '../../radio';
 import ConfigProvider from '../../config-provider';
 import type { CalendarMode, CardHeaderProps } from '../types';
 
 class CardHeader extends React.Component<CardHeaderProps> {
-    static propTypes = {
-        yearRange: PropTypes.arrayOf(PropTypes.number),
-        yearRangeOffset: PropTypes.number,
-        locale: PropTypes.object,
-    };
-
     static defaultProps = {
         yearRangeOffset: 10,
     };

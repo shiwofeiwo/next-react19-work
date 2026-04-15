@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { CardContentProps } from './types';
 
 class CardContent extends Component<CardContentProps> {
     static displayName = 'CardContent';
-    static propTypes = {
-        prefix: PropTypes.string,
-        /**
-         * 设置标签类型
-         */
-        component: PropTypes.elementType,
-        className: PropTypes.string,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         component: 'div',

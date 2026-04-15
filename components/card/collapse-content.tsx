@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import Icon from '../icon';
 import Button from '../button';
 import ConfigProvider from '../config-provider';
@@ -15,16 +14,6 @@ export interface CardCollapseContentState {
 
 class CardCollapseContent extends Component<CardCollapseContentProps, CardCollapseContentState> {
     static displayName = 'CardCollapseContent';
-    static propTypes = {
-        prefix: PropTypes.string,
-        /**
-         * 内容区域的固定高度
-         */
-        contentHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        locale: PropTypes.object,
-        children: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         contentHeight: 120,

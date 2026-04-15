@@ -1,6 +1,5 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import { dom } from '../util';
 import VirtualBody from './virtual/body';
@@ -11,26 +10,6 @@ const noop = () => {};
 export default function virtual(BaseComponent) {
     class VirtualTable extends React.Component {
         static VirtualBody = VirtualBody;
-        static propTypes = {
-            /**
-             * 是否开启虚拟滚动
-             */
-            useVirtual: PropTypes.bool,
-            /**
-             * 设置行高
-             */
-            rowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-            maxBodyHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-            primaryKey: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string]),
-            dataSource: PropTypes.array,
-            /**
-             * 在内容区域滚动的时候触发的函数
-             */
-            onBodyScroll: PropTypes.func,
-            keepForwardRenderRows: PropTypes.number,
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             ...BaseComponent.defaultProps,
             primaryKey: 'id',

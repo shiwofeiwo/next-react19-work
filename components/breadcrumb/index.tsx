@@ -1,5 +1,4 @@
 import React, { type ReactNode, type ReactElement, Component, Children } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
 import ConfigProvider from '../config-provider';
@@ -27,33 +26,6 @@ interface BreadcrumbState {
  */
 class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
     static Item = Item;
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        children: (props: Record<string, unknown>, propName: string) => {
-            Children.forEach(props[propName], (child: Child) => {
-                if (
-                    !(
-                        child &&
-                        ['function', 'object'].indexOf(typeof child.type) > -1 &&
-                        child.type?._typeMark === 'breadcrumb_item'
-                    )
-                ) {
-                    throw new Error("Breadcrumb's children must be Breadcrumb.Item!");
-                }
-            });
-        },
-        maxNode: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['auto'])]),
-        showHiddenItems: PropTypes.bool,
-        popupContainer: PropTypes.any,
-        followTrigger: PropTypes.bool,
-        popupProps: PropTypes.object,
-        separator: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-        component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-        className: PropTypes.any,
-        onClick: PropTypes.func,
-    };
 
     static defaultProps = {
         prefix: 'next-',

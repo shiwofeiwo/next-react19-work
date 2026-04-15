@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { func, dom } from '../util';
 import Animate from './animate';
 import type { ExpandProps } from './types';
@@ -9,16 +8,6 @@ const { getStyle } = dom;
 
 export default class Expand extends Component<ExpandProps> {
     static displayName = 'Expand';
-    static propTypes = {
-        animation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-        beforeEnter: PropTypes.func,
-        onEnter: PropTypes.func,
-        afterEnter: PropTypes.func,
-        beforeLeave: PropTypes.func,
-        onLeave: PropTypes.func,
-        afterLeave: PropTypes.func,
-    };
-
     static defaultProps = {
         beforeEnter: noop,
         onEnter: noop,

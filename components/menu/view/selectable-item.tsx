@@ -6,7 +6,6 @@ import React, {
     type MouseEvent,
     type ReactElement,
 } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../icon';
 import { func, obj, KEYCODE, type ClassPropsWithDefault } from '../../util';
@@ -43,24 +42,6 @@ export type ItemInMenuProps = ChildItemPropsInMenu<ItemWithDefaultsProps>;
 
 export default class SelectableItem extends Component<ItemProps> {
     static menuChildType = 'item';
-
-    static propTypes = {
-        _key: PropTypes.string,
-        root: PropTypes.object,
-        selected: PropTypes.bool,
-        onSelect: PropTypes.func,
-        inlineIndent: PropTypes.number,
-        disabled: PropTypes.bool,
-        helper: PropTypes.node,
-        children: PropTypes.node,
-        className: PropTypes.string,
-        onKeyDown: PropTypes.func,
-        onClick: PropTypes.func,
-        needIndent: PropTypes.bool,
-        hasSelectedIcon: PropTypes.bool,
-        isSelectIconRight: PropTypes.bool,
-        icons: PropTypes.object,
-    };
 
     static defaultProps = {
         disabled: false,

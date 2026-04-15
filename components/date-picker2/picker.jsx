@@ -1,9 +1,9 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
-import PT from 'prop-types';
 
-import SharedPT from './prop-types';
+
+
 import defaultLocale from '../locale/zh-cn';
 import { func, KEYCODE, obj } from '../util';
 import { switchInputType, fmtValue, isValueChanged } from './util';
@@ -79,85 +79,6 @@ const DATE_INPUT_PROP_KEYS = [
 ];
 
 class Picker extends React.Component {
-    static propTypes = {
-        rtl: PT.bool,
-        prefix: PT.string,
-        locale: PT.object,
-        name: PT.string,
-
-        // calendar
-        mode: SharedPT.mode,
-        type: SharedPT.type,
-        value: SharedPT.value,
-        defaultValue: SharedPT.value,
-        defaultPanelValue: SharedPT.date,
-        disabledDate: PT.func,
-        visible: PT.bool,
-        defaultVisible: PT.bool,
-        dateCellRender: PT.func,
-
-        // event
-        onOk: PT.func,
-        onChange: PT.func,
-        onVisibleChange: PT.func,
-        onPanelChange: PT.func,
-        onCalendarChange: PT.func,
-
-        // time
-        showTime: PT.bool,
-        resetTime: PT.bool,
-        timePanelProps: PT.object,
-        disabledTime: PT.object,
-
-        // header
-        titleRender: PT.func,
-
-        // footer
-        preset: PT.oneOfType([PT.array, PT.object]),
-        extraFooterRender: SharedPT.render,
-        showOk: PT.bool,
-
-        // input
-        trigger: SharedPT.render,
-        hasBorder: PT.bool,
-        inputProps: PT.object,
-        hasClear: PT.bool,
-        placeholder: SharedPT.placeholder,
-        disabled: SharedPT.disabled,
-        inputReadOnly: SharedPT.readOnly,
-        /**
-         * 日期显示格式
-         */
-        format: SharedPT.format,
-        label: PT.node,
-        separator: PT.node,
-        /**
-         * 输出格式：控制 onChange、onOk 事件的输出值格式
-         *  - string 类型：根据时间格式进行转换
-         *  - function 类型：((date: Dayjs, dateStr: string) => any)
-         *
-         * @version 1.23
-         */
-        outputFormat: SharedPT.format,
-
-        // popup
-        followTrigger: PT.bool,
-        popupTriggerType: PT.oneOf(['click', 'hover']),
-        popupAlign: PT.string,
-        popupContainer: PT.any,
-        popupStyle: PT.object,
-        popupClassName: PT.string,
-        popupComponent: PT.elementType,
-        popupProps: PT.object,
-
-        // preview
-        isPreview: PT.bool,
-        renderPreview: PT.func,
-
-        // ariaLabel
-        dateInputAriaLabel: SharedPT.ariaLabel,
-    };
-
     static defaultProps = {
         rtl: false,
         prefix: 'next-',

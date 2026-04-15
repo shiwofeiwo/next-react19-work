@@ -1,6 +1,5 @@
 /* istanbul ignore file */
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { log, func, obj } from '../../util';
 import { uid } from '../util';
@@ -18,24 +17,6 @@ const INPUT_STYLE: React.CSSProperties = {
 };
 
 class IframeUploader extends React.Component<IframeUploaderProps> {
-    static propTypes = {
-        style: PropTypes.object,
-        action: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-        disabled: PropTypes.bool,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        headers: PropTypes.object,
-        autoUpload: PropTypes.bool,
-        onSelect: PropTypes.func,
-        beforeUpload: PropTypes.func,
-        onStart: PropTypes.func,
-        onSuccess: PropTypes.func,
-        onError: PropTypes.func,
-        accept: PropTypes.string,
-    };
-
     static defaultProps = {
         name: 'file',
         onSelect: func.noop,

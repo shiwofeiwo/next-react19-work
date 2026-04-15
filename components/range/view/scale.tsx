@@ -1,20 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { inRange, getPercent } from '../utils';
 import type { RangeScaleProps } from '../types';
 
 export default class Scale extends React.Component<RangeScaleProps> {
     static displayName = 'Scale';
-    static propTypes = {
-        min: PropTypes.number,
-        max: PropTypes.number,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        prefix: PropTypes.string,
-        scales: PropTypes.arrayOf(PropTypes.number),
-        rtl: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         min: 0,

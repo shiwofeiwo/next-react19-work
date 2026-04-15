@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
@@ -34,25 +33,6 @@ export default function selection(BaseComponent) {
     /** Table */
     class SelectionTable extends React.Component {
         static SelectionRow = SelectionRow;
-        static propTypes = {
-            /**
-             * 是否启用选择模式
-             * @property {Function} getProps `Function(record, index)=>Object` 获取selection的默认属性
-             * @property {Function} onChange `Function(selectedRowKeys:Array, records:Array)` 选择改变的时候触发的事件，**注意:** 其中records只会包含当前dataSource的数据，很可能会小于selectedRowKeys的长度。
-             * @property {Function} onSelect `Function(selected:Boolean, record:Object, records:Array)` 用户手动选择/取消选择某行的回调
-             * @property {Function} onSelectAll `Function(selected:Boolean, records:Array)` 用户手动选择/取消选择所有行的回调
-             * @property {Array} selectedRowKeys 设置了此属性,将rowSelection变为受控状态,接收值为该行数据的primaryKey的值
-             * @property {String} mode 选择selection的模式, 可选值为`single`, `multiple`，默认为`multiple`
-             * @property {Function} columnProps `Function()=>Object` 选择列 的props，例如锁列、对齐等，可使用`Table.Column` 的所有参数
-             * @property {Function} titleProps `Function()=>Object` 选择列 表头的props，仅在 `multiple` 模式下生效
-             */
-            rowSelection: PropTypes.object,
-            primaryKey: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string]),
-            dataSource: PropTypes.array,
-            entireDataSource: PropTypes.array,
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             ...BaseComponent.defaultProps,
             locale: zhCN.Table,

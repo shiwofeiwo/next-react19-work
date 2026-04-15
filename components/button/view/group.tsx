@@ -1,5 +1,4 @@
 import React, { Component, Children } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { GroupProps } from '../types';
 import ConfigProvider from '../../config-provider';
@@ -9,14 +8,6 @@ import ConfigProvider from '../../config-provider';
  */
 class ButtonGroup extends Component<GroupProps> {
     static displayName = 'ButtonGroup';
-    static propTypes = {
-        rtl: PropTypes.bool,
-        prefix: PropTypes.string,
-        size: PropTypes.string,
-        className: PropTypes.string,
-        children: PropTypes.node,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         size: 'medium',

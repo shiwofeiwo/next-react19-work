@@ -1,6 +1,5 @@
 import React, { Children } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import shallowElementEquals from 'shallow-element-equals';
 import { log, obj, dom, events } from '../util';
@@ -17,15 +16,6 @@ export default function stickyLock(BaseComponent) {
         static LockRow = LockRow;
         static LockBody = LockBody;
         static LockHeader = LockHeader;
-        static propTypes = {
-            scrollToCol: PropTypes.number,
-            /**
-             * 指定滚动到某一行，仅在`useVirtual`的时候生效
-             */
-            scrollToRow: PropTypes.number,
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             ...BaseComponent.defaultProps,
         };

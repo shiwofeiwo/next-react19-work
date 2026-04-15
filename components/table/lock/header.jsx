@@ -1,13 +1,8 @@
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import FixedHeader from '../fixed/header';
 import TableContext from '../context';
 
 export default class LockHeader extends FixedHeader {
-    static propTypes = {
-        ...FixedHeader.propTypes,
-    };
-
     static contextType = TableContext;
 
     componentDidMount() {

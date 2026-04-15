@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {
     Component,
     Children,
@@ -48,18 +47,6 @@ const constrain = (from: number, size: number, { children, minSize }: VirtualLis
 /** VirtualList */
 class VirtualList extends Component<VirtualListProps, VirtualListState> {
     static displayName = 'VirtualList';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        children: PropTypes.any,
-        minSize: PropTypes.number,
-        pageSize: PropTypes.number,
-        itemsRenderer: PropTypes.func,
-        threshold: PropTypes.number,
-        itemSizeGetter: PropTypes.func,
-        jumpIndex: PropTypes.number,
-        className: PropTypes.string,
-    };
 
     static defaultProps = {
         prefix: 'next-',

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FilterComponent from './filter';
 import SortComponent from './sort';
@@ -7,28 +6,7 @@ import CellComponent from './cell';
 import ResizeComponent from './resize';
 
 const noop = () => {};
-export default class Header extends React.Component {
-    static propTypes = {
-        children: PropTypes.any,
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        className: PropTypes.string,
-        component: PropTypes.string,
-        columns: PropTypes.array,
-        colGroup: PropTypes.object,
-        headerCellRef: PropTypes.func,
-        locale: PropTypes.object,
-        filterParams: PropTypes.object,
-        onFilter: PropTypes.func,
-        components: PropTypes.object,
-        sort: PropTypes.object,
-        sortIcons: PropTypes.object,
-        onSort: PropTypes.func,
-        onResizeChange: PropTypes.func,
-        tableWidth: PropTypes.number,
-        tableEl: PropTypes.any,
-    };
-    static defaultProps = {
+export default class Header extends React.Component {    static defaultProps = {
         component: 'thead',
         columns: [],
         headerCellRef: noop,

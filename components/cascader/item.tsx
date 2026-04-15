@@ -1,5 +1,4 @@
 import React, { Component, type ComponentType, type KeyboardEvent } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Menu, { type CheckboxItemProps, type ItemProps as MenuItemProps } from '../menu';
 import Icon from '../icon';
@@ -31,26 +30,6 @@ const CASCADER_MENU_ITEM_PROP_KEYS = [
 
 export default class CascaderMenuItem extends Component<ItemProps, ItemState> {
     static menuChildType = 'item';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        disabled: PropTypes.bool,
-        selected: PropTypes.bool,
-        onSelect: PropTypes.func,
-        expanded: PropTypes.bool,
-        canExpand: PropTypes.bool,
-        menu: PropTypes.any,
-        expandTriggerType: PropTypes.oneOf(['click', 'hover']),
-        onExpand: PropTypes.func,
-        onFold: PropTypes.func,
-        checkable: PropTypes.bool,
-        checked: PropTypes.bool,
-        indeterminate: PropTypes.bool,
-        checkboxDisabled: PropTypes.bool,
-        onCheck: PropTypes.func,
-        children: PropTypes.node,
-    };
 
     constructor(props: ItemProps) {
         super(props);

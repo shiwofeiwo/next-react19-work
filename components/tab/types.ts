@@ -5,7 +5,7 @@ import type {
     ReactElement,
     ComponentPropsWithRef,
 } from 'react';
-import type PropTypes from 'prop-types';
+
 import type { CommonProps } from '../util';
 import Overlay from '../overlay';
 import type { Locale } from '../locale/types';
@@ -258,7 +258,7 @@ export interface TabContentProps extends CommonProps {
 export interface TabItemProps extends ItemProps, Pick<CommonProps, 'prefix'> {
     active?: boolean;
     key?: number | string;
-    title?: PropTypes.ReactNodeLike;
+    title?: ReactNode;
     lazyLoad?: boolean;
     unmountInactiveTabs?: boolean;
 }

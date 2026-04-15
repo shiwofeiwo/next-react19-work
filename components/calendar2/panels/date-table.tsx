@@ -1,9 +1,9 @@
 import React, { type KeyboardEvent, type MouseEvent } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
-import PT from 'prop-types';
+
 import { type WeekdayNames, type Dayjs, type ConfigType } from 'dayjs';
-import SharedPT from '../prop-types';
+
 import { DATE_PANEL_MODE } from '../constant';
 import { func, datejs, KEYCODE } from '../../util';
 import type { CalendarPanelMode, CellData, DateTableProps, DateTableState } from '../types';
@@ -22,21 +22,6 @@ const mode2Rows = {
 };
 
 class DateTable extends React.Component<DateTableProps, DateTableState> {
-    static propTypes = {
-        mode: SharedPT.panelMode,
-        value: SharedPT.date,
-        panelValue: SharedPT.date,
-        dateCellRender: PT.func,
-        quarterCellRender: PT.func,
-        monthCellRender: PT.func,
-        yearCellRender: PT.func,
-        disabledDate: PT.func,
-        hoveredState: PT.func,
-        onSelect: PT.func,
-        cellClassName: PT.oneOfType([PT.func, PT.string]),
-        colNum: PT.number,
-        cellProps: PT.object,
-    };
     prefixCls: string;
 
     constructor(props: DateTableProps) {

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Text from './text';
 import ConfigProvider from '../config-provider';
 import { TitleClass, TitleProps } from './types';
@@ -9,9 +8,6 @@ export default (Tag: string) => {
      * Typography.Title
      */
     class Title extends React.Component<TitleProps> {
-        static propTypes = {
-            prefix: PropTypes.string,
-        };
         static defaultProps = {
             prefix: 'next-',
         };

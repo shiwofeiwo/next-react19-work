@@ -1,5 +1,4 @@
 import React, { Component, type ComponentProps, type KeyboardEvent, type MouseEvent } from 'react';
-import PropTypes from 'prop-types';
 import Checkbox from '../../checkbox';
 import Radio from '../../radio';
 import { func, obj, KEYCODE, htmlId, type ClassPropsWithDefault } from '../../util';
@@ -35,23 +34,6 @@ export type CheckableItemWithDefaultsProps = ClassPropsWithDefault<
 export type CheckableItemInMenuProps = ChildItemPropsInMenu<CheckableItemWithDefaultsProps>;
 
 export default class CheckableItem extends Component<CheckableItemProps> {
-    static propTypes = {
-        _key: PropTypes.string,
-        root: PropTypes.object,
-        disabled: PropTypes.bool,
-        inlineIndent: PropTypes.number,
-        checked: PropTypes.bool,
-        indeterminate: PropTypes.bool,
-        onChange: PropTypes.func,
-        checkType: PropTypes.oneOf(['checkbox', 'radio']),
-        checkDisabled: PropTypes.bool,
-        helper: PropTypes.node,
-        children: PropTypes.node,
-        onKeyDown: PropTypes.func,
-        onClick: PropTypes.func,
-        id: PropTypes.string,
-    };
-
     static defaultProps = {
         disabled: false,
         checked: false,

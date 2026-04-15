@@ -6,7 +6,6 @@ import React, {
     type FunctionComponent,
     type ComponentClass,
 } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ConfigProvider from '../config-provider';
 import { type RowProps, type TypeRecord } from './types';
@@ -37,40 +36,6 @@ const ROW_PROP_KEYS = [
  * @order 1
  */
 export default class Row extends Component<RowProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        /**
-         * 行内容
-         */
-        children: PropTypes.node,
-        /**
-         * 列间隔
-         */
-        gutter: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        /**
-         * 列在行中宽度溢出后是否换行
-         */
-        wrap: PropTypes.bool,
-        /**
-         * 行在某一断点下宽度是否保持不变（默认行宽度随视口变化而变化）
-         */
-        fixed: PropTypes.bool,
-
-        fixedWidth: PropTypes.oneOf(['xxs', 'xs', 's', 'm', 'l', 'xl']),
-
-        align: PropTypes.oneOf(['top', 'center', 'bottom', 'baseline', 'stretch']),
-
-        justify: PropTypes.oneOf(['start', 'center', 'end', 'space-between', 'space-around']),
-
-        hidden: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.array]),
-
-        component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    };
-
     static defaultProps = {
         prefix: 'next-',
         pure: false,

@@ -1,6 +1,5 @@
 import React, { type ReactNode, Component, Children, isValidElement, cloneElement } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select, { type DataSourceItem, type ObjectItem } from '../select';
 import Tree, { type NodeInstance, type TreeProps } from '../tree';
@@ -188,67 +187,6 @@ const getSearchKeys = (searchedValue: string, _k2n: KeyEntities, _p2n: KeyEntiti
  * TreeSelect
  */
 class TreeSelect extends Component<TreeSelectProps, TreeSelectState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        locale: PropTypes.object,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        size: PropTypes.oneOf(['small', 'medium', 'large']),
-        placeholder: PropTypes.string,
-        disabled: PropTypes.bool,
-        hasArrow: PropTypes.bool,
-        hasBorder: PropTypes.bool,
-        hasClear: PropTypes.bool,
-        label: PropTypes.node,
-        readOnly: PropTypes.bool,
-        autoWidth: PropTypes.bool,
-        dataSource: PropTypes.arrayOf(PropTypes.object),
-        preserveNonExistentValue: PropTypes.bool,
-        value: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object,
-            PropTypes.arrayOf(PropTypes.any),
-        ]),
-        defaultValue: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object,
-            PropTypes.arrayOf(PropTypes.any),
-        ]),
-        onChange: PropTypes.func,
-        tagInline: PropTypes.bool,
-        maxTagPlaceholder: PropTypes.func,
-        autoClearSearch: PropTypes.bool,
-        showSearch: PropTypes.bool,
-        filterLocal: PropTypes.bool,
-        onSearch: PropTypes.func,
-        onSearchClear: PropTypes.func,
-        notFoundContent: PropTypes.node,
-        multiple: PropTypes.bool,
-        treeCheckable: PropTypes.bool,
-        treeCheckStrictly: PropTypes.bool,
-        treeCheckedStrategy: PropTypes.oneOf(['all', 'parent', 'child']),
-        treeDefaultExpandAll: PropTypes.bool,
-        treeDefaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
-        treeLoadData: PropTypes.func,
-        treeProps: PropTypes.object,
-        defaultVisible: PropTypes.bool,
-        visible: PropTypes.bool,
-        onVisibleChange: PropTypes.func,
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupContainer: PropTypes.any,
-        popupProps: PropTypes.object,
-        followTrigger: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        useVirtual: PropTypes.bool,
-        immutable: PropTypes.bool,
-        clickToCheck: PropTypes.bool,
-        valueRender: PropTypes.func,
-        useDetailValue: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         pure: false,

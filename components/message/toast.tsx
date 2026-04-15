@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import React, { type JSXElementConstructor } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import Overlay from '../overlay';
 import ConfigProvider from '../config-provider';
 import { guid } from '../util';

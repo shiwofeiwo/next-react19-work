@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { ConfigProviderProps } from './types';
 import ConfigContext from './context';
 
@@ -55,10 +54,4 @@ const Consumer = ({ children }: ConsumerProps) => {
 /**
  * PropTypes
  */
-Consumer.propTypes = {
-    // Render context as function
-    // Function(context: object): ReactElement
-    children: PropTypes.func,
-};
-
 export default Consumer;

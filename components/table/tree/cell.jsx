@@ -1,17 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Icon from '../../icon';
 import { KEYCODE } from '../../util';
 import CellComponent from '../base/cell';
 import TableContext from '../context';
 
 export default class TreeCell extends React.Component {
-    static propTypes = {
-        indent: PropTypes.number,
-        locale: PropTypes.object,
-        ...CellComponent.propTypes,
-    };
-
     static defaultProps = {
         ...CellComponent.defaultProps,
         component: 'td',

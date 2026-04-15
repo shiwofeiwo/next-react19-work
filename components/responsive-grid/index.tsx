@@ -4,7 +4,6 @@ import React, {
     type JSXElementConstructor,
     type ReactNode,
 } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Box from '../box';
@@ -77,18 +76,6 @@ const getStyle = (style = {}, props: ResponsiveGridProps) => {
 class ResponsiveGrid extends Component<ResponsiveGridProps> {
     static _typeMark = 'responsive_grid';
     static Cell = Cell;
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.any,
-        device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
-        rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        columns: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        gap: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
-        component: PropTypes.elementType,
-        dense: PropTypes.bool,
-        style: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         component: 'div',

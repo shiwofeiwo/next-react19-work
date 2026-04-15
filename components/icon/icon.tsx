@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Component } from 'react';
 import { obj } from '../util';
@@ -29,27 +28,6 @@ const ICON_PROP_KEYS = [
  * Icon
  */
 class Icon extends Component<IconProps> {
-    static propTypes = {
-        type: PropTypes.string,
-        children: PropTypes.node,
-        size: PropTypes.oneOfType([
-            PropTypes.oneOf([
-                'xxs',
-                'xs',
-                'small',
-                'medium',
-                'large',
-                'xl',
-                'xxl',
-                'xxxl',
-                'inherit',
-            ]),
-            PropTypes.number,
-        ]),
-        className: PropTypes.string,
-        style: PropTypes.object,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         size: 'medium',

@@ -1,23 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Icon from '../../icon';
 import { KEYCODE } from '../../util';
 
 /* eslint-disable react/prefer-stateless-function */
-export default class Sort extends React.Component {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        sort: PropTypes.object,
-        sortIcons: PropTypes.object,
-        onSort: PropTypes.func,
-        sortDirections: PropTypes.arrayOf(PropTypes.oneOf(['desc', 'asc', 'default'])),
-        dataIndex: PropTypes.string,
-        locale: PropTypes.object,
-    };
-    static defaultProps = {
+export default class Sort extends React.Component {    static defaultProps = {
         sort: {},
         sortDirections: ['desc', 'asc'],
     };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import PT from 'prop-types';
+
 import classnames from 'classnames';
-import SharedPT from '../prop-types';
+
 import { DATE_INPUT_TYPE, DATE_PICKER_MODE } from '../constant';
 import { func, datejs, obj } from '../../util';
 import { fmtValue } from '../util';
@@ -13,30 +13,6 @@ import Icon from '../../icon';
 const { DATE, WEEK, MONTH, QUARTER, YEAR } = DATE_PICKER_MODE;
 
 class DateInput extends React.Component {
-    static propTypes = {
-        prefix: PT.string,
-        rtl: PT.bool,
-        locale: PT.object,
-        value: SharedPT.inputValue,
-        inputType: SharedPT.inputType,
-        format: SharedPT.format,
-        isRange: PT.bool,
-        hasClear: PT.bool,
-        onInputTypeChange: PT.func,
-        autoFocus: PT.bool,
-        readOnly: SharedPT.readOnly,
-        placeholder: SharedPT.placeholder,
-        size: SharedPT.size,
-        focus: PT.bool,
-        hasBorder: PT.bool,
-        separator: PT.node,
-        disabled: SharedPT.disabled,
-        inputProps: PT.object,
-        dateInputAriaLabel: SharedPT.ariaLabel,
-        label: PT.node,
-        state: PT.string,
-    };
-
     static defaultProps = {
         autoFocus: false,
         readOnly: false,

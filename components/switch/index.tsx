@@ -1,6 +1,5 @@
 import React, { type HTMLAttributes, type KeyboardEvent, type MouseEvent } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import { KEYCODE } from '../util';
 import Icon from '../icon';
@@ -10,28 +9,6 @@ import type { SwitchProps, SwitchState } from './types';
 
 class Switch extends React.Component<SwitchProps, SwitchState> {
     static displayName = 'Switch';
-    static propTypes = {
-        name: PropTypes.string,
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        pure: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        checkedChildren: PropTypes.any,
-        unCheckedChildren: PropTypes.any,
-        onChange: PropTypes.func,
-        checked: PropTypes.bool,
-        defaultChecked: PropTypes.bool,
-        disabled: PropTypes.bool,
-        loading: PropTypes.bool,
-        size: PropTypes.oneOf(['medium', 'small']),
-        onClick: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-        autoWidth: PropTypes.bool,
-        locale: PropTypes.object,
-    };
     static defaultProps = {
         prefix: 'next-',
         size: 'medium',

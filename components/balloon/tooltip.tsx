@@ -1,5 +1,4 @@
 import React, { Component, type ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import Overlay from '../overlay';
 import BalloonInner from './inner';
 import { normalMap, edgeMap } from './alignMap';
@@ -18,41 +17,6 @@ let alignMap = normalMap;
 /** Balloon.Tooltip */
 export default class Tooltip extends Component<TooltipProps, TooltipState> {
     static displayName = 'Tooltip';
-
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.any,
-        align: PropTypes.oneOf([
-            't',
-            'r',
-            'b',
-            'l',
-            'tl',
-            'tr',
-            'bl',
-            'br',
-            'lt',
-            'lb',
-            'rt',
-            'rb',
-        ]),
-        trigger: PropTypes.any,
-        triggerType: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-        popupStyle: PropTypes.object,
-        popupClassName: PropTypes.string,
-        popupProps: PropTypes.object,
-        pure: PropTypes.bool,
-        popupContainer: PropTypes.any,
-        followTrigger: PropTypes.bool,
-        id: PropTypes.string,
-        delay: PropTypes.number,
-        mouseEnterDelay: PropTypes.number,
-        mouseLeaveDelay: PropTypes.number,
-        v2: PropTypes.bool,
-        arrowPointToCenter: PropTypes.bool,
-    };
 
     static defaultProps = {
         triggerType: 'hover',

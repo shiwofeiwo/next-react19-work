@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import Loading from '../loading';
@@ -11,23 +10,6 @@ import type { ListProps } from './types';
  * List
  */
 class List extends Component<ListProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        header: PropTypes.node,
-        footer: PropTypes.node,
-        size: PropTypes.oneOf(['medium', 'small']),
-        divider: PropTypes.bool,
-        dataSource: PropTypes.array,
-        renderItem: PropTypes.func,
-        loading: PropTypes.bool,
-        loadingComponent: PropTypes.func,
-        emptyContent: PropTypes.node,
-        className: PropTypes.string,
-        children: PropTypes.any,
-        locale: PropTypes.object,
-    };
-
     static defaultProps = {
         rtl: false,
         size: 'medium',

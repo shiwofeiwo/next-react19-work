@@ -1,6 +1,5 @@
 import React, { Component, Children, cloneElement, createRef } from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
@@ -370,60 +369,6 @@ const getData = (props: TreeProps) => {
  * Tree
  */
 export class Tree extends Component<TreeProps, TreeState> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        rtl: PropTypes.bool,
-        pure: PropTypes.bool,
-        className: PropTypes.string,
-        children: PropTypes.node,
-        dataSource: PropTypes.array,
-        showLine: PropTypes.bool,
-        selectable: PropTypes.bool,
-        selectedKeys: PropTypes.arrayOf(PropTypes.string),
-        defaultSelectedKeys: PropTypes.arrayOf(PropTypes.string),
-        onSelect: PropTypes.func,
-        multiple: PropTypes.bool,
-        checkable: PropTypes.bool,
-        checkedKeys: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.object]),
-        defaultCheckedKeys: PropTypes.arrayOf(PropTypes.string),
-        checkStrictly: PropTypes.bool,
-        checkedStrategy: PropTypes.oneOf(['all', 'parent', 'child']),
-        onCheck: PropTypes.func,
-        expandedKeys: PropTypes.arrayOf(PropTypes.string),
-        defaultExpandedKeys: PropTypes.arrayOf(PropTypes.string),
-        defaultExpandAll: PropTypes.bool,
-        autoExpandParent: PropTypes.bool,
-        onExpand: PropTypes.func,
-        editable: PropTypes.bool,
-        onEditFinish: PropTypes.func,
-        draggable: PropTypes.bool,
-        onDragStart: PropTypes.func,
-        onDragEnter: PropTypes.func,
-        onDragOver: PropTypes.func,
-        onDragLeave: PropTypes.func,
-        onDragEnd: PropTypes.func,
-        onDrop: PropTypes.func,
-        canDrop: PropTypes.func,
-        loadData: PropTypes.func,
-        filterTreeNode: PropTypes.func,
-        onRightClick: PropTypes.func,
-        isLabelBlock: PropTypes.bool,
-        isNodeBlock: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-        animation: PropTypes.bool,
-        focusedKey: PropTypes.string,
-        renderChildNodes: PropTypes.func,
-        focusable: PropTypes.bool,
-        autoFocus: PropTypes.bool,
-        onItemFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        onItemKeyDown: PropTypes.func,
-        labelRender: PropTypes.func,
-        useVirtual: PropTypes.bool,
-        immutable: PropTypes.bool,
-        virtualListProps: PropTypes.object,
-        clickToCheck: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         rtl: false,
@@ -1294,10 +1239,7 @@ export class Tree extends Component<TreeProps, TreeState> {
             virtualListProps,
         } = this.props;
         const { dataSource } = this.state;
-        const { style, ...others }: Omit<TreeProps, keyof typeof Tree.propTypes> = pickOthers(
-            TREE_PROP_KEYS,
-            this.props
-        );
+        const { style, ...others }: Record<string, any> = pickOthers(TREE_PROP_KEYS, this.props);
 
         if (rtl) {
             others.dir = 'rtl';

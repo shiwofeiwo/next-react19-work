@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from '../button';
 import { func, obj } from '../util';
 import FormContext from './context';
@@ -9,14 +8,6 @@ const RESET_PROP_KEYS = ['names', 'onClick', 'toDefault', 'field', 'children'];
 
 class Reset extends React.Component<ResetProps> {
     static displayName = 'Reset';
-    static propTypes = {
-        names: PropTypes.array,
-        onClick: PropTypes.func,
-        toDefault: PropTypes.bool,
-        field: PropTypes.object,
-        children: PropTypes.node,
-    };
-
     static defaultProps = {
         onClick: func.noop,
     };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import RowComponent from './tree/row';
 import CellComponent from './tree/cell';
@@ -12,40 +11,6 @@ export default function tree(BaseComponent) {
     class TreeTable extends React.Component {
         static TreeRow = RowComponent;
         static TreeCell = CellComponent;
-        static propTypes = {
-            /**
-             * 默认情况下展开的树形表格，传入了此属性代表tree的展开为受控操作
-             */
-            openRowKeys: PropTypes.array,
-            /**
-             * 默认情况下展开的 Expand行 或者 Tree行，非受控模式
-             * @version 1.23.22
-             */
-            defaultOpenRowKeys: PropTypes.array,
-            /**
-             * 点击tree展开或者关闭的时候触发的事件
-             * @param {Array} openRowKeys tree模式下展开的key
-             * @param {String} currentRowKey 当前点击行的key
-             * @param {Boolean} opened 当前点击是展开还是收起
-             * @param {Object} currentRecord 当前点击行的记录
-             */
-            onRowOpen: PropTypes.func,
-            /**
-             * dataSource当中数据的主键，如果给定的数据源中的属性不包含该主键，会造成选择状态全部选中
-             */
-            primaryKey: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string]),
-            /**
-             * 在tree模式下的缩进尺寸， 仅在isTree为true时候有效
-             */
-            indent: PropTypes.number,
-            /**
-             * 开启Table的tree模式, 接收的数据格式中包含children则渲染成tree table
-             */
-            isTree: PropTypes.bool,
-            locale: PropTypes.object,
-            ...BaseComponent.propTypes,
-        };
-
         static defaultProps = {
             ...BaseComponent.defaultProps,
             primaryKey: 'id',

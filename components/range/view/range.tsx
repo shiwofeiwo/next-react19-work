@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import { events, func, KEYCODE, dom, obj, type ClassPropsWithDefault } from '../../util';
 import Balloon from '../../balloon';
@@ -88,16 +87,6 @@ function LowerSlider(props: LowerAndUpperSliderProps) {
     return null;
 }
 
-LowerSlider.propTypes = {
-    hasTip: PropTypes.bool,
-    tooltipVisible: PropTypes.bool,
-    onTooltipVisibleChange: PropTypes.func,
-    tooltipAnimation: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-    tipRender: PropTypes.func,
-    slider: PropTypes.oneOf(['single', 'double']),
-};
-
 function UpperSlider(props: LowerAndUpperSliderProps) {
     const newprop = Object.assign({}, props);
     const {
@@ -155,16 +144,6 @@ function UpperSlider(props: LowerAndUpperSliderProps) {
     );
 }
 
-UpperSlider.propTypes = {
-    hasTip: PropTypes.bool,
-    tooltipVisible: PropTypes.bool,
-    onTooltipVisibleChange: PropTypes.func,
-    tooltipAnimation: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-    tipRender: PropTypes.func,
-    slider: PropTypes.oneOf(['single', 'double']),
-};
-
 UpperSlider.displayName = 'UpperSlider';
 
 function pauseEvent(e: React.SyntheticEvent) {
@@ -174,39 +153,6 @@ function pauseEvent(e: React.SyntheticEvent) {
 
 class Range extends React.Component<RangeProps, RangeState> {
     static displayName = 'Range';
-    static propTypes = {
-        prefix: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        slider: PropTypes.oneOf(['single', 'double']),
-        min: PropTypes.number,
-        max: PropTypes.number,
-        step: PropTypes.number,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        tempValue: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-        marks: PropTypes.oneOfType([
-            PropTypes.bool,
-            PropTypes.number,
-            PropTypes.arrayOf(PropTypes.number),
-            PropTypes.object,
-        ]),
-        marksPosition: PropTypes.oneOf(['above', 'below']),
-        disabled: PropTypes.bool,
-        onChange: PropTypes.func,
-        onProcess: PropTypes.func,
-        hasTip: PropTypes.bool,
-        tipRender: PropTypes.func,
-        id: PropTypes.string,
-        reverse: PropTypes.bool,
-        pure: PropTypes.bool,
-        fixedWidth: PropTypes.bool,
-        tooltipVisible: PropTypes.bool,
-        rtl: PropTypes.bool,
-        isPreview: PropTypes.bool,
-        renderPreview: PropTypes.func,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         slider: 'single',

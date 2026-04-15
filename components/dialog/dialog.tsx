@@ -1,5 +1,4 @@
 import React, { Component, type ComponentPropsWithRef } from 'react';
-import PropTypes from 'prop-types';
 import Overlay from '../overlay';
 import zhCN from '../locale/zh-cn';
 import { focus, obj, func, events, dom, env } from '../util';
@@ -75,53 +74,6 @@ function _getSize(dom: HTMLElement, name: CustomCSSStyleKey) {
  * Dialog
  */
 export default class Dialog extends Component<DialogV1Props> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        pure: PropTypes.bool,
-        rtl: PropTypes.bool,
-        className: PropTypes.string,
-        visible: PropTypes.bool,
-        title: PropTypes.node,
-        children: PropTypes.node,
-        footer: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-        footerAlign: PropTypes.oneOf(['left', 'center', 'right']),
-        footerActions: PropTypes.array,
-        onOk: PropTypes.func,
-        onCancel: PropTypes.func,
-        okProps: PropTypes.object,
-        cancelProps: PropTypes.object,
-        closeMode: PropTypes.oneOfType([
-            PropTypes.arrayOf(PropTypes.oneOf(['close', 'mask', 'esc'])),
-            PropTypes.oneOf(['close', 'mask', 'esc']),
-        ]),
-        cache: PropTypes.bool,
-        afterClose: PropTypes.func,
-        hasMask: PropTypes.bool,
-        animation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-        autoFocus: PropTypes.bool,
-        overlayProps: PropTypes.object,
-        locale: PropTypes.object,
-        // Do not remove this, it's for <ConfigProvider popupContainer={} />
-        // see https://github.com/alibaba-fusion/next/issues/1508
-        popupContainer: PropTypes.any,
-        height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        v2: PropTypes.bool,
-        width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        top: PropTypes.number,
-        bottom: PropTypes.number,
-        closeIcon: PropTypes.node,
-        centered: PropTypes.bool,
-        overflowScroll: PropTypes.bool,
-        wrapperClassName: PropTypes.string,
-        closeable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        onClose: PropTypes.func,
-        align: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-        isFullScreen: PropTypes.bool,
-        shouldUpdatePosition: PropTypes.bool,
-        minMargin: PropTypes.number,
-        noPadding: PropTypes.bool,
-    };
-
     static defaultProps = {
         prefix: 'next-',
         pure: false,

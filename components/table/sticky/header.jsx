@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Affix from '../../affix';
 import TableContext from '../context';
 
 /* eslint-disable react/prefer-stateless-function*/
-export default class StickHeader extends React.Component {
-    static propTypes = {
-        prefix: PropTypes.string,
-    };
-    static contextType = TableContext;
+export default class StickHeader extends React.Component {    static contextType = TableContext;
 
     getAffixRef = ref => {
         this.props.affixRef && this.props.affixRef(ref);

@@ -1,5 +1,4 @@
 import React, { type MouseEvent, Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { func } from '../../util';
 import type { DotsProps, OptionProps } from '../types';
@@ -12,18 +11,6 @@ import type { DotsProps, OptionProps } from '../types';
 const { noop } = func;
 
 export default class Dots extends Component<DotsProps> {
-    static propTypes = {
-        prefix: PropTypes.string,
-        currentSlide: PropTypes.number,
-        changeSlide: PropTypes.func,
-        dotsClass: PropTypes.string,
-        slideCount: PropTypes.number,
-        slidesToScroll: PropTypes.number,
-        dotsDirection: PropTypes.oneOf(['hoz', 'ver']),
-        dotsRender: PropTypes.func,
-        triggerType: PropTypes.string,
-    };
-
     static defaultProps = {
         changeSlide: noop,
     };
