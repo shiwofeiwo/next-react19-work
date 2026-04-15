@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import Loading from '../loading';
 import zhCN from '../locale/zh-cn';
 import ConfigProvider from '../config-provider';
@@ -89,4 +88,4 @@ class List extends Component<ListProps> {
     }
 }
 
-export default ConfigProvider.config(polyfill(List));
+export default ConfigProvider.config(List);

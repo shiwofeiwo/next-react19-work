@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 
 
@@ -761,4 +760,4 @@ class Picker extends React.Component {
     }
 }
 
-export default polyfill(Picker);
+export default Picker;

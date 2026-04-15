@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 
 import TimePickerPanel from '../../time-picker2/panel';
 
@@ -78,4 +77,4 @@ class TimePanel extends React.PureComponent {
     }
 }
 
-export default polyfill(TimePanel);
+export default TimePanel;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { obj } from '../util';
 import Checkbox from './checkbox';
 import CheckboxGroupContext from './context';
@@ -207,4 +206,4 @@ class CheckboxGroup extends React.Component<GroupProps, GroupState> {
     }
 }
 
-export default polyfill(CheckboxGroup);
+export default CheckboxGroup;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { obj } from '../util';
 import type { DividerProps } from './types';
 import ConfigProvider from '../config-provider';
@@ -41,4 +40,4 @@ class Divider extends Component<DividerProps> {
 }
 
 export type { DividerProps };
-export default ConfigProvider.config(polyfill(Divider));
+export default ConfigProvider.config(Divider);

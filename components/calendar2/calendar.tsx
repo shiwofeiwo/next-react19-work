@@ -1,5 +1,4 @@
 import React, { type UIEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 
 import classnames from 'classnames';
 import { type Dayjs, type ConfigType } from 'dayjs';
@@ -286,4 +285,4 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     }
 }
 
-export default polyfill(Calendar);
+export default Calendar;

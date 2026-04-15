@@ -1,5 +1,4 @@
 import React, { type ReactNode, type ReactElement, Component, Children } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
 import ConfigProvider from '../config-provider';
 import Dropdown from '../dropdown';
@@ -265,4 +264,4 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
     }
 }
 
-export default ConfigProvider.config(polyfill(Breadcrumb));
+export default ConfigProvider.config(Breadcrumb);

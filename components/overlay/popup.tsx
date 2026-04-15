@@ -5,7 +5,6 @@ import React, {
     type MouseEventHandler,
     type KeyboardEventHandler,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import { func, KEYCODE } from '../util';
 import Overlay from './overlay';
 import type { PopupProps, PopupState } from './types';
@@ -341,4 +340,4 @@ class Popup extends Component<PopupProps, PopupState> {
     }
 }
 
-export default polyfill(Popup);
+export default Popup;

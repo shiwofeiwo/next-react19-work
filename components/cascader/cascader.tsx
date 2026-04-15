@@ -1,5 +1,4 @@
 import React, { Component, type ReactElement, type FocusEvent, type ComponentType } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
 import Menu, { type ItemProps, type CheckboxItemProps } from '../menu';
@@ -838,4 +837,4 @@ class Cascader extends Component<CascaderProps, CascaderState> {
     }
 }
 
-export default polyfill(Cascader);
+export default Cascader;

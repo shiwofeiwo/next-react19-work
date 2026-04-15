@@ -6,7 +6,6 @@ import React, {
     type KeyboardEvent,
     type MouseEvent,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
 import ConfigProvider from '../config-provider';
 import Icon from '../icon';
@@ -566,4 +565,4 @@ class Pagination extends Component<PaginationProps, PaginationState> {
     }
 }
 
-export default ConfigProvider.config(polyfill(Pagination));
+export default ConfigProvider.config(Pagination);

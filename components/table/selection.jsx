@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
 import { func, log } from '../util';
@@ -307,5 +306,5 @@ export default function selection(BaseComponent) {
         }
     }
     statics(SelectionTable, BaseComponent);
-    return polyfill(SelectionTable);
+    return SelectionTable;
 }

@@ -1,6 +1,5 @@
 import React, { type ChangeEvent, type KeyboardEvent } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 
 import { func, obj, KEYCODE } from '../util';
 import Input from '../input';
@@ -422,4 +421,4 @@ class AutoComplete extends Base<AutoCompleteProps, AutoCompleteState> {
     }
 }
 
-export default polyfill(AutoComplete);
+export default AutoComplete;

@@ -1,6 +1,5 @@
 import React, { Component, type KeyboardEvent, type MouseEvent } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { obj, func } from '../util';
 import Tag from './tag';
 import type { SelectableProps } from './types';
@@ -81,4 +80,4 @@ class Selectable extends Component<SelectableProps, SelectableState> {
     }
 }
 
-export default polyfill(Selectable);
+export default Selectable;

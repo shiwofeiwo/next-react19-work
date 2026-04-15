@@ -6,7 +6,6 @@ import React, {
     type KeyboardEvent,
 } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
 import { func } from '../util';
 import zhCN from '../locale/zh-cn';
@@ -268,4 +267,4 @@ class Base<
     }
 }
 
-export default polyfill(Base);
+export default Base;

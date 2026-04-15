@@ -1,5 +1,4 @@
 import React, { type KeyboardEvent, type MouseEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 
 import { type WeekdayNames, type Dayjs, type ConfigType } from 'dayjs';
@@ -368,4 +367,4 @@ class DateTable extends React.Component<DateTableProps, DateTableState> {
     }
 }
 
-export default polyfill(DateTable);
+export default DateTable;

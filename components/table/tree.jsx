@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import RowComponent from './tree/row';
 import CellComponent from './tree/cell';
 import { statics } from './util';
@@ -161,5 +160,5 @@ export default function tree(BaseComponent) {
         }
     }
     statics(TreeTable, BaseComponent);
-    return polyfill(TreeTable);
+    return TreeTable;
 }

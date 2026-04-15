@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
 import Icon from '../../icon';
 import Checkbox from '../../checkbox';
@@ -621,4 +620,4 @@ export class TreeNode extends Component<NodeProps, NodeState> {
     }
 }
 
-export default polyfill(TreeNode);
+export default TreeNode;

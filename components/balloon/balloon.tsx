@@ -1,5 +1,4 @@
 import React, { type ReactElement, type MouseEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import Overlay from '../overlay';
 import { func, obj, log } from '../util';
 import BalloonInner from './inner';
@@ -386,4 +385,4 @@ class Balloon extends React.Component<BalloonProps, BalloonState> {
     }
 }
 
-export default polyfill(Balloon);
+export default Balloon;

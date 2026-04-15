@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
 import type { ListItemProps } from './types';
 
@@ -36,4 +35,4 @@ class ListItem extends Component<ListItemProps> {
 
 export type { ListItem };
 
-export default ConfigProvider.config(polyfill(ListItem));
+export default ConfigProvider.config(ListItem);

@@ -1,6 +1,5 @@
 import React, { Children } from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
 import { KEYCODE, dom, events } from '../util';
 import RowComponent from './expanded/row';
@@ -262,5 +261,5 @@ export default function expanded(BaseComponent, stickyLock) {
         }
     }
     statics(ExpandedTable, BaseComponent);
-    return polyfill(ExpandedTable);
+    return ExpandedTable;
 }

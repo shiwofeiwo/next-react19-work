@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import nextLocale from '../locale/zh-cn';
 import Icon from '../icon';
@@ -161,4 +160,4 @@ class Message extends Component<MessageProps> {
     }
 }
 
-export default ConfigProvider.config(polyfill(Message));
+export default ConfigProvider.config(Message);

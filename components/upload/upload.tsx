@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 
 import { func, obj } from '../util';
 import Icon from '../icon';
@@ -466,4 +465,4 @@ class Upload extends Base<UploadProps, UploadState> {
     }
 }
 
-export default polyfill(Upload);
+export default Upload;

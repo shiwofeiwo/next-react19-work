@@ -1,6 +1,5 @@
 import React, { Component, type KeyboardEvent, type MouseEvent } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
 import ConfigProvider from '../config-provider';
 import { func, KEYCODE, obj, type ClassPropsWithDefault } from '../util';
@@ -504,4 +503,4 @@ class Rating extends Component<RatingProps, RatingState> {
     }
 }
 
-export default polyfill(Rating);
+export default Rating;

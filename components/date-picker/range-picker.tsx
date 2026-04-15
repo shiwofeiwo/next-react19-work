@@ -5,7 +5,6 @@ import React, {
     type KeyboardEvent,
     type SyntheticEvent,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import ConfigProvider from '../config-provider';
@@ -1113,4 +1112,4 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
     }
 }
 
-export default polyfill(RangePicker);
+export default RangePicker;

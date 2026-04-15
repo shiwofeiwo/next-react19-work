@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 
 import zhCN from '../locale/zh-cn';
 import { func, obj } from '../util';
@@ -210,4 +209,4 @@ class Card extends Base<CardProps, CardState> {
     }
 }
 
-export default polyfill(Card);
+export default Card;

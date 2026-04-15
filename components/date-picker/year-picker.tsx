@@ -4,7 +4,6 @@ import React, {
     type KeyboardEvent,
     type SyntheticEvent,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import Overlay from '../overlay';
@@ -394,4 +393,4 @@ class YearPicker extends Component<YearPickerProps, YearPickerState> {
     }
 }
 
-export default polyfill(YearPicker);
+export default YearPicker;

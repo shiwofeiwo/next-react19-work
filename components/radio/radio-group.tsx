@@ -1,6 +1,5 @@
 import React, { Component, type ChangeEvent, type ReactNode } from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
 import { obj, func, focus } from '../util';
 import Radio from './radio';
@@ -287,4 +286,4 @@ class RadioGroup extends Component<GroupProps, GroupState> {
 
 export type { RadioGroup };
 
-export default polyfill(RadioGroup);
+export default RadioGroup;

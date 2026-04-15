@@ -1,6 +1,5 @@
 import React, { Component, Children, cloneElement, createRef } from 'react';
 import { cloneDeep } from 'lodash';
-import { polyfill } from 'react-lifecycles-compat';
 import cx from 'classnames';
 import { func, dom, obj, KEYCODE } from '../../util';
 import TreeNode from './tree-node';
@@ -1306,4 +1305,4 @@ export class Tree extends Component<TreeProps, TreeState> {
     }
 }
 
-export default polyfill(Tree);
+export default Tree;

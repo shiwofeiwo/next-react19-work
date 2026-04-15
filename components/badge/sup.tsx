@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import Animate from '../animate';
 import { support, dom } from '../util';
@@ -204,4 +203,4 @@ class Sup extends Component<BadgeSubProps, BadgeSubState> {
     }
 }
 
-export default polyfill(Sup);
+export default Sup;

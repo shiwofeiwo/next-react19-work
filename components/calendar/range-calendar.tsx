@@ -1,5 +1,4 @@
 import React, { type MouseEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import ConfigProvider from '../config-provider';
@@ -361,6 +360,6 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     }
 }
 
-export default ConfigProvider.config(polyfill(RangeCalendar), {
+export default ConfigProvider.config(RangeCalendar, {
     componentName: 'Calendar',
 });

@@ -4,7 +4,6 @@ import React, {
     type SyntheticEvent,
     type KeyboardEvent,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import ConfigProvider from '../config-provider';
@@ -391,4 +390,4 @@ class TimePicker extends Component<TimePickerProps, TimePickerState> {
     }
 }
 
-export default polyfill(TimePicker);
+export default TimePicker;

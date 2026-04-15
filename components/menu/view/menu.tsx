@@ -11,7 +11,6 @@ import React, {
     type KeyboardEvent,
 } from 'react';
 import cx from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import SubMenu from './sub-menu';
 import ConfigProvider from '../../config-provider';
 import { func, obj, dom, events, KEYCODE, type ClassPropsWithDefault } from '../../util';
@@ -970,4 +969,4 @@ export class Menu extends Component<MenuProps, MenuState> {
     }
 }
 
-export default polyfill(Menu);
+export default Menu;

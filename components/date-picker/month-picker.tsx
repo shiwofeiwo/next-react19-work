@@ -4,7 +4,6 @@ import React, {
     type SyntheticEvent,
     type KeyboardEvent,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import ConfigProvider from '../config-provider';
@@ -413,4 +412,4 @@ class MonthPicker extends Component<MonthPickerProps, MonthPickerState> {
     }
 }
 
-export default polyfill(MonthPicker);
+export default MonthPicker;

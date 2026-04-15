@@ -1,5 +1,4 @@
 import React, { Component, type HTMLAttributes, type KeyboardEvent, type UIEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
 import ConfigProvider from '../config-provider';
@@ -628,4 +627,4 @@ class DatePicker extends Component<DatePickerProps, DatePickerState> {
     }
 }
 
-export default polyfill(DatePicker);
+export default DatePicker;

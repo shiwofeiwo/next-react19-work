@@ -6,7 +6,6 @@ import React, {
     type HTMLAttributes,
     type ComponentPropsWithRef,
 } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import Select from '../select';
 import Cascader, { type CascaderDataItem, type Extra } from '../cascader';
@@ -897,4 +896,4 @@ class CascaderSelect extends Component<CascaderSelectProps, CascaderSelectState>
     }
 }
 
-export default polyfill(CascaderSelect);
+export default CascaderSelect;

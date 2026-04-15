@@ -1,6 +1,5 @@
 import React, { Component, type ReactElement, type KeyboardEvent } from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { KEYCODE, obj } from '../util';
 import TabNav from './tabs/nav';
 import TabContent from './tabs/content';
@@ -330,4 +329,4 @@ class Tab extends Component<TabProps, TabState> {
         );
     }
 }
-export default polyfill(Tab);
+export default Tab;

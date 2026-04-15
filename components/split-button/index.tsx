@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Icon from '../icon';
 import Button from '../button';
@@ -245,4 +244,4 @@ class SplitButton extends React.Component<SplitButtonProps> {
 
 export type { SplitButtonProps };
 
-export default ConfigProvider.config(polyfill(SplitButton));
+export default ConfigProvider.config(SplitButton);

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import UIState, { type UIStateState } from '../mixin-ui-state';
 import ConfigProvider from '../config-provider';
 import Icon from '../icon';
@@ -282,5 +281,5 @@ class Checkbox extends UIState<PrivateCheckboxProps, CheckboxState> {
 }
 
 export default ConfigProvider.config(
-    withCheckboxContext(polyfill(Checkbox) as React.ComponentType<PrivateCheckboxProps>)
+    withCheckboxContext(Checkbox as React.ComponentType<PrivateCheckboxProps>)
 );

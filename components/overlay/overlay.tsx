@@ -7,7 +7,6 @@ import React, {
     type MouseEvent,
 } from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { dom, events, focus, func, guid, KEYCODE, support } from '../util';
 import overlayManager from './manager';
 import Gateway from './gateway';
@@ -779,4 +778,4 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     }
 }
 
-export default polyfill(Overlay);
+export default Overlay;

@@ -1,5 +1,4 @@
 import React, { type ReactElement, Component } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import { events, func, obj } from '../../util';
 import EventHandlersMixin from './mixins/event-handlers';
 import HelpersMixin from './mixins/helpers';
@@ -383,4 +382,4 @@ class InnerSlider extends Component<InnerSliderProps, InnerSliderState> {
 Object.assign(InnerSlider.prototype, HelpersMixin);
 Object.assign(InnerSlider.prototype, EventHandlersMixin);
 
-export default polyfill(InnerSlider);
+export default InnerSlider;

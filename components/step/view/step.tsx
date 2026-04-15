@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { Component, Children, type ReactNode, type ReactElement } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../../config-provider';
 import { support, events, dom, obj } from '../../util';
 import type { StepProps, StepState } from '../types';
@@ -205,4 +204,4 @@ class Step extends Component<StepProps, StepState> {
     }
 }
 
-export default polyfill(Step);
+export default Step;

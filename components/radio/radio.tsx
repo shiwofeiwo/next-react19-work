@@ -1,6 +1,5 @@
 import React, { type ChangeEvent } from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import UIState, { type UIStateState } from '../mixin-ui-state';
 import ConfigProvider from '../config-provider';
 import withContext from './with-context';
@@ -262,4 +261,4 @@ class Radio extends UIState<RadioWithContextProps, RadioState> {
 
 export type { Radio };
 
-export default ConfigProvider.config(withContext(polyfill(Radio)));
+export default ConfigProvider.config(withContext(Radio));

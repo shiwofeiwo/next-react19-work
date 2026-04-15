@@ -7,7 +7,6 @@ import React, {
     type ReactNode,
 } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 
 import { func, obj, KEYCODE, env, str } from '../util';
 import Tag from '../tag';
@@ -1168,4 +1167,4 @@ class Select extends Base<SelectProps, SelectState> {
     }
 }
 
-export default polyfill(Select);
+export default Select;

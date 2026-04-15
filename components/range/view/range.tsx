@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import { events, func, KEYCODE, dom, obj, type ClassPropsWithDefault } from '../../util';
 import Balloon from '../../balloon';
 import { getPercent, getPrecision, isEqual, getDragging } from '../utils';
@@ -754,4 +753,4 @@ class Range extends React.Component<RangeProps, RangeState> {
     }
 }
 
-export default polyfill(Range);
+export default Range;

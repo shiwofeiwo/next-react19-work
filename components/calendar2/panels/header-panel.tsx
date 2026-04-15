@@ -1,5 +1,4 @@
 import React, { type ReactElement } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 
 import type { Dayjs, ManipulateType } from 'dayjs';
 import { func, datejs } from '../../util';
@@ -335,4 +334,4 @@ class HeaderPanel extends React.PureComponent<HeaderPanelProps> {
     }
 }
 
-export default polyfill(HeaderPanel);
+export default HeaderPanel;

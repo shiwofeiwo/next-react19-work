@@ -1,6 +1,5 @@
 import React, { Component, type MouseEvent, type KeyboardEvent, type ReactElement } from 'react';
 import classnames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import ConfigProvider from '../config-provider';
 import Affix from '../affix';
 import Icon from '../icon';
@@ -665,5 +664,5 @@ export default function ShellBase(props: { componentName?: string }) {
         }
     }
 
-    return polyfill(Shell);
+    return Shell;
 }

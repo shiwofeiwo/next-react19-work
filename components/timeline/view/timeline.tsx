@@ -1,6 +1,5 @@
 import React, { Component, Children, type ReactElement } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 
 import { obj } from '../../util';
 import ConfigProvider from '../../config-provider';
@@ -149,4 +148,4 @@ class Timeline extends Component<TimelineProps, TimelineState> {
     }
 }
 
-export default ConfigProvider.config(polyfill(Timeline));
+export default ConfigProvider.config(Timeline);

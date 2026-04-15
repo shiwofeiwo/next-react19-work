@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 
 
@@ -123,4 +122,4 @@ class DatePanel extends React.Component {    static defaultProps = {
     }
 }
 
-export default polyfill(DatePanel);
+export default DatePanel;

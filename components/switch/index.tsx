@@ -1,6 +1,5 @@
 import React, { type HTMLAttributes, type KeyboardEvent, type MouseEvent } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { KEYCODE } from '../util';
 import Icon from '../icon';
 import ConfigProvider from '../config-provider';
@@ -159,4 +158,4 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
 
 export type { SwitchProps, SwitchLocale } from './types';
 
-export default ConfigProvider.config(polyfill(Switch));
+export default ConfigProvider.config(Switch);

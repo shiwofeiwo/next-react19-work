@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 
 
@@ -425,4 +424,4 @@ class RangePanel extends React.Component {
     }
 }
 
-export default polyfill(RangePanel);
+export default RangePanel;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 
 import Icon from '../../icon';
 import Button from '../../button';
@@ -528,4 +527,4 @@ class Transfer extends Component<TransferProps, TransferState> {
     }
 }
 
-export default config(polyfill(Transfer));
+export default config(Transfer);

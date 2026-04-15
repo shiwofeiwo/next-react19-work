@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Dropdown from '../../dropdown';
 import Menu from '../../menu';
@@ -207,4 +206,4 @@ class Filter extends React.Component {
     }
 }
 
-export default polyfill(Filter);
+export default Filter;

@@ -1,6 +1,5 @@
 import React, { isValidElement } from 'react';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { type SearchProps } from './types';
 import Input from '../input';
 import Select, { type AutoCompleteProps } from '../select';
@@ -367,4 +366,4 @@ class Search extends React.Component<SearchProps, SearchState> {
     }
 }
 
-export default polyfill(Search);
+export default Search;

@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import Big from 'big.js';
-import { polyfill } from 'react-lifecycles-compat';
 
 import Icon from '../icon';
 import Button from '../button';
@@ -645,4 +644,4 @@ class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState>
     }
 }
 
-export default polyfill(NumberPicker);
+export default NumberPicker;

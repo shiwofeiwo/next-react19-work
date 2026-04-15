@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import { dom } from '../util';
 import VirtualBody from './virtual/body';
 import { statics } from './util';
@@ -287,5 +286,5 @@ export default function virtual(BaseComponent) {
         }
     }
     statics(VirtualTable, BaseComponent);
-    return polyfill(VirtualTable);
+    return VirtualTable;
 }

@@ -17,7 +17,15 @@ function _getProps(min: number, max: number, value: number, rtl: RangeSliderProp
     };
 }
 
-function Slider({ prefix, hasMovingClass, min, max, value, onKeyDown, rtl }: RangeSliderProps) {
+function Slider({
+    prefix = 'next-',
+    hasMovingClass = false,
+    min = 0,
+    max = 100,
+    value = 0,
+    onKeyDown,
+    rtl = false,
+}: RangeSliderProps) {
     const classes = classNames({
         [`${prefix}range-slider`]: true,
         [`${prefix}range-slider-moving`]: hasMovingClass,
@@ -34,15 +42,6 @@ function Slider({ prefix, hasMovingClass, min, max, value, onKeyDown, rtl }: Ran
         </div>
     );
 }
-
-Slider.defaultProps = {
-    prefix: 'next-',
-    min: 0,
-    max: 100,
-    value: 0,
-    hasMovingClass: false,
-    rtl: false,
-};
 
 Slider.displayName = 'Slider';
 

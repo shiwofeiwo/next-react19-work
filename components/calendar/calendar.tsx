@@ -1,5 +1,4 @@
 import React, { Component, type MouseEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import moment, { type MomentInput, type Moment } from 'moment';
 import classnames from 'classnames';
 import ConfigProvider from '../config-provider';
@@ -316,4 +315,4 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 }
 
-export default polyfill(Calendar);
+export default Calendar;

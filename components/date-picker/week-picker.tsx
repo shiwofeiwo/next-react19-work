@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import classnames from 'classnames';
 import moment, { type Moment } from 'moment';
-import { polyfill } from 'react-lifecycles-compat';
 import Overlay from '../overlay';
 import Input from '../input';
 import Icon from '../icon';
@@ -368,4 +367,4 @@ class WeekPicker extends Component<WeekPickerProps, WeekPickerState> {
     }
 }
 
-export default polyfill(WeekPicker);
+export default WeekPicker;

@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import shallowElementEquals from 'shallow-element-equals';
-import { polyfill } from 'react-lifecycles-compat';
 import Loading from '../loading';
 import ConfigProvider from '../config-provider';
 import zhCN from '../locale/zh-cn';
@@ -640,4 +639,4 @@ class Table extends React.Component {
     }
 }
 
-export default polyfill(Table);
+export default Table;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 
 import classnames from 'classnames';
 import { type Dayjs } from 'dayjs';
@@ -224,4 +223,4 @@ class DateInput extends React.Component<DateInputProps> {
     }
 }
 
-export default polyfill(DateInput);
+export default DateInput;

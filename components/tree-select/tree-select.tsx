@@ -1,5 +1,4 @@
 import React, { type ReactNode, Component, Children, isValidElement, cloneElement } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import Select, { type DataSourceItem, type ObjectItem } from '../select';
 import Tree, { type NodeInstance, type TreeProps } from '../tree';
@@ -970,4 +969,4 @@ class TreeSelect extends Component<TreeSelectProps, TreeSelectState> {
     }
 }
 
-export default polyfill(TreeSelect);
+export default TreeSelect;

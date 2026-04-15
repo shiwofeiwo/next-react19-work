@@ -1,6 +1,5 @@
 import { Component, Children, cloneElement } from 'react';
 import { createPortal } from 'react-dom';
-import { polyfill } from 'react-lifecycles-compat';
 import { func } from '../util';
 import findNode from './utils/find-node';
 import type { GatewayProps, GatewayState } from './types';
@@ -87,4 +86,4 @@ class Gateway extends Component<GatewayProps, GatewayState> {
     }
 }
 
-export default polyfill(Gateway);
+export default Gateway;

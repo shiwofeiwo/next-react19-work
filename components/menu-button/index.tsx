@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import Button from '../button';
 import Icon from '../icon';
@@ -211,6 +210,6 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
 
 export type { MenuButtonProps };
 
-export default ConfigProvider.config(polyfill(MenuButton), {
+export default ConfigProvider.config(MenuButton, {
     componentName: 'MenuButton',
 });

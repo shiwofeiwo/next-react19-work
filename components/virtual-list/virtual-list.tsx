@@ -6,7 +6,6 @@ import React, {
     type ReactElement,
 } from 'react';
 import cx from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import { events } from '../util';
 import { type VirtualListProps, type VirtualListState } from './types';
 
@@ -439,4 +438,4 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
     }
 }
 
-export default polyfill(VirtualList);
+export default VirtualList;

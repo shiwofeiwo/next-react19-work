@@ -1,5 +1,4 @@
 import React, { Component, type KeyboardEvent } from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 import classnames from 'classnames';
 import type { Dayjs } from 'dayjs';
 
@@ -658,4 +657,4 @@ class TimePicker2 extends Component<TimePickerProps, TimePickerState> {
     }
 }
 
-export default polyfill(TimePicker2);
+export default TimePicker2;

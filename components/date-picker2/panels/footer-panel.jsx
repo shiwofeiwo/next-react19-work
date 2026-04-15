@@ -1,5 +1,4 @@
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 
 import classnames from 'classnames';
 
@@ -106,4 +105,4 @@ class FooterPanel extends React.PureComponent {
     }
 }
 
-export default polyfill(FooterPanel);
+export default FooterPanel;
