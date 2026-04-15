@@ -37,7 +37,7 @@ export interface VirtualListProps extends React.HTMLAttributes<HTMLElement>, Com
      */
     itemsRenderer?: (
         items: ReadonlyArray<React.ReactNode>,
-        ref: (instance: React.ReactInstance | null) => React.ReactInstance | null
+        ref: (instance: HTMLUListElement | null) => void
     ) => React.ReactNode;
 
     /**

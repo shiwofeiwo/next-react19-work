@@ -1,7 +1,6 @@
 import React, {
     Component,
     Children,
-    type Ref,
     type CSSProperties,
     type ReactInstance,
     type ReactElement,
@@ -49,7 +48,7 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
 
     static defaultProps = {
         prefix: 'next-',
-        itemsRenderer: (items: ReactInstance, ref: Ref<HTMLUListElement>) => (
+        itemsRenderer: (items: React.ReactNode[], ref: React.RefCallback<HTMLUListElement>) => (
             <ul ref={ref}>{items}</ul>
         ),
         minSize: 1,
@@ -397,7 +396,6 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
 
         return itemsRenderer!(items, c => {
             this.items = c;
-            return this.items;
         });
     }
 
@@ -433,7 +431,6 @@ class VirtualList extends Component<VirtualListProps, VirtualListState> {
                 style={style}
                 ref={c => {
                     this.el = c;
-                    return this.el;
                 }}
             >
                 <div style={listStyle}>{items}</div>

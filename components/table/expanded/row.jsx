@@ -39,7 +39,7 @@ export default class ExpandedRow extends React.Component {
                     const ret = [];
                     for (let i = 0; i < number; i++) {
                         ret.push(
-                            <td key={i} ref={cell => cellRef(rowIndex, i + start, cell)}>
+                            <td key={i} ref={cell => { cellRef(rowIndex, i + start, cell); }}>
                                 &nbsp;
                             </td>
                         );
@@ -60,7 +60,7 @@ export default class ExpandedRow extends React.Component {
             if (lockType) {
                 return openRowKeys.indexOf(record[primaryKey]) > -1 ? (
                     <tr className={`${prefix}table-expanded-row`} key={`expanded-${expandedIndex}`}>
-                        <td colSpan={colSpan} ref={cell => cellRef(rowIndex, expandedCols, cell)}>
+                        <td colSpan={colSpan} ref={cell => { cellRef(rowIndex, expandedCols, cell); }}>
                             &nbsp;
                         </td>
                     </tr>

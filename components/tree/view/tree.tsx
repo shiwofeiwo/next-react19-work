@@ -1264,7 +1264,6 @@ export class Tree extends Component<TreeProps, TreeState> {
                     aria-multiselectable={multiple}
                     onBlur={this.handleBlur}
                     className={newClassName}
-                    // @ts-expect-error should not be null
                     style={useVirtual ? null : style}
                     {...others}
                 >
@@ -1278,10 +1277,15 @@ export class Tree extends Component<TreeProps, TreeState> {
                 <div className={`${prefix}virtual-tree-container`} style={style}>
                     <VirtualList
                         ref={this.virtualListRef}
-                        itemsRenderer={(
-                            items: React.ReactElement<any>[],
-                            ref: React.RefCallback<HTMLUListElement>
-                        ) => treeRender(items, ref)}
+                        itemsRenderer={(items, ref) =>
+                            treeRender(
+                                [...items] as (
+                                    | React.ReactElement<any>
+                                    | React.ReactElement<any>[]
+                                )[],
+                                ref
+                            )
+                        }
                         {...virtualListProps}
                     >
                         {this.renderNodeList(dataSource)}

@@ -127,7 +127,7 @@ export default class Row extends React.Component {
                     style={newStyle}
                     data-next-table-col={colIndex}
                     data-next-table-row={rowIndex}
-                    ref={cell => cellRef(__rowIndex, colIndex, cell)}
+                    ref={cell => { cellRef(__rowIndex, colIndex, cell); }}
                     prefix={prefix}
                     pure={pure}
                     primaryKey={primaryKey}
