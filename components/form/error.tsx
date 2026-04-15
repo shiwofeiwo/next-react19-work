@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import ConfigProvider from '../config-provider';
-import FormContext from './context';
+import FormContext, { type FormContextValue } from './context';
 import type { ErrorProps } from './types';
 import type NextField from '../field';
 
@@ -17,7 +17,9 @@ class Error extends Component<ErrorProps> {
 
     static _typeMark = 'form_error';
 
-    itemRender = (errors: unknown[]) => {
+    declare context: FormContextValue | null;
+
+    itemRender = (errors: React.ReactNode[]) => {
         return errors.length ? errors : null;
     };
 
@@ -44,7 +46,7 @@ class Error extends Component<ErrorProps> {
             );
         }
 
-        const field: NextField = this.context?._formField || _field;
+        const field: NextField | undefined = this.context?._formField || _field;
 
         if (!field || !name) {
             return null;
@@ -53,20 +55,23 @@ class Error extends Component<ErrorProps> {
         const isSingle = typeof name === 'string';
 
         const names = isSingle ? [name] : name;
-        const errorArr: unknown[] = [];
+        const errorArr: React.ReactNode[] = [];
 
         if (names.length) {
             const errors = field.getErrors(names);
             Object.keys(errors).forEach(key => {
                 if (errors[key]) {
-                    errorArr.push(errors[key]);
+                    errorArr.push(errors[key] as React.ReactNode);
                 }
             });
         }
 
         let result = null;
         if (typeof children === 'function') {
-            result = children(errorArr, isSingle ? field.getState(name) : undefined);
+            result = children(
+                errorArr as unknown as Record<string, object>,
+                isSingle ? field.getState(name) : undefined
+            );
         } else {
             result = this.itemRender(errorArr);
         }

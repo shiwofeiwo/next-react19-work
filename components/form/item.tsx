@@ -120,7 +120,7 @@ export default class Item extends Component<ItemProps> {
         return (
             <Error
                 name={help === undefined ? this.getNames(children) : undefined}
-                field={_formField}
+                field={_formField ?? undefined}
                 preferMarginToDisplayHelp={useMargin}
             >
                 {help}
@@ -251,7 +251,7 @@ export default class Item extends Component<ItemProps> {
 
         const isPreview = this.getIsPreview();
         const childrenProps: {
-            size: string;
+            size: string | undefined;
             isPreview?: boolean;
             renderPreview?: (values: unknown) => unknown;
             state?: string;
@@ -355,9 +355,11 @@ export default class Item extends Component<ItemProps> {
 
         const labelAlign = this.getLabelAlign(this.props.labelAlign, this.props.device);
 
-        let childrenNode = children;
+        let childrenNode: ReactNode;
         if (typeof children === 'function' && this.context?._formField) {
             childrenNode = children(this.context._formField.getValues());
+        } else {
+            childrenNode = typeof children !== 'function' ? children : null;
         }
 
         const state = this.getState(childrenNode);

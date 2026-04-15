@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../button';
 import { func, obj } from '../util';
-import FormContext from './context';
+import FormContext, { type FormContextValue } from './context';
 import type { SubmitProps } from './types';
 
 const SUBMIT_PROP_KEYS = ['onClick', 'validate', 'field', 'children'];
@@ -13,6 +13,8 @@ class Submit extends React.Component<SubmitProps> {
     };
 
     static contextType = FormContext;
+
+    declare context: FormContextValue | null;
 
     handleClick = () => {
         const { onClick, validate } = this.props;

@@ -29,7 +29,7 @@ import type { ColProps } from '../grid';
  * @en manual passing of wrapCol labelCol will use Grid auxiliary layout; labelAlign='top' will force disable Grid
  * @order 1
  */
-export interface ItemProps extends HTMLAttributes<HTMLElement>, CommonProps {
+export interface ItemProps extends Omit<HTMLAttributes<HTMLElement>, 'children'>, CommonProps {
     /**
      * label 标签的文本
      * @skip
@@ -90,7 +90,7 @@ export interface ItemProps extends HTMLAttributes<HTMLElement>, CommonProps {
      * node 或者 function(values)
      * @en node or function(values)
      */
-    children?: ReactNode | ((values: FieldValues) => void);
+    children?: ReactNode | ((values: FieldValues) => ReactNode);
 
     /**
      * 单个 Item 的 size 自定义，优先级高于 Form 的 size, 并且当组件与 Item 一起使用时，组件自身设置 size 属性无效。
@@ -429,7 +429,7 @@ export interface ResetProps extends ButtonProps {
  * 自定义错误展示
  * @en Custom error display
  */
-export interface ErrorProps extends HTMLAttributes<HTMLElement>, CommonProps {
+export interface ErrorProps extends Omit<HTMLAttributes<HTMLElement>, 'children'>, CommonProps {
     /**
      * 表单名
      * @en form name
@@ -456,7 +456,7 @@ export interface ErrorProps extends HTMLAttributes<HTMLElement>, CommonProps {
     preferMarginToDisplayHelp?: boolean;
 }
 
-type HTMLAttributesWeak = Omit<FormHTMLAttributes<HTMLElement>, 'onChange'>;
+type HTMLAttributesWeak = Omit<FormHTMLAttributes<HTMLElement>, 'onChange' | 'onSubmit'>;
 
 /**
  * @api Form

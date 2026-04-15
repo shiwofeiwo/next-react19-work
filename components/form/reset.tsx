@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../button';
 import { func, obj } from '../util';
-import FormContext from './context';
+import FormContext, { type FormContextValue } from './context';
 import type { ResetProps } from './types';
 
 const RESET_PROP_KEYS = ['names', 'onClick', 'toDefault', 'field', 'children'];
@@ -13,6 +13,8 @@ class Reset extends React.Component<ResetProps> {
     };
 
     static contextType = FormContext;
+
+    declare context: FormContextValue | null;
 
     handleClick = () => {
         const { names, toDefault, onClick } = this.props;

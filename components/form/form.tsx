@@ -193,12 +193,12 @@ export default class Form extends Component<FormProps> {
 
         const formContextValue = {
             _formField: this.props.field ? this.props.field : this._formField,
-            _formSize: this.props.size,
-            _formDisabled: this.props.disabled,
-            _formPreview: this.props.isPreview,
-            _formFullWidth: this.props.fullWidth,
-            _formLabelForErrorMessage: this.props.useLabelForErrorMessage,
-            _formMarginToDisplayHelp: this.props.preferMarginToDisplayHelp,
+            _formSize: this.props.size!,
+            _formDisabled: this.props.disabled!,
+            _formPreview: !!this.props.isPreview,
+            _formFullWidth: !!this.props.fullWidth,
+            _formLabelForErrorMessage: !!this.props.useLabelForErrorMessage,
+            _formMarginToDisplayHelp: this.props.preferMarginToDisplayHelp!,
         };
 
         return (
