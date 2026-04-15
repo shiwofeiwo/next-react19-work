@@ -29,9 +29,10 @@ export function toArray(children: ReactNode) {
     const ret: ReactElement<any>[] = [];
     React.Children.forEach(children, (child, index) => {
         if (React.isValidElement(child)) {
+            const childEl = child as React.ReactElement<{ title?: string; tab?: string }>;
             const props = {
                 key: child.key || index,
-                title: child.props.title || child.props.tab,
+                title: childEl.props.title || childEl.props.tab,
             };
             ret.push(React.cloneElement(child, props));
         }

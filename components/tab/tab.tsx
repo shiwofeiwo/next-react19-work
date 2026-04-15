@@ -120,7 +120,8 @@ class Tab extends Component<TabProps, TabState> {
             React.Children.forEach(props.children, (child, index) => {
                 if (activeKey !== undefined) return;
                 if (React.isValidElement(child)) {
-                    if (!child.props.disabled) {
+                    const childEl = child as React.ReactElement<{ disabled?: boolean }>;
+                    if (!childEl.props.disabled) {
                         // @ts-expect-error index 应转为 string
                         activeKey = child.key || index;
                     }
@@ -135,7 +136,8 @@ class Tab extends Component<TabProps, TabState> {
         const children: ReactElement<ItemProps>[] = [];
         React.Children.forEach(this.props.children, child => {
             if (React.isValidElement<ItemProps>(child)) {
-                if (!child.props.disabled) {
+                const childEl = child as React.ReactElement<ItemProps>;
+                if (!childEl.props.disabled) {
                     if (isNext) {
                         children.push(child);
                     } else {
@@ -164,7 +166,8 @@ class Tab extends Component<TabProps, TabState> {
         React.Children.forEach(this.props.children, (child, index) => {
             if (exist) return;
             if (React.isValidElement(child)) {
-                if (!child.props.disabled) {
+                const childEl = child as React.ReactElement<{ disabled?: boolean }>;
+                if (!childEl.props.disabled) {
                     const key = child.key || index;
                     if (activeKey === `${key}`) {
                         exist = true;

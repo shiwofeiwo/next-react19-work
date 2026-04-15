@@ -49,23 +49,24 @@ const createChildren = (children: React.ReactNode, { spacing, direction, wrap }:
         }
 
         if (React.isValidElement(child)) {
-            const { margin: propsMargin } = child.props;
+            const childEl = child as React.ReactElement<Record<string, any>>;
+            const { margin: propsMargin } = childEl.props;
             const childPropsMargin = getMargin(propsMargin);
             let gridProps = {};
             if (
                 ['function', 'object'].indexOf(typeof child.type) > -1 &&
                 (child as ChildElement).type._typeMark === 'responsive_grid'
             ) {
-                gridProps = createStyle({ display: 'grid', ...child.props });
+                gridProps = createStyle({ display: 'grid', ...childEl.props });
             }
 
             return React.cloneElement(child as React.ReactElement<any>, {
                 style: {
                     ...spacingMargin,
-                    // ...getBoxChildProps(child.props),
+                    // ...getBoxChildProps(childEl.props),
                     ...childPropsMargin,
                     ...gridProps,
-                    ...(child.props.style || {}),
+                    ...(childEl.props.style || {}),
                 },
             });
         }

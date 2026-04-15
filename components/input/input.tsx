@@ -138,8 +138,9 @@ class Input<P extends InputProps = InputProps> extends Base<P> {
                 if (typeof hint === 'string') {
                     hintIcon = <Icon type={hint} className={`${prefix}input-hint`} />;
                 } else if (isValidElement(hint)) {
-                    hintIcon = cloneElement(hint as ReactElement<{ className: string }>, {
-                        className: classNames(hint.props.className, `${prefix}input-hint`),
+                    const hintEl = hint as ReactElement<{ className: string }>;
+                    hintIcon = cloneElement(hintEl, {
+                        className: classNames(hintEl.props.className, `${prefix}input-hint`),
                     });
                 } else {
                     hintIcon = hint;

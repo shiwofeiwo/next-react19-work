@@ -317,8 +317,9 @@ const preHandleChildren = (props: TreeProps) => {
 
             key = key || pos;
 
-            const item = { ...node.props, key, pos, level };
-            const { children } = node.props;
+            const nodeEl = node as React.ReactElement<Record<string, any>>;
+            const item: Record<string, any> = { ...nodeEl.props, key, pos, level };
+            const { children } = nodeEl.props;
             const hasChildren = children && Children.count(children);
 
             if (!('isLeaf' in item)) {
@@ -329,8 +330,8 @@ const preHandleChildren = (props: TreeProps) => {
                 item.children = loop(children, pos, level + 1);
             }
 
-            k2n[key] = p2n[pos] = item;
-            return item;
+            k2n[key] = p2n[pos] = item as DataNode;
+            return item as DataNode;
         });
     loop(props.children);
 
@@ -1195,11 +1196,12 @@ export class Tree extends Component<TreeProps, TreeState> {
                 if (!React.isValidElement(child)) {
                     return;
                 }
+                const childEl = child as React.ReactElement<Record<string, any>>;
                 const pos = `${prefix}-${index}`;
                 const key = child.key || pos;
                 const props = this.getNodeProps(`${key}`) as Record<string, unknown>;
-                if (child.props.children) {
-                    props.children = loop(child.props.children, pos);
+                if (childEl.props.children) {
+                    props.children = loop(childEl.props.children, pos);
                 }
 
                 props._key = key;

@@ -118,10 +118,11 @@ const flatDataSource = (props: TreeSelectProps) => {
                     return;
                 }
 
-                const { value, children } = node.props;
+                const nodeEl = node as React.ReactElement<Record<string, any>>;
+                const { value, children } = nodeEl.props;
                 const pos = `${prefix}-${index}`;
                 const key = node.key || pos;
-                const newItem = { ...node.props, key, pos };
+                const newItem = { ...nodeEl.props, key, pos };
                 if (children && Children.count(children)) {
                     newItem.children = loop(children, pos);
                 }
@@ -141,8 +142,11 @@ const isSearched = (label: ReactNode, searchedValue: string) => {
     searchedValue = String(searchedValue);
 
     const loop = (arg: ReactNode) => {
-        if (isValidElement(arg) && arg.props.children) {
-            Children.forEach(arg.props.children, loop);
+        if (isValidElement(arg)) {
+            const argEl = arg as React.ReactElement<Record<string, any>>;
+            if (argEl.props.children) {
+                Children.forEach(argEl.props.children, loop);
+            }
         } else {
             labelString += arg;
         }
