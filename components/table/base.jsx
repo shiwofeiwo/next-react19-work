@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import shallowElementEquals from 'shallow-element-equals';
 import { polyfill } from 'react-lifecycles-compat';
@@ -470,7 +469,8 @@ class Table extends React.Component {
                     // in case of finding an unmounted component due to cached data
                     // need to clear refs of this.tableInc when dataSource Changed
                     // in virtual table
-                    const currentCol = findDOMNode(this.getCellRef(index, colIndex));
+                    const cellRef = this.getCellRef(index, colIndex);
+                    const currentCol = cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
                     currentCol && dom[funcName](currentCol, 'hovered');
                 } catch (error) {
                     return null;
@@ -493,7 +493,8 @@ class Table extends React.Component {
             // in case of finding an unmounted component due to cached data
             // need to clear refs of this.tableInc when dataSource Changed
             // in virtual table
-            const currentCol = findDOMNode(this.getCellRef(rowIndex, colIndex));
+            const cellRef = this.getCellRef(rowIndex, colIndex);
+            const currentCol = cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
             if (currentCol === target) {
                 return {
                     colIndex,
@@ -548,6 +549,10 @@ class Table extends React.Component {
     getTableEl = ref => {
         this.tableEl = ref;
     };
+
+    getDOMNode() {
+        return this.tableEl;
+    }
 
     render() {
         const ret = this.normalizeChildrenState(this.props);

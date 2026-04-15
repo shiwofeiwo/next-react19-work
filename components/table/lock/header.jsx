@@ -1,4 +1,3 @@
-import { findDOMNode } from 'react-dom';
 import FixedHeader from '../fixed/header';
 import TableContext from '../context';
 
@@ -7,7 +6,8 @@ export default class LockHeader extends FixedHeader {
 
     componentDidMount() {
         const { getNode, getLockNode } = this.context || {};
-        getNode && getNode('header', findDOMNode(this), (this.context || {}).lockType);
-        getLockNode && getLockNode('header', findDOMNode(this), (this.context || {}).lockType);
+        const node = this.getDOMNode();
+        getNode && getNode('header', node, (this.context || {}).lockType);
+        getLockNode && getLockNode('header', node, (this.context || {}).lockType);
     }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import { polyfill } from 'react-lifecycles-compat';
 import { dom } from '../util';
 import VirtualBody from './virtual/body';
@@ -162,7 +161,7 @@ export default function virtual(BaseComponent) {
                 const { clientHeight, clientWidth } = body;
 
                 const tableInc = this.tableInc;
-                const tableNode = findDOMNode(tableInc);
+                const tableNode = tableInc && tableInc.getDOMNode ? tableInc.getDOMNode() : tableInc;
                 const { prefix } = this.props;
                 const headerNode = tableNode.querySelector(`.${prefix}table-header table`);
                 const headerClientWidth = headerNode && headerNode.clientWidth;
@@ -217,7 +216,8 @@ export default function virtual(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of this.tableInc when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(this.tableInc.getRowRef(0));
+                const rowRef = this.tableInc.getRowRef(0);
+                return rowRef && rowRef.getDOMNode ? rowRef.getDOMNode() : rowRef;
             } catch (error) {
                 return null;
             }

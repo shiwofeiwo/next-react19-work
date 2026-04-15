@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import BodyComponent from '../base/body';
 import TableContext from '../context';
 
@@ -9,7 +8,11 @@ export default class FixedBody extends React.Component {
 
     componentDidMount() {
         const { getNode } = this.context || {};
-        getNode && getNode('body', findDOMNode(this));
+        getNode && getNode('body', this.containerRef);
+    }
+
+    getDOMNode() {
+        return this.containerRef;
     }
 
     onBodyScroll = event => {
@@ -33,7 +36,7 @@ export default class FixedBody extends React.Component {
             style.position = 'relative';
         }
         return (
-            <div style={style} className={className} onScroll={this.onBodyScroll}>
+            <div ref={c => { this.containerRef = c; }} style={style} className={className} onScroll={this.onBodyScroll}>
                 <table style={{ width: tableWidth }}>
                     {colGroup}
                     <BodyComponent {...others} colGroup={colGroup} />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import BodyComponent from '../base/body';
 import TableContext from '../context';
 
@@ -8,9 +7,9 @@ export default class VirtualBody extends React.Component {
     static contextType = TableContext;
 
     componentDidMount() {
-        const bodyNode = findDOMNode(this);
         const { getNode, getBodyNode, getLockNode, lockType } = this.context || {};
-        // // for fixed
+        const bodyNode = this.containerRef;
+        // for fixed
         getNode && getNode('body', bodyNode);
         // for virtual
         getBodyNode && getBodyNode(bodyNode, lockType);
@@ -50,7 +49,7 @@ export default class VirtualBody extends React.Component {
             wrapperStyle.height = bodyHeight;
         }
         return (
-            <div style={{ maxHeight: maxBodyHeight }} className={className} onScroll={this.onScroll}>
+            <div ref={c => { this.containerRef = c; }} style={{ maxHeight: maxBodyHeight }} className={className} onScroll={this.onScroll}>
                 <div style={wrapperStyle} ref={this.virtualScrollRef}>
                     <div
                         style={{

@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import FixedBody from '../fixed/body';
 import TableContext from '../context';
 
@@ -9,7 +8,8 @@ export default class LockBody extends React.Component {
 
     componentDidMount() {
         const { getLockNode, lockType } = this.context || {};
-        getLockNode && getLockNode('body', findDOMNode(this), lockType);
+        const node = this.fixedBodyRef && this.fixedBodyRef.getDOMNode();
+        getLockNode && getLockNode('body', node, lockType);
     }
 
     onBodyScroll = event => {
@@ -21,6 +21,6 @@ export default class LockBody extends React.Component {
         const event = {
             onLockScroll: this.onBodyScroll,
         };
-        return <FixedBody {...this.props} {...event} />;
+        return <FixedBody ref={c => { this.fixedBodyRef = c; }} {...this.props} {...event} />;
     }
 }

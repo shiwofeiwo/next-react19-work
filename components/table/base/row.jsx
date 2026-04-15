@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import { obj, dom } from '../../util';
 import { fetchDataByPath } from '../util';
@@ -23,6 +22,10 @@ export default class Row extends React.Component {
     };
 
     static contextType = TableContext;
+
+    getDOMNode() {
+        return this.containerRef;
+    }
 
     shouldComponentUpdate(nextProps) {
         if (nextProps.pure) {
@@ -52,7 +55,7 @@ export default class Row extends React.Component {
 
     onRowHover(record, index, isEnter, e) {
         const { onMouseEnter, onMouseLeave } = this.props,
-            currentRow = findDOMNode(this);
+            currentRow = this.containerRef;
         if (isEnter) {
             onMouseEnter(record, index, e);
             currentRow && dom.addClass(currentRow, 'hovered');
@@ -189,6 +192,7 @@ export default class Row extends React.Component {
 
         const tr = (
             <tr
+                ref={c => { this.containerRef = c; }}
                 className={cls}
                 role="row"
                 {...others}

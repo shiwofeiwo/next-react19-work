@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import HeaderComponent from '../base/header';
 import TableContext from '../context';
 
@@ -9,7 +8,11 @@ export default class FixedHeader extends React.Component {
 
     componentDidMount() {
         const { getNode } = this.context || {};
-        getNode && getNode('header', findDOMNode(this));
+        getNode && getNode('header', this.containerRef);
+    }
+
+    getDOMNode() {
+        return this.containerRef;
     }
 
     // 这里的 style={{overflow: 'unset'}} 可以删掉，只是为了解决用户js升级但是样式没升级的情况
@@ -19,7 +22,7 @@ export default class FixedHeader extends React.Component {
         const { onFixedScrollSync, lockType } = this.context || {};
 
         return (
-            <div className={className} onScroll={onFixedScrollSync}>
+            <div ref={c => { this.containerRef = c; }} className={className} onScroll={onFixedScrollSync}>
                 <div className={`${prefix}table-header-inner`} style={{ overflow: 'unset' }}>
                     <table style={{ width: tableWidth }}>
                         {colGroup}

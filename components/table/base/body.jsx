@@ -32,6 +32,10 @@ export default class Body extends React.Component {    static defaultProps = {
         events.off(window, 'resize', this.setEmptyDomStyle);
     }
 
+    getDOMNode() {
+        return this.containerRef;
+    }
+
     getRowRef = (i, row) => {
         this.props.rowRef(i, row);
     };
@@ -185,7 +189,7 @@ export default class Body extends React.Component {    static defaultProps = {
               }
             : {};
         return (
-            <Tag className={className} {...others} {...event}>
+            <Tag ref={c => { this.containerRef = c; }} className={className} {...others} {...event}>
                 {rows}
                 {children}
             </Tag>

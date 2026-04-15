@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 import BodyComponent from '../base/body';
 import TableContext from '../context';
 
@@ -8,7 +7,8 @@ export default class ListBody extends React.Component {
 
     componentDidMount() {
         const { getNode } = this.context || {};
-        getNode && getNode('body', findDOMNode(this));
+        const node = this.bodyRef && this.bodyRef.getDOMNode();
+        getNode && getNode('body', node);
     }
 
     onScroll = e => {
@@ -17,6 +17,6 @@ export default class ListBody extends React.Component {
     };
 
     render() {
-        return <BodyComponent component="div" onScroll={this.onScroll} {...this.props} />;
+        return <BodyComponent ref={c => { this.bodyRef = c; }} component="div" onScroll={this.onScroll} {...this.props} />;
     }
 }

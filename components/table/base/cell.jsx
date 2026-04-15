@@ -11,6 +11,10 @@ export default class Cell extends React.Component {
         prefix: 'next-',
     };
 
+    getDOMNode() {
+        return this.containerRef;
+    }
+
     shouldComponentUpdate(nextProps) {
         if (nextProps.pure) {
             const isEqual = obj.shallowEqual(this.props, nextProps);
@@ -81,7 +85,7 @@ export default class Cell extends React.Component {
         });
 
         return (
-            <Tag {...pickAttrs(others)} className={cls} style={tagStyle} role="gridcell">
+            <Tag ref={c => { this.containerRef = c; }} {...pickAttrs(others)} className={cls} style={tagStyle} role="gridcell">
                 <div
                     className={`${prefix}table-cell-wrapper`}
                     ref={this.props.getCellDomRef}

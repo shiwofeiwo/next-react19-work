@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
@@ -82,7 +81,7 @@ export default function expanded(BaseComponent, stickyLock) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.tableEl);
+                return table.tableEl;
             } catch (error) {
                 return null;
             }

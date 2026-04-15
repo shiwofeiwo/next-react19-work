@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import shallowElementEquals from 'shallow-element-equals';
 import { log, obj, dom, events } from '../util';
@@ -232,7 +231,8 @@ export default function stickyLock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.getCellRef(index, i));
+                const cellRef = table.getCellRef(index, i);
+                return cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
             } catch (error) {
                 return null;
             }
@@ -309,7 +309,7 @@ export default function stickyLock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.tableEl);
+                return table.tableEl;
             } catch (error) {
                 return null;
             }
@@ -322,7 +322,8 @@ export default function stickyLock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.getHeaderCellRef(index, i));
+                const headerCellRef = table.getHeaderCellRef(index, i);
+                return headerCellRef && headerCellRef.getDOMNode ? headerCellRef.getDOMNode() : headerCellRef;
             } catch (error) {
                 return null;
             }

@@ -1,5 +1,4 @@
 import React, { Children } from 'react';
-import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import shallowElementEquals from 'shallow-element-equals';
 import { dom, log, obj, events, env } from '../util';
@@ -361,8 +360,8 @@ export default function lock(BaseComponent) {
                 let node, width;
 
                 try {
-                    node = findDOMNode(this);
-                    width = node.clientWidth;
+                    node = this.tableInc && this.tableInc.getDOMNode();
+                    width = node ? node.clientWidth : 0;
                 } catch (err) {
                     node = null;
                     width = 0;
@@ -521,7 +520,7 @@ export default function lock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(this[`lock${type}El`]);
+                return this[`lock${type}El`]?.getDOMNode?.() || null;
             } catch (error) {
                 return null;
             }
@@ -550,7 +549,8 @@ export default function lock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.getRowRef(index));
+                const rowRef = table.getRowRef(index);
+                return rowRef && rowRef.getDOMNode ? rowRef.getDOMNode() : rowRef;
             } catch (error) {
                 return null;
             }
@@ -564,7 +564,8 @@ export default function lock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.getHeaderCellRef(index, i));
+                const headerCellRef = table.getHeaderCellRef(index, i);
+                return headerCellRef && headerCellRef.getDOMNode ? headerCellRef.getDOMNode() : headerCellRef;
             } catch (error) {
                 return null;
             }
@@ -578,7 +579,8 @@ export default function lock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return findDOMNode(table.getCellRef(index, i));
+                const cellRef = table.getCellRef(index, i);
+                return cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
             } catch (error) {
                 return null;
             }
