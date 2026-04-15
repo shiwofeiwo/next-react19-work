@@ -169,7 +169,6 @@ export default class Slider extends Component<SliderProps> {
 
         const globalProps: ObjWithCommonProps = {};
         CONFIG_PROVIDER_PROP_KEYS.forEach(key => {
-            // @ts-expect-error 类型错误
             globalProps[key as CommonKeys] = this.props[key as keyof SliderProps];
         });
 

@@ -1,10 +1,4 @@
-import React, {
-    Component,
-    type ReactNode,
-    type Ref,
-    type ComponentElement,
-    type ComponentRef,
-} from 'react';
+import React, { Component, type ReactNode, type ComponentElement } from 'react';
 import Menu, { type MenuProps } from '../menu';
 import VirtualList from '../virtual-list';
 import type { CascaderMenuProps, ItemProps } from './types';
@@ -50,7 +44,8 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
 
     renderMenu(
         items: ReadonlyArray<ReactNode>,
-        ref: Ref<ComponentRef<typeof Menu>> | undefined,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ref: any,
         props: MenuProps
     ) {
         function isItem(node: ReactNode): node is ComponentElement<ItemProps, CascaderMenuItem> {
@@ -61,7 +56,7 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
             );
         }
         return (
-            <Menu ref={ref} role="listbox" {...props}>
+            <Menu ref={ref as any} role="listbox" {...(props as any)}>
                 {items.map(node => {
                     if (isItem(node)) {
                         return React.cloneElement(node, {

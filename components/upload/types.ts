@@ -241,7 +241,7 @@ export interface UploadProps extends UploadCommonProps {
      * @en Preview mode
      * @param value - 文件 - file
      */
-    renderPreview?: (value: ObjectFile | ObjectFile[], props: UploadProps) => void;
+    renderPreview?: (value: ObjectFile | ObjectFile[], props: UploadProps) => ReactNode;
 
     /**
      * 文件对象的 key name
@@ -271,7 +271,7 @@ export interface UploadProps extends UploadCommonProps {
      * @en Custom extra rendering
      * @skip
      */
-    extraRender?: (file: File) => unknown;
+    extraRender?: (file: File) => ReactNode;
 
     /**
      * 自定义 class
@@ -558,6 +558,8 @@ export interface SelecterProps {
      * @skip
      */
     name?: string;
+
+    children?: ReactNode;
 }
 
 export interface UploadState {
@@ -576,16 +578,16 @@ export interface ListProps extends UploadCommonProps {
     onImageError?: (obj: object, file: UploadFile) => void;
     onPreview?: (file: UploadFile, e?: MouseEvent<HTMLElement>) => void;
     previewOnFileName?: boolean;
-    extraRender?: (file: ObjectFile) => void;
-    actionRender?: (file: ObjectFile) => void;
-    itemRender?: (file: ObjectFile, action?: { remove: () => void }) => void;
+    extraRender?: (file: ObjectFile) => ReactNode;
+    actionRender?: (file: ObjectFile) => ReactNode;
+    itemRender?: (file: ObjectFile, action?: { remove: () => void }) => ReactNode;
     progressProps?: object;
     children?: ReactNode;
     showDownload?: boolean;
     useDataURL?: boolean;
     rtl?: boolean;
     isPreview?: boolean;
-    fileNameRender?: (file: ObjectFile) => void;
+    fileNameRender?: (file: ObjectFile) => ReactNode;
     uploader?: {
         removeFile: (file: ObjectFile) => void;
         abort: (file: ObjectFile) => void;
@@ -612,7 +614,9 @@ export interface Html5Props
             | 'headers'
             | 'data'
             | 'request'
-        > {}
+        > {
+    children?: ReactNode;
+}
 
 export interface CoreProps extends UploadOptions {}
 
@@ -718,6 +722,7 @@ export interface IframeUploaderProps {
     onError?: (err: UploadError, params: unknown, file: ObjectFile) => void;
     onSelect?: (file: IframeFile[]) => void;
     onStart?: (file: UploadFile) => void;
+    children?: ReactNode;
 }
 
 export interface RequestOption {

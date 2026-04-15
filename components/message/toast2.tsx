@@ -74,7 +74,7 @@ const MessageWrapper = (props: MessageWrapperProps) => {
 
 const ConfigedMessages = ConfigProvider.config(MessageWrapper);
 
-let messageRootNode: HTMLDivElement | null;
+let messageRootNode: HTMLDivElement | null = null;
 let messageList: MessageWrapperProps['dataSource'] = [];
 
 const createMessage = (props: MessageQuickProps & { key?: string }) => {
@@ -98,7 +98,7 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
         messageList.shift();
     }
 
-    const root = createRoot(messageRootNode);
+    const root = createRoot(messageRootNode!);
 
     root.render(
         <ConfigProvider {...ConfigProvider.getContext()}>
@@ -117,7 +117,7 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
                 typeof item.onClose === 'function' && item.onClose();
                 messageList.splice(idx, 1);
 
-                const root = createRoot(messageRootNode);
+                const root = createRoot(messageRootNode!);
 
                 root.render(
                     <ConfigProvider {...ConfigProvider.getContext()}>

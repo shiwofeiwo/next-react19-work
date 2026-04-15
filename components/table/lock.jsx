@@ -520,7 +520,8 @@ export default function lock(BaseComponent) {
                 // in case of finding an unmounted component due to cached data
                 // need to clear refs of table when dataSource Changed
                 // use try catch for temporary
-                return this[`lock${type}El`]?.getDOMNode?.() || null;
+                const el = this[`lock${type}El`];
+                return (el && el.getDOMNode) ? el.getDOMNode() : null;
             } catch (error) {
                 return null;
             }

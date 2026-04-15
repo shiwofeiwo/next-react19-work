@@ -792,7 +792,9 @@ class Select extends Base<SelectProps, SelectState> {
                     ? (value as ObjectItem)[fillProps]
                     : valueRender!(value as ObjectItem);
             // 0 => '0'
-            return typeof retvalue === 'number' ? retvalue.toString() : retvalue;
+            return typeof retvalue === 'number'
+                ? retvalue.toString()
+                : (retvalue as React.ReactNode);
         } else if (value) {
             let detailedValueArr = value as ObjectItem[];
             let limitedCountValue = detailedValueArr;
@@ -805,7 +807,7 @@ class Select extends Base<SelectProps, SelectState> {
                 limitedCountValue = limitedCountValue.slice(0, maxTagCount);
                 maxTagPlaceholderEl = (
                     <Tag key="_count" type="primary" size={tagSize} animation={false}>
-                        {holder!(detailedValueArr, totalValue)}
+                        {holder!(detailedValueArr, totalValue) as React.ReactNode}
                     </Tag>
                 );
             }
@@ -813,7 +815,7 @@ class Select extends Base<SelectProps, SelectState> {
             if (detailedValueArr.length > 0 && tagInline) {
                 maxTagPlaceholderEl = (
                     <div className={`${prefix}select-tag-compact`} key="_count">
-                        {holder!(detailedValueArr, totalValue)}
+                        {holder!(detailedValueArr, totalValue) as React.ReactNode}
                     </div>
                 );
             }
@@ -827,7 +829,7 @@ class Select extends Base<SelectProps, SelectState> {
                 if (!v) {
                     return null;
                 }
-                const labelNode = fillProps ? v[fillProps] : valueRender!(v);
+                const labelNode = fillProps ? (v[fillProps] as React.ReactNode) : valueRender!(v);
 
                 return (
                     <Tag

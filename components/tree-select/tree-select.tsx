@@ -121,7 +121,11 @@ const flatDataSource = (props: TreeSelectProps) => {
                 const { value, children } = nodeEl.props;
                 const pos = `${prefix}-${index}`;
                 const key = node.key || pos;
-                const newItem = { ...nodeEl.props, key, pos };
+                const newItem: Record<string, any> & { key: string; pos: string } = {
+                    ...nodeEl.props,
+                    key,
+                    pos,
+                };
                 if (children && Children.count(children)) {
                     newItem.children = loop(children, pos);
                 }

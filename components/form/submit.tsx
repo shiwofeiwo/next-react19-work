@@ -26,11 +26,11 @@ class Submit extends React.Component<SubmitProps> {
         }
 
         if (validate === true) {
-            field.validate((errors: unknown[]) => {
+            field.validate((errors: any) => {
                 onClick!(field.getValues(), errors, field);
             });
         } else if (Array.isArray(validate)) {
-            field.validate(validate, (errors: unknown[]) => {
+            field.validate(validate, (errors: any) => {
                 onClick!(field.getValues(), errors, field);
             });
         } else {
@@ -42,7 +42,10 @@ class Submit extends React.Component<SubmitProps> {
         const { children } = this.props;
 
         return (
-            <Button {...obj.pickOthers(SUBMIT_PROP_KEYS, this.props)} onClick={this.handleClick}>
+            <Button
+                {...(obj.pickOthers(SUBMIT_PROP_KEYS, this.props) as any)}
+                onClick={this.handleClick}
+            >
                 {children}
             </Button>
         );

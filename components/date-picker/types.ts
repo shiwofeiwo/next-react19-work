@@ -478,7 +478,7 @@ export interface MonthPickerProps
      * 预览态定制渲染函数
      * @en Preview state custom rendering function
      */
-    renderPreview?: (value: Moment | null, props: MonthPickerProps) => void;
+    renderPreview?: (value: Moment | null, props: MonthPickerProps) => React.ReactNode;
     /**
      * 自定义年份渲染函数
      * @en Custom year rendering function
@@ -1205,6 +1205,11 @@ export interface WeekPickerProps
      * @en Whether it is a preview state
      */
     isPreview?: boolean;
+    /**
+     * 输入框占位符
+     * @en Input placeholder
+     */
+    placeholder?: string;
 }
 
 export interface WeekPickerState {

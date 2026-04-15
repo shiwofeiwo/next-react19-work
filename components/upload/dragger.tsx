@@ -100,8 +100,8 @@ class Dragger extends Component<DraggerProps> {
                 listType={listType}
                 dragable
                 style={style}
-                onDragOver={this.onDragOver}
-                onDragLeave={this.onDragLeave}
+                onDragOver={this.onDragOver as () => void}
+                onDragLeave={this.onDragLeave as () => void}
                 onDrop={this.onDrop}
                 ref={this.saveUploaderRef}
             >

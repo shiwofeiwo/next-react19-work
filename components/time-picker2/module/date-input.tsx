@@ -134,7 +134,6 @@ class DateInput extends React.Component<DateInputProps> {
         const placeholder = this.getPlaceholder();
         const htmlSize = this.getHtmlSize();
 
-        // @ts-expect-error 下面 pickProps 使用错误，导致报错
         const sharedProps: InputProps = {
             // @ts-expect-error pickProps argument order is unconventional
             ...obj.pickProps(restProps, Input),

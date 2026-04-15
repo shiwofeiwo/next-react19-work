@@ -443,7 +443,7 @@ export default class Base<
                         return (
                             <Menu
                                 ref={c => {
-                                    ref(c);
+                                    ref(((c as any)?.getInstance?.() as HTMLUListElement) ?? null);
                                     this.menuRef = c;
                                 }}
                                 flatenContent

@@ -120,7 +120,9 @@ class CardCollapseContent extends Component<CardCollapseContentProps, CardCollap
                         onClick={this.handleToggle}
                     >
                         <Button text type="primary">
-                            {expand ? locale!.fold : locale!.expand}
+                            {expand
+                                ? (locale!.fold as React.ReactNode)
+                                : (locale!.expand as React.ReactNode)}
                             <Icon type="arrow-down" className={expand ? 'expand' : ''} />
                         </Button>
                     </div>

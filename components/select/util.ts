@@ -125,7 +125,7 @@ export function parseDataSourceFromChildren(children: ReactNode, deep = 0): Norm
                 'value' in optionTypeChildProps
                     ? optionTypeChildProps.value
                     : 'key' in optionTypeChildProps
-                      ? optionTypeChildProps.key
+                      ? (optionTypeChildProps.key as string | number | boolean | null | undefined)
                       : isStrChild
                         ? (optionTypeChildProps.children as string)
                         : `${index}`;

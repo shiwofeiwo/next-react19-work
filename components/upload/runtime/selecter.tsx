@@ -115,13 +115,13 @@ export default class Selecter extends Component<SelecterProps> {
 
         const otherProps: {
             webkitdirectory?: boolean | string;
-            capture?: string;
+            capture?: boolean | 'user' | 'environment';
         } = {};
         if (webkitdirectory) {
             otherProps.webkitdirectory = '';
         }
         if (capture) {
-            otherProps.capture = capture;
+            otherProps.capture = capture as 'user' | 'environment';
         }
 
         return (

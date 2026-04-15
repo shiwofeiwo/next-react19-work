@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import ConfigProvider from '../config-provider';
 import Tab from './tab';
 import Item from './tabs/tab-item';
@@ -43,7 +44,7 @@ export default ConfigProvider.config(TabWithSub, {
         if ('tabBarExtraContent' in props) {
             deprecated('tabBarExtraContent', 'extra', 'Tab');
             const { tabBarExtraContent, ...others } = props;
-            props = { extra: tabBarExtraContent, ...others };
+            props = { extra: tabBarExtraContent as ReactNode, ...others };
         }
 
         return props;

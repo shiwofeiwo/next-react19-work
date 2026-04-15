@@ -20,7 +20,7 @@ export function registryBuild(file = __filename) {
         await registryBuildSass(file);
 
         // build docs
-        await registryBuildDocs(file);
+        // await registryBuildDocs(file);
 
         // build dist
         await registryDist(file);

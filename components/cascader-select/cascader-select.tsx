@@ -689,7 +689,9 @@ class CascaderSelect extends Component<CascaderSelectProps, CascaderSelectState>
         const { prefix, notFoundContent, locale } = this.props;
         return (
             <Menu className={`${prefix}cascader-select-not-found`}>
-                <Menu.Item>{notFoundContent || locale.notFoundContent}</Menu.Item>
+                <Menu.Item>
+                    {notFoundContent || (locale.notFoundContent as React.ReactNode)}
+                </Menu.Item>
             </Menu>
         );
     }

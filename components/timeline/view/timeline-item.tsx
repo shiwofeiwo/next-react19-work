@@ -175,12 +175,12 @@ class TimelineItem extends Component<ItemProps> {
                         <div className={dotTailCls} />
                         {foldShow ? (
                             <Button {...buttonProps}>
-                                {locale!.fold}
+                                {locale!.fold as React.ReactNode}
                                 <Icon type="arrow-up" />
                             </Button>
                         ) : (
                             <Button {...buttonProps}>
-                                {locale!.expand}
+                                {locale!.expand as React.ReactNode}
                                 <Icon type="arrow-down" />
                             </Button>
                         )}

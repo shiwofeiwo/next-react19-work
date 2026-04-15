@@ -517,6 +517,7 @@ export interface InnerProps
         > {
     closeable?: boolean;
     height?: string | number;
+    width?: string | number;
     noPadding?: boolean;
     onClose?: (event: React.MouseEvent) => void;
 }

@@ -62,7 +62,7 @@ export interface PaginationProps extends HTMLAttributesWeak, CommonProps {
      * 总数的渲染函数
      * @en The rendering functions of total number
      */
-    totalRender?: (total: number, range: number[]) => void;
+    totalRender?: (total: number, range: number[]) => ReactNode;
 
     /**
      * 页码显示的数量，更多的使用...代替

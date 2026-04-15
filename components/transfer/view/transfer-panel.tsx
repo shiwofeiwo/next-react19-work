@@ -236,7 +236,7 @@ export default class TransferPanel extends Component<TransferPanelProps, Transfe
                 <div className={newClassName} style={{ position: 'relative', ...listStyle }}>
                     <VirtualList
                         itemsRenderer={(items, ref) => (
-                            <Menu style={{ border: 'none' }} ref={ref}>
+                            <Menu style={{ border: 'none' }} ref={ref as any}>
                                 {items}
                             </Menu>
                         )}
@@ -248,7 +248,7 @@ export default class TransferPanel extends Component<TransferPanelProps, Transfe
         }
 
         return (
-            <Menu className={newClassName} style={listStyle} ref={this.getListDOM}>
+            <Menu {...({ className: newClassName, style: listStyle, ref: this.getListDOM } as any)}>
                 {this.getListData(dataSource)}
             </Menu>
         );

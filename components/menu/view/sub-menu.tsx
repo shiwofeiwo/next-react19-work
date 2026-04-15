@@ -251,7 +251,6 @@ export default class SubMenu extends Component<SubMenuProps> {
         ) : null;
 
         return (
-            // @ts-expect-error others.onSelect 签名不匹配
             <li
                 role={roleItem}
                 {...others}

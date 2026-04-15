@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import ConfigProvider from '../config-provider';
 import Progress from './view/progress';
 
@@ -25,7 +26,7 @@ export default ConfigProvider.config(Progress, {
             deprecated('suffix', 'textRender', 'Progress');
 
             const { suffix, ...others } = props;
-            props = { textRender: () => suffix, ...others };
+            props = { textRender: () => suffix as ReactNode, ...others };
         }
 
         return props;

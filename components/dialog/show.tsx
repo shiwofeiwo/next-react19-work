@@ -66,15 +66,17 @@ interface ModalProps {
     title?: React.ReactNode;
     content?: React.ReactNode;
     messageProps?: object;
-    footerActions?: unknown[];
+    footerActions?: ('ok' | 'cancel')[];
     onOk?(...args: unknown[]): unknown;
     onCancel?(...args: unknown[]): unknown;
     onClose?(...args: unknown[]): unknown;
-    okProps?: object;
-    cancelProps?: object;
+    okProps?: Record<string, unknown>;
+    cancelProps?: Record<string, unknown>;
     locale?: object;
     needWrapper?: boolean;
     className?: string;
+    v2?: boolean;
+    width?: string | number;
 }
 
 class Modal extends Component<ModalProps> {
@@ -206,8 +208,11 @@ class Modal extends Component<ModalProps> {
 
         const Tag = v2 ? Dialog2 : Dialog;
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const ConfiguredTag = Tag as any;
+
         return (
-            <Tag
+            <ConfiguredTag
                 prefix={prefix}
                 role="alertdialog"
                 {...others}
@@ -224,7 +229,7 @@ class Modal extends Component<ModalProps> {
                 width={v2 ? width : undefined}
             >
                 {newContent}
-            </Tag>
+            </ConfiguredTag>
         );
     }
 }
@@ -256,12 +261,15 @@ export const show = (config: ShowConfig = {}) => {
 
     const root = createRoot(container);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const AnyConfigModal = ConfigModal as any;
+
     root.render(
         <ConfigProvider {...newContext}>
-            <ConfigModal
+            <AnyConfigModal
                 {...config}
                 afterClose={unmount}
-                ref={ref => {
+                ref={(ref: any) => {
                     myRef = ref;
                 }}
             />

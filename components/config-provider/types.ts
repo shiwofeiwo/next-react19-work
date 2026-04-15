@@ -30,6 +30,7 @@ export type FallbackUI = JSXElementConstructor<FallbackUIProps>;
 export interface ErrorBoundaryConfig {
     afterCatch?: AfterCatch;
     fallbackUI?: FallbackUI;
+    children?: React.ReactNode;
 }
 
 export type ErrorBoundaryType = boolean | ParsedErrorBoundary;

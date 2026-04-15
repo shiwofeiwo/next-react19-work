@@ -250,6 +250,7 @@ export interface TabContentProps extends CommonProps {
     lazyLoad?: boolean;
     className?: string;
     unmountInactiveTabs?: boolean;
+    children?: React.ReactNode;
 }
 
 /**

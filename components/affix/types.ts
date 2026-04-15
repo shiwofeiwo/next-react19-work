@@ -64,4 +64,6 @@ export interface AffixProps extends CommonProps {
      * 最外层容器的 style 样式
      */
     style?: React.CSSProperties;
+
+    children?: React.ReactNode;
 }

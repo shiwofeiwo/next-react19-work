@@ -51,11 +51,11 @@ export default class Item extends Component<ItemProps> {
     componentDidMount() {
         const { parentMode, root, menu } = this.props as ItemInMenuProps;
         if (menu) {
-            this.menuNode = menu.getDOMNode();
+            this.menuNode = (menu as any).getDOMNode();
         } else if (parentMode === 'popup') {
             this.menuNode = this.itemNode.parentNode as HTMLElement;
         } else {
-            this.menuNode = root.getDOMNode();
+            this.menuNode = (root as any).getDOMNode();
             const { prefix, header, footer } = root.props;
             if (header || footer) {
                 this.menuNode = this.menuNode?.querySelector<HTMLElement>(`.${prefix}menu-content`);
@@ -191,7 +191,7 @@ export default class Item extends Component<ItemProps> {
                 }px`,
             };
         }
-        const TagName = component;
+        const TagName = component as any;
 
         let role = 'menuitem';
         if ('selectMode' in root.props) {

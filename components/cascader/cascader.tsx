@@ -806,7 +806,7 @@ class Cascader extends Component<CascaderProps, CascaderState> {
             others.dir = 'rtl';
         }
 
-        const props = {
+        const props: Record<string, unknown> & { onMouseLeave?: React.MouseEventHandler } = {
             className: cx({
                 [`${prefix}cascader`]: true,
                 multiple,

@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import ConfigProvider from '../config-provider';
 import Search from './Search';
 
@@ -19,7 +20,7 @@ export default ConfigProvider.config(Search, {
         }
         if (combox) {
             deprecated('combox', 'popupContent', 'Search');
-            newprops.popupContent = combox;
+            newprops.popupContent = combox as ReactNode;
         }
 
         return newprops;

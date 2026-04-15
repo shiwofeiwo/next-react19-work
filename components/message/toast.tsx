@@ -18,14 +18,14 @@ const timeouts: Record<string, ReturnType<typeof setTimeout>> = {};
 
 interface MaskProps {
     prefix?: string;
-    type?: string;
+    type?: 'success' | 'warning' | 'error' | 'notice' | 'help' | 'loading';
     title?: React.ReactNode;
     content?: React.ReactNode;
     align?: string;
-    offset?: unknown[];
+    offset?: number[];
     hasMask?: boolean;
     afterClose?(...args: unknown[]): unknown;
-    animation?: object | boolean;
+    animation?: boolean | { in: string; out: string };
     overlayProps?: object;
     onClose?(...args: unknown[]): unknown;
     timeoutId?: string;
@@ -144,13 +144,16 @@ const create = (props: MessageQuickProps) => {
 
     const root = createRoot(div);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const AnyNewMask = NewMask as any;
+
     root.render(
         <ConfigProvider {...newContext}>
-            <NewMask
+            <AnyNewMask
                 afterClose={closeChain}
                 {...others}
-                ref={ref => {
-                    myRef = ref!;
+                ref={(ref: any) => {
+                    myRef = ref;
                 }}
             />
         </ConfigProvider>

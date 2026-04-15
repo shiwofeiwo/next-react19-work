@@ -145,7 +145,7 @@ export interface TransferState {
 /**
  * @api Transfer
  */
-export interface TransferProps extends HTMLAttributesWeak, CommonProps {
+export interface TransferProps extends Omit<HTMLAttributesWeak, 'children'>, CommonProps {
     /**
      * 国际化文案对象
      * @skip

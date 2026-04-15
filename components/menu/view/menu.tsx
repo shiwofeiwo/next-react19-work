@@ -173,7 +173,7 @@ const addIndicators = ({
             }
         }
 
-        arr.push(child);
+        arr.push(child as ReactElement<any> | number | string | true);
     });
 
     arr.push(getIndicatorsItem([], true, prefix, renderMore));

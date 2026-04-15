@@ -198,7 +198,7 @@ class List extends Component<ListProps> {
                         <Progress
                             size="medium"
                             percent={file.percent}
-                            textRender={func.noop}
+                            textRender={() => null}
                             rtl={rtl}
                             {...progressProps}
                         />
@@ -308,7 +308,7 @@ class List extends Component<ListProps> {
                         <Progress
                             size="medium"
                             percent={file.percent}
-                            textRender={func.noop}
+                            textRender={() => null}
                             {...progressProps}
                         />
                     </div>
@@ -377,7 +377,7 @@ class List extends Component<ListProps> {
                     <Progress
                         size="medium"
                         percent={file.percent}
-                        textRender={func.noop}
+                        textRender={() => null}
                         {...progressProps}
                     />
                 </div>,

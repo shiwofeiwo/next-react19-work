@@ -19,6 +19,7 @@ export interface AnimateChildProps {
     onExit?: (node: HTMLElement) => void;
     onExiting?: (node: HTMLElement) => void;
     onExited?: (node: HTMLElement) => void;
+    children?: React.ReactNode;
 }
 
 /**

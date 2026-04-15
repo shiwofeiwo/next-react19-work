@@ -232,7 +232,7 @@ export interface SliderProps
      * @param index - 锚点编号
      * @param current - 当前幻灯片编号
      */
-    dotsRender?: (index: number, current: number) => void;
+    dotsRender?: (index: number, current: number) => ReactNode;
 
     /**
      * 是否可拖拽

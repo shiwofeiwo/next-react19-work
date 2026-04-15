@@ -167,7 +167,7 @@ export default class Inner extends Component<InnerProps> {
                           newBtnProps.type = 'primary';
                       }
 
-                      return <Button key={action} {...newBtnProps} />;
+                      return <Button key={action} {...(newBtnProps as any)} />;
                   })
                 : footer;
 

@@ -839,7 +839,7 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
         const datePanel =
             type === 'date' ? (
                 <RangeCalendar
-                    {...shareCalendarProps}
+                    {...(shareCalendarProps as any)}
                     yearRange={yearRange}
                     disableChangeMode={disableChangeMode}
                     disabledDate={disabledDate}
@@ -852,7 +852,7 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
                     <Calendar
                         shape="panel"
                         modes={type === 'month' ? ['month', 'year'] : ['year']}
-                        {...{ ...shareCalendarProps }}
+                        {...({ ...shareCalendarProps } as any)}
                         disabledDate={(date, ...args) => {
                             return (
                                 (state.endValue && date.isAfter(state.endValue, type)) ||
@@ -871,7 +871,7 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
                     <Calendar
                         shape="panel"
                         modes={type === 'month' ? ['month', 'year'] : ['year']}
-                        {...shareCalendarProps}
+                        {...(shareCalendarProps as any)}
                         disabledDate={(date, ...args) => {
                             return (
                                 (state.startValue && date.isBefore(state.startValue, type)) ||

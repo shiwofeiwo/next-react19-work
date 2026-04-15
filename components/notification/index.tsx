@@ -52,7 +52,7 @@ interface NotificationProps {
     prefix?: string;
 }
 
-class Notification extends Component<NotificationProps> {
+class Notification extends Component<NotificationProps, NotificationState> {
     static defaultProps = {
         prefix: 'next-',
     };

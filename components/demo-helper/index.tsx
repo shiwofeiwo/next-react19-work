@@ -176,6 +176,7 @@ export interface DemoProps extends Omit<BaseProps, 'demoTitle'> {
         demoFunction: Record<string, DemoFunctionDefineForObject> | DemoFunctionDefineForArray[]
     ) => unknown;
     style?: React.CSSProperties;
+    children?: React.ReactNode;
 }
 
 interface DemoState {
@@ -526,6 +527,7 @@ interface DemoGroupProps extends BaseProps {
     height?: React.CSSProperties['height'];
     className?: string;
     demoShapeLevel?: string;
+    children?: React.ReactNode;
 }
 
 class DemoGroup extends React.Component<DemoGroupProps> {

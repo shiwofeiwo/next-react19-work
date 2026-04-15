@@ -18,20 +18,11 @@ let menuInstance:
     | null
     | undefined;
 
-interface ContextMenuProps {
-    className?: string;
-    popupClassName?: string;
-    target?: any;
-    align?: string;
-    offset?: unknown[];
-    overlayProps?: object;
-    afterClose?(...args: unknown[]): unknown;
-    mode?: 'inline' | 'popup';
-    onOpen?(...args: unknown[]): unknown;
-    onItemClick?(...args: unknown[]): unknown;
+interface ContextMenuState {
+    visible: boolean;
 }
 
-class ContextMenu extends Component<ContextMenuProps> {
+class ContextMenu extends Component<CreateMenuProps, ContextMenuState> {
     static defaultProps = {
         prefix: 'next-',
         align: 'tl tl',
@@ -39,8 +30,7 @@ class ContextMenu extends Component<ContextMenuProps> {
     };
 
     overlay: ComponentRef<typeof Overlay> | null | undefined;
-    popupNodes: HTMLElement[];
-    readonly props: ClassPropsWithDefault<CreateMenuProps, typeof ContextMenu.defaultProps>;
+    popupNodes!: HTMLElement[];
 
     constructor(props: CreateMenuProps) {
         super(props);

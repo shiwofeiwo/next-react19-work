@@ -251,6 +251,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
             ...sharedProps,
             mode,
             panelMode,
+            locale: restProps.locale || defaultLocale.Calendar,
             onPanelValueChange: this.onPanelValueChange,
             onModeChange: this.onModeChange,
             onPanelModeChange: this.onPanelModeChange,

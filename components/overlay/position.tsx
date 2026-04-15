@@ -190,10 +190,10 @@ export default class Position extends Component<PositionProps> {
     render() {
         const child = Children.only(this.props.children);
         if (isValidElement(child)) {
-            return cloneElement(child, {
+            return cloneElement<any>(child, {
                 ref: (c: any) => {
                     if (c instanceof Element) {
-                        this.containerRef = c;
+                        this.containerRef = c as HTMLElement;
                     } else if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
                         this.containerRef = c.getDOMNode();
                     }
