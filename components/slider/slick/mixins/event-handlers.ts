@@ -1,5 +1,4 @@
 import type { TouchEvent, MouseEvent } from 'react';
-import { findDOMNode } from 'react-dom';
 import { getTrackCSS, getTrackLeft, getTrackAnimateCSS } from './trackHelper';
 import type { InnerSliderProps, InnerSliderState, OptionProps } from '../../types';
 import type { MixinThisType as HelpersMixinThisType } from './helpers';
@@ -232,7 +231,7 @@ const EventHandlers = {
             : 0;
         if (this.props.swipeToSlide) {
             let swipedSlide: HTMLElement | undefined;
-            const slickList = findDOMNode(this.list) as Element;
+            const slickList = this.list!;
 
             const slides = slickList.querySelectorAll<HTMLElement>(
                 `${this.props.prefix}slick-slide`

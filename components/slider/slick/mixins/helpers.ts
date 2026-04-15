@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { getTrackCSS, getTrackLeft, getTrackAnimateCSS } from './trackHelper';
 import type { InnerSliderProps, InnerSliderState } from '../../types';
 
@@ -26,10 +25,10 @@ export type MixinThisType = {
 
 const helpers = {
     initialize(this: MixinThisType, props: InnerSliderProps) {
-        const slickList = ReactDOM.findDOMNode(this.list) as Element;
+        const slickList = this.list!;
         const slideCount = React.Children.count(props.children);
         const listWidth = this.getWidth(slickList) || 0;
-        const trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track) as Element) || 0;
+        const trackWidth = this.getWidth(this.track!) || 0;
         let slideWidth;
 
         if (!props.vertical) {
@@ -111,7 +110,7 @@ const helpers = {
         if (this.props.adaptiveHeight) {
             const selector = `[data-index="${this.state.currentSlide}"]`;
             if (this.list) {
-                const slickList = ReactDOM.findDOMNode(this.list) as HTMLElement;
+                const slickList = this.list!;
                 const slickElement = slickList.querySelector<HTMLElement>(selector);
                 const listHeight = slickElement!.offsetHeight;
                 slickList.style.height = `${listHeight}px`;

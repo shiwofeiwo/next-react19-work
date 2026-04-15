@@ -1,5 +1,4 @@
 import { isValidElement, cloneElement, type ReactElement, type ReactInstance } from 'react';
-import ReactDOM from 'react-dom';
 import { type ScrollToFirstErrorOption } from './types';
 
 export function cloneAndAddKey(element: ReactElement<any>) {
@@ -16,7 +15,11 @@ export function scrollToFirstError({ errorsGroup, options, instance }: ScrollToF
         let firstTop: number | undefined;
         for (const i in errorsGroup) {
             if (errorsGroup.hasOwnProperty(i)) {
-                const node = ReactDOM.findDOMNode(instance[i] as ReactInstance) as HTMLElement;
+                const ref = instance[i] as ReactInstance;
+                const node =
+                    ref instanceof Element
+                        ? (ref as HTMLElement)
+                        : ((ref as any)?.getDOMNode?.() as HTMLElement);
                 if (!node) {
                     return;
                 }

@@ -1,5 +1,19 @@
-import { findDOMNode } from 'react-dom';
 import type { Target } from '../types';
+
+function getNodeFromInstance(instance: unknown): Element | Text | null {
+    if (!instance) return null;
+    if (instance instanceof Element || instance instanceof Text) {
+        return instance;
+    }
+    // React class component instance — try getDOMNode()
+    if (
+        'getDOMNode' in (instance as object) &&
+        typeof (instance as Record<string, unknown>).getDOMNode === 'function'
+    ) {
+        return (instance as { getDOMNode: () => Element | Text | null }).getDOMNode();
+    }
+    return null;
+}
 
 export default function findNode<T>(target?: Target<T>, param?: T): Element | Text | null {
     let realTarget: typeof target | void = target;
@@ -24,10 +38,8 @@ export default function findNode<T>(target?: Target<T>, param?: T): Element | Te
     }
 
     try {
-        // @ts-expect-error realTarget需要判断是否是ReactInstance，还会存在Element Node Text的情况
-        return findDOMNode(realTarget);
+        return getNodeFromInstance(realTarget);
     } catch (err) {
-        // @ts-expect-error 这个兜底逻辑十分破坏类型完备
-        return realTarget;
+        return realTarget as Element | Text | null;
     }
 }

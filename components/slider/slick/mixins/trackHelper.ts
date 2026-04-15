@@ -1,5 +1,4 @@
 import { type CSSProperties } from 'react';
-import ReactDOM from 'react-dom';
 import type { TrackCSSProps, TrackLeftProps } from './../../types';
 
 const checkSpecKeys = <K extends string | number | symbol, V>(
@@ -179,21 +178,17 @@ export const getTrackLeft = function (spec: TrackLeftProps) {
     if (spec.variableWidth === true) {
         let targetSlideIndex;
         if (spec.slideCount! <= spec.slidesToShow! || spec.infinite === false) {
-            targetSlide = ReactDOM.findDOMNode(spec.trackRef)!.childNodes[spec.slideIndex];
+            targetSlide = spec.trackRef.childNodes[spec.slideIndex];
         } else {
             targetSlideIndex = spec.slideIndex + spec.slidesToShow!;
-            targetSlide = ReactDOM.findDOMNode(spec.trackRef)!.childNodes[targetSlideIndex];
+            targetSlide = spec.trackRef.childNodes[targetSlideIndex];
         }
         targetLeft = targetSlide ? (targetSlide as HTMLElement).offsetLeft * -1 : 0;
         if (spec.centerMode === true) {
             if (spec.infinite === false) {
-                targetSlide = (ReactDOM.findDOMNode(spec.trackRef) as HTMLElement).children[
-                    spec.slideIndex
-                ];
+                targetSlide = spec.trackRef.children[spec.slideIndex];
             } else {
-                targetSlide = (ReactDOM.findDOMNode(spec.trackRef) as HTMLElement).children[
-                    spec.slideIndex + spec.slidesToShow! + 1
-                ];
+                targetSlide = spec.trackRef.children[spec.slideIndex + spec.slidesToShow! + 1];
             }
 
             if (targetSlide) {
