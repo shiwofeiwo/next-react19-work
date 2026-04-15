@@ -1,5 +1,4 @@
 import React, { Component, createRef, useState } from 'react';
-import propTypes from 'prop-types';
 import type { MountReturn } from 'cypress/react';
 import { KEYCODE } from '../../util';
 import Tree from '../index';
@@ -404,10 +403,6 @@ class CheckDemo extends Component<{ checkStrictly?: boolean }> {
     }
 }
 class DragDemo extends React.Component {
-    static propTypes = {
-        canDrop: propTypes.func,
-    };
-
     static defaultProps = {
         canDrop: () => true,
     };

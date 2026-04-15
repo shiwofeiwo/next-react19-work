@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Animate, { type AnimateProps } from '../index';
 import './index-spec.scss';
 
@@ -9,11 +8,6 @@ interface DemoProps extends AnimateProps {
 }
 
 class Demo extends React.Component<DemoProps, { visible: boolean }> {
-    static propTypes = {
-        visible: PropTypes.bool,
-        expand: PropTypes.bool,
-    };
-
     static defaultProps = {
         visible: false,
         expand: false,
