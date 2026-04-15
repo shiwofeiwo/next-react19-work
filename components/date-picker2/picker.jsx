@@ -72,6 +72,12 @@ const PICKER_PROP_KEYS = [
     'style',
 ];
 
+const DATE_INPUT_PROP_KEYS = [
+    'prefix', 'rtl', 'locale', 'value', 'inputType', 'format', 'isRange', 'hasClear',
+    'onInputTypeChange', 'autoFocus', 'readOnly', 'placeholder', 'size', 'focus', 'hasBorder',
+    'separator', 'disabled', 'inputProps', 'dateInputAriaLabel', 'label', 'state',
+];
+
 class Picker extends React.Component {
     static propTypes = {
         rtl: PT.bool,
@@ -708,7 +714,7 @@ class Picker extends React.Component {
 
         // 输入框
         const inputProps = {
-            ...pickProps(DateInput.propTypes, restProps),
+            ...pickProps(DATE_INPUT_PROP_KEYS, restProps),
             ...sharedProps,
             value: inputValue,
             label: label,

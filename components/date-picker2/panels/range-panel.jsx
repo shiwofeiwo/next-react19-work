@@ -16,6 +16,13 @@ const { DATE, WEEK, MONTH, QUARTER, YEAR } = DATE_PANEL_MODE;
 const { UN_SELECTED, SELECTED, SELECTED_BEGIN, SELECTED_END } = CALENDAR_CELL_STATE;
 const { BEGIN, END } = DATE_INPUT_TYPE;
 
+const CALENDAR_PROP_KEYS = [
+    'rtl', 'name', 'prefix', 'locale', 'shape', 'mode', 'value', 'defaultValue', 'panelValue',
+    'defaultPanelValue', 'disabledDate', 'dateCellRender', 'quarterCellRender', 'monthCellRender',
+    'yearCellRender', 'headerRender', 'onChange', 'onSelect', 'onPanelChange', 'cellProps',
+    'cellClassName', 'panelMode', 'onPrev', 'onNext', 'onSuperPrev', 'onSuperNext', 'colNum',
+];
+
 const operate = (mode, value, operator) => {
     const newVal = value.clone();
 
@@ -407,7 +414,7 @@ class RangePanel extends React.Component {
         this.hasModeChanged = this.state.mode !== this.props.mode;
 
         let sharedProps = {
-            ...obj.pickProps(Calendar.propTypes, restProps),
+            ...obj.pickProps(CALENDAR_PROP_KEYS, restProps),
             shape: 'panel',
             panelMode: mode,
             dateCellRender,

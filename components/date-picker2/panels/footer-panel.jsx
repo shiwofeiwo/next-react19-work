@@ -11,6 +11,11 @@ import Button from '../../button';
 
 const { renderNode } = func;
 
+const BUTTON_PROP_KEYS = [
+    'prefix', 'rtl', 'type', 'size', 'icons', 'iconSize', 'htmlType', 'component',
+    'loading', 'ghost', 'text', 'warning', 'disabled', 'onClick', 'className', 'onMouseUp', 'children',
+];
+
 function normalizePreset(preset) {
     if (Array.isArray(preset)) {
         return preset;
@@ -55,7 +60,7 @@ class FooterPanel extends React.PureComponent {
         const preset = normalizePreset(this.props.preset);
 
         return preset.map(({ label, value, ...restProps }, index) => {
-            const buttonProps = obj.pickProps(Button.propTypes, restProps);
+            const buttonProps = obj.pickProps(BUTTON_PROP_KEYS, restProps);
 
             const handleClick = () => {
                 const date = typeof value === 'function' ? value() : value;

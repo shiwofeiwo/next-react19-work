@@ -10,6 +10,17 @@ import { setTime } from '../util';
 import Calendar from '../../calendar2';
 import TimePanel from './time-panel';
 
+const CALENDAR_PROP_KEYS = [
+    'rtl', 'name', 'prefix', 'locale', 'shape', 'mode', 'value', 'defaultValue', 'panelValue',
+    'defaultPanelValue', 'disabledDate', 'dateCellRender', 'quarterCellRender', 'monthCellRender',
+    'yearCellRender', 'headerRender', 'onChange', 'onSelect', 'onPanelChange', 'cellProps',
+    'cellClassName', 'panelMode', 'onPrev', 'onNext', 'onSuperPrev', 'onSuperNext', 'colNum',
+];
+
+const TIME_PANEL_PROP_KEYS = [
+    'rtl', 'prefix', 'locale', 'value', 'timePanelProps', 'onSelect',
+];
+
 class DatePanel extends React.Component {
     static propTypes = {
         rtl: PT.bool,
@@ -102,7 +113,7 @@ class DatePanel extends React.Component {
         return (
             <div className={className}>
                 <Calendar
-                    {...obj.pickProps(Calendar.propTypes, restProps)}
+                    {...obj.pickProps(CALENDAR_PROP_KEYS, restProps)}
                     shape="panel"
                     value={value}
                     panelMode={mode}
@@ -114,7 +125,7 @@ class DatePanel extends React.Component {
                 />
                 {showTime && mode === panelMode ? (
                     <TimePanel
-                        {...obj.pickProps(TimePanel.propTypes, restProps)}
+                        {...obj.pickProps(TIME_PANEL_PROP_KEYS, restProps)}
                         prefix={prefix}
                         value={value || this.state.defaultTime}
                         onSelect={this.onTimeSelect}

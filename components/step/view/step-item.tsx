@@ -241,7 +241,7 @@ class StepItem extends Component<ItemProps> {
     getNode(args: {
         stepCls: string;
         overlayCls: { width: string } | null;
-        others: Omit<ItemProps, keyof typeof StepItem.propTypes>;
+        others: Record<string, any>;
     }) {
         const { prefix, itemRender, index, status, title, content, shape } = this.props;
         const { others, stepCls, overlayCls } = args;

@@ -50,6 +50,44 @@ const CALENDAR2_PROP_KEYS = [
     'colNum',
 ];
 
+const HEADER_PANEL_PROP_KEYS = [
+    'rtl',
+    'prefix',
+    'locale',
+    'mode',
+    'shape',
+    'value',
+    'panelMode',
+    'panelValue',
+    'validValue',
+    'showTitle',
+    'showModeSwitch',
+    'onModeChange',
+    'onPanelValueChange',
+    'onPanelModeChange',
+    'onPrev',
+    'onNext',
+    'onSuperPrev',
+    'onSuperNext',
+    'titleRender',
+];
+
+const DATE_TABLE_PROP_KEYS = [
+    'mode',
+    'value',
+    'panelValue',
+    'dateCellRender',
+    'quarterCellRender',
+    'monthCellRender',
+    'yearCellRender',
+    'disabledDate',
+    'hoveredState',
+    'onSelect',
+    'cellClassName',
+    'colNum',
+    'cellProps',
+];
+
 // CALENDAR_MODE => DATE_PANEL_MODE
 function getPanelMode(mode: CalendarMode | CalendarPanelMode) {
     return mode && (mode === CALENDAR_MODE.YEAR ? DATE_PANEL_MODE.MONTH : DATE_PANEL_MODE.DATE);
@@ -241,7 +279,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
         };
 
         const headerPanelProps = {
-            ...pickProps(HeaderPanel.propTypes, restProps),
+            ...pickProps(HEADER_PANEL_PROP_KEYS, restProps),
             ...sharedProps,
             mode,
             panelMode,
@@ -252,7 +290,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
         };
 
         const dateTableProps = {
-            ...pickProps(DateTable.propTypes, restProps),
+            ...pickProps(DATE_TABLE_PROP_KEYS, restProps),
             ...sharedProps,
             mode: panelMode,
             onSelect: this.onDateSelect,

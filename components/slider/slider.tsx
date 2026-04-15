@@ -20,7 +20,89 @@ const CONFIG_PROVIDER_PROP_KEYS = [
     'popupContainer',
 ];
 
-type CommonKeys = keyof SliderProps & keyof typeof ConfigProvider.propTypes;
+const SLIDER_PROP_KEYS = [
+    'prefix',
+    'rtl',
+    'className',
+    'adaptiveHeight',
+    'animation',
+    'arrows',
+    'arrowSize',
+    'arrowPosition',
+    'arrowDirection',
+    'autoplay',
+    'autoplaySpeed',
+    'nextArrow',
+    'prevArrow',
+    'centerMode',
+    'dots',
+    'dotsDirection',
+    'dotsClass',
+    'dotsRender',
+    'draggable',
+    'infinite',
+    'defaultActiveIndex',
+    'lazyLoad',
+    'slide',
+    'slideDirection',
+    'slidesToShow',
+    'slidesToScroll',
+    'speed',
+    'activeIndex',
+    'triggerType',
+    'onChange',
+    'onBeforeChange',
+    'children',
+    'style',
+    'centerPadding',
+    'cssEase',
+    'edgeFriction',
+    'focusOnSelect',
+    'pauseOnHover',
+    'swipe',
+    'swipeToSlide',
+    'touchMove',
+    'touchThreshold',
+    'useCSS',
+    'variableWidth',
+    'waitForAnimate',
+    'edgeEvent',
+    'swipeEvent',
+];
+
+const INNER_SLIDER_PROP_KEYS = [
+    'prefix',
+    'animation',
+    'arrows',
+    'arrowSize',
+    'arrowPosition',
+    'arrowDirection',
+    'centerPadding',
+    'children',
+    'centerMode',
+    'dots',
+    'dotsDirection',
+    'dotsClass',
+    'focusOnSelect',
+    'cssEase',
+    'speed',
+    'infinite',
+    'defaultActiveIndex',
+    'rtl',
+    'slidesToShow',
+    'lazyLoad',
+    'activeIndex',
+    'slidesToScroll',
+    'variableWidth',
+    'vertical',
+    'verticalSwiping',
+    'prevArrow',
+    'nextArrow',
+    'dotsRender',
+    'triggerType',
+];
+
+type CommonKeys = keyof SliderProps & (typeof CONFIG_PROVIDER_PROP_KEYS)[number];
 type ObjWithCommonProps = Pick<SliderProps, CommonKeys>;
 
 /**
@@ -177,7 +259,7 @@ export default class Slider extends Component<SliderProps> {
                     className={clazz}
                     style={style}
                     {...obj.pickOthers(
-                        { ...Slider.propTypes, ...InnerSlider.propTypes },
+                        [...SLIDER_PROP_KEYS, ...INNER_SLIDER_PROP_KEYS],
                         sliderProps
                     )}
                 >

@@ -867,10 +867,7 @@ class TreeSelect extends Component<TreeSelectProps, TreeSelectState> {
         );
     }
 
-    renderPreview(
-        data: ObjectItem[] | ObjectItem,
-        others: Omit<typeof this.props, keyof typeof TreeSelect.propTypes>
-    ) {
+    renderPreview(data: ObjectItem[] | ObjectItem, others: Record<string, any>) {
         const { prefix, className, renderPreview } = this.props;
 
         const previewCls = classNames(className, `${prefix}form-preview`);
