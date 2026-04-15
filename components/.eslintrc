@@ -3,6 +3,9 @@
     "env": {
         "node": false
     },
+    "rules": {
+        "react/prop-types": "off"
+    },
     "overrides": [
         {
             "files": ["**/__tests__/**/*.ts", "**/__tests__/**/*.tsx"],

@@ -6,10 +6,6 @@ import React, {
 } from 'react';
 
 export type ObjectOrArray<T = unknown> = Record<PropertyKey, T> | ArrayLike<T>;
-type Writable<T> = {
-    -readonly [P in keyof T]: T[P];
-};
-
 /**
  * 获取对象的类型
  * @example
@@ -209,14 +205,13 @@ const _isInObj = <O extends ObjectOrArray>(
  * @param props - 被过滤的对象
  *
  * @example
- * object.pickOthers(FooComponent.propTypes, this.props);
  * object.pickOthers(['className', 'onChange'], this.props);
  */
-export function pickOthers<T extends string, P extends Record<string, unknown>>(
-    holdProps: T[] | Partial<Record<T, any>>,
+export function pickOthers<P extends Record<string, unknown>>(
+    holdProps: string[] | Record<string, unknown>,
     props: P
-): Writable<Omit<P, T>> {
-    const others: Partial<P> = {};
+): Record<string, unknown> {
+    const others: Record<string, unknown> = {};
     const isArray = typeOf(holdProps) === 'Array';
 
     for (const key in props) {
@@ -225,7 +220,7 @@ export function pickOthers<T extends string, P extends Record<string, unknown>>(
         }
     }
 
-    return others as Writable<Omit<P, T>>;
+    return others;
 }
 
 /**
@@ -234,14 +229,13 @@ export function pickOthers<T extends string, P extends Record<string, unknown>>(
  * @param props - 被过滤的对象
  *
  * @example
- * object.pickProps(FooComponent.propTypes, this.props);
  * object.pickProps(['className', 'onChange'], this.props);
  */
-export function pickProps<T extends string, P extends Record<string, unknown>>(
-    holdProps: T[] | Record<T, unknown>,
+export function pickProps<P extends Record<string, unknown>>(
+    holdProps: string[] | Record<string, unknown>,
     props: P
-): Writable<Pick<P, T>> {
-    const others: Partial<P> = {};
+): Record<string, unknown> {
+    const others: Record<string, unknown> = {};
     const isArray = typeOf(holdProps) === 'Array';
 
     for (const key in props) {
@@ -250,7 +244,7 @@ export function pickProps<T extends string, P extends Record<string, unknown>>(
         }
     }
 
-    return others as Writable<Pick<P, T>>;
+    return others;
 }
 
 /**
