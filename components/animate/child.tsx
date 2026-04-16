@@ -33,11 +33,16 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         onExiting: noop,
         onExited: noop,
     };
+    nodeRef: { current: HTMLElement | null };
     endListeners: Record<string, Array<(e: UIEvent) => void>>;
     timeoutMap: Record<string, number>;
     node: HTMLElement;
     transitionOff: () => void;
     animationOff: () => void;
+    private _originalRef: React.Ref<HTMLElement> | undefined;
+
+    /** Stable callback that merges nodeRef + original child ref — stored as instance method to avoid re-creation */
+    mergedRef: (node: HTMLElement | null) => void;
 
     constructor(props: AnimateChildProps) {
         super(props);
@@ -50,6 +55,16 @@ export default class AnimateChild extends Component<AnimateChildProps> {
             'handleExited',
             'addEndListener',
         ]);
+        this.nodeRef = { current: null };
+        this._originalRef = undefined;
+        this.mergedRef = (node: HTMLElement | null) => {
+            this.nodeRef.current = node;
+            if (typeof this._originalRef === 'function') {
+                this._originalRef(node);
+            } else if (this._originalRef && typeof this._originalRef === 'object') {
+                (this._originalRef as { current: HTMLElement | null }).current = node;
+            }
+        };
         this.endListeners = {
             transitionend: [],
             animationend: [],
@@ -88,7 +103,10 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         };
     }
 
-    addEndListener(node: HTMLElement, done: () => void) {
+    addEndListener(done: () => void) {
+        const node = this.nodeRef.current;
+        if (!node) return;
+
         if (support.transition || support.animation) {
             const id = guid();
 
@@ -150,7 +168,10 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         });
     }
 
-    handleEnter(node: HTMLElement, isAppearing: boolean) {
+    handleEnter(isAppearing: boolean) {
+        const node = this.nodeRef.current;
+        if (!node) return;
+
         const { names } = this.props;
         if (names) {
             this.removeClassNames(node, names);
@@ -162,8 +183,11 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         hook!(node);
     }
 
-    handleEntering(node: HTMLElement, isAppearing: boolean) {
+    handleEntering(isAppearing: boolean) {
         setTimeout(() => {
+            const node = this.nodeRef.current;
+            if (!node) return;
+
             const { names } = this.props;
             if (names) {
                 const className = isAppearing ? 'appearActive' : 'enterActive';
@@ -175,7 +199,10 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         }, 10);
     }
 
-    handleEntered(node: HTMLElement, isAppearing: boolean) {
+    handleEntered(isAppearing: boolean) {
+        const node = this.nodeRef.current;
+        if (!node) return;
+
         const { names } = this.props;
         if (names) {
             const classNames = isAppearing
@@ -190,7 +217,10 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         hook!(node);
     }
 
-    handleExit(node: HTMLElement) {
+    handleExit() {
+        const node = this.nodeRef.current;
+        if (!node) return;
+
         const { names } = this.props;
         if (names) {
             this.removeClassNames(node, names);
@@ -200,8 +230,11 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         this.props.onExit!(node);
     }
 
-    handleExiting(node: HTMLElement) {
+    handleExiting() {
         setTimeout(() => {
+            const node = this.nodeRef.current;
+            if (!node) return;
+
             const { names } = this.props;
             if (names) {
                 addClass(node, names.leaveActive!);
@@ -210,7 +243,10 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         }, 10);
     }
 
-    handleExited(node: HTMLElement) {
+    handleExited() {
+        const node = this.nodeRef.current;
+        if (!node) return;
+
         const { names } = this.props;
         if (names) {
             [names.leave, names.leaveActive].forEach(className => {
@@ -233,11 +269,36 @@ export default class AnimateChild extends Component<AnimateChildProps> {
             onExit,
             onExiting,
             onExited,
-            ...others
+            children,
+            ...restOthers
         } = this.props;
+
+        const child = children as React.ReactElement | null;
+
+        // Guard: if no child element, render Transition without children (same as original behavior)
+        if (!child) {
+            return (
+                <Transition
+                    {...restOthers}
+                    nodeRef={this.nodeRef}
+                    onEnter={this.handleEnter}
+                    onEntering={this.handleEntering}
+                    onEntered={this.handleEntered}
+                    onExit={this.handleExit}
+                    onExiting={this.handleExiting}
+                    onExited={this.handleExited}
+                    addEndListener={this.addEndListener}
+                />
+            );
+        }
+
+        // Update the stored original ref for the stable mergedRef callback
+        this._originalRef = (child as unknown as { ref?: React.Ref<HTMLElement> }).ref;
+
         return (
             <Transition
-                {...others}
+                {...restOthers}
+                nodeRef={this.nodeRef}
                 onEnter={this.handleEnter}
                 onEntering={this.handleEntering}
                 onEntered={this.handleEntered}
@@ -245,7 +306,9 @@ export default class AnimateChild extends Component<AnimateChildProps> {
                 onExiting={this.handleExiting}
                 onExited={this.handleExited}
                 addEndListener={this.addEndListener}
-            />
+            >
+                {React.cloneElement(child, { ref: this.mergedRef } as Record<string, unknown>)}
+            </Transition>
         );
     }
 }

@@ -26,18 +26,60 @@ const OverlayAnimate = (props: OverlayAnimateProps) => {
         ...others
     } = props;
 
+    const nodeRef = React.useRef<HTMLElement>(null);
+
+    // Wrap callbacks to inject nodeRef.current as first argument,
+    // keeping the public API signature (node, ...) unchanged.
+    // Null guard added to handle unmount-before-callback scenarios.
+    const wrappedOnEnter = onEnter
+        ? (isAppearing: boolean) => {
+              const node = nodeRef.current;
+              if (node) onEnter(node, isAppearing);
+          }
+        : undefined;
+    const wrappedOnEntering = onEntering
+        ? (isAppearing: boolean) => {
+              const node = nodeRef.current;
+              if (node) onEntering(node, isAppearing);
+          }
+        : undefined;
+    const wrappedOnEntered = onEntered
+        ? (isAppearing: boolean) => {
+              const node = nodeRef.current;
+              if (node) onEntered(node, isAppearing);
+          }
+        : undefined;
+    const wrappedOnExit = onExit
+        ? () => {
+              const node = nodeRef.current;
+              if (node) onExit(node);
+          }
+        : undefined;
+    const wrappedOnExiting = onExiting
+        ? () => {
+              const node = nodeRef.current;
+              if (node) onExiting(node);
+          }
+        : undefined;
+    const wrappedOnExited = onExited
+        ? () => {
+              const node = nodeRef.current;
+              if (node) onExited(node);
+          }
+        : undefined;
+
     const animateProps = {
         mountOnEnter,
         unmountOnExit,
         appear,
         enter,
         exit,
-        onEnter,
-        onEntering,
-        onEntered,
-        onExit,
-        onExiting,
-        onExited,
+        onEnter: wrappedOnEnter,
+        onEntering: wrappedOnEntering,
+        onEntered: wrappedOnEntered,
+        onExit: wrappedOnExit,
+        onExiting: wrappedOnExiting,
+        onExited: wrappedOnExited,
     };
 
     Object.keys(animateProps).forEach((k: keyof typeof animateProps) => {
@@ -62,7 +104,13 @@ const OverlayAnimate = (props: OverlayAnimateProps) => {
     }
 
     return (
-        <Transition {...animateProps} in={visible} timeout={animation ? timeout : 0} appear>
+        <Transition
+            {...animateProps}
+            nodeRef={nodeRef as React.Ref<HTMLElement>}
+            in={visible}
+            timeout={animation ? timeout : 0}
+            appear
+        >
             {state => {
                 const cls = classNames({
                     [children.props.className]: !!children.props.className,
@@ -72,6 +120,7 @@ const OverlayAnimate = (props: OverlayAnimateProps) => {
                 const childProps: Record<string, unknown> = {
                     ...others,
                     className: cls,
+                    ref: nodeRef,
                 };
 
                 if (style && children.props && children.props.style) {

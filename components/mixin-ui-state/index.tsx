@@ -54,7 +54,7 @@ class UIState<
     // base 事件绑定的元素
     getStateElement(base: ClonableElement<P & UIStateProps>) {
         const { onFocus, onBlur } = this.props;
-        return React.cloneElement(base, {
+        return React.cloneElement(base as React.ReactElement<any>, {
             onFocus: makeChain(this._onUIFocus, onFocus),
             onBlur: makeChain(this._onUIBlur, onBlur),
         });
