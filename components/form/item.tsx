@@ -310,7 +310,7 @@ export default class Item extends Component<ItemProps> {
                                     child.type.displayName!,
                                     labelForErrorMessage
                                 ),
-                                props: { ...child.props, ref: child.ref },
+                                props: { ...child.props, ref: child.props.ref },
                             },
                             childrenProps
                         );

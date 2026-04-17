@@ -192,8 +192,8 @@ class Table extends React.Component {
                 if (child) {
                     const props = { ...child.props };
 
-                    if (child.ref) {
-                        props.ref = child.ref;
+                    if (child.props.ref) {
+                        props.ref = child.props.ref;
                     }
 
                     if (

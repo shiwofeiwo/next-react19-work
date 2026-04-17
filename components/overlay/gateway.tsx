@@ -75,11 +75,11 @@ class Gateway extends Component<GatewayProps, GatewayState> {
             return null;
         }
 
-        if (typeof child.ref === 'string') {
+        if (typeof child.props.ref === 'string') {
             throw new Error('Can not set ref by string in Gateway, use function instead.');
         }
         child = cloneElement(child, {
-            ref: makeChain(this.saveChildRef, child.ref),
+            ref: makeChain(this.saveChildRef, child.props.ref as any),
         });
 
         return createPortal(child, containerNode as HTMLElement);

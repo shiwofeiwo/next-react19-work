@@ -293,7 +293,10 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         }
 
         // Update the stored original ref for the stable mergedRef callback
-        this._originalRef = (child as unknown as { ref?: React.Ref<HTMLElement> }).ref;
+        // React 19: ref is a regular prop, access via props.ref instead of element.ref
+        this._originalRef = (child.props as Record<string, unknown>).ref as
+            | React.Ref<HTMLElement>
+            | undefined;
 
         return (
             <Transition

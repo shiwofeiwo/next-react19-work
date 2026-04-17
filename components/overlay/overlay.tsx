@@ -707,14 +707,14 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
                 [child.props.className]: !!child.props.className,
                 [className!]: !!className,
             });
-            if (typeof child.ref === 'string') {
+            if (typeof child.props.ref === 'string') {
                 throw new Error('Can not set ref by string in Overlay, use function instead.');
             }
 
             children = cloneElement(child, {
                 className: childClazz,
                 style: { ...child.props.style, ...style },
-                ref: makeChain(this.saveContentRef, child.ref),
+                ref: makeChain(this.saveContentRef, child.props.ref as any),
                 'aria-hidden': !stateVisible && cache && this._isMounted,
                 onClick: makeChain(this.props.onClick, child.props.onClick),
                 onTouchEnd: makeChain(this.props.onTouchEnd, child.props.onTouchEnd),

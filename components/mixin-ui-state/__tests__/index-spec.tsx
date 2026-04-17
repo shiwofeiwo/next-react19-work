@@ -7,7 +7,8 @@ interface TestProps extends UIStateProps {
 }
 
 class Test extends UIState<TestProps> {
-    componentWillReceiveProps(nextProps: TestProps) {
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps: TestProps) {
         if (nextProps.reset) {
             this.resetUIState();
         }

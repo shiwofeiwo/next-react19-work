@@ -243,7 +243,7 @@ class Popup extends Component<PopupProps, PopupState> {
             trigger &&
             cloneElement(trigger, {
                 ...props,
-                ref: makeChain(this.saveTriggerRef as any, (trigger as any).ref),
+                ref: makeChain(this.saveTriggerRef as any, (trigger as any).props?.ref),
             })
         );
     }
