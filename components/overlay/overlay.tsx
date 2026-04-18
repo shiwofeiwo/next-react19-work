@@ -92,11 +92,16 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     _animation: { off: () => void } | null;
     _containerNode: HTMLElement | undefined;
     _hasFocused: boolean;
-    contentRef: ReactInstance & {
-        headerNode: HTMLElement;
-        bodyNode: HTMLElement;
-        footerNode: HTMLDivElement;
-    };
+    contentRef:
+        | (ReactInstance & {
+              headerNode: HTMLElement;
+              bodyNode: HTMLElement;
+              footerNode: HTMLDivElement;
+          })
+        | HTMLDivElement
+        | null;
+    // Separate ref to capture the actual component instance for Dialog compatibility
+    _contentComponentRef: ReactInstance | null;
     gatewayRef: InstanceType<typeof Gateway> | null;
     _keydownEvents: {
         off: () => void;
@@ -170,6 +175,9 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     }
 
     componentDidMount() {
+        // Reset _isDestroyed flag on remount (may have been set to true in componentWillUnmount)
+        this._isDestroyed = false;
+
         if (this.state.willOpen) {
             this.beforeOpen();
         } else if (this.state.willClose) {
@@ -225,6 +233,11 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     doAnimation(open: boolean, close: boolean) {
         if (this.state.animation && support.animation) {
             if (open) {
+                // Safety net: if open=true but status is not mounting/entering, force reset to mounting
+                // This handles edge cases where state machine gets stuck
+                if (this.state.status !== 'mounting' && this.state.status !== 'entering') {
+                    this.setState({ status: 'mounting' });
+                }
                 this.onEntering();
             } else if (close) {
                 this.onLeaving();
@@ -298,6 +311,26 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
                     (support.animation as { end: string }).end,
                     this.handleAnimateEnd.bind(this, id)
                 );
+
+                // React 19 uses Web Animations API for CSS animations.
+                // The DOM animationend event may not fire even when WA API animation completes.
+                // Use RAF-based polling to detect when animation finishes.
+                const animations = (node as HTMLElement).getAnimations?.();
+                if (animations && animations.length > 0) {
+                    const anim = animations[0];
+                    const checkAnimationState = () => {
+                        if (anim.playState === 'finished') {
+                            this.handleAnimateEnd(id);
+                        } else if (this._animation) {
+                            requestAnimationFrame(checkAnimationState);
+                        }
+                    };
+                    if (anim.playState === 'finished') {
+                        this.handleAnimateEnd(id);
+                    } else {
+                        requestAnimationFrame(checkAnimationState);
+                    }
+                }
 
                 const animationDelay = parseFloat(getStyleProperty(node, 'animation-delay')) || 0;
                 const animationDuration =
@@ -500,13 +533,23 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     }
 
     getContent() {
-        return this.contentRef;
+        // Return component instance if available (for Dialog compatibility),
+        // otherwise return contentRef (which may be a DOM element)
+        return (this._contentComponentRef || this.contentRef) as ReactInstance & {
+            headerNode: HTMLElement;
+            bodyNode: HTMLElement;
+            footerNode: HTMLDivElement;
+        };
     }
 
     getContentNode(): HTMLElement | null {
         try {
             const ref = this.contentRef;
-            if (!ref) return null;
+            if (!ref) {
+                // Fallback: use wrapper node's first child which should be the content element
+                const wrapper = this.getWrapperNode();
+                return (wrapper?.firstChild as HTMLElement) || null;
+            }
             if (ref instanceof Element) {
                 return ref as unknown as HTMLElement;
             }
@@ -711,10 +754,21 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
                 throw new Error('Can not set ref by string in Overlay, use function instead.');
             }
 
+            // In React 19, ref is a regular prop. Apply ref directly to child element
+            // to capture the DOM node for animation events.
+            const existingChildRef = child.props.ref;
             children = cloneElement(child, {
                 className: childClazz,
                 style: { ...child.props.style, ...style },
-                ref: makeChain(this.saveContentRef, child.props.ref as any),
+                ref: (node: any) => {
+                    this.contentRef = node;
+                    if (node && typeof node === 'object' && 'bodyNode' in node) {
+                        this._contentComponentRef = node;
+                    }
+                    if (typeof existingChildRef === 'function') {
+                        existingChildRef(node);
+                    }
+                },
                 'aria-hidden': !stateVisible && cache && this._isMounted,
                 onClick: makeChain(this.props.onClick, child.props.onClick),
                 onTouchEnd: makeChain(this.props.onTouchEnd, child.props.onTouchEnd),
