@@ -1,7 +1,10 @@
 import { Component, Children, cloneElement } from 'react';
 import { createPortal } from 'react-dom';
+import { func } from '../util';
 import findNode from './utils/find-node';
 import type { GatewayProps, GatewayState } from './types';
+
+const { makeChain } = func;
 
 const getContainerNode = (props: GatewayProps) => {
     const targetNode = findNode(props.target);
@@ -75,15 +78,8 @@ class Gateway extends Component<GatewayProps, GatewayState> {
         if (typeof child.props.ref === 'string') {
             throw new Error('Can not set ref by string in Gateway, use function instead.');
         }
-        // In React 19, ref is a regular prop. We pass ref directly to ensure it's called.
-        const existingRef = child.props.ref;
         child = cloneElement(child, {
-            ref: (node: HTMLDivElement | null) => {
-                this.child = node;
-                if (typeof existingRef === 'function') {
-                    existingRef(node);
-                }
-            },
+            ref: makeChain(this.saveChildRef, child.props.ref as any),
         });
 
         return createPortal(child, containerNode as HTMLElement);
