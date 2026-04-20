@@ -170,7 +170,10 @@ export default class Position extends Component<PositionProps> {
     }
 
     getContentNode(): null | HTMLElement {
-        return this.containerRef;
+        if (this.containerRef) {
+            return this.containerRef;
+        }
+        return null;
     }
 
     getTargetNode() {
@@ -190,6 +193,7 @@ export default class Position extends Component<PositionProps> {
     render() {
         const child = Children.only(this.props.children);
         if (isValidElement(child)) {
+            const existingRef = (child as any).props?.ref;
             return cloneElement<any>(child, {
                 ref: (c: any) => {
                     if (c instanceof Element) {
@@ -197,6 +201,29 @@ export default class Position extends Component<PositionProps> {
                     } else if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
                         this.containerRef = c.getDOMNode();
                     }
+
+                    if (typeof existingRef === 'function') {
+                        existingRef(c);
+                    } else if (
+                        existingRef &&
+                        typeof existingRef === 'object' &&
+                        'current' in existingRef
+                    ) {
+                        (existingRef as React.RefObject<any>).current = c;
+                    }
+
+                    return () => {
+                        this.containerRef = null;
+                        if (typeof existingRef === 'function') {
+                            existingRef(null);
+                        } else if (
+                            existingRef &&
+                            typeof existingRef === 'object' &&
+                            'current' in existingRef
+                        ) {
+                            (existingRef as React.RefObject<any>).current = null;
+                        }
+                    };
                 },
             });
         }

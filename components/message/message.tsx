@@ -44,6 +44,8 @@ class Message extends Component<MessageProps> {
     static close: Toast2['close'];
     static destory: Toast2['destory'];
 
+    _rootRef: HTMLElement | null = null;
+
     static defaultProps = {
         prefix: 'next-',
         pure: false,
@@ -73,6 +75,10 @@ class Message extends Component<MessageProps> {
         }
 
         return {};
+    }
+
+    getDOMNode() {
+        return this._rootRef;
     }
 
     onClose = () => {
@@ -124,6 +130,9 @@ class Message extends Component<MessageProps> {
                 {...others}
                 className={classes}
                 dir={rtl ? 'rtl' : undefined}
+                ref={el => {
+                    this._rootRef = el;
+                }}
             >
                 {closeable ? (
                     <a

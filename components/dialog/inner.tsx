@@ -52,6 +52,7 @@ export default class Inner extends Component<InnerProps> {
         role: 'dialog',
     };
 
+    _rootRef: HTMLElement | null = null;
     bodyNode: HTMLElement;
     headerNode: HTMLElement;
     footerNode: HTMLElement;
@@ -90,6 +91,10 @@ export default class Inner extends Component<InnerProps> {
 
             dom.setStyle(this.bodyNode, style);
         }
+    }
+
+    getDOMNode() {
+        return this._rootRef;
     }
 
     getNode(name: 'headerNode' | 'bodyNode' | 'footerNode', ref: HTMLDivElement) {
@@ -233,7 +238,15 @@ export default class Inner extends Component<InnerProps> {
         );
 
         return (
-            <div {...ariaProps} className={newClassName} {...others} dir={rtl ? 'rtl' : undefined}>
+            <div
+                {...ariaProps}
+                className={newClassName}
+                {...others}
+                dir={rtl ? 'rtl' : undefined}
+                ref={el => {
+                    this._rootRef = el;
+                }}
+            >
                 {header}
                 {body}
                 {footer}

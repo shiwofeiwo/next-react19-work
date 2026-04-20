@@ -44,6 +44,12 @@ export default class Inner extends Component<InnerProps> {
         locale: zhCN.Drawer,
     };
 
+    _rootRef: HTMLElement | null = null;
+
+    getDOMNode() {
+        return this._rootRef;
+    }
+
     renderHeader() {
         const { prefix, title, headerStyle } = this.props;
         const closeLink = this.renderCloseLink();
@@ -114,7 +120,15 @@ export default class Inner extends Component<InnerProps> {
         const body = this.renderBody();
 
         return (
-            <div {...ariaProps} className={newClassName} {...others} dir={rtl ? 'rtl' : undefined}>
+            <div
+                {...ariaProps}
+                className={newClassName}
+                {...others}
+                dir={rtl ? 'rtl' : undefined}
+                ref={el => {
+                    this._rootRef = el;
+                }}
+            >
                 {v2 ? (
                     <div className={`${prefix}drawer-content`}>
                         {header}

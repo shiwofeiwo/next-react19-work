@@ -506,31 +506,18 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     }
 
     getContentNode(): HTMLElement | null {
-        try {
-            const ref = this.contentRef;
-            if (!ref) return null;
-            if (ref instanceof Element) {
-                return ref as unknown as HTMLElement;
-            }
-            if (
-                'getDOMNode' in ref &&
-                typeof (ref as Record<string, unknown>).getDOMNode === 'function'
-            ) {
-                return (ref as { getDOMNode: () => HTMLElement }).getDOMNode();
-            }
-            // Class component instances without getDOMNode (React 19 migration):
-            // find the overlay-inner element scoped to this overlay's wrapper
-            const wrapper = this.getWrapperNode();
-            if (wrapper) {
-                return (
-                    (wrapper.querySelector(`.${this.props.prefix}overlay-inner`) as HTMLElement) ||
-                    null
-                );
-            }
-            return null;
-        } catch (err) {
-            return null;
+        const ref = this.contentRef;
+        if (!ref) return null;
+        if (ref instanceof Element) {
+            return ref as unknown as HTMLElement;
         }
+        if (typeof (ref as unknown as Record<string, unknown>).getDOMNode === 'function') {
+            return (ref as unknown as { getDOMNode: () => HTMLElement | null }).getDOMNode();
+        }
+        if (typeof (ref as unknown as Record<string, unknown>).current !== 'undefined') {
+            return (ref as unknown as React.RefObject<HTMLElement>).current;
+        }
+        return null;
     }
 
     getWrapperNode() {

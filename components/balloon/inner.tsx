@@ -41,6 +41,12 @@ class BalloonInner extends React.Component<BalloonInnerProps> {
         pure: false,
     };
 
+    _rootRef: HTMLElement | null = null;
+
+    getDOMNode() {
+        return this._rootRef;
+    }
+
     render() {
         const {
             prefix,
@@ -107,6 +113,9 @@ class BalloonInner extends React.Component<BalloonInnerProps> {
                 className={classes}
                 style={style}
                 {...obj.pickOthers(BALLOON_INNER_PROP_KEYS, others)}
+                ref={el => {
+                    this._rootRef = el;
+                }}
             >
                 <div className={`${prefix}balloon-arrow`}>
                     <div className={`${prefix}balloon-arrow-content`} />

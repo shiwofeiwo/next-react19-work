@@ -169,6 +169,19 @@ function config<
             return this._instance;
         }
 
+        getDOMNode(): Element | Text | null {
+            if (
+                this._instance &&
+                typeof (this._instance as unknown as Record<string, unknown>).getDOMNode ===
+                    'function'
+            ) {
+                return (
+                    this._instance as unknown as { getDOMNode: () => Element | Text | null }
+                ).getDOMNode();
+            }
+            return null;
+        }
+
         render() {
             const {
                 prefix,
