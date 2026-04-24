@@ -57,12 +57,28 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         ]);
         this.nodeRef = { current: null };
         this._originalRef = undefined;
-        this.mergedRef = (node: HTMLElement | null) => {
-            this.nodeRef.current = node;
+        // ref 回调可能收到 3 类值：DOM Element、实现 getDOMNode() 的 Class 组件实例、或
+        // 暴露 RefObject-like handle 的 useImperativeHandle 对象。React 19 移除 findDOMNode
+        // 后 Class 组件作为 Animate child 时 ref 指向 instance 而非 DOM，需要显式提取。
+        this.mergedRef = (node: unknown) => {
+            let dom: HTMLElement | null = null;
+            if (node instanceof Element) {
+                dom = node as HTMLElement;
+            } else if (
+                node &&
+                typeof (node as { getDOMNode?: unknown }).getDOMNode === 'function'
+            ) {
+                const extracted = (node as { getDOMNode: () => Element | null }).getDOMNode();
+                dom = extracted instanceof Element ? (extracted as HTMLElement) : null;
+            } else if (node && typeof node === 'object' && 'current' in node) {
+                const current = (node as { current: unknown }).current;
+                dom = current instanceof Element ? (current as HTMLElement) : null;
+            }
+            this.nodeRef.current = dom;
             if (typeof this._originalRef === 'function') {
-                this._originalRef(node);
+                this._originalRef(node as HTMLElement);
             } else if (this._originalRef && typeof this._originalRef === 'object') {
-                (this._originalRef as { current: HTMLElement | null }).current = node;
+                (this._originalRef as { current: unknown }).current = node;
             }
         };
         this.endListeners = {
@@ -164,7 +180,8 @@ export default class AnimateChild extends Component<AnimateChildProps> {
 
     removeClassNames(node: HTMLElement, names: NonNullable<AnimateChildProps['names']>) {
         Object.keys(names).forEach((key: keyof typeof names) => {
-            removeClass(node, names[key]!);
+            const cls = names[key];
+            if (cls) removeClass(node, cls);
         });
     }
 
@@ -175,8 +192,9 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         const { names } = this.props;
         if (names) {
             this.removeClassNames(node, names);
-            const className = isAppearing ? 'appear' : 'enter';
-            addClass(node, names[className]!);
+            const key = isAppearing ? 'appear' : 'enter';
+            const cls = names[key];
+            if (cls) addClass(node, cls);
         }
 
         const hook = isAppearing ? this.props.onAppear : this.props.onEnter;
@@ -190,8 +208,9 @@ export default class AnimateChild extends Component<AnimateChildProps> {
 
             const { names } = this.props;
             if (names) {
-                const className = isAppearing ? 'appearActive' : 'enterActive';
-                addClass(node, names[className]!);
+                const key = isAppearing ? 'appearActive' : 'enterActive';
+                const cls = names[key];
+                if (cls) addClass(node, cls);
             }
 
             const hook = isAppearing ? this.props.onAppearing : this.props.onEntering;
@@ -209,7 +228,7 @@ export default class AnimateChild extends Component<AnimateChildProps> {
                 ? [names.appear, names.appearActive]
                 : [names.enter, names.enterActive];
             classNames.forEach(className => {
-                removeClass(node, className!);
+                if (className) removeClass(node, className);
             });
         }
 
@@ -224,7 +243,7 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         const { names } = this.props;
         if (names) {
             this.removeClassNames(node, names);
-            addClass(node, names.leave!);
+            if (names.leave) addClass(node, names.leave);
         }
 
         this.props.onExit!(node);
@@ -236,8 +255,8 @@ export default class AnimateChild extends Component<AnimateChildProps> {
             if (!node) return;
 
             const { names } = this.props;
-            if (names) {
-                addClass(node, names.leaveActive!);
+            if (names && names.leaveActive) {
+                addClass(node, names.leaveActive);
             }
             this.props.onExiting!(node);
         }, 10);
@@ -250,7 +269,7 @@ export default class AnimateChild extends Component<AnimateChildProps> {
         const { names } = this.props;
         if (names) {
             [names.leave, names.leaveActive].forEach(className => {
-                removeClass(node, className!);
+                if (className) removeClass(node, className);
             });
         }
 

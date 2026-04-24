@@ -16,15 +16,13 @@ export const hasDOM =
  */
 export function hasClass(node?: Element | null, className?: string): boolean {
     /* istanbul ignore if */
-    if (!hasDOM || !node) {
+    if (!hasDOM || !node || !className) {
         return false;
     }
 
     if (node.classList) {
-        // @ts-expect-error fixme: className can be undefined, conflict with containes
         return node.classList.contains(className);
     } else {
-        // @ts-expect-error fixme: className can be undefined, conflict with containes
         return node.className.indexOf(className) > -1;
     }
 }
@@ -37,7 +35,7 @@ export function hasClass(node?: Element | null, className?: string): boolean {
  */
 export function addClass(node: Element | undefined | null, className: string, _force = false) {
     /* istanbul ignore if */
-    if (!hasDOM || !node) {
+    if (!hasDOM || !node || !className) {
         return;
     }
 
@@ -56,7 +54,7 @@ export function addClass(node: Element | undefined | null, className: string, _f
  */
 export function removeClass(node: Element | undefined | null, className: string, _force = false) {
     /* istanbul ignore if */
-    if (!hasDOM || !node) {
+    if (!hasDOM || !node || !className) {
         return;
     }
 

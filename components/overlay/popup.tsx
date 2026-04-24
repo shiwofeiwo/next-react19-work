@@ -290,15 +290,10 @@ class Popup extends Component<PopupProps, PopupState> {
             ...others
         } = this.props;
         let { container } = this.props;
-        const findTriggerNode = () => {
-            const ref = this.triggerRef;
-            if (!ref) return null;
-            if (ref instanceof Element) return ref;
-            if ('getDOMNode' in ref && typeof (ref as any).getDOMNode === 'function') {
-                return (ref as any).getDOMNode();
-            }
-            return null;
-        };
+        // 直接返回 triggerRef 原始值，DOM 解析交给 find-node.ts 统一处理。
+        // 这样能自动受益于 find-node 的全部解析能力（Element / RefObject / HasDOMNode 契约
+        // / 未来可能引入的 fiber 兜底），避免在此处重复实现一套不完整的解析逻辑。
+        const findTriggerNode = () => this.triggerRef;
         const safeNodes = Array.isArray(safeNode) ? [...safeNode] : [safeNode];
         safeNodes.unshift(findTriggerNode);
 

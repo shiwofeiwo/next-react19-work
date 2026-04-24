@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
+import { flushSync } from 'react-dom';
 import ConfigProvider from '../config-provider';
 import Animate from '../animate';
 import Message from '../message';
@@ -36,6 +37,9 @@ interface NotificationState {
 // let instance: Notification;
 let instance: InstanceType<typeof ConfigedNotification> | null;
 let mountContainer: HTMLDivElement | null = null;
+// 缓存 createRoot 结果，destroy 时复用同一 root 调 unmount —— 避免 React 19
+// "多个 root 挂到同一 container" 警告 + 旧 root cleanup 不触发导致 instance 无法清理
+let mountRoot: ReturnType<typeof createRoot> | null = null;
 let mounting = false;
 let waitOpens: NotificationOptions[] = [];
 function close(key: string) {
@@ -223,17 +227,31 @@ function open(options: NotificationOptions = {}) {
                 document.body.appendChild(div);
             }
 
-            const root = createRoot(div);
+            mountRoot = createRoot(div);
 
-            root.render(
-                <ConfigProvider {...ConfigProvider.getContext()}>
-                    <ConfigedNotification
-                        ref={ref => {
-                            instance = ref;
-                        }}
-                    />
-                </ConfigProvider>
-            );
+            // React 19 createRoot().render() 是异步调度（concurrent by default）。
+            // 命令式 API Notification.open(...) 期望调用后立即完成 mount（测试场景尤其依赖这点），
+            // 用 flushSync 强制同步 commit，避免测试在 React 完成 render 前就断言 DOM。
+            // 和 components/message/toast.tsx 的 flushSync 是同一 pattern。
+            flushSync(() => {
+                mountRoot!.render(
+                    <ConfigProvider {...ConfigProvider.getContext()}>
+                        <ConfigedNotification
+                            ref={ref => {
+                                instance = ref;
+                            }}
+                        />
+                    </ConfigProvider>
+                );
+            });
+
+            // flushSync 结束后 instance 已经通过 ref 回调赋值。
+            // 消费在 mount 期间积压的 waitOpens（原逻辑 push 后从不消费 —— bug）。
+            if (instance) {
+                const pending = waitOpens.slice();
+                waitOpens = [];
+                pending.forEach(opt => instance!.open(opt));
+            }
         }
 
         return options.key;
@@ -251,11 +269,18 @@ function destroy() {
     if (!instance) return;
     const mountNode = mountContainer;
     if (mountNode) {
-        const root = createRoot(mountNode as Element);
-        root.unmount();
+        // 复用 open() 里缓存的 root 调 unmount；不再 createRoot(mountNode) 二次创建
+        // （React 19 下会警告「多个 root 挂到同一 container」且不触发原 root cleanup）
+        if (mountRoot) {
+            mountRoot.unmount();
+            mountRoot = null;
+        }
         mountNode.parentNode?.removeChild(mountNode);
         mountContainer = null;
     }
+    instance = null;
+    mounting = false;
+    waitOpens = [];
 }
 
 interface objectAny {
