@@ -107,8 +107,7 @@ const EventHandlers = {
 
         const curLeft = getTrackLeft({
             slideIndex: this.state.currentSlide!,
-            // @ts-expect-error 这里拿 ref 的方式是不正确的，应该是 this.track
-            trackRef: this.refs.track,
+            trackRef: this.track!,
             ...this.props,
             ...this.state,
         });

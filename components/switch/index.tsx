@@ -33,6 +33,8 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
 
     readonly props: SwitchProps & Required<Pick<SwitchProps, keyof typeof Switch.defaultProps>>;
 
+    private _rootRef: HTMLDivElement | HTMLParagraphElement | null = null;
+
     constructor(props: SwitchProps) {
         super(props);
 
@@ -42,6 +44,10 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
         this.state = {
             checked,
         };
+    }
+
+    getDOMNode(): HTMLDivElement | HTMLParagraphElement | null {
+        return this._rootRef;
     }
 
     onChange(ev: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) {
@@ -124,14 +130,26 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
 
             if (typeof renderPreview === 'function') {
                 return (
-                    <div className={previewCls} {...others}>
+                    <div
+                        className={previewCls}
+                        {...others}
+                        ref={el => {
+                            this._rootRef = el;
+                        }}
+                    >
                         {renderPreview(checked, this.props)}
                     </div>
                 );
             }
 
             return (
-                <p className={previewCls} {...others}>
+                <p
+                    className={previewCls}
+                    {...others}
+                    ref={el => {
+                        this._rootRef = el;
+                    }}
+                >
                     {children || locale[status]}
                 </p>
             );
@@ -146,6 +164,9 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
                 className={classes}
                 {...attrs}
                 aria-checked={checked}
+                ref={el => {
+                    this._rootRef = el;
+                }}
             >
                 <div className={`${prefix}switch-btn`}>
                     {loading && <Icon type="loading" className={`${prefix}switch-inner-icon`} />}

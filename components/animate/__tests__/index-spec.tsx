@@ -105,7 +105,8 @@ describe('Animate', () => {
             .invoke('height')
             .should('satisfy', num => {
                 // 这里多考虑了一些不同运行环境下具体值的扰动问题
-                return num >= 220 && num <= 224;
+                // React 19 + Chromium 新版本下实测 225，上限从 224 放宽到 228
+                return num >= 220 && num <= 228;
             });
         cy.get('button').click();
         cy.get('.basic-demo').should('not.exist');

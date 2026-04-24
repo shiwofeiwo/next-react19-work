@@ -1,4 +1,5 @@
 import { isValidElement, cloneElement, type ReactElement, type ReactInstance } from 'react';
+import { isProduction } from '../util/env';
 import { type ScrollToFirstErrorOption } from './types';
 
 export function cloneAndAddKey(element: ReactElement<any>) {
@@ -21,7 +22,22 @@ export function scrollToFirstError({ errorsGroup, options, instance }: ScrollToF
                         ? (ref as HTMLElement)
                         : ((ref as any)?.getDOMNode?.() as HTMLElement);
                 if (!node) {
-                    return;
+                    // 原版失败即 return 会跳过后续字段；改为 continue 以便定位到其他错误字段
+                    /* eslint-disable no-console */
+                    if (
+                        !isProduction() &&
+                        typeof console !== 'undefined' &&
+                        typeof console.warn === 'function'
+                    ) {
+                        console.warn(
+                            'Warning: [Form.scrollToFirstError] field instance has no resolvable DOM. ' +
+                                'Class components registered as Field must implement getDOMNode() ' +
+                                'since React 19 removed ReactDOM.findDOMNode. Skipping field:',
+                            i
+                        );
+                    }
+                    /* eslint-enable no-console */
+                    continue;
                 }
                 const top = node.offsetTop;
                 if (firstTop === undefined || firstTop > top) {

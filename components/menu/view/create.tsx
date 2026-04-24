@@ -30,7 +30,7 @@ class ContextMenu extends Component<CreateMenuProps, ContextMenuState> {
     };
 
     overlay: ComponentRef<typeof Overlay> | null | undefined;
-    popupNodes!: HTMLElement[];
+    popupNodes: HTMLElement[] = [];
 
     constructor(props: CreateMenuProps) {
         super(props);
@@ -67,8 +67,19 @@ class ContextMenu extends Component<CreateMenuProps, ContextMenuState> {
     };
 
     handleOverlayOpen() {
-        // @ts-expect-error 此处 overlay 类型不对，Overlay 完成改造后可去除该注释
-        this.popupNodes = this.overlay!.getInstance().getContent().getInstance().popupNodes;
+        // 遍历 getInstance()/getContent() 链拿到内层 Menu 实例上的 popupNodes。
+        // React 19 迁移后，cloneElement + class component ref 的链路可能不稳定——
+        // 中间任一节点拿不到实例时，退化为空数组（handleOverlayClose 仅用它做包含性检查，空数组退化为"点外部都算外部"，语义上等同无 popup 子菜单时的行为）。
+        const overlayInstance = this.overlay?.getInstance?.();
+        const contentRef = overlayInstance?.getContent?.();
+        const innerMenu =
+            contentRef &&
+            typeof (contentRef as { getInstance?: unknown }).getInstance === 'function'
+                ? (
+                      contentRef as { getInstance: () => { popupNodes?: HTMLElement[] } }
+                  ).getInstance()
+                : (contentRef as { popupNodes?: HTMLElement[] } | null);
+        this.popupNodes = innerMenu?.popupNodes ?? [];
         const { overlayProps } = this.props;
         if (overlayProps && overlayProps.onOpen) {
             overlayProps.onOpen();

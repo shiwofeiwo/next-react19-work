@@ -10,7 +10,7 @@ describe('Breadcrumb A11y', () => {
     it('should not have any violations for breadcrumb items', async () => {
         await testReact(
             <Breadcrumb>
-                <Breadcrumb.Item link="javascript:void(0);">Home</Breadcrumb.Item>
+                <Breadcrumb.Item link="#">Home</Breadcrumb.Item>
                 <Breadcrumb.Item>
                     T-shirts&nbsp; <b>78,999</b> Results
                 </Breadcrumb.Item>

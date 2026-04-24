@@ -39,6 +39,7 @@ class Nav extends React.Component<NavProps, NavState> {
     nextBtn: HTMLButtonElement | null;
     slideTimer: number;
     updateTimer: number;
+    private _unmounted = false;
 
     constructor(props: NavProps) {
         super(props);
@@ -49,12 +50,29 @@ class Nav extends React.Component<NavProps, NavState> {
     }
 
     componentDidMount() {
-        if (!this.props.animation) {
-            this.initialSettings();
-        }
-
         this.computeExtraWidth();
         events.on(window, 'resize', this.onWindowResized);
+
+        // React 19 下 ref 在 commit 完成后即就绪，animation 分支不再需要跳过 initialSettings。
+        // 用 requestAnimationFrame 等一帧保证 DOM 完成布局再测量（scrollWidth / offsetWidth）。
+        const runInitial = () => {
+            if (this._unmounted) return;
+            // 兜底：navRefHandler 遇到 <Animate> 时无法拿到底层 <ul>（Animate 是 class，无 getDOMNode；
+            // TransitionGroup 也不 forward ref），导致 this.nav 未赋值。从 scroller 子树查询补上。
+            if (!this.nav && this.scroller) {
+                const { prefix } = this.props;
+                const foundNav = this.scroller.querySelector<HTMLUListElement>(
+                    `.${prefix}tabs-nav`
+                );
+                if (foundNav) this.nav = foundNav;
+            }
+            this.initialSettings();
+        };
+        if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+            window.requestAnimationFrame(runInitial);
+        } else {
+            runInitial();
+        }
     }
 
     componentDidUpdate(prevProps: NavProps) {
@@ -75,6 +93,7 @@ class Nav extends React.Component<NavProps, NavState> {
     }
 
     componentWillUnmount() {
+        this._unmounted = true;
         events.off(window, 'resize', this.onWindowResized);
     }
 
@@ -250,6 +269,11 @@ class Nav extends React.Component<NavProps, NavState> {
 
     getDropdownItems({ excessMode, tabs }: NavProps) {
         if (excessMode !== 'dropdown') {
+            return;
+        }
+
+        // React 19 下 ref 可能晚于 componentDidUpdate 挂载，this.nav / this.wrapper 偶尔为 undefined
+        if (!this.wrapper || !this.nav) {
             return;
         }
 

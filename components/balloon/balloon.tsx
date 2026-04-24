@@ -344,6 +344,7 @@ class Balloon extends React.Component<BalloonProps, BalloonState> {
 
         if (v2) {
             delete otherProps.align;
+            delete otherProps.offset;
             delete otherProps.shouldUpdatePosition;
             delete otherProps.needAdjust;
             delete otherProps.safeId;

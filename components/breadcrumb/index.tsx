@@ -9,12 +9,6 @@ import type { BreadcrumbProps } from './types';
 
 export type { BreadcrumbProps, ItemProps } from './types';
 
-interface Child {
-    type: {
-        _typeMark: string;
-    };
-}
-
 interface BreadcrumbState {
     maxNode: number;
     prevMaxNode?: BreadcrumbProps['maxNode'];
@@ -42,6 +36,7 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
         this.state = {
             maxNode: props.maxNode === 'auto' ? 100 : props.maxNode!,
         };
+        this.validateChildren(props.children);
     }
 
     static getDerivedStateFromProps(props: BreadcrumbProps, state: BreadcrumbState) {
@@ -66,6 +61,31 @@ class Breadcrumb extends Component<BreadcrumbProps, BreadcrumbState> {
 
     componentWillUnmount() {
         events.off(window, 'resize', this.computeMaxNode);
+    }
+
+    validateChildren(children: BreadcrumbProps['children']) {
+        Children.forEach(children, (child: ReactElement<unknown> | boolean | null) => {
+            if (child === null || child === undefined || typeof child === 'boolean') {
+                return;
+            }
+            const type = (child as { type?: { _typeMark?: string } }).type;
+            const isItem =
+                type &&
+                ['function', 'object'].indexOf(typeof type) > -1 &&
+                type._typeMark === 'breadcrumb_item';
+            if (!isItem) {
+                try {
+                    throw new Error("Breadcrumb's children must be Breadcrumb.Item!");
+                } catch (err) {
+                    console.error(
+                        'Warning: Failed %s type: %s%s',
+                        'prop',
+                        (err as Error).message,
+                        ''
+                    );
+                }
+            }
+        });
     }
 
     computeMaxNode = () => {

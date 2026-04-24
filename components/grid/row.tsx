@@ -29,6 +29,12 @@ const ROW_PROP_KEYS = [
     'justify',
     'hidden',
     'component',
+    // ConfigProvider 通用 props —— 不应泄漏到 DOM 属性
+    'device',
+    'locale',
+    'popupContainer',
+    'errorBoundary',
+    'defaultPropsConfig',
 ];
 
 /**

@@ -81,6 +81,10 @@ class Tag extends Component<TagProps, { visible: boolean }> {
         this.__destroyed = true;
     }
 
+    getDOMNode(): HTMLDivElement | null {
+        return this.tagNode;
+    }
+
     handleClose(from: CloseArea) {
         const { animation, onClose } = this.props;
         const hasAnimation = support.animation && animation;

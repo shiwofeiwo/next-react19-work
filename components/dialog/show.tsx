@@ -243,26 +243,25 @@ const ConfigModal = ConfigProvider.config(Modal, { componentName: 'Dialog' });
  */
 export const show = (config: ShowConfig = {}) => {
     const container = document.createElement('div');
-    const unmount = () => {
-        if (config.afterClose) {
-            config.afterClose();
-        }
-        const root = createRoot(container);
-        root.unmount();
-        container.parentNode?.removeChild(container);
-    };
-
     document.body.appendChild(container);
     let newContext = config.contextConfig;
     if (!newContext) newContext = ConfigProvider.getContext();
 
-    let instance: InstanceType<typeof ConfigModal> | null,
-        myRef: InstanceType<typeof ConfigModal> | null;
+    let myRef: InstanceType<typeof ConfigModal> | null;
 
     const root = createRoot(container);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const AnyConfigModal = ConfigModal as any;
+
+    const unmount = () => {
+        if (config.afterClose) {
+            config.afterClose();
+        }
+        // Use the existing root that was created above, not create a new one
+        root.unmount();
+        container.parentNode?.removeChild(container);
+    };
 
     root.render(
         <ConfigProvider {...newContext}>
@@ -278,7 +277,7 @@ export const show = (config: ShowConfig = {}) => {
 
     return {
         hide: () => {
-            const inc = instance && instance.getInstance();
+            const inc = myRef && myRef.getInstance();
             inc && inc.close();
         },
     };

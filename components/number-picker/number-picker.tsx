@@ -74,6 +74,11 @@ class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState>
     static displayName = 'NumberPicker';
 
     inputRef: React.ComponentRef<typeof Input> | null;
+    private _rootRef: HTMLSpanElement | HTMLDivElement | HTMLParagraphElement | null = null;
+
+    getDOMNode(): HTMLSpanElement | HTMLDivElement | HTMLParagraphElement | null {
+        return this._rootRef;
+    }
 
     constructor(props: NumberPickerProps) {
         super(props);
@@ -600,13 +605,27 @@ class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState>
         if (isPreview) {
             if (typeof renderPreview === 'function') {
                 return (
-                    <div {...others} style={style} className={previewCls}>
+                    <div
+                        {...others}
+                        style={style}
+                        className={previewCls}
+                        ref={el => {
+                            this._rootRef = el;
+                        }}
+                    >
                         {renderPreview(this.getDisplayValue(), this.props)}
                     </div>
                 );
             }
             return (
-                <p {...others} style={style} className={previewCls}>
+                <p
+                    {...others}
+                    style={style}
+                    className={previewCls}
+                    ref={el => {
+                        this._rootRef = el;
+                    }}
+                >
                     {this.getDisplayValue()}
                     &nbsp;{innerAfter}
                 </p>
@@ -614,7 +633,15 @@ class NumberPicker extends React.Component<NumberPickerProps, NumberPickerState>
         }
 
         return (
-            <span className={cls} style={style} dir={rtl ? 'rtl' : undefined} {...dataAttrs}>
+            <span
+                className={cls}
+                style={style}
+                dir={rtl ? 'rtl' : undefined}
+                {...dataAttrs}
+                ref={el => {
+                    this._rootRef = el;
+                }}
+            >
                 <Input
                     {...others}
                     hasClear={false}

@@ -14,9 +14,11 @@ function formatViolations(violations: Result[], verbose: boolean = false) {
         formatted = violations.map(v => {
             return {
                 id: v.id,
+                impact: v.impact,
                 description: v.description,
                 helpUrl: v.helpUrl,
                 nodes: v.nodes.map(node => ({
+                    target: node.target,
                     html: node.html,
                     failureSummary: node.failureSummary,
                 })),
@@ -24,6 +26,19 @@ function formatViolations(violations: Result[], verbose: boolean = false) {
         });
     }
     return JSON.stringify(formatted, null, 2);
+}
+
+function summarizeViolations(violations: Result[]) {
+    if (!violations.length) return 'no violations';
+    return violations
+        .map(v => {
+            const impact = v.impact || 'unknown';
+            const targets = v.nodes
+                .map(n => (Array.isArray(n.target) ? n.target.join(' > ') : String(n.target)))
+                .join('; ');
+            return `[${impact}] ${v.id}: ${v.description} (nodes: ${targets}) — help: ${v.helpUrl}`;
+        })
+        .join('\n');
 }
 
 function delay(duration: number) {
@@ -60,7 +75,13 @@ export const test = function (selector: ElementContext, options: A11yTestOptions
 
     return Axe.run(selector, { rules: options.rules })
         .catch(error => {
-            assert(!error);
+            // 原本是 `assert(!error)`——默认 message 为空，失败时输出 "Unspecified AssertionError"，
+            // 遮蔽真实的 axe-core 异常信息。改为显式 throw 保留原错误。
+            throw new Error(
+                `axe-core failed to run on selector ${JSON.stringify(selector)}: ${
+                    error instanceof Error ? `${error.name}: ${error.message}` : String(error)
+                }`
+            );
         })
         .then((results: AxeResults) => {
             if (options.debug) {
@@ -72,16 +93,23 @@ export const test = function (selector: ElementContext, options: A11yTestOptions
             if (results.violations.length) {
                 // eslint-disable-next-line no-console
                 console.error(formatViolations(results.violations));
+                throw new Error(
+                    `axe-core violations (${results.violations.length}):\n${summarizeViolations(
+                        results.violations
+                    )}`
+                );
             }
-
-            assert(results.violations.length === 0);
 
             if (options.incomplete) {
                 if (results.incomplete.length) {
                     // eslint-disable-next-line no-console
                     console.error(formatViolations(results.incomplete));
+                    throw new Error(
+                        `axe-core incomplete checks (${
+                            results.incomplete.length
+                        }):\n${summarizeViolations(results.incomplete)}`
+                    );
                 }
-                assert(results.incomplete.length === 0);
             }
         });
 };
@@ -115,7 +143,7 @@ export const mountReact = function (node: ReactElement<any>, id = A11Y_ROOT_ID) 
  */
 export const testReact = async function (
     node: ReactElement<any>,
-    options: A11yTestOptions & { delay?: number } = {}
+    options: A11yTestOptions & { delay?: number } = { delay: 1 }
 ) {
     await new Promise<unknown>(resolve => {
         mountReact(node, A11Y_ROOT_ID).then(resolve);

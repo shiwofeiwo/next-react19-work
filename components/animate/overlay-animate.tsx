@@ -3,7 +3,7 @@ import { Transition, type TransitionStatus } from 'react-transition-group';
 import classNames from 'classnames';
 import type { OverlayAnimateProps } from './types';
 
-const OverlayAnimate = (props: OverlayAnimateProps) => {
+const OverlayAnimate = React.forwardRef<HTMLElement, OverlayAnimateProps>((props, externalRef) => {
     const {
         animation,
         visible,
@@ -27,6 +27,18 @@ const OverlayAnimate = (props: OverlayAnimateProps) => {
     } = props;
 
     const nodeRef = React.useRef<HTMLElement>(null);
+
+    const handleRef = React.useCallback(
+        (node: HTMLElement) => {
+            nodeRef.current = node;
+            if (typeof externalRef === 'function') {
+                externalRef(node);
+            } else if (externalRef) {
+                (externalRef as React.RefObject<HTMLElement | null>).current = node;
+            }
+        },
+        [externalRef]
+    );
 
     // Wrap callbacks to inject nodeRef.current as first argument,
     // keeping the public API signature (node, ...) unchanged.
@@ -120,7 +132,7 @@ const OverlayAnimate = (props: OverlayAnimateProps) => {
                 const childProps: Record<string, unknown> = {
                     ...others,
                     className: cls,
-                    ref: nodeRef,
+                    ref: handleRef,
                 };
 
                 if (style && children.props && children.props.style) {
@@ -131,6 +143,8 @@ const OverlayAnimate = (props: OverlayAnimateProps) => {
             }}
         </Transition>
     );
-};
+});
+
+OverlayAnimate.displayName = 'OverlayAnimate';
 
 export default OverlayAnimate;

@@ -107,6 +107,10 @@ class MenuButton extends React.Component<MenuButtonProps, MenuButtonState> {
         }
     };
 
+    getDOMNode(): HTMLElement | null {
+        return this.containerRef;
+    }
+
     onPopupVisibleChange = (visible: boolean, type: string) => {
         if (!('visible' in this.props)) {
             this.setState({

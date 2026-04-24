@@ -7,12 +7,31 @@ import type { CommonProps } from '../util';
 export type AnimationObjectType = Record<'in' | 'out', string>;
 
 /**
+ * React 19 已移除 ReactDOM.findDOMNode。作为 Overlay/Balloon/Tooltip/Popup 的 target 使用的
+ * Class 组件必须显式实现 getDOMNode()，由 find-node.ts 调用以获取组件根 DOM 节点。
+ */
+export interface HasDOMNode {
+    getDOMNode(): Element | Text | null;
+}
+
+/**
  * @api PropTarget
  */
 export type Target<T = unknown> =
-    | React.ReactInstance
+    | HasDOMNode
+    | React.RefObject<Element | Text | Node | null>
     | string
-    | ((param?: T) => React.ReactInstance | Element | Text | Node | null | void | undefined)
+    | ((
+          param?: T
+      ) =>
+          | HasDOMNode
+          | React.RefObject<Element | Text | Node | null>
+          | Element
+          | Text
+          | Node
+          | null
+          | void
+          | undefined)
     | Element
     | Node
     | Text

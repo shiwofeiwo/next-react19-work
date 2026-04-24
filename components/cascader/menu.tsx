@@ -12,6 +12,10 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
         this.scrollToSelectedItem();
     }
 
+    getDOMNode() {
+        return this.menuEl;
+    }
+
     scrollToSelectedItem() {
         const { prefix, useVirtual, children } = this.props;
         // FIXME 这里的判断很容易报错
@@ -31,7 +35,7 @@ export default class CascaderMenu extends Component<CascaderMenuProps> {
             setTimeout(() => instance.scrollTo(selectedIndex), 0);
         } else {
             const itemSelector = `.${prefix}menu-item`;
-            const menu = (this.menuEl as any)?.getDOMNode() as HTMLElement;
+            const menu = this.menuEl;
             const targetItem = menu.querySelectorAll(itemSelector)[selectedIndex] as HTMLElement;
             if (targetItem) {
                 menu.scrollTop =

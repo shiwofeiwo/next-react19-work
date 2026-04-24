@@ -409,6 +409,9 @@ export class Menu extends Component<MenuProps, MenuState> {
     menuHeader: HTMLLIElement | null;
     menuFooter: HTMLLIElement | null;
     menuItemSizes: number[];
+    // 防死循环兜底：adjustChildrenWidth 连续调用的次数上限，超过则停止，避免 React 19 下
+    // 在 componentDidUpdate → adjustChildrenWidth → setState 的环上无限递归
+    private _adjustIterations = 0;
 
     constructor(props: MenuProps) {
         super(props);
@@ -487,6 +490,16 @@ export class Menu extends Component<MenuProps, MenuState> {
             return;
         }
 
+        // 第二级防护：连续 adjust 超过 5 次不再 setState，避免无限循环
+        if (this._adjustIterations > 5) {
+            return;
+        }
+        this._adjustIterations++;
+        // 异步重置计数器，让下次真正的 DOM 变化（resize、children 增删）可以重新触发
+        Promise.resolve().then(() => {
+            this._adjustIterations = 0;
+        });
+
         let children: [] | HTMLCollection = [],
             spaceWidth: number;
 
@@ -547,6 +560,12 @@ export class Menu extends Component<MenuProps, MenuState> {
 
         if (lastVisibleIndex >= totalLen - 1) {
             dom.setStyle(moreNode, 'display', 'none');
+        }
+
+        // 防止 componentDidUpdate → adjustChildrenWidth → setState(同值) 的死循环。
+        // React 19 commit 时机下，若 lastVisibleIndex 已收敛到稳定值，不再触发额外 setState。
+        if (this.state.lastVisibleIndex === lastVisibleIndex) {
+            return;
         }
 
         this.setState({

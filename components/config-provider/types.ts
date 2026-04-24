@@ -185,6 +185,12 @@ export interface ConfiguredComponent<P, R> extends Component<P> {
      * 获取到真实的组件 ref 对象的函数
      */
     getInstance(): R;
+    /**
+     * 获取被包裹组件的根 DOM 节点。React 19 已移除 ReactDOM.findDOMNode，
+     * 此方法代理到被包裹组件的 getDOMNode() 实现（若内部组件未实现则返回 null）。
+     * 参见 components/overlay/utils/find-node.ts
+     */
+    getDOMNode(): Element | Text | null;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot, type Root } from 'react-dom/client';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import ConfigProvider from '../config-provider';
@@ -75,7 +75,22 @@ const MessageWrapper = (props: MessageWrapperProps) => {
 const ConfigedMessages = ConfigProvider.config(MessageWrapper);
 
 let messageRootNode: HTMLDivElement | null = null;
+let messageRoot: Root | null = null;
 let messageList: MessageWrapperProps['dataSource'] = [];
+
+// 缓存同一个 container 上的 createRoot 结果——每次都 createRoot 会让上一次 mount
+// 变成孤儿 root（React 19 警告 + 组件 lifecycle 不触发，导致 Message 无法正确 unmount）
+function renderMessages() {
+    if (!messageRootNode) return;
+    if (!messageRoot) {
+        messageRoot = createRoot(messageRootNode);
+    }
+    messageRoot.render(
+        <ConfigProvider {...ConfigProvider.getContext()}>
+            <ConfigedMessages dataSource={messageList} />
+        </ConfigProvider>
+    );
+}
 
 const createMessage = (props: MessageQuickProps & { key?: string }) => {
     const { key = guid('message-'), ...others } = props;
@@ -98,13 +113,7 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
         messageList.shift();
     }
 
-    const root = createRoot(messageRootNode!);
-
-    root.render(
-        <ConfigProvider {...ConfigProvider.getContext()}>
-            <ConfigedMessages dataSource={messageList} />
-        </ConfigProvider>
-    );
+    renderMessages();
 
     return {
         key,
@@ -116,14 +125,7 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
             if (idx > -1) {
                 typeof item.onClose === 'function' && item.onClose();
                 messageList.splice(idx, 1);
-
-                const root = createRoot(messageRootNode!);
-
-                root.render(
-                    <ConfigProvider {...ConfigProvider.getContext()}>
-                        <ConfigedMessages dataSource={messageList} />
-                    </ConfigProvider>
-                );
+                renderMessages();
             }
         },
     };
@@ -132,20 +134,14 @@ const createMessage = (props: MessageQuickProps & { key?: string }) => {
 function close(key?: string) {
     if (key) {
         const index = messageList.findIndex(item => item.key === key);
-        messageList.splice(index, 1);
+        if (index > -1) {
+            messageList.splice(index, 1);
+        }
     } else {
         messageList = [];
     }
 
-    if (messageRootNode) {
-        const root = createRoot(messageRootNode);
-
-        root.render(
-            <ConfigProvider {...ConfigProvider.getContext()}>
-                <ConfigedMessages dataSource={messageList} />
-            </ConfigProvider>
-        );
-    }
+    renderMessages();
 }
 
 function handleConfig(config: OpenProps, type?: MessageQuickProps['type']) {
@@ -173,12 +169,14 @@ function open(type?: MessageQuickProps['type']) {
 
 function destory() {
     if (!messageRootNode) return;
-    if (messageRootNode) {
-        const root = createRoot(messageRootNode);
-        root.unmount();
-        messageRootNode.parentNode!.removeChild(messageRootNode);
-        messageRootNode = null;
+    // 复用缓存的 root；从未创建过就不用再 unmount
+    if (messageRoot) {
+        messageRoot.unmount();
+        messageRoot = null;
     }
+    messageRootNode.parentNode?.removeChild(messageRootNode);
+    messageRootNode = null;
+    messageList = [];
 }
 
 export default {

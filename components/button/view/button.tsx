@@ -72,6 +72,10 @@ export default class Button extends Component<ButtonProps> {
         this.button = button;
     };
 
+    getDOMNode(): HTMLButtonElement | HTMLAnchorElement | null {
+        return (this.button as HTMLButtonElement | HTMLAnchorElement | null) ?? null;
+    }
+
     render() {
         const {
             prefix,

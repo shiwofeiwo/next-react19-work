@@ -1,4 +1,4 @@
-import { Component, Children, cloneElement, isValidElement } from 'react';
+import React, { Component, Children, cloneElement, isValidElement } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import { func, dom, events } from '../util';
 import position from './utils/position';
@@ -33,6 +33,7 @@ export default class Position extends Component<PositionProps> {
     updateCount = 0;
     resizeTimeout: number;
     containerRef: HTMLElement | null = null;
+    private existingChildRef: React.Ref<unknown> | null = null;
 
     constructor(props: PositionProps) {
         super(props);
@@ -65,6 +66,17 @@ export default class Position extends Component<PositionProps> {
 
             this.setPosition();
             this.shouldUpdatePosition = false;
+        }
+
+        // handleChildRef 是稳定引用，React 19 不会因为 re-render 重新 attach ref。
+        // 如果 parent 在两次 render 之间换了新的 child ref，此处手动同步，
+        // 避免旧 ref 仍指向当前节点、新 ref 始终为 null。
+        const prevRef = Position.readChildRef(prevProps);
+        const nextRef = Position.readChildRef(this.props);
+        if (prevRef !== nextRef) {
+            Position.applyRef(prevRef, null);
+            this.existingChildRef = nextRef;
+            Position.applyRef(nextRef, this.containerRef);
         }
     }
 
@@ -190,42 +202,46 @@ export default class Position extends Component<PositionProps> {
         }, 200);
     }
 
+    // 稳定引用：每次 render 都是同一个函数，React 19 不会因 callback identity 变化
+    // 而在 re-render 时 fire cleanup，cleanup 仅在 unmount 时触发一次。
+    private handleChildRef = (c: unknown): (() => void) => {
+        if (c instanceof Element) {
+            this.containerRef = c as HTMLElement;
+        } else if (c && typeof (c as { getDOMNode?: unknown }).getDOMNode === 'function') {
+            this.containerRef = (c as { getDOMNode: () => HTMLElement }).getDOMNode();
+        } else if (c && typeof c === 'object' && 'current' in c) {
+            // 兼容部分组件通过 useImperativeHandle 暴露 RefObject-like handle 的场景
+            this.containerRef = (c as React.RefObject<HTMLElement>).current;
+        }
+
+        Position.applyRef(this.existingChildRef, c);
+
+        return () => {
+            this.containerRef = null;
+            Position.applyRef(this.existingChildRef, null);
+        };
+    };
+
+    private static readChildRef(props: PositionProps): React.Ref<unknown> | null {
+        const child = Children.only(props.children);
+        if (!isValidElement(child)) return null;
+        return (child as { props?: { ref?: React.Ref<unknown> } }).props?.ref ?? null;
+    }
+
+    private static applyRef(ref: React.Ref<unknown> | null, value: unknown) {
+        if (typeof ref === 'function') {
+            ref(value);
+        } else if (ref && typeof ref === 'object' && 'current' in ref) {
+            (ref as React.MutableRefObject<unknown>).current = value;
+        }
+    }
+
     render() {
         const child = Children.only(this.props.children);
         if (isValidElement(child)) {
-            const existingRef = (child as any).props?.ref;
-            return cloneElement<any>(child, {
-                ref: (c: any) => {
-                    if (c instanceof Element) {
-                        this.containerRef = c as HTMLElement;
-                    } else if (c && 'getDOMNode' in c && typeof c.getDOMNode === 'function') {
-                        this.containerRef = c.getDOMNode();
-                    }
-
-                    if (typeof existingRef === 'function') {
-                        existingRef(c);
-                    } else if (
-                        existingRef &&
-                        typeof existingRef === 'object' &&
-                        'current' in existingRef
-                    ) {
-                        (existingRef as React.RefObject<any>).current = c;
-                    }
-
-                    return () => {
-                        this.containerRef = null;
-                        if (typeof existingRef === 'function') {
-                            existingRef(null);
-                        } else if (
-                            existingRef &&
-                            typeof existingRef === 'object' &&
-                            'current' in existingRef
-                        ) {
-                            (existingRef as React.RefObject<any>).current = null;
-                        }
-                    };
-                },
-            });
+            // 每次 render 都刷新 existingChildRef，供稳定的 handleChildRef 读取。
+            this.existingChildRef = Position.readChildRef(this.props);
+            return cloneElement<any>(child, { ref: this.handleChildRef });
         }
         return child;
     }

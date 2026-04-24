@@ -31,6 +31,9 @@ const TRANSFER_PROP_KEYS = [
     'device',
     'children',
     'popupContainer',
+    // React element-level keys that must not be in {...others} or they override explicit className / style
+    'className',
+    'style',
     // Transfer-specific keys
     'mode',
     'dataSource',

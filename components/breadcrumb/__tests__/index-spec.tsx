@@ -41,13 +41,14 @@ describe('Item', () => {
 
 describe('Breadcrumb', () => {
     it("should throw error if you don't pass Item as children", () => {
-        const spy = cy.spy(console, 'error');
+        cy.spy(console, 'error').as('consoleError');
         cy.mount(
             <Breadcrumb>
                 <div>Invalid Child</div>
             </Breadcrumb>
         );
-        expect(spy).to.have.been.calledWithMatch(
+        cy.get('@consoleError').should(
+            'have.been.calledWithMatch',
             /Warning: Failed %s type: %s%s/,
             'prop',
             "Breadcrumb's children must be Breadcrumb.Item!"
@@ -167,30 +168,21 @@ describe('Breadcrumb', () => {
     });
 
     it('should support onClick', () => {
-        cy.wrap(false).as('isClicked');
+        const onClickSpy = cy.spy().as('onClickSpy');
         cy.mount(
             <Breadcrumb
                 maxNode={2}
                 showHiddenItems
                 popupProps={{ triggerType: 'click', visible: true }}
             >
-                <Breadcrumb.Item link="javascript:void(0);">Home 1</Breadcrumb.Item>
-                <Breadcrumb.Item
-                    link="javascript:void(0);"
-                    onClick={() => {
-                        cy.get('@isClicked').then(isClicked => {
-                            if (!isClicked) {
-                                cy.wrap(true).as('isClicked');
-                            }
-                        });
-                    }}
-                >
+                <Breadcrumb.Item link="#">Home 1</Breadcrumb.Item>
+                <Breadcrumb.Item link="#" onClick={onClickSpy}>
                     Whatever 2
                 </Breadcrumb.Item>
-                <Breadcrumb.Item link="javascript:void(0);">All Categories 3</Breadcrumb.Item>
+                <Breadcrumb.Item link="#">All Categories 3</Breadcrumb.Item>
             </Breadcrumb>
         );
         cy.contains('Whatever 2').click();
-        cy.get('@isClicked').should('be.true');
+        cy.get('@onClickSpy').should('have.been.calledOnce');
     });
 });

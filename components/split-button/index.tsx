@@ -139,6 +139,10 @@ class SplitButton extends React.Component<SplitButtonProps> {
                 : ((ref as any)?.getDOMNode?.() as HTMLDivElement);
     };
 
+    getDOMNode(): HTMLDivElement | null {
+        return this.wrapper;
+    }
+
     render() {
         const {
             prefix,

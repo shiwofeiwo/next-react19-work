@@ -1,4 +1,4 @@
-import React, { Component, type ReactElement, type MouseEvent, type CSSProperties } from 'react';
+import React, { forwardRef, type ReactElement, type MouseEvent, type CSSProperties } from 'react';
 import classNames from 'classnames';
 import { dom } from '../../util';
 import type { OptionProps, TrackProps } from '../types';
@@ -186,21 +186,16 @@ const renderSlides = (specProps: TrackProps) => {
     }
 };
 
-export default class Track extends Component<TrackProps> {
-    static defaultProps = {
-        prefix: 'next-',
-    };
+const Track = forwardRef<HTMLDivElement, TrackProps>(function Track(props, ref) {
+    const { prefix = 'next-', trackStyle } = props;
+    const slides = renderSlides({ ...props, prefix });
+    return (
+        <div ref={ref} role="list" className={`${prefix}slick-track`} style={trackStyle}>
+            {slides}
+        </div>
+    );
+});
 
-    render() {
-        const slides = renderSlides(this.props);
-        return (
-            <div
-                role="list"
-                className={`${this.props.prefix}slick-track`}
-                style={this.props.trackStyle}
-            >
-                {slides}
-            </div>
-        );
-    }
-}
+Track.displayName = 'Track';
+
+export default Track;

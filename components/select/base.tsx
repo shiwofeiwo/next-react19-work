@@ -510,6 +510,10 @@ export default class Base<
         this.selectDOM = ref!;
     };
 
+    getDOMNode(): HTMLElement | null {
+        return this.selectDOM ?? null;
+    }
+
     saveInputRef = (ref: InstanceType<typeof Input>) => {
         if (ref && ref.getInstance()) {
             this.inputRef = ref.getInstance();

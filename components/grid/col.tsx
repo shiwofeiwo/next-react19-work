@@ -28,6 +28,12 @@ const COL_PROP_KEYS = [
     'l',
     'xl',
     'component',
+    // ConfigProvider 通用 props —— 不应泄漏到 DOM 属性
+    'device',
+    'locale',
+    'popupContainer',
+    'errorBoundary',
+    'defaultPropsConfig',
 ];
 
 /**
@@ -63,6 +69,7 @@ export default class Col extends Component<ColProps> {
             className,
             children,
             rtl,
+            style,
             ...others
         } = this.props;
         const domOtherProps = obj.pickOthers(COL_PROP_KEYS, others);
@@ -110,7 +117,13 @@ export default class Col extends Component<ColProps> {
         });
 
         return (
-            <Tag dir={rtl ? 'rtl' : 'ltr'} role="gridcell" className={classes} {...domOtherProps}>
+            <Tag
+                dir={rtl ? 'rtl' : 'ltr'}
+                role="gridcell"
+                className={classes}
+                style={style}
+                {...domOtherProps}
+            >
                 {children}
             </Tag>
         );

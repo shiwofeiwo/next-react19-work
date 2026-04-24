@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import React, { type JSXElementConstructor } from 'react';
-import ReactDOM from 'react-dom';
+import { flushSync } from 'react-dom';
 import Overlay from '../overlay';
 import ConfigProvider from '../config-provider';
 import { guid } from '../util';
@@ -124,40 +124,72 @@ const create = (props: MessageQuickProps) => {
     const { duration, afterClose, contextConfig, ...others } = props;
     const div = document.createElement('div');
     document.body.appendChild(div);
-    const closeChain = function () {
-        const root = createRoot(div);
-        root.unmount();
-        document.body.removeChild(div);
-        afterClose && afterClose();
-    };
 
     let newContext = contextConfig;
     if (!newContext) newContext = ConfigProvider.getContext();
     let mask: ConfigMask | null = null,
         myRef: ConfigMask,
         destroyed = false;
-    const destroy = () => {
-        const inc = mask && mask.getInstance();
-        inc && inc.handleClose(true);
-        destroyed = true;
+
+    // 在同一个 container 上只能创建一次 root，复用于 render 和 unmount；
+    // 否则 React 19 会警告「多个 root 挂到同一 container」且旧 root 的 cleanup 不触发，导致 Message unmount 失败。
+    const root = createRoot(div);
+
+    let cleaned = false;
+    const cleanupContainer = () => {
+        if (cleaned) return;
+        cleaned = true;
+        root.unmount();
+        if (div.parentNode) {
+            div.parentNode.removeChild(div);
+        }
     };
 
-    const root = createRoot(div);
+    const closeChain = function () {
+        cleanupContainer();
+        afterClose && afterClose();
+    };
+
+    const destroy = () => {
+        if (destroyed) return;
+        destroyed = true;
+        // 触发 Overlay 关闭动画（通过 Mask.handleClose → setState visible:false）；
+        // 动画结束后 Overlay 的 afterClose 会调 closeChain → cleanupContainer。
+        const inc = mask && mask.getInstance();
+        inc && inc.handleClose(true);
+        // 同步兜底：对于快速连续 show/hide（如测试场景），动画完成前 close 就返回，
+        // 若上一次 destroy 还未触发 closeChain 就有新 show，会在 DOM 中累积多个容器。
+        // 这里用 microtask 兜底：一个 tick 后若 closeChain 仍未跑，强制 cleanup
+        // （损失一次关闭动画的平滑度，换取多次快速 show/hide 的 DOM 无累积）
+        Promise.resolve().then(() => {
+            if (!cleaned) {
+                cleanupContainer();
+                afterClose && afterClose();
+            }
+        });
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const AnyNewMask = NewMask as any;
 
-    root.render(
-        <ConfigProvider {...newContext}>
-            <AnyNewMask
-                afterClose={closeChain}
-                {...others}
-                ref={(ref: any) => {
-                    myRef = ref;
-                }}
-            />
-        </ConfigProvider>
-    );
+    // React 19 createRoot().render() 是异步调度（concurrent by default）。
+    // 命令式 API Message.show(...) 期望调用后 DOM 已可见（测试场景尤其依赖这点），
+    // 用 flushSync 包装强制同步 commit + 内部 setState 全部 flush，
+    // 避免 Gateway 的 2-phase render（首次 containerNode=null 返回 null，DidMount 后 setState 触发第二次 render 才 createPortal）
+    // 在 Cypress retry window 内未完成导致 .next-overlay-wrapper 找不到。
+    flushSync(() => {
+        root.render(
+            <ConfigProvider {...newContext}>
+                <AnyNewMask
+                    afterClose={closeChain}
+                    {...others}
+                    ref={(ref: any) => {
+                        myRef = ref;
+                    }}
+                />
+            </ConfigProvider>
+        );
+    });
 
     return {
         component: mask,

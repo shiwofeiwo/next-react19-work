@@ -99,6 +99,11 @@ class Search extends React.Component<SearchProps, SearchState> {
 
     highlightKey: unknown;
     inputRef: ReturnType<InstanceType<typeof AutoComplete>['getInstance']> | null = null;
+    private _rootRef: HTMLSpanElement | null = null;
+
+    getDOMNode(): HTMLSpanElement | null {
+        return this._rootRef;
+    }
 
     constructor(props: SearchProps) {
         super(props);
@@ -359,7 +364,15 @@ class Search extends React.Component<SearchProps, SearchState> {
         );
 
         return (
-            <span className={cls} style={style} {...dataAttr} dir={rtl ? 'rtl' : undefined}>
+            <span
+                className={cls}
+                style={style}
+                {...dataAttr}
+                dir={rtl ? 'rtl' : undefined}
+                ref={el => {
+                    this._rootRef = el;
+                }}
+            >
                 {searchBtn ? <Group addonAfter={searchBtn}>{left}</Group> : left}
             </span>
         );

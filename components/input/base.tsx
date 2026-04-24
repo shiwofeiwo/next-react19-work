@@ -256,6 +256,10 @@ class Base<
         return this.inputRef;
     }
 
+    getDOMNode(): HTMLInputElement | HTMLTextAreaElement | null {
+        return this.inputRef ?? null;
+    }
+
     focus(start?: number, end?: number, preventScroll = false) {
         this.inputRef.focus({ preventScroll });
         if (typeof start === 'number') {
