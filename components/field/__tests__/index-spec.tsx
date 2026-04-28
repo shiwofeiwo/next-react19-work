@@ -154,7 +154,8 @@ describe('field', () => {
                 cy.get('input[type="text"]').should('have.attr', 'value', '3');
                 cy.wrap(field.getValue('input')).should('eq', '3');
 
-                cy.get('input[type="checkbox"]').should('have.attr', 'value');
+                // React 16: value={undefined} → value=""; React 19: undefined props are not rendered as DOM attributes
+                cy.get('input[type="checkbox"]').should('not.have.attr', 'value');
                 cy.wrap(field.getValue('checkbox')).should('eq', undefined);
 
                 cy.get('input[type="radio"]')
@@ -409,7 +410,7 @@ describe('field', () => {
                 const comp = ref.current!;
                 cy.wrap(comp.field.getValue('input')).should('eq', 'start');
                 comp.setState({ inputValue: 'end' });
-                cy.wrap(comp.field.getValue('input')).should('eq', 'end');
+                cy.wrap(comp.field).invoke('getValue', 'input').should('eq', 'end');
             });
         });
 
@@ -440,7 +441,7 @@ describe('field', () => {
                     a: 'start',
                 });
                 comp.setState({ inputValue: 'end' });
-                cy.wrap(comp.field.getValue('input')).should('deep.equal', {
+                cy.wrap(comp.field).invoke('getValue', 'input').should('deep.equal', {
                     a: 'end',
                 });
             });

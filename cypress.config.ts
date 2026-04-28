@@ -1,6 +1,10 @@
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
+    reporter: 'cypress-multi-reporters',
+    reporterOptions: {
+        configFile: 'reporter-config.json',
+    },
     component: {
         setupNodeEvents(on) {
             on('task', {

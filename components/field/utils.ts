@@ -1,5 +1,6 @@
 import { isValidElement, cloneElement, type ReactElement, type ReactInstance } from 'react';
 import { isProduction } from '../util/env';
+import { fiberShim } from '../util/fiber-shim';
 import { type ScrollToFirstErrorOption } from './types';
 
 export function cloneAndAddKey(element: ReactElement<any>) {
@@ -20,7 +21,8 @@ export function scrollToFirstError({ errorsGroup, options, instance }: ScrollToF
                 const node =
                     ref instanceof Element
                         ? (ref as HTMLElement)
-                        : ((ref as any)?.getDOMNode?.() as HTMLElement);
+                        : ((ref as any)?.getDOMNode?.() as HTMLElement) ??
+                          (fiberShim(ref) as HTMLElement | null);
                 if (!node) {
                     // 原版失败即 return 会跳过后续字段；改为 continue 以便定位到其他错误字段
                     /* eslint-disable no-console */

@@ -359,23 +359,29 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
         this.onValueChange([]);
     };
 
-    onDateInputChange = (inputStr: string, e: SyntheticEvent, eventType?: string) => {
+    onDateInputChange = (
+        inputStr: string,
+        e: SyntheticEvent,
+        eventType?: string,
+        type?: RangePickerState['activeDateInput']
+    ) => {
         if (eventType === 'clear' || !inputStr) {
             e.stopPropagation();
             this.clearRange();
         } else {
-            const stateName = mapInputStateName(this.state.activeDateInput!);
+            const activeType = type || this.state.activeDateInput!;
+            const stateName = mapInputStateName(activeType);
             this.setState({
                 [stateName!]: inputStr,
-                inputing: this.state.activeDateInput,
+                inputing: activeType,
             });
         }
     };
 
-    onDateInputBlur = () => {
+    onDateInputBlur = (type?: RangePickerState['activeDateInput']) => {
         const { resetTime } = this.props;
-        const { activeDateInput } = this.state;
-        const stateName = mapInputStateName(activeDateInput!);
+        const activeDateInput = type || this.state.activeDateInput!;
+        const stateName = mapInputStateName(activeDateInput);
         const dateInputStr = this.state[stateName!];
 
         if (dateInputStr) {
@@ -391,7 +397,7 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
                 const valueName = activeDateInput as 'startValue' | 'endValue';
                 const newValue = resetTime
                     ? parsed
-                    : resetValueTime(parsed, this.state[activeDateInput!]);
+                    : resetValueTime(parsed, this.state[activeDateInput]);
 
                 this.handleChange(valueName, newValue);
             }
@@ -806,6 +812,11 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
                 aria-label={startDateInputAriaLabel}
                 placeholder={state.format}
                 value={startDateInputValue}
+                onChange={(str: string, e: SyntheticEvent, et?: string) =>
+                    this.onDateInputChange(str, e, et, 'startValue')
+                }
+                onBlur={() => this.onDateInputBlur('startValue')}
+                onPressEnter={() => this.onDateInputBlur('startValue')}
                 onFocus={() => this.onFocusDateInput('startValue')}
                 className={startDateInputCls}
                 ref={this.startDateInputRef}
@@ -819,6 +830,11 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
                 aria-label={endDateInputAriaLabel}
                 placeholder={state.format}
                 value={endDateInputValue}
+                onChange={(str: string, e: SyntheticEvent, et?: string) =>
+                    this.onDateInputChange(str, e, et, 'endValue')
+                }
+                onBlur={() => this.onDateInputBlur('endValue')}
+                onPressEnter={() => this.onDateInputBlur('endValue')}
                 onFocus={() => this.onFocusDateInput('endValue')}
                 className={endDateInputCls}
                 ref={this.endDateInputRef}

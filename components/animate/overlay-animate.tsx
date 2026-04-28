@@ -28,9 +28,32 @@ const OverlayAnimate = React.forwardRef<HTMLElement, OverlayAnimateProps>((props
 
     const nodeRef = React.useRef<HTMLElement>(null);
 
+    // Keep the latest children ref accessible without adding children to useCallback deps.
+    // This avoids repeated ref teardown/reattach caused by the children object changing identity.
+    const childrenRefHolder = React.useRef<
+        | ((node: HTMLElement | null) => void)
+        | React.RefObject<HTMLElement | null>
+        | null
+        | undefined
+    >(null);
+    childrenRefHolder.current = ((children as React.ReactElement).props as Record<string, unknown>)
+        ?.ref as
+        | ((node: HTMLElement | null) => void)
+        | React.RefObject<HTMLElement | null>
+        | null
+        | undefined;
+
     const handleRef = React.useCallback(
         (node: HTMLElement) => {
             nodeRef.current = node;
+            // Preserve original ref on children so external consumers (e.g. @alifd/overlay's
+            // maskRef) still receive the DOM node even after cloneElement overrides the ref.
+            const childRef = childrenRefHolder.current;
+            if (typeof childRef === 'function') {
+                childRef(node);
+            } else if (childRef !== null && typeof childRef === 'object') {
+                (childRef as React.RefObject<HTMLElement | null>).current = node;
+            }
             if (typeof externalRef === 'function') {
                 externalRef(node);
             } else if (externalRef) {

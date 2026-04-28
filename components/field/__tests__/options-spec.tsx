@@ -25,7 +25,7 @@ describe('options', () => {
         cy.mount(<Demo ref={ref} />).then(() => {
             cy.wrap(ref.current).should('be.ok');
             ref.current!.setState({ show: false });
-            cy.wrap(ref.current!.field.getValues()).should('not.have.property', 'input2');
+            cy.wrap(ref.current!.field).invoke('getValues').should('not.have.property', 'input2');
         });
     });
 

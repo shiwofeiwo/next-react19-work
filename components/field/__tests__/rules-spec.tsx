@@ -42,7 +42,8 @@ describe('rules', () => {
         });
 
         cy.mount(<Input {...inited} />);
-        cy.get('input').trigger('blur');
+        cy.get('input').focus();
+        cy.get('input').blur();
         cy.then(() => {
             cy.wrap(field.getError('input')).should('deep.equal', ['cant be null']);
         });

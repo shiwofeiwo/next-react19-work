@@ -573,7 +573,7 @@ describe('Overlay', () => {
     });
 
     // https://codesandbox.io/s/next-overlay-overflow-2-fulpq?file=/src/App.js
-    it('fix overlay overflow hidden', done => {
+    it('fix overlay overflow hidden', () => {
         function App() {
             const appRef = createRef<HTMLDivElement>();
 
@@ -584,12 +584,7 @@ describe('Overlay', () => {
                     content: 'Dialog Content',
                     onOk() {
                         appRef.current!.style.overflow = 'visible';
-                        cy.get('#app').should('have.css', 'overflow', 'visible');
-                        done();
                     },
-                });
-                cy.get('.next-dialog-btn').then(el => {
-                    el[0].click();
                 });
             }, []);
 
@@ -601,6 +596,8 @@ describe('Overlay', () => {
         }
 
         cy.mount(<App />);
+        cy.get('.next-btn-primary.next-dialog-btn').click();
+        cy.get('#app').should('have.css', 'overflow', 'visible');
     });
 
     // https://github.com/alibaba-fusion/next/issues/3104
@@ -655,8 +652,9 @@ describe('Popup', () => {
     });
 
     it('should support triggerType', () => {
+        // animation={false}: avoids CSS animation timing in tests; with cache=false overlay unmounts on close
         cy.mount(
-            <Popup trigger={<button>Open</button>}>
+            <Popup animation={false} trigger={<button>Open</button>}>
                 <span className="content">Hello World From Popup!</span>
             </Popup>
         );
@@ -664,13 +662,16 @@ describe('Popup', () => {
         cy.get('button').trigger('mouseover');
 
         cy.get('.next-overlay-wrapper').should('exist');
-        cy.get('button').trigger('mouseleave');
+        // React 19: onMouseLeave is polyfilled via mouseout at root (event delegation moved from document to root).
+        // Native mouseleave does not bubble, so cy.trigger('mouseleave') never reaches the root handler.
+        cy.get('button').trigger('mouseout');
         cy.get('.content').trigger('mouseover');
 
         cy.get('.next-overlay-wrapper').should('exist');
-        cy.get('.content').trigger('mouseleave');
+        cy.get('.content').trigger('mouseout');
 
-        cy.get('.next-overlay-wrapper').should('not.be.visible');
+        // animation=false + cache=false: overlay unmounts immediately, so not.exist is correct
+        cy.get('.next-overlay-wrapper').should('not.exist');
     });
 
     it('should support setting triggerType to click', () => {
@@ -695,7 +696,7 @@ describe('Popup', () => {
 
     it('should support setting triggerType to focus', () => {
         cy.mount(
-            <Popup trigger={<button>Open</button>} triggerType="focus">
+            <Popup animation={false} trigger={<button>Open</button>} triggerType="focus">
                 <span className="content">Hello World From Popup!</span>
             </Popup>
         );
@@ -708,7 +709,8 @@ describe('Popup', () => {
         cy.get('button').focus();
         cy.get('.next-overlay-wrapper').should('exist');
         cy.get('button').blur();
-        cy.get('.next-overlay-wrapper').should('not.be.visible');
+        // animation=false + cache=false: overlay unmounts immediately on close
+        cy.get('.next-overlay-wrapper').should('not.exist');
     });
 
     it('should support setting triggerType to click with custom triggerClickKeycode', () => {

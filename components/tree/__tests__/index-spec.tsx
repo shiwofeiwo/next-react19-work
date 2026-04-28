@@ -1584,6 +1584,7 @@ describe('Tree', () => {
                 })
             );
         });
+        findTreeNodeByKey('0-0').first().should('have.class', 'next-filtered');
         cy.then(() => {
             treeRef?.getInstance().scrollFilterNodeIntoView();
             shouldTreeNodeInViewport('.k-0-0');

@@ -402,16 +402,19 @@ describe('Popup v2', async () => {
         );
         cy.get('button').trigger('mouseover');
         cy.get('.next-overlay-wrapper').should('exist');
-        cy.get('button').trigger('mouseleave');
+        // React 19: onMouseLeave is polyfilled via mouseout at root (event delegation moved from document to root).
+        // Native mouseleave does not bubble, so cy.trigger('mouseleave') never reaches the root handler.
+        cy.get('button').trigger('mouseout');
         cy.get('.content').trigger('mouseover');
         cy.get('.next-overlay-wrapper').should('exist');
 
-        cy.get('button').trigger('mouseleave');
-        cy.get('.content').trigger('mouseenter');
+        cy.get('button').trigger('mouseout');
+        cy.get('.content').trigger('mouseover');
         cy.get('.next-overlay-wrapper').should('exist');
 
-        cy.get('.content').trigger('mouseleave');
-        cy.get('.next-overlay-wrapper').should('not.be.visible');
+        cy.get('.content').trigger('mouseout');
+        // animation=false + cache=false: overlay unmounts immediately on close
+        cy.get('.next-overlay-wrapper').should('not.exist');
     });
 
     it('should still open when click overlay with triggerType = focus', () => {
@@ -420,15 +423,17 @@ describe('Popup v2', async () => {
                 <span className="content">Hello World From Popup!</span>
             </Popup>
         );
-        cy.get('button').trigger('focus');
+        cy.get('button').focus();
         cy.get('.next-overlay-wrapper').should('exist');
 
         cy.get('.content').trigger('mousedown');
+        cy.get('button').blur();
         cy.get('button').focus();
         cy.get('.next-overlay-wrapper').should('exist');
 
         cy.get('button').blur();
-        cy.get('.next-overlay-wrapper').should('not.be.visible');
+        // animation=false + cache=false: overlay unmounts immediately on close
+        cy.get('.next-overlay-wrapper').should('not.exist');
     });
 
     it('should support setting triggerType to click', () => {

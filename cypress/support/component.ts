@@ -22,7 +22,10 @@ function mountWithRefTick(
 
 function rerender<Props extends object>(tag: string, nextProps: Props) {
     return cy.get<MountReturn>(`@${tag.replace(/^@/, '')}`).then(({ component, rerender }) => {
-        return rerender(cloneElement(component as ReactElement, nextProps));
+        // Same React 19 commit timing fix as mountWithRefTick: wait one tick after rerender
+        return rerender(cloneElement(component as ReactElement, nextProps)).then(result => {
+            return cy.wait(0, { log: false }).then(() => result);
+        }) as unknown as Cypress.Chainable<MountReturn>;
     });
 }
 

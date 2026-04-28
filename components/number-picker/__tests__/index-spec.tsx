@@ -75,13 +75,15 @@ describe('number-picker', () => {
 
             cy.mount(<App />).as('DOM');
             cy.get('@DOM').document().find('input').as('input');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 8);
+            cy.get('@input').focus();
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '8');
 
             cy.get('@DOM').document().find('button').eq(0).as('button');
             cy.get('@button').click();
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 5);
+            cy.get('@input').focus();
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '5');
         });
         it('if max or min were undefined or null should infinity', () => {
             cy.mount(<NumberPicker max={10} defaultValue={10} min={10} />).as('numberPicker');
@@ -139,7 +141,7 @@ describe('number-picker', () => {
             cy.get('@input').type(`${Number.MAX_SAFE_INTEGER}2333.1`);
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', `${Number.MAX_SAFE_INTEGER}2333.1`);
-            cy.get('@input').trigger('blur');
+            cy.get('@input').blur();
             cy.get('@input').should('have.value', `${Number.MAX_SAFE_INTEGER}2333`);
 
             const step = '0.000000000000000000000001';
@@ -294,7 +296,7 @@ describe('number-picker', () => {
             cy.get('@input').type(`${Number.MAX_SAFE_INTEGER}000`);
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', `${Number.MAX_SAFE_INTEGER}000`);
-            cy.get('@input').trigger('blur');
+            cy.get('@input').blur();
             cy.get('@input').should('have.value', Big(20).toFixed(precision));
         });
 
@@ -311,7 +313,7 @@ describe('number-picker', () => {
             cy.get('@input').type(`0${Number.MAX_SAFE_INTEGER}123`);
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', `0${Number.MAX_SAFE_INTEGER}123`);
-            cy.get('@input').trigger('blur');
+            cy.get('@input').blur();
             cy.get('@input').should('have.value', `${Number.MAX_SAFE_INTEGER}123`);
         });
     });
@@ -325,10 +327,10 @@ describe('number-picker', () => {
             cy.wrap(onChange).should('be.calledOnce');
             cy.get('@NumberPicker').document().find('input').as('input');
             cy.get('@input').type(`5`);
-            cy.get('@input').trigger('focus');
+            cy.get('@input').focus();
             cy.wrap(onChange).should('be.calledTwice');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').trigger('focus');
+            cy.get('@input').blur();
+            cy.get('@input').focus();
             cy.wrap(onFocus).should('be.calledThrice');
         });
 
@@ -352,8 +354,8 @@ describe('number-picker', () => {
             cy.get('@input').should('have.attr', 'value', 123);
             cy.get('@input').type('4');
             cy.get('@input').should('have.value', '1234');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 123);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '123');
         });
 
         it('should only input -.1234567890', () => {
@@ -390,8 +392,8 @@ describe('number-picker', () => {
             cy.get('@input2').type('1.');
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '1.');
-            cy.get('@input2').trigger('blur');
-            cy.get('@input2').should('have.attr', 'value', 1);
+            cy.get('@input2').blur();
+            cy.get('@input2').should('have.value', '1');
         });
 
         it('should leave out digits larger than precision set', () => {
@@ -401,8 +403,8 @@ describe('number-picker', () => {
             cy.get('@input').type('0.34');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '0.34');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 0.3);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '0.3');
 
             cy.mount(<NumberPicker defaultValue={1} />).as('NumberPicker2');
             cy.get('@NumberPicker2').document().find('input').as('input2');
@@ -410,20 +412,20 @@ describe('number-picker', () => {
             cy.get('@input2').type('0.');
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '0.');
-            cy.get('@input2').trigger('blur');
-            cy.get('@input2').should('have.attr', 'value', 0);
+            cy.get('@input2').blur();
+            cy.get('@input2').should('have.value', '0');
             cy.get('@input2').clear();
             cy.get('@input2').type('0.24');
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '0.24');
-            cy.get('@input2').trigger('blur');
-            cy.get('@input2').should('have.attr', 'value', 0);
+            cy.get('@input2').blur();
+            cy.get('@input2').should('have.value', '0');
             cy.get('@input2').clear();
             cy.get('@input2').type('0.2.4');
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '0.2.4');
-            cy.get('@input2').trigger('blur');
-            cy.get('@input2').should('have.attr', 'value', 0);
+            cy.get('@input2').blur();
+            cy.get('@input2').should('have.value', '0');
         });
 
         it('should ignore more than one . or -, cut at second . or -', () => {
@@ -433,8 +435,8 @@ describe('number-picker', () => {
             cy.get('@input').type('0.3.4');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '0.3.4');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 0.3);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '0.3');
 
             cy.get('@input').clear();
             cy.get('@input').type('0.3');
@@ -442,8 +444,8 @@ describe('number-picker', () => {
             cy.get('@input').type('.');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '0.3.');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 0.3);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '0.3');
 
             cy.get('@input').clear();
             cy.get('@input').type('-0.3');
@@ -451,8 +453,8 @@ describe('number-picker', () => {
             cy.get('@input').type('-');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '-0.3-');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', -0.3);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '-0.3');
 
             cy.get('@input').clear();
             cy.get('@input').type('-1.34');
@@ -460,8 +462,8 @@ describe('number-picker', () => {
             cy.get('@input').type('5-4');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '-1.345-4');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', -1.34);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '-1.34');
 
             const onChange = cy.spy();
             cy.mount(
@@ -483,8 +485,8 @@ describe('number-picker', () => {
             cy.get('@input2').type('3');
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '-0.-3');
-            cy.get('@input2').trigger('blur');
-            cy.get('@input2').should('have.attr', 'value', '-0');
+            cy.get('@input2').blur();
+            cy.get('@input2').should('have.value', '-0');
             cy.wrap(onChange).should('have.been.called');
         });
 
@@ -548,8 +550,8 @@ describe('number-picker', () => {
             cy.get('@input').type('1');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '1');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', 6);
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '6');
         });
 
         it('should support input with -.x or .x or -0.0x', () => {
@@ -569,8 +571,8 @@ describe('number-picker', () => {
             cy.get('@input').type('-.');
             cy.get('@input').trigger('focus');
             cy.get('@input').should('have.value', '-.');
-            cy.get('@input').trigger('blur');
-            cy.get('@input').should('have.attr', 'value', '');
+            cy.get('@input').blur();
+            cy.get('@input').should('have.value', '');
 
             cy.mount(<NumberPicker defaultValue={-0.2} onChange={onChange} precision={1} />).as(
                 'NumberPicker2'
@@ -580,7 +582,7 @@ describe('number-picker', () => {
             cy.get('@input2').type('-.2');
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '-.2');
-            cy.get('@input2').trigger('blur');
+            cy.get('@input2').blur();
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '-0.2');
 
@@ -595,7 +597,7 @@ describe('number-picker', () => {
             cy.get('@input3').type('.3');
             cy.get('@input3').trigger('focus');
             cy.get('@input3').should('have.value', '.3');
-            cy.get('@input3').trigger('blur');
+            cy.get('@input3').blur();
             cy.get('@input3').trigger('focus');
             cy.get('@input3').should('have.value', '0.3');
 
@@ -609,7 +611,7 @@ describe('number-picker', () => {
             cy.get('@input4').trigger('focus');
             cy.get('@input4').should('have.value', '.3');
             cy.wrap(onChange4).should('be.calledTwice');
-            cy.get('@input4').trigger('blur');
+            cy.get('@input4').blur();
             cy.get('@input4').should('have.value', '0.3');
             cy.wrap(onChange4).should('be.calledTwice');
 
@@ -623,7 +625,7 @@ describe('number-picker', () => {
             cy.get('@input5').trigger('focus');
             cy.get('@input5').should('have.value', '-0.');
             cy.wrap(onChange5).should('be.calledTwice');
-            cy.get('@input5').trigger('blur');
+            cy.get('@input5').blur();
             cy.get('@input5').should('have.value', '-0');
             cy.wrap(onChange5).should('be.calledTwice');
 
@@ -632,7 +634,7 @@ describe('number-picker', () => {
             cy.get('@input6').clear();
             cy.get('@input6').type('-0.0');
             cy.get('@input6').trigger('focus');
-            cy.get('@input6').trigger('blur');
+            cy.get('@input6').blur();
             cy.get('@input6').should('have.value', '-0');
             cy.get('@input6').clear();
             cy.get('@input6').type('-0.0');
@@ -641,7 +643,7 @@ describe('number-picker', () => {
             cy.get('@input6').clear();
             cy.get('@input6').type('-0.01');
             cy.get('@input6').trigger('focus');
-            cy.get('@input6').trigger('blur');
+            cy.get('@input6').blur();
             cy.get('@input6').should('have.value', '-0.01');
         });
 
@@ -673,7 +675,7 @@ describe('number-picker', () => {
             cy.get('@input2').trigger('focus');
             cy.get('@input2').should('have.value', '-0.');
             cy.wrap(onChange2).should('be.calledTwice');
-            cy.get('@input2').trigger('blur');
+            cy.get('@input2').blur();
             cy.get('@input2').should('have.value', '-0');
             cy.wrap(onChange2).should('be.calledTwice');
 
@@ -832,12 +834,12 @@ describe('number-picker', () => {
             cy.get('@input5').type('1');
             cy.get('@input5').trigger('focus');
             cy.get('@input5').should('have.value', '1');
-            cy.get('@input5').trigger('blur');
+            cy.get('@input5').blur();
             cy.get('@input5').should('have.value', '18');
             cy.get('@input5').clear();
             cy.get('@input5').type('21');
             cy.get('@input5').trigger('focus');
-            cy.get('@input5').trigger('blur');
+            cy.get('@input5').blur();
             cy.get('@input5').should('have.value', '20');
         });
 

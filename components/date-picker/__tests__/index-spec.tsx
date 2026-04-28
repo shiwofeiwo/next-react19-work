@@ -153,7 +153,7 @@ describe('DatePicker', () => {
             cy.get('.next-date-picker-panel-input input').eq(0).type('2017-11-11');
             cy.get('.next-date-picker-panel-input input').eq(0).blur();
             cy.wrap(handleChange).should('be.calledWith', '2017-11-11 00:00:00');
-            cy.get('.next-date-picker-panel-input input').eq(1).focus();
+            cy.get('.next-date-picker-panel-input input').eq(1).should('not.be.disabled').focus();
             cy.get('.next-date-picker-panel-input input').eq(1).triggerInputChange('11:11:11');
             cy.get('.next-date-picker-panel-input input').eq(1).blur();
             cy.wrap(handleChange).should('be.calledWith', '2017-11-11 11:11:11');

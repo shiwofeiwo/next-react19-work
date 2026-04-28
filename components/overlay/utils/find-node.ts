@@ -1,4 +1,5 @@
 import { isProduction } from '../../util/env';
+import { fiberShim } from '../../util/fiber-shim';
 import type { Target } from '../types';
 
 function getNodeFromInstance(instance: unknown): Element | Text | null {
@@ -17,6 +18,9 @@ function getNodeFromInstance(instance: unknown): Element | Text | null {
     ) {
         return (instance as { getDOMNode: () => Element | Text | null }).getDOMNode();
     }
+    // 用户自定义 class 组件兜底：从 React fiber 私有结构反查根 DOM
+    const shimResult = fiberShim(instance);
+    if (shimResult) return shimResult;
     // 开发环境提示：组件实例没有 getDOMNode()，Overlay 将拿不到 target DOM 节点。
     // React 19 已移除 ReactDOM.findDOMNode，Class 组件作为 Overlay target 必须显式实现 getDOMNode()。
     /* eslint-disable no-console */

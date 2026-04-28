@@ -8,7 +8,8 @@ import findNode from '../utils/find-node';
  * - 6 种 target 形态：null/false/undefined、string id、直接 DOM/Text、函数、RefObject、HasDOMNode
  * - 嵌套 RefObject（.current 递归解析）
  * - 异常路径（函数内抛错）
- * - 降级路径（无 getDOMNode 的裸 class 实例 → null + dev warn）
+ * - fiber shim 路径（无 getDOMNode 但有 _reactInternals 的 class 实例 → 返回 DOM）
+ * - 降级路径（无 getDOMNode 也无 _reactInternals 的裸 class 实例 → null + dev warn）
  */
 describe('components/overlay/utils/find-node', () => {
     let el: HTMLDivElement;
@@ -155,8 +156,24 @@ describe('components/overlay/utils/find-node', () => {
         });
     });
 
+    describe('fiber shim 路径', () => {
+        it('无 getDOMNode 但有 _reactInternals（模拟已挂载 class 组件），返回根 DOM', () => {
+            const fakeHostFiber = { tag: 5, stateNode: el, child: null, sibling: null };
+            const inst = {
+                _reactInternals: { tag: 1, stateNode: null, child: fakeHostFiber, sibling: null },
+            };
+            assert(findNode(inst as any) === el);
+        });
+
+        it('函数返回有 _reactInternals 的实例，同样走 shim 返回 DOM', () => {
+            const fakeHostFiber = { tag: 5, stateNode: el, child: null, sibling: null };
+            const inst = { _reactInternals: fakeHostFiber };
+            assert(findNode(() => inst as any) === el);
+        });
+    });
+
     describe('降级路径', () => {
-        it('无 getDOMNode / current 的裸 class 实例返回 null', () => {
+        it('无 getDOMNode / _reactInternals 的裸 class 实例返回 null', () => {
             class BareClass {}
             const inst = new BareClass();
             assert(findNode(inst as any) === null);
@@ -166,7 +183,7 @@ describe('components/overlay/utils/find-node', () => {
             assert(findNode({ foo: 'bar' } as any) === null);
         });
 
-        it('函数返回无 getDOMNode 的裸 class 实例返回 null', () => {
+        it('函数返回无 getDOMNode / _reactInternals 的裸 class 实例返回 null', () => {
             class BareClass {}
             const inst = new BareClass();
             assert(findNode(() => inst as any) === null);
