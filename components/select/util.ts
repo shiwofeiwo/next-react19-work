@@ -334,6 +334,26 @@ export function getValueDataSource(
 }
 
 /**
+ * Generate a unique key for a menu group that avoids collision with item values
+ * @param index - group index in dataSource array
+ * @param itemValueSet - set of stringified item values at the same level
+ * @returns unique group key
+ */
+export function generateGroupKey(index: number, itemValueSet: Set<string>) {
+    const targetKey = `select-group-${index}`;
+    if (!itemValueSet.has(targetKey)) {
+        return targetKey;
+    }
+    let suffix = 0;
+    let key = `${targetKey}-repeat-${suffix}`;
+    while (itemValueSet.has(key)) {
+        suffix++;
+        key = `${targetKey}-repeat-${suffix}`;
+    }
+    return key;
+}
+
+/**
  * Get Selected key from value
  * @param value - structured dataSource
  * @returns

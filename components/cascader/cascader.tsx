@@ -1,7 +1,7 @@
 import React, { Component, type ReactElement, type FocusEvent, type ComponentType } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
-import Menu, { type ItemProps, type CheckboxItemProps } from '../menu';
+import Menu, { type ItemProps, type CheckboxItemProps, type MenuProps } from '../menu';
 import { func, obj, dom } from '../util';
 import CascaderMenu from './menu';
 import CascaderMenuItem from './item';
@@ -140,6 +140,13 @@ const CASCADER_PROP_KEYS = [
     'resultRender',
     'immutable',
 ];
+
+const getFormatMenuProps = (others: Record<string, unknown>): Partial<MenuProps> => {
+    return {
+        ...pickOthers([...CASCADER_PROP_KEYS, 'focusable'], others),
+        isSelectIconRight: false,
+    } as Partial<MenuProps>;
+};
 
 class Cascader extends Component<CascaderProps, CascaderState> {
     static defaultProps = {
@@ -629,11 +636,13 @@ class Cascader extends Component<CascaderProps, CascaderState> {
             listClassName,
             listStyle,
             itemRender,
+            ...others
         } = this.props;
         const { value, expandedValue, focusedValue } = this.state;
 
         return (
             <CascaderMenu
+                {...getFormatMenuProps(others as Record<string, unknown>)}
                 key={level}
                 prefix={prefix}
                 useVirtual={useVirtual}

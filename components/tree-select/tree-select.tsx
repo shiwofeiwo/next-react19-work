@@ -571,9 +571,17 @@ class TreeSelect extends Component<TreeSelectProps, TreeSelectState> {
     }
 
     handleSearchClear(triggerType: string) {
+        const { _k2n } = this.state;
+        const { treeDefaultExpandAll } = this.props;
+        const expandedKeys: Key[] = treeDefaultExpandAll
+            ? Object.keys(_k2n).filter(k => {
+                  const node = _k2n[k];
+                  return node && node.children && node.children.length > 0;
+              })
+            : [];
         this.setState({
             searchedValue: '',
-            expandedKeys: [],
+            expandedKeys,
         });
         this.props.onSearchClear!(triggerType);
     }
@@ -779,6 +787,13 @@ class TreeSelect extends Component<TreeSelectProps, TreeSelectState> {
                 notFound = true;
             }
         } else {
+            if (filterLocal && showSearch) {
+                if (Array.isArray(expandedKeys) && expandedKeys.length) {
+                    treeProps.expandedKeys = expandedKeys;
+                }
+                treeProps.autoExpandParent = autoExpandParent;
+                treeProps.onExpand = this.handleExpand;
+            }
             // eslint-disable-next-line
             if (dataSource) {
                 if (dataSource.length) {

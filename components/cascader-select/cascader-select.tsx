@@ -767,7 +767,8 @@ class CascaderSelect extends Component<CascaderSelectProps, CascaderSelectState>
             props.filteredListStyle = { height: this.cascaderHeight };
         }
 
-        return <Cascader {...props} {...menuProps} />;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return <Cascader {...props} {...(menuProps as any)} />;
     }
 
     renderPopupContent() {

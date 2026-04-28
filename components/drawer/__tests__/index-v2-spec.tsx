@@ -105,4 +105,44 @@ describe('Drawer v2', () => {
             hide();
         });
     });
+
+    it('should add paddingRight to body when body is scroll on open Drawer', () => {
+        let tallDiv: HTMLDivElement;
+
+        cy.document().then(doc => {
+            tallDiv = doc.createElement('div');
+            tallDiv.style.height = '110vh';
+            tallDiv.setAttribute('data-test-element', 'scroll-trigger');
+            doc.body.appendChild(tallDiv);
+        });
+
+        cy.get('body').invoke('css', 'padding-right', '10px');
+        cy.get('body').invoke('css', 'overflow', 'auto');
+
+        cy.mount(
+            <Drawer v2 visible title="test" closeMode={[]}>
+                body
+            </Drawer>
+        );
+
+        cy.then(() => {
+            const scrollDiv = document.createElement('div');
+            scrollDiv.className = 'just-to-get-scrollbar-size';
+            scrollDiv.style.width = '100px';
+            scrollDiv.style.height = '100px';
+            scrollDiv.style.overflow = 'scroll';
+            scrollDiv.style.position = 'absolute';
+            scrollDiv.style.top = '-9999px';
+            document.body.appendChild(scrollDiv);
+            const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            document.body.removeChild(scrollDiv);
+            cy.get('body').should('have.css', 'padding-right', `${10 + scrollbarWidth}px`);
+        });
+
+        cy.then(() => {
+            if (tallDiv && tallDiv.parentNode) {
+                tallDiv.parentNode.removeChild(tallDiv);
+            }
+        });
+    });
 });

@@ -1,5 +1,6 @@
 import type React from 'react';
 import type { CascaderProps, CascaderDataItem, Extra } from '../cascader';
+import type { MenuProps } from '../menu';
 import type { CommonProps } from '../util';
 import Overlay from '../overlay';
 import type { SelectProps, VisibleChangeType } from '../select';
@@ -244,10 +245,10 @@ export interface CascaderSelectProps
      */
     treeCheckable?: boolean;
     /**
-     * 透传到 Cascader 的属性对象
-     * @en props object passed to Cascader
+     * 透传到内部 Menu 组件的属性对象
+     * @en props object passed to the internal Menu component
      */
-    menuProps?: Omit<CascaderProps, 'onSelect' | 'onChange'>;
+    menuProps?: MenuProps;
     /**
      * 是否在选中项后清空搜索框，只在 multiple 为 true 时有效
      * @en Whether the current search will be cleared on selecting an item. Only applies when multiple is true
