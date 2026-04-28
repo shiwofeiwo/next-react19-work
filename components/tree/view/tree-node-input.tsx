@@ -11,7 +11,7 @@ export interface TreeNodeInputProps {
 // Input 通过 ConfigProvider.config 暴露 `focus` 和 `getInputNode` 两个方法（见 components/input/index.tsx:41）
 interface InputInstance {
     focus?: () => void;
-    getInputNode?: () => HTMLInputElement | null;
+    getInputNode?: () => HTMLInputElement | HTMLTextAreaElement | null;
 }
 
 export default class TreeNodeInput extends Component<TreeNodeInputProps> {

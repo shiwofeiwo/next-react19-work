@@ -801,8 +801,8 @@ class RangePicker extends Component<RangePickerProps, RangePickerState> {
             size,
             disabled,
             onChange: this.onDateInputChange,
-            onBlur: this.onDateInputBlur,
-            onPressEnter: this.onDateInputBlur,
+            onBlur: () => this.onDateInputBlur(),
+            onPressEnter: () => this.onDateInputBlur(),
             onKeyDown: this.onDateInputKeyDown,
         };
 

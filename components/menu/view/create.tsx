@@ -76,7 +76,7 @@ class ContextMenu extends Component<CreateMenuProps, ContextMenuState> {
             contentRef &&
             typeof (contentRef as { getInstance?: unknown }).getInstance === 'function'
                 ? (
-                      contentRef as { getInstance: () => { popupNodes?: HTMLElement[] } }
+                      contentRef as unknown as { getInstance: () => { popupNodes?: HTMLElement[] } }
                   ).getInstance()
                 : (contentRef as { popupNodes?: HTMLElement[] } | null);
         this.popupNodes = innerMenu?.popupNodes ?? [];
