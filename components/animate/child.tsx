@@ -294,8 +294,21 @@ export default class AnimateChild extends Component<AnimateChildProps> {
 
         const child = children as React.ReactElement | null;
 
+        // Guard: if no child element, render Transition without children (same as original behavior)
         if (!child) {
-            return null;
+            return (
+                <Transition
+                    {...restOthers}
+                    nodeRef={this.nodeRef}
+                    onEnter={this.handleEnter}
+                    onEntering={this.handleEntering}
+                    onEntered={this.handleEntered}
+                    onExit={this.handleExit}
+                    onExiting={this.handleExiting}
+                    onExited={this.handleExited}
+                    addEndListener={this.addEndListener}
+                />
+            );
         }
 
         // Update the stored original ref for the stable mergedRef callback
