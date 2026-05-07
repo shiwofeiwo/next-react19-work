@@ -91,8 +91,8 @@ export default class GroupListRow extends Row {
         if (toRenderList) {
             return toRenderList.map((child, index) => {
                 const cells = this.renderCells(child, index);
+                const ctx = this.context || {};
                 if (this.isChildrenSelection()) {
-                    const ctx = this.context || {};
                     if (!child[primaryKey]) {
                         log.warning(
                             'record.children/recored should contains primaryKey when childrenSelection is true.'

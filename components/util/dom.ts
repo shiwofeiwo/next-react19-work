@@ -245,7 +245,7 @@ export function setStyle(
     value?: any
 ): false | void {
     /* istanbul ignore if */
-    if (!hasDOM || !node) {
+    if (!hasDOM || !node || !node.style) {
         return false;
     }
 

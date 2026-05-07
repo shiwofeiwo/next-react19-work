@@ -11,6 +11,10 @@ export default class TreeRow extends React.Component {
 
     static contextType = TableContext;
 
+    getDOMNode() {
+        return this.rowRef && this.rowRef.getDOMNode ? this.rowRef.getDOMNode() : this.rowRef;
+    }
+
     render() {
         /* eslint-disable no-unused-vars*/
         const { className, record, primaryKey, prefix, ...others } = this.props;
@@ -21,6 +25,6 @@ export default class TreeRow extends React.Component {
             opened: openRowKeys.indexOf(record[primaryKey]) > -1,
             [className]: className,
         });
-        return <Row {...others} record={record} className={cls} primaryKey={primaryKey} prefix={prefix} />;
+        return <Row ref={c => { this.rowRef = c; }} {...others} record={record} className={cls} primaryKey={primaryKey} prefix={prefix} />;
     }
 }

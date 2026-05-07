@@ -188,7 +188,7 @@ export default function lock(BaseComponent) {
         getNode = (type, node, lockType) => {
             lockType = lockType ? lockType.charAt(0).toUpperCase() + lockType.substr(1) : '';
             this[`${type}${lockType}Node`] = node;
-            if (type === 'header' && !this.innerHeaderNode && !lockType) {
+            if (type === 'header' && !this.innerHeaderNode && !lockType && this.headerNode) {
                 this.innerHeaderNode = this.headerNode.querySelector('div');
             }
         };
@@ -264,16 +264,18 @@ export default function lock(BaseComponent) {
             // add shadow class for lock columns
             if (this.isLock()) {
                 const { rtl } = this.props;
+                const bodyNode = this.bodyNode;
+                if (!bodyNode) return;
                 const lockRightTable = rtl ? this.getWrapperNode('left') : this.getWrapperNode('right'),
                     lockLeftTable = rtl ? this.getWrapperNode('right') : this.getWrapperNode('left'),
                     shadowClassName = 'shadow';
 
-                const x = this.bodyNode.scrollLeft;
+                const x = bodyNode.scrollLeft;
 
                 if (x === 0) {
                     lockLeftTable && dom.removeClass(lockLeftTable, shadowClassName);
                     lockRightTable && dom.addClass(lockRightTable, shadowClassName);
-                } else if (x === this.bodyNode.scrollWidth - this.bodyNode.clientWidth) {
+                } else if (x === bodyNode.scrollWidth - bodyNode.clientWidth) {
                     lockLeftTable && dom.addClass(lockLeftTable, shadowClassName);
                     lockRightTable && dom.removeClass(lockRightTable, shadowClassName);
                 } else {
@@ -405,9 +407,9 @@ export default function lock(BaseComponent) {
                 const lockLeftBody = this.bodyLeftNode,
                     lockRightBody = this.bodyRightNode,
                     lockRightBodyWrapper = this.getWrapperNode('right'),
-                    bodyHeight = body.offsetHeight,
+                    bodyHeight = body && body.offsetHeight,
                     width = hasVerScroll ? scrollBarSize : 0,
-                    lockBodyHeight = bodyHeight - scrollBarSize;
+                    lockBodyHeight = bodyHeight ? bodyHeight - scrollBarSize : 0;
 
                 if (!hasVerScroll) {
                     style[paddingName] = 0;
@@ -462,7 +464,7 @@ export default function lock(BaseComponent) {
                         dom.setStyle(headerRightLockRow, 'height', maxRightRowHeight);
 
                         setTimeout(() => {
-                            const affixRef = this.tableRightInc.affixRef;
+                            const affixRef = this.tableRightInc && this.tableRightInc.affixRef;
                             // if rendered then update postion of affix
                             return affixRef && affixRef.getInstance() && affixRef.getInstance().updatePosition();
                         });
@@ -474,7 +476,7 @@ export default function lock(BaseComponent) {
                         dom.setStyle(headerLeftLockRow, 'height', maxLeftRowHeight);
 
                         setTimeout(() => {
-                            const affixRef = this.tableLeftInc.affixRef;
+                            const affixRef = this.tableLeftInc && this.tableLeftInc.affixRef;
                             // if rendered then update postion of affix
                             return affixRef && affixRef.getInstance() && affixRef.getInstance().updatePosition();
                         });
@@ -502,12 +504,14 @@ export default function lock(BaseComponent) {
         setRowHeight(rowIndex, dir) {
             const lockRow = this.getRowNode(rowIndex, dir),
                 row = this.getRowNode(rowIndex),
+                isRowElement = row && row.nodeType === 1,
+                isLockRowElement = lockRow && lockRow.nodeType === 1,
                 rowHeight =
-                    (ieVersion ? row && row.offsetHeight : row && parseFloat(getComputedStyle(row).height)) || 'auto',
+                    (ieVersion ? row && row.offsetHeight : isRowElement && parseFloat(getComputedStyle(row).height)) || 'auto',
                 lockHeight =
                     (ieVersion
                         ? lockRow && lockRow.offsetHeight
-                        : lockRow && parseFloat(getComputedStyle(lockRow).height)) || 'auto';
+                        : isLockRowElement && parseFloat(getComputedStyle(lockRow).height)) || 'auto';
 
             if (lockRow && rowHeight !== lockHeight) {
                 dom.setStyle(lockRow, 'height', rowHeight);

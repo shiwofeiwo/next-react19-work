@@ -10,6 +10,10 @@ export default class ExpandedRow extends React.Component {
 
     static contextType = TableContext;
 
+    getDOMNode() {
+        return this.rowRef && this.rowRef.getDOMNode ? this.rowRef.getDOMNode() : this.rowRef;
+    }
+
     getExpandedRow = (parentKey, ref) => {
         const { getExpandedRowRef } = this.context || {};
         getExpandedRowRef && getExpandedRowRef(parentKey, ref);
@@ -123,6 +127,6 @@ export default class ExpandedRow extends React.Component {
         }
 
         const newRowIndex = expandedIndexSimulate ? rowIndex / 2 : rowIndex;
-        return <Row {...others} record={record} columns={columns} __rowIndex={rowIndex} rowIndex={newRowIndex} />;
+        return <Row ref={c => { this.rowRef = c; }} {...others} record={record} columns={columns} __rowIndex={rowIndex} rowIndex={newRowIndex} />;
     }
 }

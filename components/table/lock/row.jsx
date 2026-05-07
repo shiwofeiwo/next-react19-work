@@ -9,6 +9,10 @@ export default class LockRow extends React.Component {
         ...Row.defaultProps,
     };
 
+    getDOMNode() {
+        return this.rowRef && this.rowRef.getDOMNode ? this.rowRef.getDOMNode() : this.rowRef;
+    }
+
     onMouseEnter = (record, index, e) => {
         const { onRowMouseEnter } = this.context || {};
         const { onMouseEnter } = this.props;
@@ -25,6 +29,6 @@ export default class LockRow extends React.Component {
 
     render() {
         /* eslint-disable no-unused-vars*/
-        return <Row {...this.props} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} />;
+        return <Row ref={c => { this.rowRef = c; }} {...this.props} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} />;
     }
 }
