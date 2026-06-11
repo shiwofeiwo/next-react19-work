@@ -5,6 +5,7 @@ import Loading from '../loading';
 import ConfigProvider from '../config-provider';
 import zhCN from '../locale/zh-cn';
 import { log, obj, dom } from '../util';
+import findNode from '../overlay/utils/find-node';
 import BodyComponent from './base/body';
 import HeaderComponent from './base/header';
 import WrapperComponent from './base/wrapper';
@@ -469,7 +470,7 @@ class Table extends React.Component {
                     // need to clear refs of this.tableInc when dataSource Changed
                     // in virtual table
                     const cellRef = this.getCellRef(index, colIndex);
-                    const currentCol = cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
+                    const currentCol = findNode(cellRef);
                     currentCol && dom[funcName](currentCol, 'hovered');
                 } catch (error) {
                     return null;
@@ -493,7 +494,7 @@ class Table extends React.Component {
             // need to clear refs of this.tableInc when dataSource Changed
             // in virtual table
             const cellRef = this.getCellRef(rowIndex, colIndex);
-            const currentCol = cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
+            const currentCol = findNode(cellRef);
             if (currentCol === target) {
                 return {
                     colIndex,

@@ -67,8 +67,8 @@ export const show = (config: Config = {}) => {
     let newContext = config.contextConfig;
     if (!newContext) newContext = ConfigProvider.getContext();
 
-    let instance: InstanceType<typeof ConfigModal> | null,
-        myRef: InstanceType<typeof ConfigModal> | null;
+    let instance: InstanceType<typeof ConfigModal> | null = null,
+        myRef: InstanceType<typeof ConfigModal> | null = null;
 
     const handleClose = () => {
         const inc = instance && instance.getInstance();
@@ -88,6 +88,7 @@ export const show = (config: Config = {}) => {
                 afterClose={unmount}
                 ref={ref => {
                     myRef = ref;
+                    instance = ref;
                 }}
             />
         </ConfigProvider>

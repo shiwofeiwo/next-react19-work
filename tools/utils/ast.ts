@@ -1,5 +1,5 @@
-import { Project, ModuleKind, ModuleResolutionKind } from 'ts-morph';
-import { ScriptTarget, JsxEmit, Node } from 'typescript';
+import { Project, ModuleKind, ModuleResolutionKind, ScriptTarget } from 'ts-morph';
+import { JsxEmit, Node } from 'typescript';
 
 export function visitCode(code: string, visitNode?: (node: Node) => Node) {
     const project = new Project({

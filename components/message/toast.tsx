@@ -9,7 +9,8 @@ import type { OpenProps, MessageQuickProps } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyProps = any;
-type ConfigMask = InstanceType<typeof NewMask>;
+// InstanceType<typeof NewMask> resolves to never under @types/react 19 due to ComponentRef generic chain
+type ConfigMask = { getInstance(): Mask | null };
 
 const { config } = ConfigProvider;
 
@@ -128,7 +129,7 @@ const create = (props: MessageQuickProps) => {
     let newContext = contextConfig;
     if (!newContext) newContext = ConfigProvider.getContext();
     let mask: ConfigMask | null = null,
-        myRef: ConfigMask,
+        myRef: ConfigMask | null = null,
         destroyed = false;
 
     // 在同一个 container 上只能创建一次 root，复用于 render 和 unmount；
@@ -190,6 +191,11 @@ const create = (props: MessageQuickProps) => {
             </ConfigProvider>
         );
     });
+
+    mask = myRef;
+    if (mask && destroyed) {
+        destroy();
+    }
 
     return {
         component: mask,

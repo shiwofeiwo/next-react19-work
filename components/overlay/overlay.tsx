@@ -11,7 +11,7 @@ import { dom, events, focus, func, guid, KEYCODE, support } from '../util';
 import overlayManager from './manager';
 import Gateway from './gateway';
 import Position from './position';
-import findNode from './utils/find-node';
+import findNode, { getNodeFromInstance } from './utils/find-node';
 import type { OverlayV1Props, OverlayState, AnimationObjectType } from './types';
 import type { CustomCSSStyle } from '../util/dom';
 
@@ -506,18 +506,7 @@ class Overlay extends Component<OverlayV1Props, OverlayState> {
     }
 
     getContentNode(): HTMLElement | null {
-        const ref = this.contentRef;
-        if (!ref) return null;
-        if (ref instanceof Element) {
-            return ref as unknown as HTMLElement;
-        }
-        if (typeof (ref as unknown as Record<string, unknown>).getDOMNode === 'function') {
-            return (ref as unknown as { getDOMNode: () => HTMLElement | null }).getDOMNode();
-        }
-        if (typeof (ref as unknown as Record<string, unknown>).current !== 'undefined') {
-            return (ref as unknown as React.RefObject<HTMLElement>).current;
-        }
-        return null;
+        return getNodeFromInstance(this.contentRef) as HTMLElement | null;
     }
 
     getWrapperNode() {

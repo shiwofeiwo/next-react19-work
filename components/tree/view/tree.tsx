@@ -415,7 +415,7 @@ export class Tree extends Component<TreeProps, TreeState> {
     dragNode: NodeInstance | null;
     dragNodesKeys: Key[];
 
-    normalListRef: React.MutableRefObject<HTMLUListElement | null>;
+    normalListRef: React.RefObject<HTMLUListElement | null>;
     virtualListRef: React.RefObject<InstanceType<typeof VirtualList> | null>;
 
     constructor(props: TreeProps) {

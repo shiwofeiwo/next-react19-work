@@ -2,7 +2,7 @@ import React, { Component, Children, cloneElement, isValidElement } from 'react'
 import ResizeObserver from 'resize-observer-polyfill';
 import { func, dom, events } from '../util';
 import position from './utils/position';
-import findNode from './utils/find-node';
+import findNode, { getNodeFromInstance } from './utils/find-node';
 import { warning } from '../util/log';
 import type { PositionProps } from './types';
 
@@ -205,14 +205,7 @@ export default class Position extends Component<PositionProps> {
     // 稳定引用：每次 render 都是同一个函数，React 19 不会因 callback identity 变化
     // 而在 re-render 时 fire cleanup，cleanup 仅在 unmount 时触发一次。
     private handleChildRef = (c: unknown): (() => void) => {
-        if (c instanceof Element) {
-            this.containerRef = c as HTMLElement;
-        } else if (c && typeof (c as { getDOMNode?: unknown }).getDOMNode === 'function') {
-            this.containerRef = (c as { getDOMNode: () => HTMLElement }).getDOMNode();
-        } else if (c && typeof c === 'object' && 'current' in c) {
-            // 兼容部分组件通过 useImperativeHandle 暴露 RefObject-like handle 的场景
-            this.containerRef = (c as React.RefObject<HTMLElement>).current;
-        }
+        this.containerRef = getNodeFromInstance(c) as HTMLElement | null;
 
         Position.applyRef(this.existingChildRef, c);
 
@@ -232,7 +225,7 @@ export default class Position extends Component<PositionProps> {
         if (typeof ref === 'function') {
             ref(value);
         } else if (ref && typeof ref === 'object' && 'current' in ref) {
-            (ref as React.MutableRefObject<unknown>).current = value;
+            (ref as React.RefObject<unknown>).current = value;
         }
     }
 

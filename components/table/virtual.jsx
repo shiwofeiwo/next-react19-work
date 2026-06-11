@@ -1,5 +1,6 @@
 import React from 'react';
 import { dom } from '../util';
+import { getNodeFromInstance } from '../overlay/utils/find-node';
 import VirtualBody from './virtual/body';
 import { statics } from './util';
 import TableContext from './context';
@@ -160,7 +161,7 @@ export default function virtual(BaseComponent) {
                 const { clientHeight, clientWidth } = body;
 
                 const tableInc = this.tableInc;
-                const tableNode = tableInc && tableInc.getDOMNode ? tableInc.getDOMNode() : tableInc;
+                const tableNode = getNodeFromInstance(tableInc);
                 const { prefix } = this.props;
                 const headerNode = tableNode.querySelector(`.${prefix}table-header table`);
                 const headerClientWidth = headerNode && headerNode.clientWidth;
@@ -212,11 +213,8 @@ export default function virtual(BaseComponent) {
 
         getRowNode() {
             try {
-                // in case of finding an unmounted component due to cached data
-                // need to clear refs of this.tableInc when dataSource Changed
-                // use try catch for temporary
                 const rowRef = this.tableInc.getRowRef(0);
-                return rowRef && rowRef.getDOMNode ? rowRef.getDOMNode() : rowRef;
+                return getNodeFromInstance(rowRef);
             } catch (error) {
                 return null;
             }

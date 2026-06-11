@@ -34,7 +34,6 @@ const BUTTON_PROP_KEYS = [
     'loading',
     'ghost',
     'text',
-    'warning',
     'disabled',
     'onClick',
     'onMouseUp',

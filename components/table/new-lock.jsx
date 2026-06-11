@@ -2,6 +2,7 @@ import React, { Children } from 'react';
 import classnames from 'classnames';
 import shallowElementEquals from 'shallow-element-equals';
 import { log, obj, dom, events } from '../util';
+import { getNodeFromInstance } from '../overlay/utils/find-node';
 import LockRow from './lock/row';
 import LockBody from './lock/body';
 import LockHeader from './lock/header';
@@ -228,11 +229,8 @@ export default function stickyLock(BaseComponent) {
             const table = this.tableInc;
 
             try {
-                // in case of finding an unmounted component due to cached data
-                // need to clear refs of table when dataSource Changed
-                // use try catch for temporary
                 const cellRef = table.getCellRef(index, i);
-                return cellRef && cellRef.getDOMNode ? cellRef.getDOMNode() : cellRef;
+                return getNodeFromInstance(cellRef);
             } catch (error) {
                 return null;
             }
@@ -319,11 +317,8 @@ export default function stickyLock(BaseComponent) {
             const table = this.tableInc;
 
             try {
-                // in case of finding an unmounted component due to cached data
-                // need to clear refs of table when dataSource Changed
-                // use try catch for temporary
                 const headerCellRef = table.getHeaderCellRef(index, i);
-                return headerCellRef && headerCellRef.getDOMNode ? headerCellRef.getDOMNode() : headerCellRef;
+                return getNodeFromInstance(headerCellRef);
             } catch (error) {
                 return null;
             }

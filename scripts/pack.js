@@ -43,6 +43,14 @@ config.externals = [
         },
     },
     {
+        'react-dom/client': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom/client',
+            commonjs: 'react-dom/client',
+            amd: 'react-dom/client',
+        },
+    },
+    {
         moment: {
             root: 'moment',
             commonjs2: 'moment',
